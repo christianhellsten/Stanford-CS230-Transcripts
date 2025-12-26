@@ -1,2 +1,6 @@
+audio/
+scratchpad/
 *.mp3
+*.log
 *.env*
+CLAUDE.md
