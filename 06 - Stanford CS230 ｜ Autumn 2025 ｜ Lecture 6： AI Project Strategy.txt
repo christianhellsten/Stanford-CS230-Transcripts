@@ -1,0 +1,1942 @@
+So what I want to do today is continue our discussion on AI project strategy.
+So if you're building a deep learning system for some tasks, and today, for the first
+part of today, I'm going to use a speech recognition, voice-activated device example.
+And then for the second half, I'm going to use a kind of AI deep researcher example.
+But what I want to do is walk you through a couple of concrete examples of projects
+you might work on and let you understand what it feels like to be in the thick of
+building an AI system, making day-to-day decisions on what to do next.
+I find that, I think as you've heard me say before, understanding the
+algorithms is important, so in this class, you learn a lot from the
+online videos about the deep learning algorithms, how to build pipelines.
+But even beyond understanding how the algorithms work, what really drives
+performance is a team's ability to have an efficient development process.
+How do you tune how the parameters, how do you collect data?
+When you try something and it doesn't work the first time, which it often
+doesn't, what do you do next?
+Your skill at making those decisions is what often makes a massive,
+literally 10x difference in productivity.
+And as I was reflecting, was preparing for what to say to you today,
+I was reflecting on quite a few projects where that 10x difference in
+productivity is really not an exaggeration, right?
+Maybe more than 10x, but I've literally seen many teams in many well-known
+companies with good brands spend a year at work on a project that I will
+see a more skilled team execute in like a month, right?
+So these differences in skill are real.
+And one of the challenges for new people learning this is if you
+work for some company, maybe you work on a different project every year or two,
+right? But so it takes you like, you know, two years of two years or a year of your
+life to gain experience on one more project.
+And then after, I don't know, 10 years, you finally seen 10 projects
+and a pretty experience.
+But what I want to do is in today's class, walk you through a few
+concrete examples of projects that similar to want to kind of simplify
+versions of stuff that I've seen myself to try to accelerate your hands
+on experience, looking at these projects and thinking through.
+If you are the one in the hot seat building a system and it works or
+doesn't work or this problem, whatever, making those decisions for what you
+would do. So try to get you through that today.
+We'll have a couple of examples rather than you having to spend years
+and years of your life to finally see a small number of examples of how
+these projects can be driven.
+Right? So the first motive, the first of the two motivating examples
+I'm going to use today is building a voice activated device in my house.
+I have, you know, like a Amazon Echo, right?
+I have a lot of them actually.
+And I think it's a delightful experience, but those devices like
+that, Amazon Echo or Google Home or the Apple Siri HomePods, they
+require quite a bit of setup, right?
+They require some setup, connect to the wifi, figure out a way to
+connect to your phone, blah.
+And so, you know, actually for a long time, even though I built smart
+speakers, for a long time in my house, I had one light bulb connected
+to my home wifi internet, you know, because it's just so much of
+a hassle to set things up.
+I think now I have two light bulbs connected in my house.
+I guess I should connect my stuff.
+But so for this motive example, I want to talk about if you are
+part of a startup, building a new product that makes it much easier
+to get these voice control devices without the user needing to do
+this whole wifi setup process.
+So, you know, I'm not very good at drawing, but if you could go to
+some store and buy a desk lamp and the desk lamp already has a name,
+let's call this lamp Robert, and you could just take it, plug it into
+the electricity, plug it into your desk, and then say, Robert, turn
+on, and then it turns on, say, Robert, turn on, then it turns off
+without needing to be connected to the internet, to the cloud
+access and all that.
+Then that would give users an easier setup experience.
+There's a project that my friends and I actually discussed a
+few years ago that we thought would actually be a decent startup
+idea.
+We decided not to do it because there are too many other ideas
+that we're even more excited about.
+But we felt that actually, you know, like a reasonable, reasonable
+startup idea to build a little IC circuit, little integrated
+circuit, to sell to say, lamp manufacturers and other device
+manufacturers to make it really easy if, say, some company
+sells lamps to build little things so they can very quickly
+make their devices voice enabled.
+And if you have a few pre-built names, maybe give the
+users a choice, you can call it lamp Robert or Lainer, you
+know, or, I don't know, or Johnny or, I don't know,
+Alice or whatever, have a little switch.
+Then users could just buy a lamp, put it down, and then
+immediately have it be voice controlled without needing to
+worry about how do you get this onto my Wi-Fi network?
+And if my internet is down, then my whole house stays
+dark as well because all things like that, right?
+And I actually did once have an, I was building a lot
+of voice assistants, I actually set up my office to
+have a lot of voice control devices.
+So I had different names with different lamps, standing
+desk is his name as well, so I'd say, I forget what my
+desk name was, you know, like, you know, Jonathan, go
+higher or whatever, and then my standing desk would go
+up and down.
+It's actually pretty cool.
+So what I want you to, so just for today's
+illustration, probably we should give the different
+devices different names because you can't have every
+device in your house called Robert.
+Otherwise, they say Robert turn on the whole house
+illuminates and Robert turn off whole houses plunged into
+the darkness.
+So we found out you do need different devices to
+have different names.
+But just for today, I'm going to use as illustration,
+the task of creating a neural network or building
+a system that detects when someone says Robert
+turn on, and you need kind of Robert turn on,
+Robert turn off.
+If you have a choice, it needs to be Lena turn on,
+Lena turn off and a variety of handful of options
+of names.
+But just a simplicity, I'm going to worry only about
+detecting the phrase Robert turn on, right?
+And what do we do for this?
+You can rinse and repeat to get the turn off
+command and a handful of other names to make it
+user selectable.
+What, you know, what name do you want to give this
+thing?
+Okay, so this is something they'll need to run on
+device, small IC circuits, and Mike, and I'm going
+to ask you a question, right?
+When you've graduated from CS230, or maybe when
+you graduated from Stanford, if you are the
+CTO of a startup responsible for building
+this, what would you do?
+Right?
+So call out.
+So imagine you just graduated from CS230 or
+just graduate from Stanford, and you're the CTO
+of a startup, and you want to build this lamp that
+can turn on when anyone says Robert turn on.
+How would you approach this problem?
+And I know this is an incredibly open-ended
+question, and it turns out life is incredibly
+open-ended, right?
+You graduate from CS230, you have to decide
+what to do.
+So if this is what you're doing, if you're
+going to raise your hand and call out, if you
+want to build this product, what's the first
+thing you do?
+How would you think about it?
+Go for it.
+Yeah, cool.
+Yeah, right.
+So get some like an open-source speech-to-text
+model or something, and let's see if you can
+write it.
+Yeah, that would be a good start.
+Anything else?
+Go ahead.
+All right, sorry.
+Three models, one that detects Robert, and
+then one that I see.
+I see.
+Cool.
+Right.
+Okay.
+Right.
+So the three models to detect Robert,
+understand their sentence, or detecting
+the sound.
+Cool.
+Go for it.
+All right.
+Oh, sorry.
+Say again?
+It's like a sign-means network.
+We actually teach a sign-means network
+related to this class, where something
+that inputs two audio files and decides
+they're saying the same words.
+So you can more easily generalize the
+new words than the Robert.
+Cool.
+Now that's actually pretty interesting.
+Yeah, go for it.
+Oh, sorry.
+You mean just connect up your device
+to Siri?
+I see.
+Okay, cool.
+Yeah.
+Right.
+Yeah.
+That sounds interesting.
+It sounds like a different product
+than this if we need to connect to
+the cell phone and all that though.
+Yeah.
+Cool.
+Right.
+So let me just, lots of interesting
+ideas.
+Let me just make some observations.
+So I find that when building software
+products, there are actually lots of
+good ideas or lots of reasonable things
+you could try.
+But, you know, as you heard me
+mention a few weeks ago, I think one
+of the strongest predictors for the
+odds of you building something compelling
+is speed.
+So I find that of all of these ideas,
+I think some are better than others,
+but it doesn't, but whether the idea
+is, you know, a bit better, a little
+bit worse, it is important.
+But it's actually secondary to how
+quickly you can just get something
+built.
+So if you're actually the CTO of a
+startup like this, I encourage you to
+look and say, all right, what can
+we build today?
+Or what can we build maybe in a week?
+And try any of these architecture
+choices and build it
+and see what happens.
+Because even if what you build is a
+little bit less, you know, good,
+you can find out all in two days,
+you know, leaving the course
+correct very quickly.
+I've actually worked, I've actually
+built a lot of smart speakers.
+So I have maybe firsthand experience
+of this and I just share some
+things that I happen to know that
+there's no reason you would know.
+But it turns out that, let's see,
+at least today, general purpose
+speech recognition is still a little
+bit heavyweight.
+Takes quite a lot of, you know,
+processing power is a bit expensive
+to run on an edge device.
+If you want to make this like
+just a few dollars.
+But it turns out that if you look
+at the smart speakers, there's
+usually, if you want to train
+a neural network just to detect
+one phrase, be it a phrase like,
+you know, okay, Google, or hey,
+Siri, or Alexa, or whatever.
+And if the smart speaker
+trigger words, that can be done
+with a fairly small neural network.
+Although to your point, if we want
+to do different neural networks,
+different words, we'll need to swap
+out different neural networks.
+I'm going to repeat that.
+But if you have only a small
+handful of names, phrases,
+one to ten, I think that'd be okay.
+And then one other piece of advice
+I would give, if you're embarking
+on this, is the first thing I
+would do actually, if I was working
+on this for the first time, is
+actually a literature search.
+And it turns out that, you know,
+I think we're fortunate that the AI
+world has a ton of open-source
+software and a ton of open
+research papers.
+Somewhat surprisingly, despite
+smart speakers haven't been
+around for a long time,
+there still, to this day, isn't
+like a single architecture that
+everyone's agreed on, on the
+best way to do this.
+If you look at the literature,
+there's still actually a
+diversity of opinions on how to do
+this type of wake word or trigger
+word, which is so sensitive.
+So when you say something like,
+yeah, okay, Google, or Hey Siri,
+or Alexa, that's sometimes called
+a wake word because it wakes up
+the device, or trigger word,
+triggers the device to take
+activity. So somewhat
+surprisingly, even though we
+have smart speakers for a long
+time now, for more than a decade,
+there still isn't a single agreed
+on unified architecture that
+the committee has agreed on,
+and what's the best algorithm
+to do this. But I feel like
+if you are embarking on this
+for the first time, the number
+one boost in your speed of
+learning, it could be
+implementing something, but I
+would say doing a literature
+search and trying open source
+software would be the even
+faster accelerator.
+And I want to give you a few
+tips for that, right?
+Real quick. So, you know,
+today, if this is, there are
+a lot of research articles
+and blog posts and GitHub repos
+on many topics, certainly wake
+word detection. And what I
+find is that if this is
+research paper one, research
+paper two, research paper
+three, research paper four,
+I find that, you know,
+sometimes people will spend
+a lot of time reading
+research paper one until
+you're done, right?
+It's zero percent complete,
+it's a hundred percent
+complete. And then spend
+a lot of time reading
+research paper two, spend
+a lot of time reading
+research paper three, and I
+just recommend you not do
+that. Instead, when I'm
+doing a literature search,
+what it often feels like is,
+you know, do a few web
+searches for a handful
+of resources, skim all
+of them, zero percent
+complete, hundred percent
+complete, right?
+Basically initial reading,
+you may decide to go back
+to paper three and spend
+more time to really read
+and understand that.
+But that'll help you find
+additional references,
+you can skim and maybe
+you find that paper seven
+that's really seminal,
+spend a lot of effort.
+But this is what doing
+a very broad survey of
+the literature will feel like,
+where, you know, you're
+really putting the time
+to finish only a very small
+number of resources, but spend
+a lot more time skipping
+around and getting a
+cursory level understanding
+of a broader set of papers,
+which can also point you
+to also point you
+to the more useful resources
+to focus attention on.
+And just one thing
+I've seen among Stanford
+students, there's one
+other thing that I find
+people tend to under use,
+which is trying to talk
+to experts. So if you are
+actually a seat at a start,
+I'm trying to build this
+for the first time.
+I feel like, you know,
+we all want to do our own work
+and not bother other people,
+which is good.
+But I just encourage you
+to consider if
+after you've done your own work,
+if reach out to an expert
+can really survey your learning.
+So something I've often done is,
+you know, I will do my own work.
+I don't call random experts
+to try to bother them
+before I've at least done my work.
+But if you've sometimes
+I'm reading a paper,
+I'm really struggling
+to understand it.
+And I find that instead of me
+struggling for another like
+four hours, if I send the authors
+a respectful email
+and say, hey, I read your paper,
+try to understand this.
+I'm still confused.
+Can you help me out?
+Can you explain this to me?
+A lot of the time,
+including when, you know,
+I was less well known, right?
+But I think a lot of people,
+if they see that
+you're doing your work
+and not just reaching out to them
+before you've even done anything,
+a lot of them, not everyone,
+but a lot of research authors
+would actually be quite, you know,
+understanding and then
+try to help you out.
+And so I find that
+for a lot of projects I did,
+finding that one expert,
+sometimes a Stanford professor,
+actually we have a lot of speech faculty
+and the Stanford faculty as well.
+But when I had problems
+with my speech recognition system,
+you know, sometimes I call like,
+you know, Dan Jurowski, whatever.
+And then like a half hour conversation
+or even a 10 minute conversation
+really accelerates
+what I've been able to do.
+So I just encourage you to,
+it takes you like 10 minutes
+to send an email
+and maybe there's a 50% chance
+of response, I don't know, right?
+Not a high spin chance,
+but sometimes that tends to be
+really high ROI, right?
+And then what I think you find
+is that if you do
+a literature search,
+you will likely discover
+that most of the robust enterprise
+grade smart speaker systems
+all have a specialized system
+trained to detect the wake word
+or the trigger word, right?
+And again, there's a variety
+of architectures.
+You probably come up
+with some good neural network
+architectures for this.
+And oh, it turns out that
+there is no data set on the internet
+with lots of people
+saying Robert turned on, right?
+That's just not a thing, right?
+So if you decide that the names
+are Robert and Lainer and,
+you know, I don't know,
+Jeremy and Alicia or whatever,
+sorry, the people of those real names.
+It was actually kind of weird
+when we chose people's names,
+but we chose that for some reason.
+But it turns out that
+there is no large data set
+on the internet of lots of people
+saying Robert turned on.
+So if you want to train a neural network
+to detect if someone has said this phrase,
+you need to collect that data yourself, right?
+So let me then ask you
+another question.
+Say you've done a literature search,
+found some open source code
+you can try,
+but that has led you,
+say to conclude that
+you need data sets
+of people saying Robert turned on.
+Oh, you need a data set to train
+to distinguish between
+someone saying Robert turned on
+versus not someone saying Robert turned on.
+How would you approach
+getting a data set like that?
+So yeah, go for it.
+Text-to-speech.
+Yeah, cool.
+Yeah, yep.
+You use text-to-speech as one method.
+I'll come back to that later.
+So you need that, yes.
+Oh, sorry.
+Yep, cool.
+Yep, I like that.
+So walk around and ask people,
+tell them what you're doing,
+get the permission to record
+and use their voice,
+and if they're okay giving permission,
+just record their voices.
+Yeah, I like that.
+Anything else?
+Cool.
+Oh, sorry.
+Can you say that again?
+Yep, cool.
+Yeah, yep, cool.
+Yep, right.
+So samples of people
+saying not Robert turned on.
+I agree, yeah, cool.
+I see, cool.
+Actually, you're right.
+So the data is what people are saying Robert,
+but you don't want that to be mistaken.
+That's a good point.
+I'll come back to that later.
+Yes.
+Did I say something?
+Oh, same thing.
+Oh, interesting.
+Cool.
+Awesome.
+Great.
+All right.
+So one of the...
+Yes, so I really like the idea
+of just going around
+and asking people for permission
+to record their voices.
+And then, by the way,
+in today's world privacy is important.
+Consent is important.
+So don't do anything sneaky or weird.
+Just tell people clearly what you're doing,
+ask them for permission,
+make sure any permission is freely given,
+and if they don't give permission, it's fine.
+We won't.
+I really respect people's privacy.
+That is really important.
+Having said that,
+I find that a lot of people in the world
+are very nice.
+Not everyone,
+but the vast majority of people in the world
+seem very nice.
+And if you ask them nicely,
+I know this because I've done this myself.
+They won't give permission
+for you to provide their data.
+And then just one of the framing
+I encourage you to think about as always
+is the speed.
+So how long will it take you
+to wander around campus
+or wander around San Francisco
+and collect a sample of voices?
+And I think you actually get a lot done.
+You'll get many dozens of samples,
+maybe hundreds of samples
+easily in a day.
+So I think those are good tactics.
+And then let me share with you some things.
+It turns out synthetic data
+using text-to-speech
+is an interesting tactic.
+I would usually not use that
+as the first thing I do,
+mainly because it turns out
+it's hard to know
+how accurate synthetic data is
+compared to true natural data.
+And maybe just show you
+one thing I've run into.
+I've actually done a lot of synthetic data
+for speech recognition, right?
+One thing you have to watch out for is
+if it goes to a lot of the synthetic
+sources of data,
+how many voices,
+how many different voices
+does it provide?
+And is it going to be a pain
+to get enough diversity
+in different people's voices?
+So it turns out, I don't know,
+for example, I often talk to
+open that voice on my phone
+instead of typing,
+but the number of voices there is limited.
+And if you go to TTS provider,
+I guess there are now some services
+with a larger number of voices,
+but these are things
+you end up worrying about.
+And it's all solvable.
+Synthetic data does work
+for speech recognition, right?
+But it turns out that they're often
+enough details associated with filling
+with the synthetic data generation process
+and that ends up taking longer.
+So for a lot of machine learning applications,
+using synthetic data is a good idea.
+And eventually you might get around to it,
+but using synthetic data
+is usually not the first type of data
+I would collect
+because usually there's just
+too many hyperparameters
+and too many knobs
+you have to worry about.
+And then at the back of your head,
+you may be wondering
+whether there's something
+weird about the synthetic data
+that I had not thought of before.
+Whereas you collect natural data,
+collect real data,
+it's just one less thing to worry about.
+Maybe just to tell one more story,
+not in speech,
+but self-driving cars, right?
+So you're building self-driving cars,
+you want to detect other cars.
+Where do you get pictures of cars?
+It turns out that a lot of people
+will have the idea of,
+oh, there are lots of video games
+with cars driving around.
+Why don't we use video games
+to get pictures of cars
+out of the video game?
+But it turns out a problem
+with a lot of video games is
+there could be like 20 different cars
+in the entire video game.
+It depends on the video game.
+But it turns out that
+to have a realistic video game,
+you don't need a thousand different cars
+and there are tons of different
+car designs on the road,
+but you need a very narrow set of cars.
+And so to a human,
+seeing the same 20 cars over and over
+and looking at the road looks fine,
+the video game plays fine.
+But for a lot of video games,
+the data just isn't rich enough
+to capture anywhere near
+the richness of the real world.
+Whereas in contrast,
+if you've got real pictures,
+there's just one less thing
+you have to worry about, right?
+So I find that for synthetic data,
+it works, it's very valuable to use it a lot,
+but I usually get to it
+only later in the process.
+Does that make sense?
+Cool, something.
+And then in the interest
+of building these things quickly,
+let me share with you
+the types of things
+that my teams have done
+to collect data for this, right?
+And I feel like when you
+read research papers
+or you take courses,
+often you get a very clean view of data.
+I'm going to tell you
+about one of the weird random hacks
+that one of my teams has used to build
+like a very serious,
+working really well
+commercial system, right?
+And at least that's part
+of the journey to do so,
+which is, let's see.
+So collected 100 training audio clips
+and 25 development sets to tune to
+and zero tests, right?
+One thing I'll often do
+if my main goal
+is to just build a system that works
+as opposed to publish a research paper
+is to not have a test set.
+We just have a dev set
+that we will tune the parameters to.
+And if I want to publish a research paper,
+I probably need a clean,
+unbiased test set.
+But if my goal is to just build something
+and have it work and ship it,
+sometimes I just say,
+I'm not going to bother
+to collect any test data.
+Just a training set and a dev set
+and I just unapologetically
+tune my system to the dev set, right?
+And one thing you could do is,
+let's see.
+So audio clips.
+So audio is, let's see.
+So you may have seen the audio waveforms, right?
+Which ones is time,
+you know, x-axis is time
+and audio waveforms kind of
+are these wiggly time series.
+Right, and sound is very rapid
+vibrations in the air
+that your ear perceives that sound.
+And what the microphone does
+is it records these very rapid
+changes in air pressure, right?
+So that's why I see audio waveforms
+that look like this.
+And so one thing that
+one of my teams once did
+was collect 100 samples of,
+you know, audio waveforms
+where somewhere in the middle of it
+is someone saying, Robert, turn on.
+So, you know, hey, how are you doing?
+Oh, yep.
+And let's say Robert turn on
+and we could now talk about some other things, right?
+And so the phrase Robert turn on
+takes about one second to say.
+And one way to collect
+a constructive training set would be
+to take a three second clip.
+So this is where Robert turn on was said.
+This is where they just finished
+saying Robert turn on.
+And so if you collect
+100 audio clips like this,
+one way to turn this into
+bigger training set is
+to take these long audio clips
+and then this becomes a training example
+with a label one,
+because that's an utterance
+where the end of utterances
+corresponds to when someone
+just finished saying Robert turn on.
+And in contrast,
+this would be an example,
+you know, would be a negative example.
+Um, and this too is a negative example,
+you know, and this too is a negative example.
+Does it make sense?
+So given a, say, 10 second clip,
+given the 10 seconds of audio,
+we will have cut out
+a phrase where
+you get a positive label
+if that three second audio
+corresponds to someone just finishing
+saying Robert turn on,
+which is when you should turn on the lamp
+and anything else is labeled zero, right?
+And so this is a way to take, say,
+100 training examples
+and turn that into
+3,000 binary examples.
+So 100 audio clips, sorry,
+I should say 100 audio clips.
+And if we take 30 windows out of this,
+then you can turn this into,
+say, 3,000 training examples
+equal to binary zero one label
+that labels is this moment in time
+when someone just finished
+saying the phrase Robert turn on.
+So it turns out that if you do this
+and we did do this,
+then we wound up,
+let's see,
+we wound up with a system.
+So we ran this and tested this on the
+depth set.
+And we wound up with a system
+that when trained to predict binary classification
+was 97% accurate, right?
+But it turns out it did this
+by outputting zero all the time
+that had zero detections, right?
+And so what this training said,
+we basically trained a very large neural network
+where I would have gotten
+exactly the same result
+with that one line of Python code, right?
+So this is the kind of stuff
+that happens in real life, right?
+And by the way,
+I'm sharing these stories
+not just to entertain you,
+though hopefully you're entertained,
+but because I think of this
+by living these experiences
+that you go,
+oh, I could see this problem.
+This is what I do.
+I could see this problem.
+So the question to you is,
+if you collect this data,
+train the system 97% accuracy,
+isn't that fantastic?
+But you realize that
+you just implemented
+by a huge neural network
+a print zero statement
+or the equivalent of print zero
+that is never finding
+the phrase Robert Turnon.
+What do you do next?
+What's going on?
+What do you do next?
+Cool. Awesome. Right.
+So it increases the number
+of Robert Turnons in the training example.
+This is a very unbalanced training example
+and it's great,
+but just saying,
+I never hear this phrase, right?
+How would you go about,
+and you or anyone else,
+how would you go about
+increasing the number of positive examples?
+How do you do that?
+Oh, audio editors.
+I see. Wow.
+I see. Cool.
+Yeah. I see.
+Okay. Yes.
+That will work.
+It gets the synthetic data again, right?
+Which is actually,
+which actually works.
+And then it also has
+all the complexities of synthetic data,
+but it turns out it does work.
+So I know it works,
+because I've done that too, but yeah.
+I see. Okay.
+Yeah. Yep.
+That works too.
+So one thing you could do
+is take your positive examples,
+the examples of Robert Turnon
+and just duplicate those examples,
+or maybe just give those examples
+more weight to the training objective.
+Any other ideas?
+Increase the noise of the example.
+Yeah. Yeah. Cool.
+Yeah. That, that, that, yeah.
+So a few variations of synthetic variation.
+Yep.
+So I think the, the, the easy things to try,
+one would be to take the examples and duplicate it, right?
+So, you know, mathematically,
+this is equivalent to taking your positive examples
+and just making multiple copies of that in your training set.
+It turns out that will work.
+They'll largely solve it.
+And by the way, unbalanced data sets
+is a common issue in training neural networks.
+I'll tell you the rule of thumb I use.
+And you know, is many neural networks
+are pretty good at handling
+up to like a one to 10 ratio of unbalanced data sets.
+So people often worry what if an unbalanced data set?
+In this example, we have like a one to 30 ratio
+and your knowledge may vary.
+Sometimes it works, sometimes it won't.
+In this case, it didn't work.
+But I find that if you have a,
+you know, like a one to two ratio,
+just usually not that worried about it.
+Your network is fine training like that.
+Maybe up to one to 10 is when I start to worry
+about it being a little bit too unbalanced
+for, you know, standard training procedures.
+And when I might do something
+to make it a little bit more balanced.
+But duplicating these samples will be one tactic.
+Yes, so penalize false negatives.
+Yes, that will work too.
+So I think there are a few ways
+to train to change the cost function.
+You can give the positive examples more weight
+or yes, or penalizing false negatives
+will be another way to change the cost function.
+That will work.
+Yes, that will work too.
+Yeah, go ahead.
+Yeah, yes, so you can also decrease
+the number of negative examples.
+That will work too.
+The one downside of that is like it's okay.
+I think it's fine to do what you said.
+The one slight downside is if you are reducing
+the diversity of the negative examples,
+then your network has just a little bit
+less information to learn from.
+I think this is small.
+What I just said is a small difference.
+So I think that will also work.
+It's a quick thing to try.
+And I'll tell you what my team actually did.
+And I'm telling you this not because
+it's a brilliant technique I'm proud of,
+but because I just want to tell you the examples
+of the types of hacks that actual commercial
+machine learning teams do that actually works.
+So I'll tell you what we did.
+It was very close to duplicating the positive examples,
+but we had just a slightly different variation,
+which was, we said that instead of the positive example
+being the one window where Robert turned on,
+just finish.
+So here we're having a sequence of labels, right?
+Where zero corresponds to is that moment in time
+when someone just finished Robert turned on.
+And in the architecture I described,
+we are detecting a very, very narrow window in time
+where someone just finished Robert turned on
+and they got to turn on.
+But the hack that we used was actually
+just extend this out a little bit.
+So instead of saying,
+did someone just finish saying Robert turned on
+and lost 100 milliseconds,
+we extended that out to half a second or a second.
+And so if someone finished saying Robert turned on
+any time they lost half a second,
+let's turn on the light, right?
+And so this actually generates a few more training examples.
+So the reason we did that,
+and again, it's a small difference,
+is this actually creates a little bit more diversity
+in the positive examples than just duplicating it
+because now this red rectangle is a positive example
+and so is this one and so is this one
+and so is this one.
+So it just creates a little bit more diversity
+in the positive examples.
+I expect this will make a very small difference
+in the training and the learning algorithms performance,
+but it's just, you know,
+maybe just slightly better to have slightly,
+yes, it covers the space of positive examples,
+just a little bit better, make sense?
+So, okay, just to keep going with the story,
+let's say you do this and now
+you still do well on the training site,
+95% accuracy on the training site,
+but 50% accuracy, so not good enough,
+on your dev set, right?
+So you fix one problem and another one comes up
+and so what do you do next?
+Go for it.
+Yeah, cool, awesome.
+Yep, overfitting, let's use regularization.
+Go ahead.
+So, right, is it that training and dev set distributions
+are not the same?
+In this example, because we collected the training
+and the dev sets,
+if we randomly shuffle between training and dev,
+they would be the same distribution, actually.
+Yeah, but sometimes there's one other thing I do see,
+which is if you, it turns out,
+earlier in the history of machine learning,
+there was always this assumption of obsession
+with making the training set and the dev set
+and the test set have the same distribution.
+I think it's because if the training set
+and the test set have the same distribution,
+it's easier to prove theorems,
+easier to give guarantees, whatever,
+so kind of academic machine learning
+there was always this, you know,
+theoretical assumption,
+which makes the theory work way better.
+The training set and your test set
+come from the same distribution, right?
+It's just like, from a publishing papers point of view,
+that makes life much better.
+For a practical point of view,
+what I see is a lot of the time,
+your training set distribution
+is just different than your test set distribution.
+That's just life because, you know,
+it's hard to demand data of a certain sort
+and so, for example, one common thing is,
+if you do use synthetic data generation,
+you can come up with really clever ways
+to generate synthetic training data
+by using TTS or editing audio or whatever.
+There, these techniques let you
+generate a massive training set
+but the price of that is,
+you know, your synthetic data,
+I mean, that's not how users talk, right?
+Users don't speak synthetic data,
+they speak raw data
+and so to make sure that your test metric
+truly reflects how users will perceive your product,
+you know, I would put true data in your test set
+and so you end up with a lot of systems
+where your training set distribution
+is synthetic data or other things you fit it with
+and then your test set is
+what if the world actually cares more about
+and the two distributions is very different
+and then I think the question you just asked is,
+is the training set distribution
+too different from the synthetic data
+that is a problem?
+Those would be good questions to ask, right?
+All right, so if you see this,
+this is overfitting
+because we're doing great on training set,
+not so well on dev,
+so one thing to try,
+first thing to try is very regularization
+so that would be a good thing to try
+and then beyond using regularization,
+I find that for a lot of speech problems,
+if you're overfitting,
+getting more data is nice
+and so just to share with you,
+I know, you know, suggestion of synthetic data earlier,
+I'll share with you one thing for synthetic data
+that does work,
+which we eventually wound up using,
+which is, it turns out that,
+sorry, this is audio stream, right?
+It turns out that there are a lot of,
+if you can get audio clips of background noise,
+so for example, in this room,
+you know, if I'm not,
+if I'm quiet,
+we can hear a little bit of air conditioning noise, right?
+So a lot of rooms have little background noise
+or if you're near a highway,
+there's cars in the background,
+so there are actually most,
+most people where they may use the lab,
+you know, there's a little bit of background noise.
+So if you're able to get audio of background noise
+and then additionally record
+some very clean audio clips of Robert Turnon,
+it turns out that if you take two audio waveforms
+and sum them together,
+you end up with an audio waveform
+that sounds like someone saying this
+in the presence of the background noise, right?
+I think it's called the superposition property of sound,
+but basically sound adds,
+which is why if you take two audio clips
+and you just add the audio waveforms together,
+then you end up with an audio recording
+that sounds like both sounds going on at the same time.
+So what we can do is take, you know, background noise.
+There's actually a lot of audio clips
+of background noise on YouTube as well and so on
+that check the licensing terms
+before you use stuff like that, right?
+But there are actually quite a lot of openly licensed audio clips
+of, you know, just someone like a quiet,
+like a coffee shop noise
+or someone sitting in a house studying or whatever.
+And so if you can take some background noise audio clips
+and then take a clean voice,
+someone saying, Robert Turnon, right?
+And if you add these two together,
+then you end up with background noise,
+Robert Turnon and more background noise.
+And this becomes a positive example
+using the process that we talked about just now.
+And if you have a handful of clips of Robert Turnon
+and a lot of clips of background noise,
+so you can synthesize the phrase Robert Turnon
+and use a lot of different types of background noise
+and create, you know, a pretty large training set.
+It turns out one problem with what I just described
+is if you do exactly what I just said,
+you won't actually find a Robert Turnon detector,
+you end up with a voice activity detection detector
+because you have a lot of background noise
+and anytime anyone says anything,
+the only thing people say is Robert Turnon.
+It's much easier to just decide,
+is there a loud sound of someone talking
+to actually recognize things?
+So the other thing we should do
+is instead of adding Robert Turnon,
+you know, pick a dictionary
+or find other types of audio
+I think that's where you have to comment just now,
+make sure you don't confuse all the things
+and add, I don't know,
+just someone to say the word,
+you know, cardinal or whatever, other words.
+So you have a bunch of examples
+of people saying words other than Robert Turnon
+and then also a bunch of examples
+of people saying Robert Turnon.
+And by having a handful of clean recordings
+of Robert Turnon
+and a handful of clean recordings
+of people saying other stuff
+and synthesizing a data set like this,
+you can get a data set
+with many thousands of examples
+of Robert Turnon pretty efficiently.
+And if you train a neural network on this,
+you get like a decent wake work
+or trigger work detector.
+That make sense?
+So yeah, right.
+So with a process like this,
+so this is what working
+on a machine learning project feels like, right?
+You try something, doesn't work,
+like you find out that you have a skewed data set,
+be creative in how you create and collect data.
+You may find that you have a skewed data set
+and it just doesn't work.
+You may find it's overfitting.
+And I find that it is these,
+the ability to drive iterations on a system
+that determines how quickly
+you can get something to work.
+So for the Robert Turnon example,
+so if I found that there are a lot of users
+that are listening to music,
+then I would probably synthesize data
+with music in the background
+and then have someone say Robert Turnon.
+So if you think a lot of users listen to music
+and there's a desk lamp,
+we want to make sure we catch them
+saying Robert Turnon.
+Then I would probably synthesize more training data
+to include, you know, loudish music
+in the background.
+Sorry, what are the genre of music?
+Yeah, so it turns out that if you have a,
+I feel like as a rule of thumb,
+if you can have a more diverse set of training data,
+it's usually better, right?
+So maybe I'm not sure what music my user base
+likes to listen to the most.
+Is it classical?
+Is it rock?
+Is it EDM?
+Is it whatever?
+If you could collect a very rich training set
+that includes all of the above
+and even more, then usually they'll do better
+than going too narrow and risking picking wrong.
+Yeah, and the one asterisk to what I said
+is so long as you can train a neural network
+that's big enough, usually more diverse data,
+more data, more diverse data is better.
+If your neural network is too small,
+then it may lack the capacity
+on the intelligence to memorize all this stuff,
+which could be a problem
+if you need a very small network.
+That runs at the edge.
+But usually, usually if you have the capacity
+to get more rich, more diverse training data,
+that ends up delivering better results.
+I want to share a view.
+So it turns out,
+when you're building a machine learning system,
+very common experience is
+you try something and it doesn't work
+and then you have to figure out
+all the wonderful ways it could be not working
+and then go and fix whatever is not working, right?
+And even in this example we went through,
+is the training data too skewed?
+Is it overfitting?
+So you need either regularization or more data
+or is it something else?
+Or does synthetic data distribution
+not match real data distribution?
+It turns out that when you train your neural network,
+when you train your, when you're building an AI system,
+it's really difficult to know in advance
+what's going to go wrong next.
+I find that in software development,
+if I'm writing traditional software,
+you kind of control all the code
+and so it's more okay to write a spec
+and then you just build it
+and then it kind of works.
+You still need to debug it,
+but the bugs are, it's like my own bugs, right?
+In contrast,
+when you're building a machine learning system,
+it's much more like,
+I don't know what's going to happen next, right?
+Maybe because I don't know what the data will give me,
+how to predict how the algorithm will perform.
+And so the workflow of machine learning
+feels much more like debugging than development.
+And by debugging, I mean,
+it's a process where you build a system
+and you're just repeatedly trying to find
+how it doesn't work and fix it.
+And if you're trying to do a task that humans can do,
+then the bugs or the gaps in performance
+is often whatever a human can clearly do,
+but the AI system is unable to do.
+So, for many machine learning teams
+that I've led and worked in,
+if you can get the team to a healthy rhythm
+of this debugging cycle,
+you can make really rapid progress.
+So for example, it turns out,
+let me give one example.
+I've been on teams where we would do the following, right?
+And we say morning, afternoon, evening.
+So we run our trading jobs at night, right?
+And for example, it turns out,
+for some of these models we're training,
+for speech recognition, it takes, let's say,
+it takes four hours, right?
+So the training job takes about four hours
+to train the neural network.
+So training night, in the morning,
+we look at the results,
+look at the results, do error analysis,
+try to figure out what's wrong.
+And the afternoon, you know, we write code, right?
+To figure out how we're going to fix
+what everything we discovered the day before.
+And then evening, right before we go home,
+we launch the training job.
+And then it runs overnight.
+And the next morning, we do it again,
+and again, and again.
+And it turns out that if you can fix one problem a day,
+that's actually pretty good.
+And within, you know, like, huh.
+And then you saw me walk through three,
+three or four problems.
+When I built this for girl,
+there are slightly more problems than that, right?
+But I find that you can get a team and take treatments
+where you train stuff,
+look at the results, figure out,
+is this bias, variance, data mismatch?
+Oh, actually, this should be cold on good data.
+Fix it, you know?
+And then the evening before you go home, launch the job.
+Maybe if you have time in the evening,
+just baby the training job a little bit,
+make sure it's still running.
+But then come back in the next morning to see how it did.
+Then you just do this over and over.
+It can make really rapid progress.
+And I find there's often this discipline, right?
+That, that lets you make progress.
+In contrast, the teams that kind of wake up
+and they go, huh, what do we do next?
+Oh, let's call a meeting this afternoon.
+Wait, where's the data?
+Okay, I guess we'll meet tomorrow to look at the data.
+And then, and then like, oh, our infrastructure is down.
+And teams like that move much slower
+than the really disciplined teams
+that just keep on rolling forward.
+And one more observation.
+It turns out that your iteration cycle,
+sometimes it is driven by this.
+So I've worked on machine learning jobs
+where it took us about four hours to train a model.
+And four hours is long enough.
+They want to wait for it.
+But, you know, running overnight is just fine.
+I've also worked on teams
+where a typical training job
+took about three weeks on average, right?
+And so if it takes three weeks to train a neural network
+for a particular type of model we're working on,
+then the pacing is very different.
+So how long it takes to train a neural network
+really drives the pacing of this
+where sometimes we would, you know, launch a training job
+and then like hope for the best.
+We would want to train during those three weeks.
+It's not that we do nothing for those three weeks,
+but you just go launch a training job.
+And then frankly, you know, hope that it works
+three weeks later, but we take three weeks.
+And then after that, tons of analysis
+and debugging and whatever work
+that would take us one to two weeks
+to set us up for the next training job.
+They're going to take us another three weeks
+to get the result.
+And then we're also parallelizing.
+While launching this job,
+we're analyzing the job from a previous job
+and we've launched a few jobs asynchronously.
+But I find that how long it takes,
+this is a huge driver for how you do this.
+The other end of the spectrum is
+if it takes 10 minutes to train a neural network,
+then that's wonderful.
+You just train it, get the result, train it,
+get the coffee, come back, you know,
+then do the analysis.
+And then the bottleneck is how quickly
+can you analyze the data and get more data.
+So this really drives the design of this process.
+And one of the things that happens is
+for a lot of projects, you start off with a small thing
+that takes 10 minutes to train,
+but then as you get more and more data,
+you know, then like you're bigger than,
+but now it takes four hours to train.
+It goes in bigger.
+Then it takes two weeks to train.
+It's like, oh, now this thing takes
+a month and a half to train.
+So I've experienced that as well
+where unfortunately as a performance climb,
+we decided we had to train bigger
+and bigger models with more and more data.
+And then it went from this really fantastic
+10 minute iterations to these like
+months long iterations.
+But they just had to be done
+because we were training bigger and bigger networks.
+Yeah.
+We probably didn't stop the model that much.
+So sometimes you can look at checkpoints
+and if you see that for some reason,
+so actually if you're training like a three week job,
+you kind of expect the performance
+to be at a certain level
+after a couple of days or after a week.
+And if it's way off,
+then before burning another two weeks,
+you may ask, is my learning rate clearly wrong?
+Or maybe this new data set we try is clearly wrong.
+So you can actually start to run
+some analyses on the checkpoints
+and sometimes we would yank the job
+and just kill it.
+I don't see that happen very rarely.
+Yeah.
+Yes.
+So what you learn about in the online videos
+is transfer learning.
+We train a large data set
+and then maybe fine tune
+on just a much smaller data set.
+And then if you process a fine tuning
+on a much smaller data set,
+it takes half an hour, right?
+Then that's great.
+Then you can also drive much faster iterations
+and that based on that half hours
+and let me take back to the training time.
+Cool.
+One of the reason I obsess about speed
+is because it turns out that if the X axis,
+imagine you're building a slot
+to launch this product, right?
+I find that if a team takes twice as long to do it,
+they're just much less competitive
+in the marketplace, right?
+So here's what I mean.
+So if this is error and this is months, right?
+There's some machine learning systems
+that we work on for months
+to keep on trying to improve it.
+And if this is you
+and if a competitor,
+say, takes twice as long
+to reach the same level.
+So instead of taking this long to get here,
+they take this long to get here.
+Instead of taking this long to get here,
+they take twice as long to get here.
+So the competitor kind of does that, right?
+It just takes twice as long.
+You know, they take two days
+instead of one day to do something.
+But it always takes two days
+to do what you would take one day to do.
+Then the performance over time looks like this.
+And what the customer cares about
+at a certain moment in time
+is you are so much better than them, right?
+So these two X differences in speed
+really translates into a massive difference
+in the performance of your system
+versus someone else's system
+in the marketplace.
+And I find that the fast-moving teams
+are just so much more effective.
+And you might think,
+yeah, you know, I took two days.
+They took one day.
+What's the big deal?
+Like, the big deal is not that you're a day slower.
+The big deal is you're two times slower.
+And it's very not just in the marketplace.
+It's just not competitive
+if you take twice as long
+for some applications.
+Okay.
+All right.
+There's one other example I want to cover.
+Let me try to do that quickly.
+So what I've talked about so far
+is speech recognition, wake word detection,
+which is more of an end-to-end
+deep learning system
+where your input audio
+goes to the neural network.
+And in this outputs,
+there's this RTO robot turn on, right?
+So the entire system
+you're trying to build
+is just a single neural network.
+For a lot of applications you build,
+you end up building pipelines
+or sometimes call them cascades.
+So I'm going to use the term pipelines.
+We saw one example of this last time
+where to detect people
+coming up to unlock the door
+with face recognition,
+we had video that fed to visual activity detection
+to see if anyone is even in front of it.
+And then that fed to neural network
+to recognize is this an authorized person
+and then 01 to say
+is this a person
+that we should unlock the door for, right?
+What I want to do is use a different example
+of a pipeline of an AI deep researcher.
+So it turns out all of the leading alarm,
+well, almost all of the leading alarm providers
+have deep researchers
+where you can ask a query
+or go and search the internet,
+look at a lot of web pages
+and come back and synthesize
+a very thoughtful report, right?
+And so, yeah,
+but I actually use the open AI deep researcher
+quite a lot.
+I think that I know some of the team
+that built it really well,
+but I think some of us also did a good job.
+But so, you know,
+you input a query like,
+this is example I'm taking
+from the agented AI course online.
+But input the query like
+show me the latest research on black holes, right?
+Some query like that.
+And then one thing you might do
+is take a query like whatever, right?
+Black hole research.
+And then use an LLM,
+use a large model
+to generate search terms
+to feed to a web search engine.
+So it may generate a few terms like,
+you know, black hole research
+latest in, I don't know,
+astronomy and black holes or whatever.
+So generate a handful of search terms.
+This then call out to a web search engine,
+be it server, Google,
+data go, Bing, I don't know,
+I used to really quite a lot.
+But multiple, actually,
+actually more and more
+web search engines designed for AI
+rather than for humans,
+which I think is pretty neat.
+So this can call,
+call the web search engine
+and then fetch the top URLs.
+Oh, sorry.
+I mean, I fetched the top pages,
+other than the top URLs.
+So the web search engine returns 10 pages.
+You may not want to fetch all 10 of them.
+You can read the snippets,
+decide which ones are most relevant.
+Again, maybe with an LLM,
+with a large language model,
+to decide what are the pages
+you want to download.
+So just like a human,
+you know, do a web search.
+I won't click every single link.
+I'll take a glance
+and then decide which ones I'm going to click.
+So identify and fetch the top URLs
+and then feed all that into
+right here,
+into writing,
+and this gives the final output, right?
+So this is a, by the way,
+I think this is a more traditional
+de-researcher article,
+sorry, de-researcher architecture.
+The more modern de-researcher article,
+architectures that the system
+decide when to do more web search,
+when to fetch more web pages
+and are more, you know,
+autonomous, more agenting.
+But this is what the early
+de-researcher architectures look like.
+There's more of a linear pipeline.
+There are more modern architectures
+where the system will fetch some pages
+and autonomously decide,
+do I need to go back
+and do more research
+on some of my topics
+and figure it out a few times?
+But this would be like a,
+you know, pretty decent,
+basic de-researcher, right?
+And it turns out that
+if you actually build this,
+there, one of the,
+in the speech recognition system,
+Robert Turnon lamp example,
+we talk a lot about
+how to improve one component,
+which is the neural network.
+If you have a pipeline like this,
+the other thing you need to do,
+which is pretty important,
+is to decide
+of all the different components
+in the pipeline,
+which one do you want
+to focus your attention on, right?
+So I find that one thing
+that makes a huge difference
+in a team's performance
+is, again, being able to drive
+a disciplined evaluation
+and error analysis process
+to decide what to work on.
+I find that a lot of machine learning
+is not, you know,
+wildly doing things
+to see what works.
+There's actually a very thoughtful,
+very disciplined process
+where with the system,
+maybe it's not doing
+as well as we wish,
+so we should look at it to decide.
+It turns out lots of things
+could be wrong.
+Is it generating search terms
+that aren't quite right, right?
+Or maybe we're using
+a web search engine
+that is returning results
+that aren't that good.
+So, for example,
+is my web search engine
+comprehensive enough,
+or is it just, you know,
+maybe I picked a lower cost
+web search service or something
+that's just not returning
+the latest materials?
+It turns out,
+for some internet articles,
+many web search engines
+would do really well,
+but if you ever want to fetch news,
+really fresh news,
+there's actually a lot of difference
+in the performance.
+Some web search engines
+are much better
+at having really fresh content.
+Some just don't update as frequently,
+so do I need to switch
+web search engines?
+Or am I successfully identifying
+the best web pages to fetch?
+So if I have black hole signs,
+you know, I think nasa.gov
+is probably a very
+authoritative web page,
+but if a web search engine
+returns, you know,
+like, I don't know,
+bobsbackdownastronomyblog.com, right?
+That's less authoritative
+than nasa.gov.
+Am I correctly fetching
+the most authoritative
+scientific articles
+versus whatever is hyped up,
+you know, or maybe like,
+am I fetching a lot of
+random TikTok videos,
+you know, rather than
+really scientific authoritative things?
+And then lastly,
+given all this information,
+am I writing a thoughtful article,
+right, with an LM
+from the final research output?
+So it turns out that
+with a pipeline like this,
+there are lots of steps
+that could go wrong,
+and your ability to
+decide what is the components
+you should focus your effort on,
+that's a massive driver
+of your productivity
+in improving a system like this.
+And the good news is
+that there's actually
+one other thing I've seen.
+Sometimes I've seen a few
+experienced machine learning people,
+it's actually one thing I've seen.
+Sometimes a team will
+build a system like this,
+and if it's a less experienced team,
+they'll build a system,
+it's not quite working,
+try to decide what to do next.
+One thing I've seen many times is
+if you get a few senior
+machine learning people around,
+as I've seen this quite a few times,
+sometimes the students
+on the project may build
+a system like this.
+If you get a few, you know,
+experienced professors
+to look at the system,
+you find that our opinions
+on what to do next,
+there's remarkably little variance, right?
+So you find that many,
+you know, experienced AI people
+will look at it and will go,
+well, based on what it seems,
+we think this is a problem,
+or this is wrong,
+we should try this.
+It's not that we always agree
+with each other 100%,
+but the variance is much less
+than you might think.
+And to me that, you know,
+I think there's a methodology
+behind how to approach
+these problems,
+whereas the variance
+and what to try next
+among less experienced engineers
+is much larger, right?
+So to me, I think there's actually,
+if you have a systematic way
+of doing error analysis,
+to figure out
+where it's actually underperforming,
+you know, experienced people
+all kind of,
+doesn't mean experienced people
+are always right,
+there's just no variance, right?
+But then there really is a methodology
+to figure out what to do next.
+And one of the key ideas
+is error analysis.
+And I talk about this
+on online videos as well,
+but this is so important
+and we'll just go through.
+And one thing to do
+is to look at the outputs
+of each of these intermediate steps
+and it's one of these things,
+I know I'll say it,
+you probably even agree
+it's a good idea,
+but the percentage of people
+that actually do it
+when the time comes
+are found to be far lower
+than 100%, right?
+But there's just, you know,
+take a handful of queries,
+be it, is it latest
+in black hole science
+or should I rent
+or buy an apartment
+or, you know,
+what's the, what are,
+help me make fun plans
+for a weekend in Santa Cruz,
+whatever, some handful of queries
+for a deep researcher.
+And then look at what search terms
+it generates
+and see if it makes sense.
+Look at the web pages and fetches,
+see if they look good.
+Look at the top pages and fetch
+and see if the top web pages selected
+is similar
+or if it's materially different
+than what you would pick.
+Like my example,
+one of this decides to fetch
+Bob's Backup Astronomy page.com
+rather than nasa.gov, right?
+Then you go, okay,
+maybe I need to change how to do that.
+And then also look at the final writing
+to see given the source articles
+is it writing the appropriate articles.
+And what I find is
+for a process like this,
+you know, it turns out error analysis
+is often a very manual process
+because when the system isn't performing
+error analysis or gap analysis
+is often a manual process of
+figuring out what a human would do
+that is better than what the AI system would do.
+And we're trying to inject knowledge
+from the human into the AI system.
+So because AI doesn't have this knowledge yet,
+usually you do need a human time to do this.
+And I know, you know,
+and people are talking about automating
+some of this
+and maybe there'll be problems there.
+But so far I find error analysis,
+it just takes human to look at it
+and have the insights into
+where AI system is doing something different
+than an expert human would be.
+And it's that insight
+that then points you in the direction
+for how to improve it.
+And so often I would build a spreadsheet like this
+where I have a query that is,
+you know, black hole science.
+Another one, do I rent versus buy,
+you know, in whatever, San Francisco
+or, you know, weekend activities in Santa Cruz, right?
+Whatever, just have, I don't know,
+maybe up to a hundred.
+I find that I often have patients
+look at up to a hundred examples,
+beyond a hundred,
+sometimes more than a hundred,
+but it's somewhere between ten and a hundred.
+Have a list of queries
+and have a list of steps.
+And so the steps would be, right, search terms,
+what's that, web search,
+fetch pages.
+So this is what it feels like to do error analysis.
+It is a labor intensive process
+because there's a process of
+identifying where a human outperforms AI
+to try to close the gap, right?
+Just do this over and over.
+But so what I would do is,
+I'll sit down often with a spreadsheet
+in front of me open like this,
+and I will run, you know,
+black hole science through the whole system
+and then just read,
+are the search terms satisfactory?
+And if I'm not an expert in black hole science,
+I may need to get an expert
+or do a bit of work to figure that out.
+But if I find that the search terms
+to send to a web search engine
+are completely satisfactory,
+then I just say, okay, this one's good.
+Then given those search terms,
+I'll look at the web search results and say,
+huh, did the web search engine
+retrieve reasonable things?
+And it looks good, then great.
+And then I look at,
+did my system, maybe in LLM,
+did it make a good choice
+in the top web pages to actually go and fetch?
+And maybe I found this retrieving,
+it chose to retrieve Bob's backup astronomy blog,
+but skip NASA.gov.
+Then I'll say, okay, there's a problem there, right?
+And then often to make a note, you know,
+Bob instead of NASA, right?
+Just to kind of just take notes on what you're seeing.
+And then I'll say, given these sources,
+is this writing okay?
+Maybe it's okay.
+And then the process is to take a handful,
+somewhere between 10, 20, and 100 of articles
+where the performance is subpar.
+And it's called error analysis
+because I want to focus on where it's underperforming, right?
+So there's some articles
+where it's doing a great job on,
+I would tend to pay less attention to those.
+But I focus on finding anywhere from 10, 20, to 100 queries,
+where it's clearly underperforming
+what I think a human should be doing
+or what I hope should do.
+And then going through to just try to get a sense
+of how often the hotspots
+are in different parts of the pipeline.
+And so maybe for rent versus buy,
+I might say, boy,
+there's a really authoritative blogger
+that talks about this,
+but somehow web search misses.
+I don't know.
+Maybe I'm using the wrong web search engine.
+We can in Santa Cruz, yes,
+it's buying into some hyped up tourist things
+rather than actually finding
+locally interesting webpages and so on.
+And then by doing this for 20, 30, 50 queries,
+you can then start to get a sense
+of where the hotspots are, right?
+So again, all of these are subpar results.
+I'm focusing on queries
+where the performance is not good enough.
+And then if I find that, you know,
+I don't know, 40% of the time
+it's failing to fetch the top webpages.
+Only 5% of the time, right,
+it's failing to do that.
+Actually, because of the issues.
+They find that 70% of the time
+I'm really not happy with this.
+5% of the time web search is not good enough.
+You know, maybe 20% of the time
+search terms are wrong
+and maybe 20% of the time
+the writing is not good enough.
+These don't have to add up to 100%.
+Sometimes you have problems in one column.
+But if this is what it turns out to be,
+then we'll go, well, clearly a lot of the,
+my dissatisfaction of results
+is because it's just not choosing good pages
+from the web search to return.
+So let me go focus on that.
+And the thing about a lot of machine learning systems
+is you just don't know
+if you don't do this error analysis ahead of time
+in terms of what component to focus on.
+And so I find that teams that know
+how to drive this process systematically
+and it sometimes takes us hours.
+And we're that, you know, daily schedule thing.
+Sometimes it takes us a few hours
+to go through this process to reach conclusions.
+But then the benefit of spending like whatever,
+you know, three, four hours on this
+is that it can save you weeks
+of otherwise heading in the wrong direction.
+So teams can drive this
+evalus and error analysis process
+in a very methodological way.
+You're much better picking what direction to work in
+and that allows your team to go way faster.
+And there's way more than a 2x difference.
+So I've actually literally visited teams
+that have been working on something for six months.
+I go, like, gee, you know,
+I could have told you six months ago
+this wasn't going to cut it, right?
+And then imagine if this was the problem,
+we're not writing the right web pages,
+but, you know, for some reason,
+the team kept on trying out different web search engines.
+Maybe there's someone trying to sell
+a new web search service to you.
+So, you know, spend a lot of time with the sales team,
+do a lot of integration with the web search.
+There's actually more web search services
+than most people know, right?
+So, and I actually swap between them
+whenever I feel like it.
+So imagine you spend all your time
+trying to come up with a better web search service,
+you know, for six months,
+at least entirely possible.
+Then you could just,
+it just won't move the needle
+for the overall performance,
+which is why the cyber error analysis process
+is so important, right?
+I walked through this with the example of one pipeline.
+The online videos go through other examples as well,
+but both building deep learning pipelines
+is for kind of AI agentic pipelines.
+I think this is a very important concept to master.

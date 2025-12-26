@@ -1,0 +1,1438 @@
+So, um, what I'd like to do today is chat with you about the full cycle of a deep learning project.
+And as I promised in the first lecture, rather than me talking at you for an hour and 20 minutes or whatever,
+um, we'd love for this to be much more interactive.
+And so what I'm going to do is illustrate this as an example,
+but also ask you a bunch of questions along the way about what you would do
+if you are the one working on the project that I'm going to use as an illustrative example.
+Okay, so plan for this to be quite interactive and please interrupt any time and ask questions
+since I think that's why, uh, you know, I want to do this in person here at Stanford.
+Um, so one of the reasons why developing machine learning or deep learning
+or other types of AI projects, including AI projects using large language models
+or agency guide workflows or whatever, is that AI projects are different than traditional software engineering projects.
+So one of the biggest difference between AI projects of the many different flavors,
+civilized learning, LMBase, um, you know, generative AI base is that
+in traditional software projects, you write code and you control your code, right?
+Write whatever code you want, compile it, your code does what you tell it to.
+But AI projects, you know, involve both code as well as data that you train your algorithm on
+and you almost never know what strange and wonderful things there are in your data.
+For example, if you're working on a face recognition application,
+that's a running example I'm going to use today, then as you're just getting started on the project,
+you actually, it's really difficult to know in advance what you find in the data.
+Is the lighting of the faces good? Do you struggle with people with very long hair or people with short hair?
+Do people making weird facial expressions make your system struggle?
+Do people wearing glasses make your system struggle?
+So data is so rich that a lot of time you can't predict in advance what your AI system is going to do,
+not because you don't control the code.
+So you can write whatever new network or whatever code you want, but you don't know what's in the data.
+And this is why, unlike traditional software engineering, machine learning development is a much more iterative process
+where you just have to build something, see how it works, and then through a process,
+discover, almost discover what is in the data and therefore what you should be doing
+to change your code to make your overall system perform.
+This is also true, not just for, this is true not just for deep learning based systems,
+this is also true for modern large language models.
+If there's been a lot of hype buzz about how LLMs, large language models, are hard to control,
+I think there's a lot of excessive hype about that, you know, kind of fear-mongering, there's a little bit of that.
+But one of the reasons why none of us know in advance what LLMs do is because it was trained on a lot of data,
+more data than any human could possibly look at, and we just don't know, you know,
+what precision, what is in all that data that the app was trained on.
+And so because we don't know the data, we can't really look at all the massive tens of trillions of tokens of data was trained on.
+It's hard to know exactly how a large language model will perform,
+which is why building agent-based applications or building large language models based applications is also very empirical or very experimental,
+meaning you just have to build something, then see where it goes well,
+see where it goes poorly, and then use that to fix problems.
+And that's how you drive progress.
+That make sense?
+So because you control your code, but you don't really know, it's hard to control the data.
+And this is true, both for the data you have stored in your hard disk.
+You're going to have, I don't know, terabytes of data stored in a hard disk.
+I don't really know what's in my hard disk.
+And the thing you really don't control is what data the world will give you in the future.
+So we deploy a system in the world, safe face recognition, which we should talk about.
+People wear a thick, heavy scarf that covers part of their face when it's winter.
+You just don't know.
+There are all these things in data that will surprise you.
+And if you don't even control your past data that's already in your hard disk, you certainly can't control your future data.
+So it turns out that a lot of machine learning classes talk about building models, right?
+And you learn a lot from the online videos about how to build powerful deep learning models.
+But it turns out that building the overall machine learning system or deep learning system has a lot more work than just training models.
+But if you look at a lot of courses, there's actually a very strong focus on modeling because I think that's what academia has focused on.
+We can train models, evaluate models, publish papers on models.
+And so you find that a lot of courses focus on training a good deep learning model.
+And that is absolutely important.
+But because we know how to evaluate models, different research groups can benchmark different models.
+So there's a lot of academic research work on that that's reflecting a lot of courses.
+But this is just a small part of what you need to do if you want to build an effective deep learning system.
+And what I want to do today is go outside the small box of models to give you a broader view of what it feels like to develop a deep learning or a machine learning system.
+And this is what it often says.
+This is what building a deep learning system would be like, which is first.
+Specify the problem, figure out what we're actually working on.
+The running example I want to use today will be to build a face recognition system or face rec system for security, for deciding when to unlock a door.
+And I know Kian talked about some face recognition, which I believe face rec architectures last week as well.
+But a specific application I want to talk about is something I've worked on.
+Actually, I built one of the commercial systems for this.
+If this is a door and this is, well, you or a friend or maybe someone that you don't want to let in approaching, if you have a low camera, sorry, bad drawing,
+take a picture of whoever's approaching the door and decide whether or not to unlock the door.
+So face recognition to decide who's authorized to enter, like a restricted location, like a corporate office building or your house or whatever.
+And actually, one common use case that one of my teams built was key card, swipe key cards.
+So sometimes key cards get stolen.
+And so one of the systems we deployed, you know, fairly large office complexes was if you swipe a key card, we also just take a picture,
+student just called it to make sure that the key card is held by the person whose face is shown on the key card.
+So it makes it harder for someone to steal a key card to gain unauthorized access to the office complex.
+So I'm going to use this as the motivating example for today.
+And after specifying a problem, typical process is then sometimes the open source model can download.
+But let's say for today that the open source models aren't good enough.
+You want to train your own model.
+The simple process we get data, you know, design a model, train a model.
+And then we will iterate through these steps a bunch of times until the model looks like it's performing well enough.
+And then after that, we have to deploy it and maintain the model.
+OK, so I'm going to talk a bunch about multiple of these steps today because I want you to come away with a feel for
+when you're working on a real machine learning application, what the important steps you will face on.
+And so as I alluded, machine learning development is very iterative process.
+So for these three steps, we often drive a rapid development loop where we design the model, train it,
+analyze the results, and then maybe design or update the model, the data or something,
+and iterate around this loop many times before you are satisfied.
+And all right, just one more detail.
+It turns out that for face recognition, the very common architecture which you learn in detail about later in the online videos
+is a neural network called a Siamese network.
+And what that does is a neural network that takes as input two pictures,
+and two pictures get fed to a neural network or a deep learning algorithm.
+And it's a job of the deep learning algorithm to tell us are these two pictures the same person or different persons?
+Because if you're trying to set this system safe for your house,
+and maybe you have a few family members or roommates you want to let in,
+then it would be quite annoying if they retrained a neural network for every single home.
+So the most common way to do face recognition is of a neural network that inputs two pictures,
+and the job of the neural network is to tell me are these two pictures the same person?
+And then the way you set up the system is to input a few registration pictures.
+So take a picture of yourself, take a picture of your roommate,
+take a picture of any family members you want to have access.
+So then when someone comes, you can quickly check if the person that just showed up
+is one of the people that's authorized, and then let them in.
+And then the corporate key card swipe example is someone swipes a card,
+and my card says this is Andrew's card,
+then I'll quickly pull up my registration picture to double check if I am,
+if I seem to be the same person as the Andrew that was registered.
+So this is a typical neural network architecture.
+All right, so I have a question for you.
+One thing I'd like to do today is walk you through a number of scenarios
+and invite you to think about what decision you would make
+if you are the CTO of a startup building these technologies, right?
+So my question for you is, if you are the CTO of a startup building
+the next phase recognition system,
+and if your lawyers have said you aren't allowed to download data from the internet,
+right, so let's not download data from the internet for this application,
+how would you go about getting data to train the system?
+So what you need is a bunch of pictures of people, right,
+to train a neural network to say, you know, are they the same person or not?
+So maybe take a few minutes to think about it,
+and then I'll see if you can raise hands and give some answers.
+And one specific question I have as well is,
+how long would you take to collect data before you start training a model?
+Right, so I think, well, you need to get data,
+we've designed a model, I guess, and then you need to train a model.
+So what does the timeline look for you?
+We specify the problem, you know, we design the model,
+how many hours or days or weeks we just spend to get data and how,
+before you start running, you know, gradient descent.
+I see your hand up.
+Oh, sure, go ahead.
+Let me leave it a bit more open-ended.
+Say you just graduated from Stanford,
+and your CTO of a three-person startup building this thing,
+that eventually, hopefully, you sell all around the world,
+but your goal is to just get started with the three of you working all of,
+you know, Palo Alto, California,
+and do it as your real self, right, with the resources that you have.
+All right, anyone want to venture an answer?
+How would you get data to train the neural network?
+Go for it.
+Yeah, cool, video streaming service.
+By video streaming service, you're thinking like, you know, Netflix and Hulu,
+or are you thinking like security videos?
+Oh, like Zoom.
+Oh, I see, I see, cool.
+I see, cool, cool, right, cool.
+All right, video streaming service.
+How long do you think it will take to do that?
+Cool, all right, cool, thank you.
+All right, creative idea.
+Any idea what it is?
+How would you go about and get data?
+Go ahead.
+Yeah, cool, awesome.
+All right, stick a camera there.
+Let people, you know, opt in, right, to get the picture taken.
+Cool.
+I think I saw a hand up.
+Go for it.
+Oh, sorry.
+I see, cool.
+How would you get users?
+I see, cool, right.
+Yeah, by your own people, you can like grab some friends and also they'll give you that LinkedIn photo,
+give you some pictures from the camera roll.
+Yeah, cool, I like that.
+That's fast.
+I like that.
+Any other ideas?
+Oh, good.
+I see, interesting.
+Yeah, I'll stand for to send an email.
+Cool.
+But I love Stanford.
+Stanford is a wonderful institution.
+That's going to take a while.
+Really creative idea.
+I like the creative ideas.
+So let me share with you one guiding principle for how I would encourage you to approach this problem of data collection.
+I appreciate all the creative ideas, actually.
+One of the frameworks I often use to decide how I collect data is speed.
+Because I find that, especially when building a startup, in my opinion,
+one of the strongest predictors for whether a startup will succeed and also whether a small innovative project in a large corporation,
+it could be a giant corporation, but a team of three working on a small innovative project in a big company,
+I find that one of the biggest predictors for the chance of success is just the speed of execution.
+It's just speed of getting stuff done.
+And so when I'm sitting with a team and brainstorming different tactics,
+I will gravitate toward the tactics that let me get the data set very quickly.
+And quickly usually means, you know, like one or two days,
+even if it ends up with an inferior, smaller, lower quality data sets or whatever.
+Because I don't really know what problems I'll see in my data.
+And the quicker I can, you know, get the data set, train a model, see where it goes wrong,
+the quicker I can then discover what's wrong with my data and fix it.
+True story, chatting with a CEO that told me he actually had spent I think it was over $100 million,
+definitely more than $10 million, spent a lot of money buying a company for its data.
+And then she actually said, hey, Andrew, I've spent all this money to get all this data.
+You know, can you help me figure out how to monetize this, how to make money off of this?
+And I kind of looked at it and said, boy, I kind of wish I hadn't done that.
+And what I find is that the value of data is just so difficult to know in advance.
+What's important and what's not important about data.
+So for a lot of these tactics, for example, I think student ID is an interesting one.
+But, you know, our student ID photos weird in some way, right?
+Or are they too expressionless or people smiling too much in student IDs?
+I actually have no idea.
+Actually, my Stanford ID, I look really weird in my Stanford ID.
+Or and I think you and I actually like the idea of sticking a camera
+and just letting people come up and opt in and take a picture if you can do it quickly.
+And I think in a big company or even in a small startup, if you know,
+it's important to respect user privacy or individual privacy.
+But if you can stick a camera in some place, you know, that doesn't kind of,
+what's the word, invade people's privacy,
+that don't want to be any part of this, but let people opt in,
+take the pictures of permission.
+If you can do that in days, I find that to be valuable.
+One other thing I found for quite a few of my projects,
+I found that Stanford students, our community here is pretty cosmopolitan.
+We're people from all around the world.
+We're not fully representative of the world's distribution of people,
+but we actually do have people from all around the world.
+A lot of Stanford people are actually very nice.
+So one thing I've done multiple times is when I need to collect data,
+we'll go to places on campus with high foot traffic.
+It turns out cafeteria is a very high foot traffic.
+And we just ask people, hey, work on the project.
+Can I get a sample of your voice?
+Can I take a picture of you?
+Kind of with really informed concern.
+Tell people, is it okay if I do this?
+I've been delighted at how collaborative Stanford students are.
+And I find that one thing I've often done is gone to my teams
+and said, we have two days to collect data.
+It's like, whatever.
+It's 11.52 a.m. now.
+Let's figure out what we can do by, what day is it? Tuesday.
+Let's figure out what we can do by Thursday, 11.52 a.m.
+So this gives us 48 hours, and let's brainstorm.
+How can we collect data?
+And it's fine that the data isn't all there,
+fine that the data is low quality,
+but that velocity lets us more quickly trade a model,
+figure out what's wrong with the data,
+and then jigger or retweak how we collect data.
+So I find that some teams will ask,
+how can we collect the data we need?
+And then ask, how long would that take?
+That usually leads to much slower execution.
+I instead tend to go to my teams and say,
+we have two days or one day or maybe a week, right,
+some short time span like that,
+and say, what's the most creative, you know,
+respectful, responsible, but creative way you can use
+to collect data in a short time span.
+And one of the ways to think about that too is
+trading a model takes, I don't know,
+let's say it takes two days.
+Maybe I should take more like one day, right?
+If you can trade a model in a couple of days,
+then I would not spend, you know, like whatever, right,
+two months to find data to trade a model,
+because then this becomes a huge bottleneck.
+Because you can trade a model relatively quickly,
+let's take a commensurate amount of time
+to design a model or design the data as trade a model.
+And depending on how long it takes to trade a model,
+sometimes trade a model, you know,
+it needs to run overnight.
+I actually see teams sometimes take one day
+iteration loops around this.
+The fast-moving teams I work with,
+we often go around this loop once per day
+for the smaller models.
+If we're trading a large air foundation model,
+sometimes trading a model takes weeks or even months,
+then the process can be different.
+If your model run is going to be, you know,
+two months, then yeah, maybe it makes sense
+to spend, you know, a couple months
+to get the data really right.
+If you have a large air foundation,
+you could train that overnight,
+or actually in a couple hours quite easily.
+So it makes sense not to spend massive amounts of time
+before you go in to train the model.
+Does that make sense?
+And because, oh, the word empirical
+means experimental, right?
+Sorry, I've used the word a few times today.
+And I think we say that machine learning
+is a very empirical process,
+we have to do it, see what happens,
+and decide what to do next.
+I know that sometimes others have criticized our field
+as like, we never know what we're doing,
+we just try stuff and see what works.
+And, you know, there's a little bit of truth to that.
+I think understanding neural networks,
+hyperparameters, architecture,
+that is really valuable,
+so we don't just try stuff at random.
+But because we don't know what's in the data,
+we do try a lot of things,
+and then drive a disparate process,
+understand what works and what doesn't,
+and then use that to navigate forward.
+Does that make sense?
+And then I'll just say there's one exception
+to the advice I'm giving here,
+which is if you're working on a project
+that you have worked on many times before,
+so, you know, whatever,
+I've built a bunch of face recognition systems.
+So I kind of have a sense from previous experience
+and from reading research papers
+that certain things I know are just not going to work
+if I have, you know, a hundred images, right?
+So there's some face recognition systems I know
+I probably need at least 50,000 images
+before they'll have any hope of working.
+So because of that prior experience,
+having gone through that loop a lot,
+I now have a basis to say,
+okay, I do need 50,000 images,
+then I might invest upfront
+and put more effort upfront
+to get those 50,000 images.
+But I think for most applications you work on
+for the first time,
+if you don't have academic literature
+to justify certain larger data investments,
+or if you don't have prior experience yourself,
+then I would focus on the speed
+of iterating around this loop.
+Make sense?
+All right.
+And to relate this to
+large language models-based applications as well,
+a lot of us, a lot of you are probably,
+well, you may be building applications
+like prompting OMS and calling an API, right?
+Like an OpenAI or Anthropic or Gemini
+or Metalarmor or whatever API
+to get things back from OMS.
+One of the reasons that too
+is a very experimental,
+a very iterative empirical process
+is because when you write an OMS prompt,
+you don't really know in advance
+how it's going to do
+because it was trained on data
+that none of us have really looked at.
+And that too is why,
+instead of theorizing for a long time
+about what prompt to use in OMS,
+you know, just try it out.
+And then just by doing that,
+you then see the problems
+and then your focus can be on fixing the problems.
+Make sense?
+And in fact,
+there's a lot of discussion on responsible AI,
+how to make sure AI systems are safe
+or they don't have kind of unforeseen circumstances.
+And because a lot of the theorizing,
+you know, you can only theorize so much,
+I find that if you want to build
+safe, responsible AI systems,
+one of the best ways to do that
+is to just build it
+and then experiment with it
+in a sandbox environment.
+Just don't let it out in the world
+until you've tested it rigorously,
+but just go build something
+and then, you know, test it,
+probe it in the safety of your own laptop, right?
+Don't let it end to innocent users
+and have some weird impact on innocent third parties.
+But there's only by building it
+and then probing it
+that you can figure out where can it go wrong,
+where it will say inappropriate things,
+where it would respond inappropriately
+to certain user queries
+and then that tells you
+where the problems are
+when you work on that decision.
+Okay?
+All right, yeah, question?
+Oh, sorry, is that you?
+So like, when you do some work,
+like when you do analytics,
+how do you complete that?
+Yeah, right.
+Great question.
+So when you analyze something
+that's wrong with your model,
+how do you use that
+to take the next step forward, right?
+That's a big topic
+that we'll talk at length
+multiple times in some of the videos
+and also in some future lessons,
+but maybe long story short,
+one of the things you could do
+is change your neural network architecture.
+You may realize that
+maybe the assignment sample isn't working
+or read the literature to change your architecture.
+The other thing you can often do
+is change your data.
+So data-centric AI is a discipline
+of systematically entering your data
+to build a successful AI system.
+And it turns out
+that you build a face recognition system.
+Let's say, I like your hat,
+snap the hat, let's go.
+But let's say hypothetically
+that you find that the system
+really struggles recognizing people
+that are wearing hats.
+Then you may say, all right,
+I need to get more data
+with people wearing hats, right?
+And so it's often that
+looking at what goes wrong,
+which we call error analysis,
+that then gives you the insight
+to say, oh, it works well
+on these types of data
+or these types of users,
+but the struggles of these types of users
+and those data,
+so can I fix my data
+or get more data
+just on the subset of cases it struggles with?
+And that's a very common motion.
+That's a very common process
+for then driving the performance of the system.
+And this is also why
+blindly going out to grab more data
+willy-nilly,
+that's often not a good strategy
+because it's just too much data you get.
+Do I want more data
+with people with long hair
+or short hair
+or people with facial hair,
+sorry, too much hair,
+too many hair examples,
+or do I want people
+with wearing a scarf,
+covering part of the face
+or people that wear glasses,
+or people that don't wear glasses,
+or people that are slightly turned away.
+There's just so many different types of data
+you could invest effort to get more of
+that until you build a system,
+see where it goes well,
+see where it goes poorly,
+it's really difficult to decide
+where to get more data
+and just get more data
+of everything under the sun.
+That's very slow and expensive.
+And I think part of the hype
+about the value of data
+has led people to have sometimes
+overly simplistic view of data, right?
+Yes, of course I want more data,
+but just grabbing more data
+of all types of data
+is a very inefficient,
+very expensive way
+to improve my system.
+And even if you look at the way
+that frontier models are trained right now,
+it's not a game
+of just grabbing more data
+of anything under the sun.
+It is identifying the subcategories
+where it's valuable
+to invest to get high quality data,
+which is why if you look at them,
+it turns out in AI,
+there are two clear buckets
+of value in LLMs, right?
+There's the general
+answering people's questions.
+I think, you know,
+OpenAI is actually
+doing really well there.
+Gemini, Anthropic have momentum,
+but there's the general
+answering general questions.
+And then one of the verticals
+is really valuable
+is AI for coding the system.
+So I think, you know,
+Claude has been ahead for a while,
+but OpenAI, you know,
+I don't know,
+Gemini 2.5 Pro,
+some of the models
+are making really good
+progress in coding as well.
+And if you look at the team,
+look at the work
+that the frontier teams
+are doing to improve coding,
+building iterative agentic
+workflows is part of it,
+but also finding clever ways
+to come up with coding-related data
+is also part of it.
+And if you want your alum
+to do better in coding,
+you don't grab data
+with low quality,
+random internet chat,
+social media,
+whatever data, right?
+But instead,
+having high quality coding
+related data
+is how you can have
+a focused effort
+to improve your alum's ability
+to code.
+So a lot of these things
+are actually, yeah,
+I feel like more data is better.
+That is absolutely true,
+but it's also
+an overly simplistic thing.
+Data is not monolithic.
+There are subcategories of data,
+and having a view on
+what piece of data
+to really invest in
+getting a lot more of,
+that's really important
+to being efficient
+in how you improve
+your system performance.
+That make sense?
+All right,
+we'll talk more about
+error analysis in this data.
+Any other questions?
+Cool.
+Yeah, go for it.
+Yeah, right.
+So as you collect data,
+the quality of data
+matters a lot too,
+which is why,
+and I think data quality
+is tricky, I think.
+When building an application
+for the first time,
+I would still focus on speed
+and collecting some data quickly,
+but as you then analyze
+where your system is going,
+why and what it's doing poorly,
+you often find that
+the quality of data
+really matters.
+So, I'll talk about this now later.
+I'll come back,
+so let's see,
+let's go there.
+All right, let me talk about LM1.
+There's a lot of low-quality
+random chat on the internet
+that's not that useful
+for training LMs.
+But I think, you know,
+this is actually now well-known
+that if you can legally access
+very high-quality written,
+authored articles or books,
+they're highly edited,
+very insightful,
+but that's very high-quality
+data for training LMs.
+And I'll give an example later as well
+for face recognition.
+It turns out that, you know,
+blurry images, right,
+would be low-quality,
+then sharp and focused images,
+assuming that's representative
+of how you want to recognize
+people's faces.
+So that really matters as well.
+All right, anything else?
+Cool.
+All right.
+Oh, yeah, go for it.
+Yeah, so, right,
+just repeat for Mike.
+How important is it
+that the data you collect
+is similar to the distribution
+of things you want to work on?
+I think it's important,
+but not as important
+as most people might think.
+So, it turns out that
+it turns out one of the reasons
+neural networks have been so effective
+is because when you build
+a very large neural network,
+you can throw all sorts of data into it,
+including data that is, you know,
+not perfectly tuned
+to your test set distribution,
+and it often doesn't hurt
+so long as your network is big enough.
+So, you raise the example,
+whether we have it identify
+two identical objects, right?
+If it's generic objects,
+like, I don't know,
+water bottles and markers,
+maybe that's too far afield,
+but if we were to use, let's say,
+you know, simulated cartoonish characters,
+right, that look really different
+than real humans,
+my guess is it probably won't hurt at all,
+and it may even help a little bit.
+And so, throwing in a lot of data,
+if we train a large neural network
+with a lot of capacity
+to absorb even some slightly irrelevant data,
+it usually doesn't hurt
+and might even help a little bit,
+but how much it helps
+is another empirical question
+that will be problem dependent,
+and we often just have to try it out.
+But I think maybe, you know,
+like, in the past,
+people used to have an obsession
+that the data you train on
+has to come from exactly the same distribution
+as the solution you test on.
+That used to be how machining was done,
+I don't know, like, 10, 15 years ago.
+That's really not true today anymore.
+I think we're very comfortable.
+And I think when neural networks
+were much smaller,
+where you could train very small models,
+there was a sense that you didn't want
+to distract the neural network
+with irrelevant data, right?
+Because computer was expensive,
+with few parameters,
+and you're distracted on irrelevant stuff,
+maybe it gets less good
+at the core tasks you really care about.
+But if you can train it bigger
+than a neural network,
+which is getting easier and easier these days,
+then it's become much more okay
+to toss in some data
+that hopefully isn't incorrect data.
+I think incorrect data is a problem,
+but just irrelevant examples
+hurts much less,
+because big neural networks
+is like a human brain, right?
+You know, I don't know.
+The fact that, whatever,
+the fact that I learned to play the piano,
+you know, probably doesn't make me worse at AI, right?
+Because hopefully my brain is big enough
+to learn to play the piano
+and learn some self-able AI.
+And I think as neural networks get big enough,
+they can learn some other irrelevant things
+and also do well
+with the core tasks you really care about.
+But this is less true when, you know,
+if my brain was really small,
+then I don't think any of you
+are fans of Sherlock Holmes,
+but I think Sherlock Holmes had an attic theory
+that your brain has only so much capacity,
+so you've got to forget some stuff
+to learn new stuff.
+But when you train very large neural networks,
+that's much less true.
+Cool.
+All right, thank you for all the questions.
+So what I want to do is just
+keep going through this flow, right?
+So we talked about your data design model,
+trainer model.
+We'll talk a lot more about error analysis
+later this quarter of how to figure out
+where your algorithm is still subpar
+and where to focus efforts to improve it.
+But what I want to do is
+give you a sense of deployment, right?
+So when you have trained a model,
+it's often a bunch of software engineering work
+to then maybe take your model
+hosting the cloud on the local server
+and have it run inference, right?
+It's a very common architecture
+for deploying machine learning model
+will be that you have a neural network
+as a piece of software.
+You deploy it maybe on the cloud hosted service
+so that your software can accept a picture
+or set two pictures and it will reply back,
+you know, do I unlock the door or not?
+Or is this the same person or not?
+So there's a bunch of software engineering work
+that needs to be done.
+But in practical deployment settings,
+I'll actually tell you,
+it turns out that if you're building
+a practical face recognition system,
+you probably find that if you are trying
+to unlock a door, you know,
+to a corporate campus,
+it's too expensive or too slow
+to stream video 24-7 to cloud
+to classify every frame at 30 frames per second
+to see if, you know,
+there's a person that you should unlock the door for.
+So in practical face recognition systems,
+what we end up doing,
+actually, let's take the example
+of someone walk up to the door,
+to your home, to your door at home,
+and you want to see if there's someone there
+you should unlock the door for, right?
+So a lot of systems will actually
+have an image from the camera
+and then try to build a system.
+All right.
+So what we have so far, right,
+is a system that takes a simple image
+and maybe a reference image.
+A neural network says,
+do I unlock the door or not?
+But it turns out that if streaming video
+is too expensive,
+classifying every frame is too expensive,
+we'll often end up with a system like this.
+I'm going to...
+Well, the VAD sense of visual activity detection.
+And what this does is a usually low-cost,
+low-power, inexpensive computer job to run
+to just very quickly maybe try to figure out
+is there a human face there.
+Because it turns out, actually,
+if you're building something,
+unlock your front door, you know,
+to you and your friends.
+If you look up my front door and my house,
+like, it's pretty boring, you know.
+There's a wall,
+but we see it all over the street,
+but nothing moves most of the time.
+So this very obviously,
+almost all of the time is very obvious
+that there's no one outside my front door
+trying to be let in,
+and it'd be very wasteful to stream all that video
+to the internet for classification, right?
+So visual activity detection is usually
+a low-cost, low-power system
+to just very quickly decide,
+should I do the work of sending this
+to the larger face recognition system
+neural network that may be hosted on the cloud
+to have it do the much more computationally expensive work
+to decide, you know, zero or one,
+do I unlock the door or not.
+Okay?
+So this type of optimization
+in order to make the system computationally feasible
+to deploy is fairly common,
+and I'm going to give you two options
+for how to implement VAD,
+and I'm going to ask you to reflect on them
+and then tell me which one you would pick to get started.
+Okay?
+So option one is a non-machine learning-based method,
+which is see if the number of pixels changed
+is greater than some threshold epsilon, right?
+So if the camera is stationary,
+maybe looking at a wall,
+most of the time the pixels barely change
+because, you know, it's just a wall,
+and so you can write a little bit of code
+using, you know, some image library
+like PIL, Python Imaging Library,
+or some simple, write a few lines of code
+to just say, has the number of pixels
+whose RGB values have changed more than some threshold
+has more than, you know, 10% of the pixels changed
+compared to what it looked like a second ago
+in order to see if there's anything
+in front of your camera
+to even decide to pass this to a more high part neural network.
+Okay?
+Option two would be to train a small neural network.
+So face recognition is a pretty complex task.
+You have to look at multiple cues in the face,
+look at the eyes, look at the mouth, look at the, you know,
+so that piece of relatively large neural network.
+But just taking a quick glance to see
+is there even a human in front of my door?
+That's a much simpler task.
+So option two would be to train a very small,
+very low-power, very lightweight neural network
+to just very quickly tell you,
+do you think there's a human there?
+And then use this train model to decide,
+is it worth passing on to a much more powerful
+neural network running in the cloud
+with a lot more resources
+to make the final determination.
+Okay?
+So if you are the, again, CTO
+or a three-person software building this,
+how would you, how would you start?
+We'll give everyone a few seconds to reflect on this now.
+Get people's thoughts.
+Go for it.
+All right, cool.
+All right, just repeating my mic.
+So problem-dependent depends on whether you're on the street
+with a lot of people walking past,
+maybe concern other algorithms.
+They're even cheaper than small neural network.
+Cool.
+Yeah, cool.
+Great.
+So use option one in the short term
+and then maybe replace that with option two
+where we have more data.
+Yeah, cool.
+That's very sane.
+Go ahead.
+Oh, sorry.
+So use both options or put both in the pipeline.
+Oh, that's interesting.
+I see.
+All right.
+So see if option one,
+let option one see if anything changed.
+If something changed,
+then pass this on your network.
+Oh, okay.
+That's cool.
+That could work.
+Yeah, cool.
+Yeah, that could work.
+So it could cascade the multiple steps.
+Yeah.
+Yeah, right.
+Yeah.
+So how expensive is it to run this neural network
+in the cloud?
+So actually,
+so I would usually want to design both of these
+to run at the edge,
+meaning on the device.
+Oh, this one.
+So it turns out that streaming video
+is fairly expensive.
+So I think,
+yeah, I feel like, boy,
+I don't have numbers at tip of my fingertips,
+but I think running this 24-7 is not feasible.
+So we definitely need something to fill it down.
+But sending, you know,
+I don't know,
+a few images every minute
+is probably not a problem.
+Yeah.
+Okay.
+Sorry.
+All right.
+Sample certain times,
+sample certain frames of the video
+in order to get all of them.
+Yes.
+I guess so.
+Yes.
+Although, yeah,
+although I think if you have a video of my front door,
+you need a way to sample other than random,
+I guess.
+Right?
+Because a lot of time,
+nothing happens.
+Unless you take one frame per minute,
+I guess,
+which would be okay.
+But then we don't want someone waiting there
+for a full minute
+before we finally get around to sampling
+and then sending it.
+So, yeah.
+Go ahead.
+Yeah.
+Could we use the same images
+for training this network
+to train this option two network?
+Maybe.
+I think it's actually one of those things
+I would say we have to try it
+before we know if it works.
+It might be doable.
+It depends a lot on what data we collected
+to train the Breakthrough network.
+Yeah.
+Cool.
+Anything else?
+All right.
+Let's take a cool last one.
+Go ahead.
+Cool.
+Right.
+Yeah.
+How about use option one
+and keep it really low threshold
+so we send very few images.
+Is that what you mean?
+Yeah.
+I think that'd be reasonable to try.
+Well, right.
+So that we don't miss too many people.
+But, yeah.
+Right.
+Let's take one last comment.
+I'll share a perspective on Hollywood.
+Yeah, right.
+Yes.
+Yes.
+So one of the weaknesses of option one
+is if there's a tree swaying in the background
+or if you see a road
+and there's a car that drives by
+or if there's a busy street
+and the car's driving by all the time
+or the neighbor's cat comes and visits,
+those will trigger this.
+Right.
+So those are downsides.
+So let me share your perspective
+on how I would approach this
+and what we actually do.
+So if you're the CTO of a startup
+implementing this,
+to me, it again comes down to speed.
+Right?
+And so what I would ask is
+how long does it take to implement option one?
+And how long does it take to implement option two?
+And I think everyone made good points
+about the pros and cons of these two options.
+And if you're actually doing this,
+the approach I would take is, you know,
+just ask, what can I do really quickly
+so I can then deploy it
+and see whether it works
+and then I'll fix it if it doesn't work.
+Because I think these insights like
+will tree swaying in the background affect it?
+You know, it turns out that it actually does probably,
+but maybe not if the wind isn't that strong
+or if, right?
+But it's really difficult to know
+answers to questions like these
+because you don't really know
+until you stick on a bunch of cameras
+in front of doors and see the data.
+Then you can get more confident
+in how well option one works.
+Like, I don't know,
+how often does the neighbor's cat actually come by?
+And if there's a car that drives past,
+are the cars usually so far away
+that it doesn't matter
+because the number of pixels per car is small, right?
+So all of these are very empirical questions.
+It's really difficult to answer.
+And the fastest way to get answers
+is just implement something quick and dirty
+and then run it, see what goes wrong, and then fix it.
+So what happens on, I'll tell you,
+from the experience of a lot of face recognition teams
+is because option one is so quick to implement,
+this is like, I don't know,
+five lines of Python or something, right?
+And I don't know, get it out and write it for you.
+Just get it out and write the five lines of Python for you.
+So you can implement this in, you know,
+20 minutes, maybe even less,
+whereas this, I think, will take you at least many hours,
+maybe longer to implement.
+So my instinct would be the start of this.
+And it turns out, having built many face recognition systems,
+I'll tell you, this actually doesn't work well enough
+for all the problems people raise.
+And so we wind up going to this.
+But implementing this also gives you insights
+into where it's going wrong.
+And I'll give you one example of one insight
+that, you know, we and many other face recognition teams have,
+which is it turns out that when you're approaching a camera
+that's trying to recognize your face,
+there are some frames that are going to be
+really clear and in focus,
+and a lot of frames are really blurry, right?
+If you just look at a video,
+someone walking toward the camera,
+sometimes just, you know, when I'm stepping,
+sometimes the velocity of my face is higher
+and sometimes it's lower, right?
+That's just what it is.
+And so sometimes my face is in focus,
+sometimes it's more blurry.
+And it turns out that if you can select out
+the high resolution frames
+and feed that to face recognition,
+you get much higher quality results, right?
+So this is the kind of stuff that I assume,
+you know, most people would not know about
+until you work on a system like this.
+But it turns out that when I was working on a system like that,
+having a system to not just do VAD,
+but also capture the video
+and then deliberately select not just one,
+but maybe five frames
+to the high resolution and in focus of the person,
+that actually gave a significant boost
+to the accuracy of our face recognition system.
+And I mentioned this as an example
+of the sort of discovery that you have
+only when you implement one of these systems,
+maybe even implement this system.
+But if you implement this system,
+you see, boy, we're trying to recognize
+a lot of pictures from blurry faces.
+Maybe we need to do something about that, right?
+So this is driving the empirical process
+that may then lead you to train in your network,
+both to see if there's a face,
+but also to see if the picture of the face is in focus
+to select out that frame for downstream processing.
+Does that make sense?
+And this is why you find that
+for some meaningful fraction of questions I ask in class,
+the thing that the speed is to do
+is often the right answer,
+because that obsession with speed
+really lets you go in and figure out
+what's in your data
+and improve your system more efficiently, right?
+So, right.
+So, yeah, so what happens in the practice,
+start with this, discover how it doesn't work,
+because it doesn't actually work,
+I can tell you that.
+And then figure out,
+but use those learnings to do this.
+Yeah, so is there a sense of
+what is a good classification,
+accuracy of problems like these?
+It's actually really difficult.
+One of the common benchmarks,
+you learn more about this in the third module
+on the online videos as well,
+is building machine learning systems is easier
+if we have a reference level of performance,
+like an aspirational target accuracy,
+which is often human level performance.
+And so it turns out that
+the way you diagnose bias and variance,
+which we'll talk about later in this course,
+is easier if you know
+what's an achievable level of accuracy.
+And very often we'll use what a human expert could do
+as the achievable level of accuracy.
+And then in the case of face recognition,
+definitely under controlled environments
+were better than humans.
+So definitely, actually,
+the AI systems we build,
+they're way better than I am
+at recognizing human faces.
+And I think AI systems are better than,
+I want to say,
+probably the vast majority of humans,
+maybe all humans at this point,
+that really distinguishing of two pictures
+are the same.
+And then it gets really difficult.
+Then it actually gets more difficult
+once you're even better than humans.
+But those are, yeah.
+But until you're as good as humans
+on certain tasks,
+using a human level of performance
+is often a good benchmark.
+And then if you're doing something
+that even humans can't do well,
+like it turns out,
+you're recommending online books
+or movies or whatever.
+Humans aren't actually that good at that.
+I think most of us have a hard time
+recommending good movies,
+even to our closest friends.
+AI actually probably does it even better
+than many of us do as humans.
+Then those things,
+it's harder to establish a baseline.
+Cool.
+All right.
+Now, one final aspect
+I want to touch on is
+after deploying a model
+to monitor and to maintain the model,
+one thing that often happens is
+you train a machine learning model,
+works great, you know,
+does well in your training set,
+does well in your test set,
+works great,
+and then you deploy it,
+and then unknowingly,
+the world changes
+and your system no longer works, right?
+So we sometimes call this
+data drift or concept drift,
+where the distribution of data
+the world gives you is different
+than what you had in your training set
+or concept drift,
+which is with the input-output mapping,
+your X and Y changes in the world
+compared to your training set.
+But to ground this,
+if you are training a face recognition system
+now in, you know, I don't know,
+when it's not too cold here in California,
+you get faces of a certain distribution,
+but as we approach winter,
+if it starts to rain more,
+people are wearing scarves,
+rain jackets, you know,
+people look different, right?
+Or maybe we approach next summer,
+more people are wearing sunglasses,
+then the data distribution changes.
+Or if you train a system
+based on data here in California,
+but we then decide to deploy it,
+you know, in a different country
+where people dress differently
+or where their appearance is different,
+the world keeps on giving us different data.
+And so one of the jobs of, I think,
+us as machine learning engineers
+is to put in place systems
+that monitor the set of concept drift or data drift
+and fix problems as they arise.
+When you're out building machine learning systems,
+I have seen a segment of AI engineers
+that think their job is to do well on a test set, right?
+And so I've been in a bunch of these conversations
+where the machine learning person will say,
+look, I did well on the test set.
+My job is done.
+But then a product owner,
+a business owner will say,
+no, your system doesn't work.
+Look at all the ways it does not work.
+And then if the machine learning person says,
+well, that's not my problem.
+I do well on the test set.
+I think that's not a constructive way
+to move it forward.
+So I encourage you to think of yourselves
+if you're building a machine learning system.
+I think of my job as building something that works.
+And that can be different
+than building something that works on the test set.
+So if ever you're working on a product
+and someone says, you know,
+I know you did well on the test set,
+but your system doesn't work,
+I would encourage you not to respond.
+But my job is to do well on the test set.
+I encourage you to think about
+why doing well on the test set
+doesn't translate to doing well
+on the application that people actually care about.
+And then they'll lean in and go and fix that, right?
+And one of the common problems
+for why doing well on the test set
+doesn't translate to doing well in real life
+is if the data distribution changes,
+in which case you may need to update
+the distribution of data you're training on
+in order to capture what has changed in the world.
+And just a few other examples.
+I feel like, you know,
+the world gives us new data all the time.
+So if you're building a web search engine,
+sometimes the new politician is elected,
+or there's a new movement,
+or some new video goes viral,
+or, I don't know,
+Taylor Swift releases a new album,
+I don't know, whatever,
+and then people are suddenly searching for a brand.
+I thought I'd get a lot from that.
+No, all right, no.
+No Swifties here.
+All right.
+But then suddenly a lot of people
+are searching for a brand new thing,
+and so the distribution of data you get
+is different because the world has changed.
+Or I've done a lot of work in factories.
+There's actually a reasonable chance
+a cell phone you have in your pocket
+may have been inspected by software
+that my teams wrote.
+But, you know, sometimes the materials change,
+or there's a new machine installed
+in the manufacturing line,
+and this machine makes a new type
+of scratch in the cell phone.
+So data changes in inspection lines as well.
+Or one thing that actually surprised me,
+when I work on self-driving cars,
+one of the things I was working with,
+we trained a lot on data in California,
+and then when we took the cars to Texas,
+you and I as people, we can drive just fine
+in California or in Texas,
+but it turns out that traffic lights
+look really different in Texas and California, right?
+So it's traffic lights, horizontal, vertical.
+I think part of it is there are very high winds
+in some parts of Texas,
+so a lot of traffic lights tend to be
+strung up differently to be robust to high winds, right?
+And so traffic lights actually look pretty different in Texas.
+So the models we train in California,
+they don't work in Texas.
+We've got to get new data, refresh the data.
+So a lot of that is a process of monitoring
+and maintaining the model,
+even when something in the world changes.
+And before going on to monitoring the model performance
+and maintaining it,
+one interesting difference in performance
+between this and this is,
+option one is a very simple model, right?
+It basically has one parameter, which is epsilon,
+the fraction of pixels that change.
+And so this, because it's so simple,
+it's actually very robust to changes in distribution.
+For example, say it's a hot summer
+and a lot of people are wearing sunglasses.
+Well, the fraction of pixels that change, right?
+Even when people are wearing sunglasses,
+it doesn't change that much.
+Maybe if it's Halloween
+and people are wearing crazy large costumes,
+maybe that would change,
+but this is actually a very robust algorithm
+because it's so simple.
+In contrast, if you train on data
+with no one wearing sunglasses,
+because the sun's not that hot these days, right?
+Then with everyone starts to wear sunglasses,
+this is actually less robust.
+So one of the advantages
+of very simple non machine learning based systems
+is they may be less susceptible to data drift
+because maybe I tuned this parameter epsilon
+to a limited data set,
+but even when the data changes,
+this tuning can be quite robust.
+But if I train a neural network
+with say thousands or tens of thousands of parameters,
+then I'm more likely to have overfit
+to people without sunglasses.
+So if people start wearing sunglasses,
+you're more likely to have to update this model, right?
+And if you are building a...
+Sorry, right, cool, boy.
+If you're building a system,
+it turns out to be incredibly helpful
+if you can get user permission
+to stream a little bit of data
+back to your cloud hosted service
+so that respecting user privacy,
+being careful often,
+transparent privacy practices,
+I think that privacy is really important, right?
+So do be transparent, do the right thing for users.
+And if you're able to do that
+and get a little bit of data back to your cloud
+to plot to dashboards,
+and maybe one practice that I've seen is
+when building a high stakes application,
+one good practice would be to gather your team together
+and get a diverse set of opinions
+on all the things that could change
+and all the things that could go wrong.
+And I've built quite a few machine learning systems
+and I found that when we sit down
+and brainstorm all the things that could go wrong,
+including the data distribution changes,
+I don't think I have ever seen something go wrong
+in real life that we did not identify as a possible problem.
+I might be wrong, but at least right now
+when we sat down, we really brainstormed
+all things that go wrong.
+I think I have yet to see something go wrong
+that was not on the list of stuff that we brainstormed.
+And so if you brainstorm,
+and this is true for safety critical applications as well,
+it turns out creative teams,
+you can actually think of all sorts of things
+that could change the data or things that go wrong.
+And that then lets you try to design
+a set of dashboards or metrics to put in place
+to monitor whether or not any of the things
+that you think might go wrong actually do go wrong.
+So we may put in place dashboards like how often,
+it turns out re-authentication is a common thing.
+How often does a user need to authenticate twice
+before they let through?
+That's actually a sign of user frustration, right?
+So let's build a dashboard to do that.
+How often does a user have to try twice?
+It probably means something went wrong the first time.
+How often do you accept versus reject the user?
+And what is the latency of the system?
+And I find that just as it's difficult to know in advance
+what's in your data,
+it's actually difficult to know in advance
+what dashboard will be the most useful.
+And so the best practice I tend to recommend
+is brainstorm a lot of things that go wrong,
+brainstorm a lot of metrics,
+and then just create very rich dashboards
+where this is time latency,
+time re-authentication, right?
+Time, the number of zeros versus ones,
+and then draw plots over time
+to see how these rates trend over time.
+And if you're able to have a lot of dashboards
+and sample and just look at some of the data
+for where you suspect you may be making a mistake,
+that often is then a good way
+for you to have a higher chance of spotting
+when there might be a problem.
+And in the times I've built large dashboards
+with 20, 30 metrics,
+I've found that it's surprisingly difficult
+to know in advance which dashboards
+would turn out to be useful.
+I think in exploratory data analysis
+and data science, again,
+because we often don't know what's in the data
+or what the data will give us in the future,
+we just, frankly, plot a lot of stuff
+and then go and figure out from there
+what is interesting, right?
+So the cost of plotting something
+in a Jupyter notebook is fairly low.
+So let's just plot a lot of stuff,
+have a lot of dashboards,
+and if you end up with 30, 50, 100 dashboards
+tracking these metrics over time,
+then hopefully in a few days or a few weeks,
+you figure out that a lot of them are really boring.
+So we figure out that, well,
+latency is just not a thing
+because with cloud hosted deployment,
+it's just very constant.
+So, well, let's get rid of that
+because that's just a very boring plot.
+I'm just not worried about that.
+And so we often plot a lot of things
+and then prune back
+to then have a smaller number of metrics
+that we track and monitor for the long term.
+And then eventually when you get a sense of,
+just being the normal range for some metric,
+you can then also put in place upper and lower alarms
+so that if it ever goes above or below certain bounds,
+they'll trigger an alarm,
+like go page someone to take a look,
+to figure out if something's gone wrong.
+That make sense?
+And so unfortunately,
+just because you train them all the time
+in a real-world production setting,
+it doesn't mean you're done
+because you deploy it
+and then the world will give you surprising data
+and having a plan to monitor what happens
+as well as to maintain the model,
+meaning get new data, update the system
+to fix problems as they arise.
+That is often an important part
+of the practicalities
+of deploying a machine learning system as well.

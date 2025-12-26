@@ -1,0 +1,951 @@
+Welcome to our fifth lecture in person for Stanford Deep Learning CS230.
+Today's lecture is going to be about deep reinforcement learning. I actually switched
+the original plan of talking about neural network interpretability and LLM visualization
+simply because you haven't had the chance to study attention maps, convolutional neural
+networks, and so it would have been an overkill to do that week five. So we're going to talk about
+neural network interpretability and visualization in a later lecture, actually. But today our
+focus will be on deep reinforcement learning, which is probably my favorite lecture of the
+class. I feel like I say that every week, but it's okay. I like it. The agenda is pretty packed.
+We're going to start with deep reinforcement learning, which you can think of as the marriage
+between deep learning and reinforcement learning. Together the baby is called deep reinforcement
+learning and we're going to see how reinforcement learning works and how neural networks can play
+a part in building a reinforcement learning agent. In the second half of the class,
+we will focus on a very specific concept called reinforcement learning
+from human feedback that you might have heard of. It's one of the core concepts that
+really made the difference between what you might have remembered as GPT-2
+and chat GPT. That's the leap. That's really the technique that has democratized
+access to LLM because of the performance improvements and the alignment with humans.
+So we're going to see what is this concept of our LHF and how does it work and why does it
+allow us to align a language model to human preferences. Ready to go? As always,
+let's try to make it interactive. So the motivation behind deep reinforcement learning
+and as usual, you're going to have all the most important papers that are covered in the
+class listed at the bottom of each slide. Reinforcement learning has grown in popularity.
+One of the very popular papers called human level control through deep reinforcement learning
+is the work from DeepMind that has shown us that a single algorithm training method
+can allow us to train AI that can play many, many Atari games better than humans.
+Single algorithm over 40, 50 games where it exceeds human capability, which is quite
+impressive when you thought about the fact that machine learning used to be niche and you
+would have to train a really niche algorithm to perform different tasks. Here's an algorithm
+that can just learn sort of every Atari game. A little later, you might have heard of
+AlphaGo. AlphaGo is an algorithm that was developed to beat and exceed
+human performance in the game of Go. We'll talk about it a little more.
+The game of Go is a very complex game. Some would argue way more complex than chess
+from a decision-making standpoint and from the possibilities that can happen on the board.
+So it actually got sold in 2017 again by the DeepMind team and David Silver's lab.
+Later on and again another great paper from DeepMind had showed us that reinforcement
+learning can also be used for strategy game that might be a touch more complex than chess
+or Go that might actually involve multiple players playing with each other or against
+each other. Some of you might have played StarCraft for example. That's an example of a game
+where it requires a lot of long-term thinking, short-term thinking. Another one is Dota.
+Some of you might have played Dota or League of Legends where you have a team playing
+against another team. Those are examples of games that involve multiple agents playing
+collaboratively. It's pretty hard to develop systems that can play with each other against
+multiple opponents. Finally, most recently this is 2022 so alongside the release of ChatGPT
+this paper that introduces the concept of reinforcement learning with human feedback
+applied to aligning language models with human preferences. We'll talk about that later.
+All this to say that reinforcement learning allowed us to exceed human performance in a variety of
+tasks. The first one I want us to think about is the game of Go. Let's say that you were asked
+to solve the game of Go with classic supervised learning. Everything we've seen together so far,
+labeled data. How would you solve the game of Go with classic supervised learning? What data would
+you collect? What would be the label? Good point. You look at history of plenty of games,
+hopefully from good players. You look at X as the input being the current state of the board
+and Y as the next state of the board. This would tell you what move was selected
+and you learn the move essentially. Hopefully, if you do that across many games,
+you might see the agent become more attuned to the game and develop better strategies.
+Hopefully, it's a professional player. What are the disadvantages of that or the shortcomings
+that you can anticipate? You might not see the entire space of possible states of the board,
+so you might miss out on a lot of different strategies. The game of Go is actually a game
+with two players, one player that uses the black stones and one player that uses the white
+stones. Iteratively, they're going to place those stones on the grid, a 13 by 13 grid
+that you can see on screen with the goal of surrounding their opponents. You're constantly
+trying to surround the stones of the opponent and the opponent is trying to surround your
+stones. You can imagine that for every intersection on the grid, there are multiple
+possibilities. Either there's a black stone or a white stone or nothing. On a 13 by 13 grid,
+you can imagine how many possibilities of a board state there are. It's impossible to capture all
+of that with historical moves from professional players. It will just never cover that. The
+same thing could be said in chess as well. You know that even the professional players can
+plan x number of steps in advance, but nobody knows where the game takes you. In the late
+stages of the games or the end games, players always find themselves playing a different game
+and that's part of the magic of being good at chess. So yeah, that's a problem. What's
+another problem or shortcoming beyond the fact that we can't observe possibly all the states?
+Yes. Correct, correct. If I repeat what you said, well first, you don't even know if this
+was a good move. So maybe it was not even a good move and you're learning something that
+was not a good move and you're labeling it as a good move. And second, you're actually only
+getting partial information, meaning you don't have the information of what's in the person's
+mind and what strategy they're trying to execute. So you're looking at a single example
+among long-term strategy and you can't expect the model to guess what's the long-term
+strategy because it was just trained on x and y and matching the inputs to a possible output.
+So you don't really have any concept of a strategy at that point. It looks one-off
+at every decision of the model. Okay, those are really good points. The other one
+is the ground truth might be ill-defined. What I mean by that is even the best humans
+in the world do not play their best game every day and even their best game is not
+the ground truth. And that creates an issue because you're essentially training against
+a target that is off by a certain margin. You're never going to get better than the
+best human and the best human is not the best possible existing, the best possible strategy
+at every point. So you could argue what if we get a panel of experts that we're monitoring
+and those are the best players in the world. Even with a panel of experts that decides
+every move, you still have an ill-defined ground truth. So that's a big issue.
+Too many states in the game you mentioned and we will likely not generalize, which is what
+you said, meaning we're looking at one-off situations. We're not looking at entire
+strategies. And so when we face a board state that we've never seen before,
+because the model was not trained on strategy, it's sort of we get stuck.
+And this is an example of a perfect application for reinforcement learning
+because reinforcement learning is all about delayed labels and making sequences of good
+decisions. So if you have to remember in one sentence, what's RL? RL is making good
+sequences of decisions, sequences of good decisions, sorry, and do that automatically.
+Another way to look at it is the difference between, you know, classic supervised learning
+and RL is in classic supervised learning you teach by example, in reinforcement learning
+you teach by experience, which is also a different concept. You're not just showing
+cats and non-cats to a model. You're actually letting the model experience an environment
+until it figures out what were the best decision it made and learns from them.
+Some examples of reinforcement learning applications. I'm going to mention them.
+We have gaming, of course, that we already covered. What are other applications
+of AI where we need good sequences of decisions?
+Yes. Autonomous driving? Yeah, correct. I mean, in driving, you could argue RL
+could work and there's some RL going on. But what you mean, I think, is you have some sort
+of a dynamic planning algorithm that allows you to strategize. If you see a red light
+ahead, you might start slowing down over time, but maybe it will turn green. So you
+might not slow down completely. This is an example of a strategy.
+This is an example of a strategy that you need, of course. Yeah.
+Robotic controlling. That's a great example also related to autonomous driving. But
+imagine you want to teach to a robot to move from point A to point B. The number of good
+decisions that the robot needs to make in terms of moving each of their joints
+is tremendous. It's actually super unlikely that a robot would move from A to B if it's
+not trained to make good sequences of decisions. What else? Actually, the biggest one nobody
+mentioned yet. It's not a great application. I don't like it, but it happens to be the
+biggest one over enforcement learning. Yeah. Yeah. Yeah. Advertisement. Yeah. Marketing.
+You're right. So yeah, we talked about robotics. Advertisement is another example.
+Advertisement is a long game. Companies are showing you multiple ads before you buy.
+And in fact, the reason reinforcement learning is important is because
+they're planning a strategy that might lead a buyer to execute a purchase over time. And
+it requires long-term thinking. So there's a lot of reinforcement learning applied to marketing,
+advertisement, real-time bidding processes, et cetera. Okay. Clear on what RLEs and how
+it differs from classic supervised learning. So let's put some vocabulary around that concept.
+In reinforcement learning, you have an agent and the agent interacts with an environment.
+As the agent interacts with the environment, the agent will perform certain actions that we
+will denote AT, where T is a time step. And the environment will show you states
+that transition from time step T to time step T plus one. So subject to an action AT,
+an environment may transition from ST to ST plus one. You can think of the game of Go.
+I take the action of putting my Blackstone on a certain grid intersection and the
+environment has changed. The state has changed. It moved from state time step T
+to time step T plus one where my stone is on the grid. After that state update happens,
+there's two things that the agent observes. The agent observes an observation that we will
+note OT and a reward RT. Okay. So those are the vocabulary words. And of course,
+the goal of the agent will be to maximize the rewards. One thing to know about the
+observation, we'll talk about it a little more. The observation sometimes is equal to the state.
+Can someone guess why we might need two concepts instead of a single concept?
+Why is it important to have a state and an observation? Yes. Yes, correct. So in some
+cases, the environment may not be fully transparent to the user. And so for example,
+in chess or in Go, the observation is actually equal to the state. You see everything on your
+board. All the information is available to you. If you play League of Legends or StarCraft,
+you know the concept of, I think in English, it's called like a cloud or a fog. I think it's
+a fog. You only see certain parts of the map until you have explored everything or until
+your friends are sort of visiting the other parts of the map. And so the observation is
+actually less information than the states of the environment. Okay. And then the last piece
+of vocabulary is a transition. When I refer to a transition, I refer to the process of getting
+from state T to state T plus one, which means we're in state T, the agent takes an action AT,
+it observes OT and a reward RT, and it transitions to the next state ST plus one.
+Question. Wait, what do you mean? Are there examples of environments where the state
+is so large that, yeah, possibly for computational reasons? Yeah. Yeah. You might have
+games. I mean, you've got open world games. Like truly you could argue, I don't know,
+there are some games where you might press start and you see the entire environment,
+but who cares of what's happening 20,000 kilometers west of you, if you're in a
+certain location that might not influence your strategy. So you might actually put some sort
+of a, you know, trust circle or like some sort of a circle in which you observe,
+which you think has 99% of the information you need, possibly for computational reasons.
+That's a good point. Okay. Let's get to a practical example of a reinforcement
+learning algorithm and develop it together. This example is called recycling is good
+because recycling is good, but also because it's a simple example illustrative of reinforcement
+learning. So let's say we have a small environment with five states. There is a starting state
+marked in brown, which is state two. It's our initial state. And then on the left side,
+you have state one, which is a garbage. And it's great to get to the garbage because you're
+going to be able to put in the garbage, the, you know, the stuff that you have in your hands,
+you know, you're trying to throw away some garbage and the garbage kind of happens to be
+there. And so we would expect there to be a reward on the other side. If you actually go
+to the right, you might pass by state three, which is empty. You might pass by state four,
+where there is a chocolate packaging that is left on the ground that you can pick up.
+And it's good to pick it up. And then on stage five, state five, you have the recycle bin,
+which is more valuable than the garbage can, because you can recycle and you should get
+better rewards for that. So that's our game. In this game, we define a reward that is
+associated with the type of behaviors that we want the agents to learn. And the reward is
+as follow. That's just one example, plus two for throwing your garbage in the normal can,
+plus one for picking up the chocolate packaging, and plus 10 if you manage to make it to the
+recycle bin. Is it clear? Now, the goal will be, and that's the case in reinforcement
+learning oftentimes, to maximize the return. We define formally the return, but think about
+it as maximize the amount of rewards that you get as you go through this journey and
+you make your decisions. In this specific game, we have five states, and there's three
+types of states. In brown is the initial states. We have normal states, and we have in blue
+terminal states. When you get to a terminal state in reinforcement learning, it will typically
+end the game. It will end one episode of the game. You move to another episode,
+you'll get back to the starting state or initial state, and you'll redo another episode.
+The possible actions for agent here are going to be fairly simple, left and right.
+And we are going to add an additional rule that is important, which is that the garbage
+collector comes in three minutes and it takes a minute to get from one state to the other.
+Why is that an important rule to add to the game? Can you guess? Yeah?
+Yeah, otherwise you just go back and forth between stage three and stage four. You just
+collect a bunch of chocolate packaging and you never make it to the bin. And so it's not what
+we want. Okay, so how do we define the long-term return? The long-term return is
+going to be defined as capital R, which is the sum of rewards with a discount.
+Discount is a very important concept in reinforcement learning. It's also a very
+natural concept to think about. Can you think of what the discount would represent for humans?
+Do you have an example of what it could be? Yeah, the value of money and time. Exactly.
+Or the energy that a robot might have. Things like that. Yeah. You would rather get a dollar
+now than a dollar in 10 years, knowing that there is some inflation, for example. That's
+the example of a discount in reinforcement learning is the same. Let's say you have a
+strategy that takes so much time, you need to discount it because your robot might lose
+energy as it's going through it, for example. Discounts can vary, but they stay between zero
+and one. What is the best strategy to follow if gamma, the discount, is equal to one? Meaning
+time doesn't matter here if it's longer or shorter. I just want to maximize the return.
+Best strategy to follow. Let's give it a try. Someone who hasn't spoken yet. Yes. Bounce
+around, but remember the rule of three minutes. You can bounce around because you will not get
+to the terminal state before the time allotted is done. But that would be a good idea if this
+rule was not true. What else could you do? The idea. It's an easy one, no? Not too hard.
+Best strategy for gamma equals one. And give me also the maximum reward you would get.
+People are sleepy today. Yeah. Go to the recycle. So, right, right,
+right. Yeah, that's right. Thank you. Right, right, right. And then what's your total reward?
+Yeah, that's right. Eleven. So that's where we get terminal state and we grab our reward of
+11. Very good. Now, assuming 0.9 for gamma, we're going to complexify things a little bit.
+I'm going to walk you through a very simple algorithm that, you know, allows us to sort
+of determine the best strategy and we will put our numbers in a matrix. So, for instance,
+we'll define a Q table. And Q stands, you know, it's a value function where the name
+Q learning, Q star, you might have heard, all of these things come from Q learning.
+And so let's say we have a Q table which has the size of number of states times number of
+actions. So five rows, two columns in our case. Every entry of the Q table is essentially
+representing how good it is to take action A in state B. Do you agree that if we had a table
+with these numbers, essentially we solve the problem. Meaning at any point, the agent can
+just look in the table, I am in state three. Let's look at column one that would tell me the
+value of action one. And let's see that column two, it will tell me the value of action two.
+So I have everything I need to make my decisions. So that table is really the thing you want to
+find in this exercise. Now the way we will find the table is sort of using backtracking
+algorithm where we might actually codify the environment as a tree and traverse the tree.
+So here's what it looks like. I start in S2 and I have two options ahead of me.
+I can go to the left where I will get a reward of two. It's an immediate reward.
+The immediate reward is not discounted. It's an immediate reward. Remember the formula for r.
+The immediate reward r0 is not discounted. That would take me to S1. It's a terminal state
+so there's nothing to do after. Second option, I go to the right and I get a reward of zero.
+That's my immediate reward and I end up in state three. State three is not a terminal state
+so I can go and do the same exercise from state three. In state three I have two options.
+I can go to the left where I would see a reward of zero and I will end up in S2
+or I will go to the right and I will get an immediate reward of plus one. It's an immediate
+reward. We're not discounting it. I will end up in S4 and from S4 again I have two options
+back to the left to S3 with zero reward or to the right with the amazing reward of plus 10
+and the terminal state of S5. That's my map of immediate rewards. That's not my discounted
+return. What we're going to do now is we're going to backtrack up the tree in order to
+compute the discounted returns. Actually if I'm in S3 right here I see that I can get an immediate
+reward in S4 of plus one and I want to compute my maximum return that I can get from when I'm
+in S3. My maximum return is that in S4 I could get a plus 10 but I need to discount that.
+My discount is 0.9 so I multiply 10 by 0.9. What it tells me is that from S4 I can expect nine
+plus one which I get as an immediate reward from moving from S3 to S4. I can update this number
+to 10 meaning from S3 the best you can hope for is a discounted return of 10 which is one
+plus 0.9 times 10. Everyone follows? Now let's do the same exercise one step before in S2.
+In S2 I have an immediate reward of zero for going to S3 or an immediate reward of two for
+going to S1. S1 is not going to be worth it. We already know that because when I'm in S3
+I can actually expect 10 which I have to discount. 0.9 times 10 gives me nine plus zero immediate
+reward from S2 to S3. That tells me that the discounted return from state two which is our
+initial state is nine. Follow? Just a simple backtracking. Now I can copy back this so
+S3 I know that when I'm in S3 you know I can expect zero immediate reward if I'm in S2
+I can expect zero immediate reward plus a discount times the plus nine that I could expect
+in S3. That gives me values that should cover everything that we have in this
+queue table. So I do that backtracking. I copy paste all of that into my queue table
+all the way up here and this is what I get. We essentially finish the game at this point. We
+can look at a certain row. So let's say I'm in state number three. I look on the third row
+of that queue table and I see that I have two options. If I go back to S2 ultimately
+my discounted return will be 8.1. If I actually go to S4 on the right I will get 10 because I
+will get one plus 0.9 times 10 which is 10. So this is a toy example but it tells you that
+if you were able to backtrack through the entire environment you will be able to build
+a massive queue table and you will be able to give it to your agent to make its decisions.
+Yeah sorry can you repeat?
+Yeah here I'm simplifying. I'm not considering the time remaining but in practice if I remove
+the time component so I remove the fact that there's a three minute deadline before the
+garbage collector comes then this would be slightly more difficult because you would have
+to do a time series essentially of adding the discount times the reward that you collect.
+But I'm simplifying here and that's why I use the three minute rule.
+Any question on the queue table? Super. Okay so this was the queue table and in fact we can
+put together our strategy for gamma equals 0.9. The best strategy is still the same. You go to
+the right and you can expect a return of 9. Now one of the most important concepts in
+reinforcement learning is this equation on the board called the Bellman optimality equation.
+Oftentimes you see it's noted as q star of state s and action a
+equals r plus gamma times the max of that same function applied to s prime a prime.
+Let me explain this equation for you because it's super important.
+This equation is called the optimality equation because your optimal q table will follow this
+equation. If you have finished the game this equation can be applied to any state action
+pair and it will still be true. The intuition behind why the Bellman equation is the
+optimality equation is that if you have the perfect q function q table
+and you're in a certain state and you perform a certain action a you will observe a reward and
+this reward will you know you have taken an action so you would be in a new state
+and from that new state you can repeat what you just did right and because you've done
+the backtracking and stuff like that you will get this equation to be true because it's the
+reward plus discount times the best next action that you could be taking. Does that make sense?
+Any question on that? That's exactly the backtracking that we did by the way.
+Immediate reward plus discount times the best possible action that you can take in the next
+state s prime. The last concept I cover in terms of vocabulary is the policy. The policy
+is the function that given your state is going to tell you what to do and in q learning the way
+this policy is defined is argmax of q star across the action so essentially what it says is like
+look in the table and look at a certain state s you want the policy which is what you should
+do it's the function that tells you our best strategy you just look at the two possible
+actions which one has the highest q value and select that action that's it. This is a very
+simple example but it's the core of q learning that you know later on you will use policies
+widely there's a lot of reinforcement learning algorithms but this concept of understanding
+the policy the function telling us our best strategy in q learning it's the argmax of the
+best q value in a given state it tells you which action to take that's the core thing you
+need to understand. So remember this Bellman equation because we're going to reuse it
+in a bit. The main issue with this approach of a q table is that state and action spaces can be
+super large and having a matrix that you discover through backtracking and where every
+time you want to do an action you have to look up the given states the possible action it becomes
+impossible like imagine you using this algorithm for the game of go where there's so many states
+there's so many possible actions you can put your stone anywhere on the board you can imagine
+how big this matrix becomes and how impossible it is to use so that's our problem and that's
+the moment where deep learning comes into play so let's look at it.
+Actually before I go there I'm just going to cover some vocabulary we said the environment
+the agent the state the action the reward the total return and the discount factor we learned
+all of that we saw that the q table is the matrix of entries representing how good is it to
+take action a in state s and the policy is the function that tells us what's the best
+strategy to adopt and the Bellman equation is satisfied by the optimal q table.
+So let's get to deep learning which is what I was about to say is we are going to frame the
+problem slightly differently so instead of using a q table we're going to use the fact
+that neural networks are universal function approximators and we're going to define a
+q function that's essentially a neural network so that the function can take a state s
+and an action a and tell you how good that action is in state s so instead of a lookup
+in a matrix you just run a forward pass in a neural network and it gives you the answer
+that feels like a better solution for games where there's a lot of states and a lot of
+actions so here is the same problem statement in the past we looked for a q table and this
+time we will look for a neural network one of the things we're going to do is to define
+the output layer to have two outputs so given a certain state as input think about it as a one
+hot vector including the states so this one is the example of state two zero one zero zero
+zero if you pass state two in this q function with multiple layers it will give you two
+outputs one output that corresponds to q of s action right and the other one q of s action left
+because it's the two actions if we had more actions to take we would just increase the
+output layer and we might have many more neurons in the output layer so the big question
+is how the hell are we going to train that network because we're not in classic supervised
+learning we don't have labels so this one is a hard question but what do you what would you do
+given we don't have traditional x and y pairs how are you going to train this neural network
+because remember at the beginning this neural network will give you garbage it will take a
+state s and it might tell you go to the left or to the right but it's completely random
+so how are you going to tune it to the level where it makes really good decisions yes assume
+based on some prior knowledge tell me more what so what are the things we know about this
+problem right now what are the the rules of the game that we could use in order to
+i'm i'm seeing what you say you say we could estimate what good looks like
+but based on what okay so reward structure you're saying that's one thing we have in
+every game we have a reward structure for every state that definitely should be used in order to
+estimate the good what a good decision looks like yeah the problem is not in every state
+you will see a reward and if you look at many games of like go you might not see a reward
+until 50 moves so what do you do in this case yes
+so you could you're you're actually bringing up a sort of a three search
+right you go down the tree you do every possible action and then you backtrack
+so which actions
+trying to spread it out okay that's that's what we're getting there so first possibility is we
+just go down the tree in the game of go you could put your stone everywhere so the tree
+already starts by your 13 by 13 options and then it's exponentially grows impossible it's
+intractable but what you said is what if there are certain actions that are more likely
+than others do we need actually to explore the entire tree what's this like what are
+you using when you're saying that how do you determine what action might be better than another
+one expected return we're getting close yeah but you know how do you know the expected return
+without going through the tree once at least okay you can estimate it using what
+yeah maybe yeah what what so that's exactly what we're going to do actually but we're
+going to use the the bellman equation because there are two things we know about this problem
+we know the reward structure which you brought up and we also know that the perfect q function
+will follow the bellman equation that we know as well at the end the bellman equation should
+be respected meaning for every state if you want to know the q value of that state given
+an action the way you will get that is you will look at the immediate reward plus a discount
+times the best q value from the next state across all actions that equation will be respected
+so those are the only information we have and we're going to use them drastically to define
+our labels and sort of mimic a classic supervised learning approach so here's what we have we have
+our neural network we have q s to the left and q s to the right that represent how good it
+is to go to the left in that state versus the right and then i've pasted the bellman
+equation on top right of the screen we're going to define a loss function so let's say for the
+sake of simplicity because those are scalar values that we use you know l2 loss quadratic
+loss that compares a certain label y to a certain q value of a state in a certain action
+so what we would like is to minimize this loss function meaning y and the q value for
+a given action in a given state is as close as possible to each other and we're going
+to leverage the reward and the bellman equation so let's do two things right now we don't have
+a y so in supervised learning you will have a picture of a cat there's a cat the y is one
+or zero here we don't have a y so we have to come up with an estimate of a good y
+actually is better than random so let's say at this point in time when i send a state s
+in the network it turns out that q of going to the left is higher than q of going to the right
+which means that today at that moment the q function tells me it's better to go to the
+left than to go to the right that is random at the beginning it's completely random all right
+so what i'm going to do is i'm going to use as my target value y the immediate reward that
+i observe on the left plus gamma times the best q value that i can get so the best action that
+i could take in the next step based on my current q value that's very important so
+remember this target is off it's not a perfect target but it's better than nothing meaning
+not only it tells us hey there is a good reward to the left we should consider that in saying
+that that might be a good move because we're seeing an immediate reward but on top of that
+we also know that at the end of training the q value should follow the bellman equation so
+why don't we set the target as the bellman equation so we add the discounted maximum
+future reward when you are in the next state so you were in state s you go to the left now
+you're in state s next left and you look again at your q values and you select the best one
+then you add that number here so there is actually two forward paths in that process
+right there's one forward path where you send the state s in q and you look at the two options
+left or right and you're like okay i'm going to the left and then you're like i'm going to
+compare that value to a target y but to get that target y i need to do another forward path
+so i take my action left i perform it i get an s prime state s next and i send that s next
+into the q network i look at the two options i have i pick the best one and i add it here
+with the discount so fundamentally what's happening is is the following is we have a
+q network that's random at the beginning it has never observed the rewards we just know
+that at some point if we get to the q it will get to a perfect you know policy it will get
+to a perfect q function but the best we can do right now is to say as a guide to for our agent
+we will look at the immediate reward and we will look at the bellman equation which should tell
+us a better estimate than where we are right now and we will try to catch up to that estimate
+and then we do that again and again so remember every time your q gets better
+it gets better for the next state as well so you know the bellman equation tells you
+estimate it with the second forward path and you just keep getting better and better
+as you're observing more rewards how would it so describe the loop you
+yeah yeah you would stop at that point so what you yeah this is a good question i'll show
+you how we fix certain things but you do only one step meaning you have your q value
+at this point and it tells you go to the left and you just want to target y so what
+you do is you put left and you look at your next state you forward propagate your next state you
+look at the two options you pick the best you don't go further you just use that one step you
+look one step ahead essentially you don't look multiple steps ahead you could but it will be
+more computationally heavy to do one more step again and so on so yeah yeah no it will
+typically be a function of the environment the state space how long it will take to converge
+but you're perfectly right that as the q function get better the estimate y also gets better
+so the two things get better together right because the y is based on the q function
+and if the state space is massive you might have a very difficult time training this model
+there's better approaches that we see later yep correct there was a question there
+yeah so here i'm just saying let's say when you send state s in q the left happens to be higher
+than right but the same happens on the other side let's say let's say the left is worse than
+right then what you will do is you will define your target y as the reward that you observe
+on the right plus from the next state of having gone to the right what's the best action
+and what's the q value for that pair and then it will give you the target for that scenario
+so one complication with this training is that when you want to differentiate l so you want to perform
+a back propagation you want to take the derivative of l with respect to the parameters of the
+network you want y to be a fixed thing right because in supervised learning y is not differentiable
+it's just a fixed number zero or one or a certain number so here we're going to simplify
+and we're going to say this term that is dependent on the q network so technically this
+term has parameters so if you actually differentiate it it will give you a value
+we just hold it fixed so we say we do use our q network to perform an estimate of our y
+but we will not differentiate it we will say it's not it's fixed yeah because you know going
+back to the reason we discount is like the value of time it's like you probably want to say
+if you can win the game in 10 moves we need in 10 moves rather than 100 moves
+or if you can get one dollar today get one dollar today rather than in 10 years
+all of that is why we have a discount here and the discount is a
+is a hyper parameter that you would define this way that would influence the strategy of your
+agent we're going to see it after actually i'm going to do a concrete example because
+it's a little complicated yeah yeah no no that was it's a good point it's not that it's
+just q of it's it's a two by two it's a one by two so you have left and right i was just
+going down the first case so i put the state left yeah yeah what if the rewards are not
+fixed i mean in most games we're going to see right now the rewards are going to be fixed
+by the designer of the game the human that's designing the game in practice you could have
+a separate function that's actually comes up with the reward we're going to see an example
+later in the lecture where the reward might be different in different scenarios and there's a
+function or a sometimes called a critique that determines what's the reward in a certain state
+okay this is yeah one last question and then we move because we're going to see a concrete
+example is going to be clear so when we like hold it fixed for laptop is that what
+differentiates this from all of the like possible yeah yeah so instead of doing the
+backtracking down the tree and going over everything we're saying we're going to limit
+ourselves to just picking the best action based on our current understanding of the network
+is he like my network is kind of intelligent not great we're in the middle of training
+it says that i should go to the left and then if i look at the next state when i'm in the left
+it says i should go to the right i will trust it because it's the best i have best estimate i have
+but i will discount that and then if you keep repeating that it turns out that not only your
+estimate gets better but your model gets trained and then ultimately both together get
+to an optimality equation so it's a it's a funky concept right but you get it we're going
+to see examples okay so then once you have been able to use the bellman equation to
+estimate your targets you perform a classic back propagation and you update the parameters
+of the network and you repeat that process okay here is concretely if you were to code it in
+pseudo code here is what it would look like to train an rl agent using q learning we start
+by initializing our q network parameters so initialization it's random at first
+then we will loop over episode as a reminder episodes are one full game from start to terminal
+state within an episode we're going to start from the initial state s and we're going to
+loop over time steps until we reach a terminal state so within one time step here is what we
+will do we forward propagate the state s in the q network we will execute the action a that has
+the maximum q value we will observe a reward and we will also observe a next state s prime
+we will use that s prime to compute our target y by forward propagating s prime in the q network
+and then computing our last function and based on that we will use gradient descent to update
+the parameters of the network should be simpler looked at like that right okay so this is the
+vanilla q learning so to summarize again the one the main difference is that we don't have a
+target and we use our own network to estimate the target and the rewards are what's going to
+help us get better over time by the way it's okay if you don't understand everything this
+is an entire class at stanford you know an entire quarter of studying that type of stuff
+so we're trying to get the basics within an hour and a half two hours okay let's go a
+little further now together and apply that to an actual game so here's the game it's called
+we want to destroy all the bricks who has played breakout in the past
+what do you feel okay good so you have a paddle that you control and you are trying to
+destroy the bricks if the ball gets past your paddle you lost and if the bricks are all
+destroyed you won't that's it let's do it together what's um what is the input of our
+q network what would you use as input to remember in yeah yes entire screen okay let's do that
+so i think i define that as the state s which is the input to my q network uh what's the
+output of the q network yes good question we'll get there i'm gonna ask you but do we have to
+look at the full screen the answer is no but we'll see why what's the output yeah
+the game score uh no but we're going to talk about the game score in the back
+yeah let's let's talk about the output first and then we'll talk about this stuff we can
+get rid of on the inputs but what's the output yeah the actions yeah the actions
+so yeah it will be the q values associated with the actions in state s remember it's a q function
+so the output is we need one value for left one value for right and one value for idle
+you could make this game more complicated and say we have eight actions we have a little bit
+to the left a lot to the left a lot more to the left you know if you add multiple buttons
+but let's simplify and say three actions either you don't move you move to the left
+or you move to the right so these are the outputs so now let's get to the question of the screen
+do we need the entire screen so you were saying something earlier okay so you say you need the
+tray and the bricks i would argue uh you need more because there's the walls and i guess that
+you could if you're an expert player you could know where the walls are but generally you need
+a little more than that what what what would be obviously things we can get rid of and why
+would we do that okay the score the score at the top who would remove the score at the top
+about half why would you not remove it why would you remove it okay you want to always win
+so the score doesn't matter it's true we would remove the score so you could actually crop the
+top you could also crop the bottom i mean if you pass the paddle you don't care about the
+few pixels at the bottom you could get rid of them this is not always true there are games
+where the score matters and in fact you know i like football soccer the in soccer if you're
+one zero up you can park the bus so your strategy is dependent of the score that you
+have like you wouldn't park the bus if you're losing one zero parking the bus meaning you
+ask every player to come back and defend if you're losing you would actually do the
+opposite you will go all out attack so in certain games you want the scores in others
+you don't want and so it's part of the designer the the ai engineer that's working on that to
+determine what information we need and what we don't need what else can we do to reduce
+the dimensionality of the problem and make our computation faster
+yeah remove the rgb channels so do grayscale essentially that's true here you actually don't
+need the colors it's just nice as a user for user experience purposes you don't need i don't
+think there are different points based on the bricks that you destroy it's all the same
+they're actually funny enough this algorithm was used by deep mind to play a lot of
+Atari games and they did a single pre-processing where they removed the channels
+because they said it doesn't matter turns out in one of the games i think it was
+i forgot which one the fish disappeared when you did that and so that game didn't work
+the agent couldn't crack it because they thought that the same pre-processing could
+apply to every game but actually they had to make a slight tweak correct so just to recap
+you could do it even better by using a low dimensional representation of this game that
+describes the game it's true but because we want to use a single algorithm for 50 plus
+Atari games we say the human sees the screen we just give the screen and it will probably scale
+better essentially but you're perfectly right if you are working on only that game okay so let's
+do that we'll do pre-processing there's one last thing that nobody mentioned which is history
+because in fact if you get only one screen you don't know where the ball is going
+so actually you can't solve the game and the way you fix that is by giving a history
+of multiple screens for example four screens so that you see the direction that the ball is
+going in so our pre-processing function is you know called phi of s let's say and phi of s is
+a mix of um you know you might do convert to grayscale reduce the dimension the height and
+width and also add the history of four frames and that should be enough turns out in most
+games you will need the history a little bit of history to know where the ball is going or
+where in this example you know just improve the like velocity vector of the ball yeah you could
+you could replace exactly you could replace um the history so multiple screen by just adding
+the gradients or the velocity of where the ball is going that's true but would it scale to
+every game you know turns out this because we know humans look at the Atari machine and
+they look at pixels this would be more likely to scale to every game like think about a
+game where actually sea quest is a good game or space invaders where you have multiple enemies
+coming at you then you would need to change your pre-processing to take into account the
+velocity of all these enemies so it wouldn't work the same way while if you actually give
+the pixels you actually from the pixels get the velocity of all your enemies and the
+directions they're going okay so this is our pre-processing i'm going to refer to it as
+and our deep q network architecture because we're working with pixels is going to be a
+convolutional network don't worry if you haven't learned it yet in the class but it's a bunch
+of conf and relu activations and then we end with a fully connected layer that gives us the
+three q values for the different actions so nothing special here now we're going to go
+back to our vanilla training so this one that we saw together earlier and we're going to look
+at tips to train reinforcement learning algorithms those tips are not specific to q learning some
+of them are applied to a lot more than q learning and they're very important to know
+and they're part of the reason reinforcement learning has worked better in the last few years
+so one of the things that's pretty simple that we forgot to do is the pre-processing
+that we just did so anywhere i had an s i'm going to instead run s through the pre-processing step
+i'm going to use phi of s so i initialize instead of s with phi of s i start from the
+initial state five s and then i for propagate five s i um i get the q of that pre-processed
+states in action a and etc etc and then when i get my next state so let's say
+i look at my current pre-processed state i forward propagate it once i see the three q values
+in our case the two q values one of them was better than the other action right then i get
+my next state s prime i want to pre-process that state as well
+so that's pretty straightforward you just replace all of that the second thing we forgot
+to do is to keep track of the terminal states in our pseudocode there is no concept of
+terminal state it's pretty easy to add you would probably just do an if l statement you
+would create a boolean to detect terminal state so let's say your boolean is terminal equals
+false and then as you loop over the time step of a single episode every time you're going to
+check is the state that i'm going in based on the action i'm taking a terminal state
+if it's a terminal state then get out of the loop you know there's nothing else after
+the one thing that you need to be careful of is if it's a terminal state then your target
+is not the bellman equation is just the immediate reward remember you get to the terminal state
+you get a reward of 10 there's no bellman equation to apply it's just 10 it's immediate
+reward there's no discount etc okay so these are fairly easy changes now we're going to
+look at a new method that will enable more data efficiency it's called experience replay
+one of the a couple of issues with the way we've been training so far is one the correlation
+of successive screens it's like imagine in the Atari game you have the ball that's in the top
+left corner and it's traveling to the bottom right of the screen you have like many many
+time steps that are essentially the same it's all the ball traveling in the same stuff in the same
+place so you're actually training repetitively on something that is not that meaningful you
+don't need to just train on a batch the equivalent in supervised learning is let's say
+you're trying to differentiate cats and dogs and you train on a mini batch of cats then
+you train on a mini batch of dogs then you train on a mini batch of cats and you will
+never converge it will just index too much on cats and then index too much on dogs so you
+want to add some sort of a experience replay concept that we see in order to create more
+mixes in the data and get more diversity the other thing that is important is in our current
+training process we are not reusing our data like you experience something you immediately
+train on it you never see it again unless you re-experience the same thing sometimes
+in the future which might or might not happen experience replay is going to help us to keep
+experiences in memory and maybe retrain on them on a regular basis so that one experience might
+be useful multiple times which intuitively makes sense like maybe you do an experience
+you get an amazing reward and you don't want to forget it you want to retrain the model on
+it on a regular basis it's more data efficiency so here's what it looks like the current way
+we were training was we're in a state i'm just going to state state instead of pre-processed
+states but it's pre-processed we're in a state s we perform action a we get a reward r and we
+get into the next state from that next state we perform another action a prime we get a
+reward r prime and we get into s second and so on you know and so on and each of these
+would be called one experience it's one iteration of gradient descent it's one experience
+so right now we're training on these experiences so the training looks like i train on e1
+i update my parameters then i train on e2 i update my parameters then i train on e3
+update my parameters those are highly correlated because they're part of the same
+episode and as i was saying with the ball traveling in one direction that might actually
+not be that helpful to train on all of these you know so instead what we'll do is we'll
+use experience replay where we will collect our first experience but instead of training on it
+we will put it in a memory called the replay memory d we put it in there and then at every
+step we will sample from that memory to decide what to train on so of course at the
+beginning if we just have one experience in the memory we will train on that experience
+but over time you will see that we get more diversity and reuse out of our experiences so
+for example let's say i experience e2 i put it in the memory and then instead of training on
+e2 i'm going to randomly sample from the memory i might get e1 or i might get e2
+then i experience e3 and i put it in the memory and i might get one of the three you
+know this is the vanilla experience replay in practice there is more methods like prioritize
+sweeping which might tell you which experience you want to weigh maybe some experiences had a
+higher gradient so you want to prioritize them more often you know things like that
+so all in all this is what our training looks like with experience replay we experience
+e1 we train on e1 then we the next training iteration is not on e2 it's on a sample from
+e1 and e2 either or the third experience is then put in the replay memory but we
+don't train on it we train on a sample from whatever is in the replay memory and we repeat
+and that is more sample more efficient allows more reusability and less cross correlation in our
+um training batch okay so that's called replay memory
+and you can use it with mini batch gradient descent note that
+you still experience in the direction that the game is played like we still
+go and take the action as expected we just don't necessarily update our model
+parameter based on the action that we ended up taking we put it in the replay memory we
+may train on it later okay um so here's how it modifies our vanilla setup we've added an
+experience from state s to state s prime to the replay memory you know like let me walk you
+through it again within one time step we forward propagate our state into the q network we
+execute the best action given the q values this gives us a reward and the next state
+the next state is pre-processed and then instead of training on that instead of training we just
+add that transition to the replay memory and instead we sample randomly a mini batch of
+transition from the replay memory and we train on those and we redo the same thing again and
+yes yeah yeah you you would uh you would within one episode but you know if you if you play
+multiple chess games your replay memory will get already bigger so then you would see some end
+game some middle of the game some early games yeah and in practice it's actually useful because
+you might imagine that in a chess game you know all of us
+uh let's say if you're a beginner you you see a lot of beginning of the games you actually people
+that are beginners they're good at openings but they're bad at end games because they don't get
+to play a lot of end games uh well that type of approach could be useful you can retrain on
+end games more often and you know a more advanced version of the replay memory would
+also weigh the experience in the replay memory based on how much the gradient is going to be
+so if you have an experience that actually was super insightful you can weigh it higher so
+that you you you prioritize grabbing it and retraining on it essentially so let's say you
+blunder in chess you might actually want to re-see that blunder later so that you don't
+do it again okay um okay so these were all the different methods another one that's very
+intuitive and very important is when during the training process our um agent gets stuck
+gets stuck in a local minima here is how it would work in practice you start in initial
+state s1 and you have three states ahead of you if you take action a1 you go to state 2 which
+is a terminal state if you take and you get a reward of zero if you take action a2 you
+get to s3 also a terminal state and you get a reward of one and if you get action a3 you
+get to state four terminal state with the reward of a thousand so of course to us it's obvious
+that we would want to explore the state number four it's pretty obvious in practice let's say
+you update you you initialize your network and in the first forward path that's what you get
+first forward path the network is random you get q value for action 1.5 for action 2.4
+for action 3.3 what does that mean it means the agent is saying i'm going to go to action one
+so i take action one and i see an immediate reward of zero right because it's a terminal
+state the bellman equation thing doesn't happen i just have the immediate reward
+which becomes my target y and so i perform a gradient descent update to say this q value
+should have been zero so i convert this q value to zero now second try this time the q value
+is saying take action two it's the highest q value i take action two i have an immediate
+reward ahead of me that's one because it's a terminal state there's no second discounted
+future reward term so i just take y equals one i perform my gradient descent update and
+this converts to one and then third time the agent is still saying go to a2 go to the take
+action a2 reward of one good that's what you predicted nothing to do just keep going
+we're done with training we're stuck we never visit the state we actually wanted to visit
+okay so that that that wouldn't work for us we will never visit that state using our current
+algorithm does that make sense why we wouldn't ever visit that state in practice this is a
+big issue the analogy of this concept of exploration versus exploitation is when every
+day you take your bike and you cross campus you have a favorite route and turns out that
+the more you take that route the better you get every time like you get a little faster maybe
+your turn is faster or something or you can predict how many people are going to be at
+that roundabout and you know how to take it in the wide way so you go faster we've all
+done that that's exploitation you exploit what you already know and you get better at it
+but maybe there's another route that you're not thinking of that's pretty
+instead of going north from campus you go south and maybe it might be better you will
+never see because you don't have the courage or the patience to do it that's the difference
+between exploration and exploitation in practice a good model would be able to handle both to
+explore 22 to exploit to explore when it needs to explore the way we do it in practice in our
+pseudocode is to inject some randomness so for example when we are looping over time step
+with probability epsilon let's say five percent take a random action so from time to time on
+average one time every 20 times you take a random action it will allow you to visit
+maybe a new path the analogy in chess is you know you might use a creative move from time to
+time that might be worse today but might allow you to learn something and to get better over
+time yeah
+setting the the couldn't we resolve this problem by setting the initial values from
+into infinity well the problem if you set the initial values to infinity so you would say
+instead of randomly initializing your network you initialize it in a way that the outputs are
+equal to infinity well in practice if the three q values are infinity then you can't make a
+decision on the spot so you're saying just pick one randomly because if the three are
+infinity you you can't decide which one to take right and also if if it's infinity and the
+reward is one i mean if it's a really large number and the reward is one your gradient is
+going to be massive right so it's gonna i guess the loss function is going to be massive
+and i don't know i imagine it would be really hard to train it but in practice you start with
+the random initialization because this might be one example but you know if in the game of
+chess actually the the reward is one at the end and zero all the time or maybe the reward
+is a thousand at the end and when you lose your rook it's a it's a negative reward you can't
+predict what the reward structure is going to be you want an agent that is able to adapt to it
+and it's better to find a method that can scale to different environments essentially
+okay so this was epsilon greedy action which is adding some randomness with probability
+epsilon take a random action okay so adding all our techniques because we get good at training
+reinforcement learning algorithms this is what we have we initialize our q network parameters
+we have a random network we initialize our replay memory d and then we loop over episodes
+we start from an initial state we create a boolean that allows us to detect terminal states
+with probability epsilon we're going to take a random action otherwise we're going to follow
+what we know which is forward propagate the state in the q network take the action that has the
+highest q value that allows you to observe a reward and the next state take that next state
+forward propagate it again instead and then and then instead of um oh no sorry sorry
+observe that next state add it to the replay memory sample from the replay memory and then
+train on that sample and in the process you will need to do another forward path because you
+need to estimate your target y using the immediate reward plus the bellman equation
+plus the discounted future reward okay are you experts at q learning okay good
+sounds good and here's where we get at the end you can claim proudly you have trained an
+atari it's not that complicated as you can see other than the bellman equation piece
+turns out the agent has discovered that it can send the ball on the back and it's actually
+much easier to finish the game like that which is quite interesting you know a good player would
+know that you can dig a tunnel and you can finish the game without too much issues yeah
+how do you quantify when when the game has ended yeah well first you would you would
+you would start seeing the model get two good rewards as it play like it manages to get
+really good rewards why earlier it might not you know and so that's probably your best guess for
+how good the model is in practice if you're alfago you can also test it against the best
+humans in the world and you can observe that they're losing against the model
+you can get them to play together so you know you could you could actually monitor the
+loss function and look at is the bellman equation respected if the bellman equation
+is respected then your model is really really good and then we're we're going to see an
+example of competitive self-play where you get the model to play against other models
+and then over time as you watch them play for thousands and thousands of time you can tell
+which model is ahead of another one you can then sort of copy paste the best model into
+the other models and then make them play again for many times and because you have the epsilon
+greedy approach one of the model is naturally going to get better than the others because
+of the randomness that you are okay let's look at a few examples and then we'll spend
+20 minutes on the rlhf here are other examples this is pong which is one v one sea quests
+which is an underwater game and then the one that's maybe more of you know space invaders
+very popular game as well so the impressive thing that they showed is that you can
+actually solve many games with the exact same algorithm no tweaks which is quite impressive
+let's go a little further and talk about advanced topics here is a game called
+montezuma revenge this game is particular because you're controlling a little character right here
+and this character is trying to go and grab let's say this key right here and it has some
+obstacles or some enemies that it needs to take care of what what do you think is going to
+be an issue if we apply what we just learned to this game what makes this game especially
+hard in comparison to let's say chess or go yes the reward is very delayed like if you start
+with a random network what are the chances that the network is going to figure out that
+to get to the key it actually should go in the opposite direction it should go in the
+opposite direction it could jump down here it should catch the rope the rope will probably
+allow the character to go to the ladder it goes down the ladder it has to go jump up
+this enemy my guess is it's an enemy i'm not sure but i think it's an enemy because of the color
+and i know that in gaming if it was green it might not have been an enemy but if it's gray
+or red it might be an enemy and then go up the ladder and grab the key the chance is
+very low that the agent is going to make that successive good decisions to get there you're
+right why is it use why is it easier for a human to actually solve that game
+intuition prior knowledge so for example when you look at this game even if you have never
+played it my guess is you would know you can go down the ladder because you know what a
+ladder is or you can see this little rope and you're like i'm going to catch the rope
+i'm going to jump and go to the other side and you look at this little monster and you're
+like i'd better not touch this monster or if anything i will jump on top of it because
+you've played mario let's say so all of this is human intuition sometimes you would call as a
+baby survival instinct like you throw the baby in the water and suddenly it flips and it can
+swim those are things that are to a certain extent encoded in our dna but at the very
+least encoded in our experience of doing other things that have nothing to do with this game
+and so the the problem here is called imitation learning is is there a better way to start our
+network than a random initialization that allows the network to for example guess that this is a
+ladder and turns out that if the network knows that if we be more likely to get to the reward
+first and then learn from that reward and then get better over time the other part that can
+also use human knowledge which is what we're going to see together is reinforcement learning
+from human feedback where you have an analogy here which is you can train a language model
+and it might be completely misaligned with what actually humans care about
+how does reinforcement learning help in those situations that's going to be the
+next topic in the last part of the lecture okay let me show you a few other results
+quickly today we talked about dq and deep q learning in practice there is a lot more
+reinforcement learning algorithm but you got the gist of it you got the concept of making good
+sequences of decision epsilon really exploration exploitation terminal state starting state all
+of that you you got the one the one algorithm that is very popular right now is called ppo
+proximal policy optimization there is one that is even more popular right now that's actually
+from a year ago at stanford called dpo that we won't study in the class one of the things
+to know about ppo just just to go over it really quickly and i i pasted two important
+papers from shulman et al a few years back trust trpo and ppo is that it is not a value
+based algorithm so in q learning you learn the q values and then you define your policy
+as the arg max of the q values in ppo you learn the policy directly which is a more
+probabilistic method it also works well with continuous spaces if you look at the q learning
+we learned one output for one action if you actually have a game that has continuous action
+like autonomous driving where it's not like just turn the wheel to the right or to the left
+it's like what degree you turn it it's continuous then the qn would not work
+well or you would have to granularize the number of action a little bit to the right
+a little more a little more which would not be really useful instead you would use ppo
+yeah yeah so the question is how do you define the reward in the qn
+different reward structure will lead to different types of you know agent strategies but you're
+right for the game of go you could actually define the reward as one if you win and zero
+if you don't win that's it you know every move will be zero until the last move is a
+win in chess you might actually do intermediate reward because you want to tell the you want
+to tell the agent that is good to kill the opponent's pieces to get rid of them you could
+also do end-to-end and say i don't give any intermediate reward i just give a final reward
+which might be more complicated to train on but it might actually lead to a more optimal
+strategy because in fact you could actually win without taking any piece from your opponent
+other things about ppo is you know it's more probabilistic it has a concept of an expected
+advantage which at every step instead of telling you how good that action is it would tell you
+how much better it is than random than the current state like how much better would it be
+to do certain thing versus what you would have done otherwise i'm not going to go into the
+details it's all in the paper but those are things that are important here's a few examples
+of ppo so this example on the left is from open ai a few years back where you can see it's
+a continuous space where the agent is being bullied a little bit but it's trying to grab
+the rewards but it's also subject to external forces that are sort of throwing balls at it
+it's a little bit mean but you can imagine that this is a continuous space meaning you're
+controlling the nodes you're controlling the joints of the agent and you're controlling the
+forces the angles and so it's a that's why ppo would be better in that case
+super here is a competitive self-play which i really like where you have agent play with
+each other and this is the sumo game push the opponent outside the ring and you get a reward
+so actually it's interesting because you're seeing some emergent behavior which is they
+attack each other's feet or they lower their center of gravity to be more stable for example
+yeah yeah it's versions sometimes different initializations for example so no but good
+question so oftentimes what opening i would do back you know back in that time is they would
+create copies of the same model they would initialize them differently and they will let
+them learn and turns out one of the model we get better than the others and then they
+will copy again that model to the rest and do the same thing again and again pretty much
+oh yeah it's kind of funny isn't it that's a good catch
+that's a good goal could watch that for hours okay they're a little awkward you have to say
+but but it works okay so at least you know i let you watch the video it's going to be
+shared but here's another set of games that are even more complicated that i mentioned early on
+open ai5 which you can think of an equivalent of league of legend dota where you have
+five v five game so you have to collaborate etc which makes it adds like literally one
+additional degree of complexity and starcraft alpha star from deep mind is an example of
+where the observation is not the entire states you have fog and so that adds another layer
+of complexity not going to see that together today i would encourage you to look at the
+alpha go documentary on netflix if you haven't who has seen it already
+nobody okay well you can now watch it with a different eye understanding reinforcement learning
+and at some point in the in the documentary you will see that alpha go makes a very
+odd move a very creative move and people are like i don't understand that move even the top
+researchers or the best players would say in the video they don't understand that move
+it turns out that that move is very unintuitive for humans because as humans we are trained to
+maximize our chances of winning like literally if i can eat all your pieces in chess i will
+eat all your pieces and if i can surround your stones and go as much as i can i will do it
+the agent is just programmed to win so that move actually looked counter-intuitive because
+the agent doesn't care about winning by one or winning by a you know 20 stones it just cares
+about winning and that move specifically put the agent in a good place to win by a small
+margin you know so that's an example of an insight that you will learn you you understand
+from this class and you will see in the in the documentary okay i think we have 10 minutes
+i'm just going to introduce reinforcement learning from human feedback because it's a more
+modern topic that's is very trendy right now it's important to know and so let's look at it
+together we're going to start by recapping how language models are trained in a nutshell
+and then we'll see what self what supervised fine tuning looks like we'll talk about how do
+we train a critique model a reward model and then finally what rlhf looks like and why is
+it so trending in the news so our training objective for language models is next token
+prediction right we've already talked about it in a formal lecture the idea is that i will get
+some inputs i'm reading wikipedia let's say or some sort of a text online and i read a sentence
+and i predict the last token and i do that again and again so for example deep learning
+and then deep learning is deep learning is so deep learning is so cool and that's it
+so you get the idea right you're always spreading the next token and then over time
+it forces the model to explicit emerging behaviors and it understands the connections
+between those concepts and it's really good at generating texts we compute a loss function
+you're actually going to study this loss function in c5 so i'm not going to talk about
+it right now but you perform you know a gradient descent loop and this is how you get your first
+pre-trained language model you get a pre-trained language model you can call it on a text or
+prompt and it will continually generate and you call it again and again and again and
+it generate generate generates everybody's comfortable with that right okay so that's
+how we trained a language model but there is a couple of problems the first problem
+is that online data does not reflect helpfulness so to give you a concrete example
+what you might find in the training set is something like deep learning is so cool
+when actually what you might find in practice is people asking what is deep learning
+so the data is not really reflective of you want an agent to be helpful and that's a problem
+because the model was trained to continue text rather than answer questions and in practice
+you would see it's a big problem another problem is the model has no concept of good polite
+or helpful yet and to give you a concrete example you might actually ask a pre-trained
+language model my laptop won't turn on what should i do and then the model responds because
+it has read it on reddit or on wikipedia is laptops sometimes don't turn on because of
+power issues which is not what you ask you ask what should i do and in fact a better answer
+would have been check your charger if is properly connected or the outlet works if that's
+fine try holding the power button for 10 seconds if it still doesn't start the battery
+or motor board may blah blah blah that's a better answer that's what you want a language
+model to do nowadays and the model can give you factual text because that's what it's been
+trained on but it's it doesn't understand being helpful or having an answer that looks
+like a human-like answer so our solution to it we'll start with using supervised fine tuning
+which is going to be learning from human written demonstrations of helpful behavior
+and then we get to even further and use rlhf which will optimize not only for human written
+sentences or paragraphs but for preferences and the word preference is the key word
+let's talk about how we can improve our pre-trained model with supervised fine tuning
+i take that we want to align models with human written responses
+and the step one that we're going to lose is to build a data set let's build a data set
+of human prompt response pairs so what actually opening is going to do i'll explain it in a
+second is it might collect some of the prompts that we all use and then ask humans to respond
+to those prompts and put that in a data set it might also ask separately experts to write
+really good prompts and then answer those prompts it's a fully human-made data set and
+then we use that data set to fine tune our pre-trained model and by now you've learned
+fine tuning in the online video so you know what i'm talking about using supervised learning so what
+it looks like is i take my pre-trained model that i just told you how we train and then i
+give it a prompt explain deep learning to a beginner and i also will concatenate to it
+a response a good response written by a human deep learning is a type of machine learning
+that uses neural and then i expect the model to come up with the word networks
+so it's literally do whatever we need to train the pre-trained model but we do it on human written
+prompt response pairs and if you do that many times and you use the you know the same loss
+function how far the model's response is from a human response you do that many times and
+you will get sft supervised fine tuning but it has some shortcomings one of the shortcomings
+is it is data that is extremely costly to collect in fact i believe in the first version
+of that instruct gpt there was only 13 000 prompt response pairs and turns out it did
+really well despite that um the second aspect is it's unlikely to generalize well because
+you're again you're not doing reinforcement learning here you're doing supervised learning
+and so you're just showing a set of examples 13 000 examples that you want to learn but it's
+what tells you that it will generalize to an unseen prompt that will come up from your user
+base and so this approach sft really teaches the model to imitate good behavior from humans
+and that's the key it's it's imitation it is not preference optimization to do preference
+optimization that's where we're going to train a reward model and we're going to do proper
+rlhf so let me talk to you about the rm reward model and then i'll tell you about
+rlhf in a nutshell the problem of rlhf is to align not with human responses but with
+human preferences so what what's going to happen is we're going to train a separate
+model to predict which responses human prefer and we're going to call that model the reward
+model it's a separate model from whatever we've trained before the model is going to use data
+from labelers so you're going to show labelers two or more responses to the same prompts
+and those responses will be sampled from the sft so your best model right now is the sft
+you will sample three or four responses and you know how we sample right you you can tweak
+the temperature you can select not only the top priority word the top the softmax layers
+number one word but you can sometimes sample differently and you will get a variety of answers
+and then you will ask a human labeler to say answer b is better than answer c and answer c is
+better than answer a and answer a is sort of equal to answer d that's it
+they will be asked which response they prefer and it can get more complicated it doesn't have
+to be just a simple ranking you have multiple liker scale methods and so on but the point
+is that you will collect those pairwise comparison that we call preference data
+and you will use it to train a reward model which is initialized from your sft
+so your sft is here it's your best model to date and you're going to modify the last layer so the
+softmax layer at the end of a language model that will tell you this is the token we should
+output or this is the word we should write instead of that you'll get rid of that layer
+you'll put a scalar value as output you'll put a linear layer with a scalar value that
+will represent the reward head it will predict the the reward you know which is a proxy for
+the preference of the human the way you'll train that reward model is you'll give it a batch of
+two you know you'll give it a prompt x with a response a and the preference of the user and
+you'll give it the same prompt with a response b from the sft with the preference of the user
+so here the user is saying response a is better than response b and so if you actually
+were sending that into this model you will get a predicted reward for the preferred answer
+and a predicted reward for the this preferred answer that allows you to train using a loss
+function that i'm not going to cover given our time sensitivity the loss function will
+encourage the model to assign higher rewards to preferred responses so you're trying to
+dissociate the higher reward better preference from the lower reward for lower preference
+and it turns out that if you do that many times you will have a reward model that even a prompt
+and a response will be approximating human preference so you've just trained a critique
+that represents your humans it's a proxy for what humans prefer it's been trained on a lot
+of human preferences the reason is better to use a model than actual humans is because we
+can use it widely on all sorts of inputs and it can scale from a data standpoint also note
+that this method is better than sft because it's way easier to ask humans what's your preference
+between those two things and to ask them to come up with answers to prompts takes way less
+time and if you've used chat gpt you've probably been asked before to to tell them
+which response you prefer so once trained the reward model replaces the human as the
+evaluator during reinforcement learning with from human feedback and reinforcement learning from
+human feedback is very comfortable for you now i will i will show you what it looks like given
+the q learning algorithm we learn but essentially we we have first taught the model what good
+behavior looks like with sft and then we built a reward model that can tell us how good
+an answer is according to human preferences and the rlhf approach is where we will let this
+model practice get scored by the reward model or the critic and update itself to produce higher
+scoring answers so more preferred answers and it's the same as the games we've seen together
+but some things differ so i just pasted here the exact setup that we've learned together
+for reinforcement learning the differences are the following you know our objective is still
+to maximize expected reward that is produced by the reward model aligned with human preferences
+the agent is the language model being fine-tuned the environment is the space of possible prompts
+and continuations it's any any text that you can encounter the state is the specific prompt
+plus the tokens that were generated so far the next state is one more token added
+and the action is the next token that is chosen by the agent or the model
+which is of course determined by the policy and then the reward is estimated by the reward model
+that we trained to represent human preferences in this case one episode is one full prompt
+so imagine that you get a prompt and you start generating and you go through this
+reinforcement learning loop and you observe the rewards and then you try to maximize the future
+rewards and then at the end of training you end up with having your pre-trained model turn into
+an sft and your sft turn into a way better model using rlhf okay so a few things to note
+to end on this the model does not get a reward at every single token it gets a reward
+at the end of a sequence when the completion is finished because the reward model was was asked to
+rate prompts and responses together so you need to finish the generation in order to see what's
+the reward and so again going back to making good sequences of decision that's exactly it you
+want the model to make enough good sequences of decision so that the response is preferred by
+the critique which represents a proxy to the human preferences so all intermediary rewards are
+typically zero and that makes it a very sparse reward episodic tasks just like a game of chess
+where you only get a reward when you finish assuming you're not defining intermediary
+reward so you only know if you did well at the end and you have to then use that information
+to update your network and get a better proxy for it super there's a very nice video we're
+not going to play for the sake of time but i will send it online it's from four days ago
+it's you know a former stanford students andres carpati who is very thoughtful and
+articulate and was explaining four days ago why reinforcement learning can be terrible at
+times and that human minds work way more efficiently and so i would encourage you to
+watch this four-minute video because he's very clearly outlying why reinforcement learning
+is still not great even if it's the best thing we can use in many ways

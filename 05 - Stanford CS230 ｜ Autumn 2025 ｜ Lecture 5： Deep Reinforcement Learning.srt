@@ -1,0 +1,3804 @@
+1
+00:00:05,419 --> 00:00:11,900
+Welcome to our fifth lecture in person for Stanford Deep Learning CS230.
+
+2
+00:00:13,660 --> 00:00:17,500
+Today's lecture is going to be about deep reinforcement learning. I actually switched
+
+3
+00:00:18,219 --> 00:00:24,859
+the original plan of talking about neural network interpretability and LLM visualization
+
+4
+00:00:25,579 --> 00:00:32,060
+simply because you haven't had the chance to study attention maps, convolutional neural
+
+5
+00:00:32,060 --> 00:00:36,539
+networks, and so it would have been an overkill to do that week five. So we're going to talk about
+
+6
+00:00:36,539 --> 00:00:43,420
+neural network interpretability and visualization in a later lecture, actually. But today our
+
+7
+00:00:43,420 --> 00:00:49,740
+focus will be on deep reinforcement learning, which is probably my favorite lecture of the
+
+8
+00:00:49,740 --> 00:00:56,780
+class. I feel like I say that every week, but it's okay. I like it. The agenda is pretty packed.
+
+9
+00:00:57,420 --> 00:01:05,180
+We're going to start with deep reinforcement learning, which you can think of as the marriage
+
+10
+00:01:05,180 --> 00:01:09,980
+between deep learning and reinforcement learning. Together the baby is called deep reinforcement
+
+11
+00:01:09,980 --> 00:01:15,900
+learning and we're going to see how reinforcement learning works and how neural networks can play
+
+12
+00:01:15,900 --> 00:01:25,579
+a part in building a reinforcement learning agent. In the second half of the class,
+
+13
+00:01:25,579 --> 00:01:32,939
+we will focus on a very specific concept called reinforcement learning
+
+14
+00:01:32,939 --> 00:01:37,739
+from human feedback that you might have heard of. It's one of the core concepts that
+
+15
+00:01:39,420 --> 00:01:45,260
+really made the difference between what you might have remembered as GPT-2
+
+16
+00:01:46,140 --> 00:01:55,099
+and chat GPT. That's the leap. That's really the technique that has democratized
+
+17
+00:01:55,980 --> 00:02:01,260
+access to LLM because of the performance improvements and the alignment with humans.
+
+18
+00:02:01,260 --> 00:02:09,099
+So we're going to see what is this concept of our LHF and how does it work and why does it
+
+19
+00:02:09,099 --> 00:02:15,740
+allow us to align a language model to human preferences. Ready to go? As always,
+
+20
+00:02:15,740 --> 00:02:21,740
+let's try to make it interactive. So the motivation behind deep reinforcement learning
+
+21
+00:02:21,740 --> 00:02:26,539
+and as usual, you're going to have all the most important papers that are covered in the
+
+22
+00:02:26,539 --> 00:02:32,300
+class listed at the bottom of each slide. Reinforcement learning has grown in popularity.
+
+23
+00:02:33,259 --> 00:02:41,500
+One of the very popular papers called human level control through deep reinforcement learning
+
+24
+00:02:41,500 --> 00:02:51,900
+is the work from DeepMind that has shown us that a single algorithm training method
+
+25
+00:02:51,900 --> 00:02:59,900
+can allow us to train AI that can play many, many Atari games better than humans.
+
+26
+00:02:59,900 --> 00:03:07,020
+Single algorithm over 40, 50 games where it exceeds human capability, which is quite
+
+27
+00:03:07,020 --> 00:03:11,740
+impressive when you thought about the fact that machine learning used to be niche and you
+
+28
+00:03:11,740 --> 00:03:15,900
+would have to train a really niche algorithm to perform different tasks. Here's an algorithm
+
+29
+00:03:15,900 --> 00:03:22,139
+that can just learn sort of every Atari game. A little later, you might have heard of
+
+30
+00:03:22,139 --> 00:03:28,699
+AlphaGo. AlphaGo is an algorithm that was developed to beat and exceed
+
+31
+00:03:28,699 --> 00:03:32,699
+human performance in the game of Go. We'll talk about it a little more.
+
+32
+00:03:32,699 --> 00:03:39,580
+The game of Go is a very complex game. Some would argue way more complex than chess
+
+33
+00:03:39,580 --> 00:03:45,979
+from a decision-making standpoint and from the possibilities that can happen on the board.
+
+34
+00:03:46,139 --> 00:03:55,180
+So it actually got sold in 2017 again by the DeepMind team and David Silver's lab.
+
+35
+00:03:56,460 --> 00:04:02,699
+Later on and again another great paper from DeepMind had showed us that reinforcement
+
+36
+00:04:02,699 --> 00:04:11,419
+learning can also be used for strategy game that might be a touch more complex than chess
+
+37
+00:04:11,419 --> 00:04:17,660
+or Go that might actually involve multiple players playing with each other or against
+
+38
+00:04:17,660 --> 00:04:22,459
+each other. Some of you might have played StarCraft for example. That's an example of a game
+
+39
+00:04:22,459 --> 00:04:28,300
+where it requires a lot of long-term thinking, short-term thinking. Another one is Dota.
+
+40
+00:04:28,300 --> 00:04:31,899
+Some of you might have played Dota or League of Legends where you have a team playing
+
+41
+00:04:31,899 --> 00:04:36,300
+against another team. Those are examples of games that involve multiple agents playing
+
+42
+00:04:36,300 --> 00:04:42,699
+collaboratively. It's pretty hard to develop systems that can play with each other against
+
+43
+00:04:42,699 --> 00:04:50,620
+multiple opponents. Finally, most recently this is 2022 so alongside the release of ChatGPT
+
+44
+00:04:51,500 --> 00:04:56,220
+this paper that introduces the concept of reinforcement learning with human feedback
+
+45
+00:04:56,220 --> 00:05:02,300
+applied to aligning language models with human preferences. We'll talk about that later.
+
+46
+00:05:02,620 --> 00:05:11,100
+All this to say that reinforcement learning allowed us to exceed human performance in a variety of
+
+47
+00:05:11,100 --> 00:05:19,819
+tasks. The first one I want us to think about is the game of Go. Let's say that you were asked
+
+48
+00:05:19,819 --> 00:05:27,100
+to solve the game of Go with classic supervised learning. Everything we've seen together so far,
+
+49
+00:05:27,740 --> 00:05:36,180
+labeled data. How would you solve the game of Go with classic supervised learning? What data would
+
+50
+00:05:36,180 --> 00:05:57,310
+you collect? What would be the label? Good point. You look at history of plenty of games,
+
+51
+00:05:57,310 --> 00:06:07,949
+hopefully from good players. You look at X as the input being the current state of the board
+
+52
+00:06:07,949 --> 00:06:13,230
+and Y as the next state of the board. This would tell you what move was selected
+
+53
+00:06:13,230 --> 00:06:17,550
+and you learn the move essentially. Hopefully, if you do that across many games,
+
+54
+00:06:18,910 --> 00:06:26,670
+you might see the agent become more attuned to the game and develop better strategies.
+
+55
+00:06:28,430 --> 00:06:33,949
+Hopefully, it's a professional player. What are the disadvantages of that or the shortcomings
+
+56
+00:06:33,949 --> 00:06:56,540
+that you can anticipate? You might not see the entire space of possible states of the board,
+
+57
+00:06:58,139 --> 00:07:03,339
+so you might miss out on a lot of different strategies. The game of Go is actually a game
+
+58
+00:07:03,339 --> 00:07:08,779
+with two players, one player that uses the black stones and one player that uses the white
+
+59
+00:07:08,779 --> 00:07:16,699
+stones. Iteratively, they're going to place those stones on the grid, a 13 by 13 grid
+
+60
+00:07:16,699 --> 00:07:21,579
+that you can see on screen with the goal of surrounding their opponents. You're constantly
+
+61
+00:07:21,579 --> 00:07:26,060
+trying to surround the stones of the opponent and the opponent is trying to surround your
+
+62
+00:07:26,060 --> 00:07:33,740
+stones. You can imagine that for every intersection on the grid, there are multiple
+
+63
+00:07:33,740 --> 00:07:40,060
+possibilities. Either there's a black stone or a white stone or nothing. On a 13 by 13 grid,
+
+64
+00:07:40,060 --> 00:07:46,620
+you can imagine how many possibilities of a board state there are. It's impossible to capture all
+
+65
+00:07:46,620 --> 00:07:51,899
+of that with historical moves from professional players. It will just never cover that. The
+
+66
+00:07:51,899 --> 00:07:55,899
+same thing could be said in chess as well. You know that even the professional players can
+
+67
+00:07:55,899 --> 00:08:02,139
+plan x number of steps in advance, but nobody knows where the game takes you. In the late
+
+68
+00:08:02,139 --> 00:08:07,500
+stages of the games or the end games, players always find themselves playing a different game
+
+69
+00:08:07,500 --> 00:08:12,699
+and that's part of the magic of being good at chess. So yeah, that's a problem. What's
+
+70
+00:08:12,699 --> 00:08:17,339
+another problem or shortcoming beyond the fact that we can't observe possibly all the states?
+
+71
+00:08:21,360 --> 00:08:39,779
+Yes. Correct, correct. If I repeat what you said, well first, you don't even know if this
+
+72
+00:08:39,779 --> 00:08:43,460
+was a good move. So maybe it was not even a good move and you're learning something that
+
+73
+00:08:43,460 --> 00:08:48,580
+was not a good move and you're labeling it as a good move. And second, you're actually only
+
+74
+00:08:48,580 --> 00:08:52,899
+getting partial information, meaning you don't have the information of what's in the person's
+
+75
+00:08:52,899 --> 00:08:59,379
+mind and what strategy they're trying to execute. So you're looking at a single example
+
+76
+00:08:59,379 --> 00:09:05,139
+among long-term strategy and you can't expect the model to guess what's the long-term
+
+77
+00:09:05,139 --> 00:09:11,059
+strategy because it was just trained on x and y and matching the inputs to a possible output.
+
+78
+00:09:11,059 --> 00:09:16,100
+So you don't really have any concept of a strategy at that point. It looks one-off
+
+79
+00:09:16,100 --> 00:09:22,820
+at every decision of the model. Okay, those are really good points. The other one
+
+80
+00:09:22,820 --> 00:09:32,320
+is the ground truth might be ill-defined. What I mean by that is even the best humans
+
+81
+00:09:32,320 --> 00:09:38,000
+in the world do not play their best game every day and even their best game is not
+
+82
+00:09:38,000 --> 00:09:43,279
+the ground truth. And that creates an issue because you're essentially training against
+
+83
+00:09:43,279 --> 00:09:47,679
+a target that is off by a certain margin. You're never going to get better than the
+
+84
+00:09:47,679 --> 00:09:52,960
+best human and the best human is not the best possible existing, the best possible strategy
+
+85
+00:09:52,960 --> 00:09:59,200
+at every point. So you could argue what if we get a panel of experts that we're monitoring
+
+86
+00:09:59,200 --> 00:10:03,919
+and those are the best players in the world. Even with a panel of experts that decides
+
+87
+00:10:03,919 --> 00:10:11,120
+every move, you still have an ill-defined ground truth. So that's a big issue.
+
+88
+00:10:11,120 --> 00:10:14,799
+Too many states in the game you mentioned and we will likely not generalize, which is what
+
+89
+00:10:14,799 --> 00:10:18,320
+you said, meaning we're looking at one-off situations. We're not looking at entire
+
+90
+00:10:18,320 --> 00:10:23,440
+strategies. And so when we face a board state that we've never seen before,
+
+91
+00:10:24,000 --> 00:10:28,080
+because the model was not trained on strategy, it's sort of we get stuck.
+
+92
+00:10:31,950 --> 00:10:36,590
+And this is an example of a perfect application for reinforcement learning
+
+93
+00:10:36,590 --> 00:10:44,190
+because reinforcement learning is all about delayed labels and making sequences of good
+
+94
+00:10:44,190 --> 00:10:52,029
+decisions. So if you have to remember in one sentence, what's RL? RL is making good
+
+95
+00:10:52,029 --> 00:11:02,539
+sequences of decisions, sequences of good decisions, sorry, and do that automatically.
+
+96
+00:11:05,600 --> 00:11:09,759
+Another way to look at it is the difference between, you know, classic supervised learning
+
+97
+00:11:09,759 --> 00:11:16,960
+and RL is in classic supervised learning you teach by example, in reinforcement learning
+
+98
+00:11:16,960 --> 00:11:22,879
+you teach by experience, which is also a different concept. You're not just showing
+
+99
+00:11:22,879 --> 00:11:29,600
+cats and non-cats to a model. You're actually letting the model experience an environment
+
+100
+00:11:29,600 --> 00:11:34,320
+until it figures out what were the best decision it made and learns from them.
+
+101
+00:11:37,440 --> 00:11:41,120
+Some examples of reinforcement learning applications. I'm going to mention them.
+
+102
+00:11:41,120 --> 00:11:46,080
+We have gaming, of course, that we already covered. What are other applications
+
+103
+00:11:47,360 --> 00:11:50,159
+of AI where we need good sequences of decisions?
+
+104
+00:11:50,480 --> 00:11:56,720
+Yes. Autonomous driving? Yeah, correct. I mean, in driving, you could argue RL
+
+105
+00:11:56,720 --> 00:12:02,720
+could work and there's some RL going on. But what you mean, I think, is you have some sort
+
+106
+00:12:02,720 --> 00:12:08,960
+of a dynamic planning algorithm that allows you to strategize. If you see a red light
+
+107
+00:12:08,960 --> 00:12:13,600
+ahead, you might start slowing down over time, but maybe it will turn green. So you
+
+108
+00:12:13,600 --> 00:12:17,759
+might not slow down completely. This is an example of a strategy.
+
+109
+00:12:17,919 --> 00:12:22,480
+This is an example of a strategy that you need, of course. Yeah.
+
+110
+00:12:24,000 --> 00:12:28,399
+Robotic controlling. That's a great example also related to autonomous driving. But
+
+111
+00:12:28,399 --> 00:12:35,440
+imagine you want to teach to a robot to move from point A to point B. The number of good
+
+112
+00:12:35,440 --> 00:12:40,159
+decisions that the robot needs to make in terms of moving each of their joints
+
+113
+00:12:40,799 --> 00:12:46,240
+is tremendous. It's actually super unlikely that a robot would move from A to B if it's
+
+114
+00:12:46,240 --> 00:12:57,500
+not trained to make good sequences of decisions. What else? Actually, the biggest one nobody
+
+115
+00:12:57,500 --> 00:13:05,019
+mentioned yet. It's not a great application. I don't like it, but it happens to be the
+
+116
+00:13:05,019 --> 00:13:16,190
+biggest one over enforcement learning. Yeah. Yeah. Yeah. Advertisement. Yeah. Marketing.
+
+117
+00:13:16,190 --> 00:13:19,870
+You're right. So yeah, we talked about robotics. Advertisement is another example.
+
+118
+00:13:21,389 --> 00:13:28,669
+Advertisement is a long game. Companies are showing you multiple ads before you buy.
+
+119
+00:13:29,309 --> 00:13:33,230
+And in fact, the reason reinforcement learning is important is because
+
+120
+00:13:34,269 --> 00:13:39,870
+they're planning a strategy that might lead a buyer to execute a purchase over time. And
+
+121
+00:13:39,870 --> 00:13:46,830
+it requires long-term thinking. So there's a lot of reinforcement learning applied to marketing,
+
+122
+00:13:46,830 --> 00:13:54,669
+advertisement, real-time bidding processes, et cetera. Okay. Clear on what RLEs and how
+
+123
+00:13:54,669 --> 00:14:02,830
+it differs from classic supervised learning. So let's put some vocabulary around that concept.
+
+124
+00:14:02,830 --> 00:14:08,269
+In reinforcement learning, you have an agent and the agent interacts with an environment.
+
+125
+00:14:11,250 --> 00:14:17,009
+As the agent interacts with the environment, the agent will perform certain actions that we
+
+126
+00:14:17,009 --> 00:14:25,730
+will denote AT, where T is a time step. And the environment will show you states
+
+127
+00:14:26,610 --> 00:14:32,690
+that transition from time step T to time step T plus one. So subject to an action AT,
+
+128
+00:14:33,330 --> 00:14:39,090
+an environment may transition from ST to ST plus one. You can think of the game of Go.
+
+129
+00:14:39,090 --> 00:14:43,970
+I take the action of putting my Blackstone on a certain grid intersection and the
+
+130
+00:14:43,970 --> 00:14:48,690
+environment has changed. The state has changed. It moved from state time step T
+
+131
+00:14:48,690 --> 00:14:55,570
+to time step T plus one where my stone is on the grid. After that state update happens,
+
+132
+00:14:56,529 --> 00:15:01,250
+there's two things that the agent observes. The agent observes an observation that we will
+
+133
+00:15:01,250 --> 00:15:11,149
+note OT and a reward RT. Okay. So those are the vocabulary words. And of course,
+
+134
+00:15:11,149 --> 00:15:18,820
+the goal of the agent will be to maximize the rewards. One thing to know about the
+
+135
+00:15:18,820 --> 00:15:24,899
+observation, we'll talk about it a little more. The observation sometimes is equal to the state.
+
+136
+00:15:25,539 --> 00:15:29,779
+Can someone guess why we might need two concepts instead of a single concept?
+
+137
+00:15:30,820 --> 00:15:43,470
+Why is it important to have a state and an observation? Yes. Yes, correct. So in some
+
+138
+00:15:43,470 --> 00:15:51,389
+cases, the environment may not be fully transparent to the user. And so for example,
+
+139
+00:15:51,389 --> 00:15:56,909
+in chess or in Go, the observation is actually equal to the state. You see everything on your
+
+140
+00:15:56,909 --> 00:16:03,230
+board. All the information is available to you. If you play League of Legends or StarCraft,
+
+141
+00:16:04,029 --> 00:16:09,070
+you know the concept of, I think in English, it's called like a cloud or a fog. I think it's
+
+142
+00:16:09,070 --> 00:16:14,190
+a fog. You only see certain parts of the map until you have explored everything or until
+
+143
+00:16:14,190 --> 00:16:18,990
+your friends are sort of visiting the other parts of the map. And so the observation is
+
+144
+00:16:18,990 --> 00:16:26,509
+actually less information than the states of the environment. Okay. And then the last piece
+
+145
+00:16:26,509 --> 00:16:31,549
+of vocabulary is a transition. When I refer to a transition, I refer to the process of getting
+
+146
+00:16:31,549 --> 00:16:37,230
+from state T to state T plus one, which means we're in state T, the agent takes an action AT,
+
+147
+00:16:37,230 --> 00:16:42,830
+it observes OT and a reward RT, and it transitions to the next state ST plus one.
+
+148
+00:16:42,830 --> 00:17:01,100
+Question. Wait, what do you mean? Are there examples of environments where the state
+
+149
+00:17:01,100 --> 00:17:11,940
+is so large that, yeah, possibly for computational reasons? Yeah. Yeah. You might have
+
+150
+00:17:12,660 --> 00:17:18,579
+games. I mean, you've got open world games. Like truly you could argue, I don't know,
+
+151
+00:17:18,579 --> 00:17:22,180
+there are some games where you might press start and you see the entire environment,
+
+152
+00:17:22,180 --> 00:17:27,940
+but who cares of what's happening 20,000 kilometers west of you, if you're in a
+
+153
+00:17:27,940 --> 00:17:33,140
+certain location that might not influence your strategy. So you might actually put some sort
+
+154
+00:17:33,140 --> 00:17:39,220
+of a, you know, trust circle or like some sort of a circle in which you observe,
+
+155
+00:17:39,220 --> 00:17:43,460
+which you think has 99% of the information you need, possibly for computational reasons.
+
+156
+00:17:43,460 --> 00:17:49,380
+That's a good point. Okay. Let's get to a practical example of a reinforcement
+
+157
+00:17:49,380 --> 00:17:55,539
+learning algorithm and develop it together. This example is called recycling is good
+
+158
+00:17:55,539 --> 00:18:00,900
+because recycling is good, but also because it's a simple example illustrative of reinforcement
+
+159
+00:18:00,900 --> 00:18:10,259
+learning. So let's say we have a small environment with five states. There is a starting state
+
+160
+00:18:10,259 --> 00:18:21,299
+marked in brown, which is state two. It's our initial state. And then on the left side,
+
+161
+00:18:21,299 --> 00:18:26,339
+you have state one, which is a garbage. And it's great to get to the garbage because you're
+
+162
+00:18:26,339 --> 00:18:32,420
+going to be able to put in the garbage, the, you know, the stuff that you have in your hands,
+
+163
+00:18:32,420 --> 00:18:36,980
+you know, you're trying to throw away some garbage and the garbage kind of happens to be
+
+164
+00:18:36,980 --> 00:18:41,940
+there. And so we would expect there to be a reward on the other side. If you actually go
+
+165
+00:18:41,940 --> 00:18:47,619
+to the right, you might pass by state three, which is empty. You might pass by state four,
+
+166
+00:18:47,619 --> 00:18:52,819
+where there is a chocolate packaging that is left on the ground that you can pick up.
+
+167
+00:18:53,299 --> 00:18:59,779
+And it's good to pick it up. And then on stage five, state five, you have the recycle bin,
+
+168
+00:18:59,779 --> 00:19:03,940
+which is more valuable than the garbage can, because you can recycle and you should get
+
+169
+00:19:03,940 --> 00:19:10,019
+better rewards for that. So that's our game. In this game, we define a reward that is
+
+170
+00:19:10,019 --> 00:19:15,380
+associated with the type of behaviors that we want the agents to learn. And the reward is
+
+171
+00:19:15,380 --> 00:19:21,140
+as follow. That's just one example, plus two for throwing your garbage in the normal can,
+
+172
+00:19:21,859 --> 00:19:26,900
+plus one for picking up the chocolate packaging, and plus 10 if you manage to make it to the
+
+173
+00:19:26,900 --> 00:19:36,740
+recycle bin. Is it clear? Now, the goal will be, and that's the case in reinforcement
+
+174
+00:19:36,740 --> 00:19:43,380
+learning oftentimes, to maximize the return. We define formally the return, but think about
+
+175
+00:19:43,380 --> 00:19:47,700
+it as maximize the amount of rewards that you get as you go through this journey and
+
+176
+00:19:47,700 --> 00:19:53,140
+you make your decisions. In this specific game, we have five states, and there's three
+
+177
+00:19:53,140 --> 00:19:59,220
+types of states. In brown is the initial states. We have normal states, and we have in blue
+
+178
+00:19:59,220 --> 00:20:05,220
+terminal states. When you get to a terminal state in reinforcement learning, it will typically
+
+179
+00:20:05,859 --> 00:20:13,140
+end the game. It will end one episode of the game. You move to another episode,
+
+180
+00:20:13,140 --> 00:20:16,579
+you'll get back to the starting state or initial state, and you'll redo another episode.
+
+181
+00:20:18,339 --> 00:20:22,900
+The possible actions for agent here are going to be fairly simple, left and right.
+
+182
+00:20:24,980 --> 00:20:29,140
+And we are going to add an additional rule that is important, which is that the garbage
+
+183
+00:20:29,140 --> 00:20:35,380
+collector comes in three minutes and it takes a minute to get from one state to the other.
+
+184
+00:20:36,099 --> 00:20:44,180
+Why is that an important rule to add to the game? Can you guess? Yeah?
+
+185
+00:20:44,180 --> 00:20:51,940
+Yeah, otherwise you just go back and forth between stage three and stage four. You just
+
+186
+00:20:51,940 --> 00:20:57,299
+collect a bunch of chocolate packaging and you never make it to the bin. And so it's not what
+
+187
+00:20:57,299 --> 00:21:04,339
+we want. Okay, so how do we define the long-term return? The long-term return is
+
+188
+00:21:04,339 --> 00:21:13,220
+going to be defined as capital R, which is the sum of rewards with a discount.
+
+189
+00:21:14,819 --> 00:21:20,420
+Discount is a very important concept in reinforcement learning. It's also a very
+
+190
+00:21:20,420 --> 00:21:27,220
+natural concept to think about. Can you think of what the discount would represent for humans?
+
+191
+00:21:27,220 --> 00:21:35,380
+Do you have an example of what it could be? Yeah, the value of money and time. Exactly.
+
+192
+00:21:36,019 --> 00:21:42,259
+Or the energy that a robot might have. Things like that. Yeah. You would rather get a dollar
+
+193
+00:21:42,259 --> 00:21:47,380
+now than a dollar in 10 years, knowing that there is some inflation, for example. That's
+
+194
+00:21:47,380 --> 00:21:51,700
+the example of a discount in reinforcement learning is the same. Let's say you have a
+
+195
+00:21:51,700 --> 00:21:55,940
+strategy that takes so much time, you need to discount it because your robot might lose
+
+196
+00:21:55,940 --> 00:22:02,579
+energy as it's going through it, for example. Discounts can vary, but they stay between zero
+
+197
+00:22:02,579 --> 00:22:11,950
+and one. What is the best strategy to follow if gamma, the discount, is equal to one? Meaning
+
+198
+00:22:13,230 --> 00:22:18,750
+time doesn't matter here if it's longer or shorter. I just want to maximize the return.
+
+199
+00:22:20,910 --> 00:22:47,579
+Best strategy to follow. Let's give it a try. Someone who hasn't spoken yet. Yes. Bounce
+
+200
+00:22:47,579 --> 00:22:54,059
+around, but remember the rule of three minutes. You can bounce around because you will not get
+
+201
+00:22:54,059 --> 00:23:00,619
+to the terminal state before the time allotted is done. But that would be a good idea if this
+
+202
+00:23:00,619 --> 00:23:14,609
+rule was not true. What else could you do? The idea. It's an easy one, no? Not too hard.
+
+203
+00:23:19,250 --> 00:23:24,130
+Best strategy for gamma equals one. And give me also the maximum reward you would get.
+
+204
+00:23:30,059 --> 00:23:36,380
+People are sleepy today. Yeah. Go to the recycle. So, right, right,
+
+205
+00:23:37,099 --> 00:23:47,220
+right. Yeah, that's right. Thank you. Right, right, right. And then what's your total reward?
+
+206
+00:23:49,470 --> 00:23:55,630
+Yeah, that's right. Eleven. So that's where we get terminal state and we grab our reward of
+
+207
+00:23:55,710 --> 00:24:03,549
+11. Very good. Now, assuming 0.9 for gamma, we're going to complexify things a little bit.
+
+208
+00:24:03,549 --> 00:24:08,029
+I'm going to walk you through a very simple algorithm that, you know, allows us to sort
+
+209
+00:24:08,029 --> 00:24:13,230
+of determine the best strategy and we will put our numbers in a matrix. So, for instance,
+
+210
+00:24:14,109 --> 00:24:23,549
+we'll define a Q table. And Q stands, you know, it's a value function where the name
+
+211
+00:24:23,549 --> 00:24:30,190
+Q learning, Q star, you might have heard, all of these things come from Q learning.
+
+212
+00:24:30,190 --> 00:24:37,470
+And so let's say we have a Q table which has the size of number of states times number of
+
+213
+00:24:37,470 --> 00:24:46,829
+actions. So five rows, two columns in our case. Every entry of the Q table is essentially
+
+214
+00:24:46,829 --> 00:24:57,809
+representing how good it is to take action A in state B. Do you agree that if we had a table
+
+215
+00:24:57,809 --> 00:25:03,410
+with these numbers, essentially we solve the problem. Meaning at any point, the agent can
+
+216
+00:25:03,410 --> 00:25:09,250
+just look in the table, I am in state three. Let's look at column one that would tell me the
+
+217
+00:25:09,250 --> 00:25:13,650
+value of action one. And let's see that column two, it will tell me the value of action two.
+
+218
+00:25:13,650 --> 00:25:20,319
+So I have everything I need to make my decisions. So that table is really the thing you want to
+
+219
+00:25:20,319 --> 00:25:28,079
+find in this exercise. Now the way we will find the table is sort of using backtracking
+
+220
+00:25:28,079 --> 00:25:34,400
+algorithm where we might actually codify the environment as a tree and traverse the tree.
+
+221
+00:25:34,400 --> 00:25:39,599
+So here's what it looks like. I start in S2 and I have two options ahead of me.
+
+222
+00:25:39,599 --> 00:25:44,000
+I can go to the left where I will get a reward of two. It's an immediate reward.
+
+223
+00:25:44,000 --> 00:25:50,640
+The immediate reward is not discounted. It's an immediate reward. Remember the formula for r.
+
+224
+00:25:50,640 --> 00:25:58,480
+The immediate reward r0 is not discounted. That would take me to S1. It's a terminal state
+
+225
+00:25:58,480 --> 00:26:06,559
+so there's nothing to do after. Second option, I go to the right and I get a reward of zero.
+
+226
+00:26:06,559 --> 00:26:11,920
+That's my immediate reward and I end up in state three. State three is not a terminal state
+
+227
+00:26:11,920 --> 00:26:16,799
+so I can go and do the same exercise from state three. In state three I have two options.
+
+228
+00:26:16,799 --> 00:26:21,599
+I can go to the left where I would see a reward of zero and I will end up in S2
+
+229
+00:26:22,640 --> 00:26:28,240
+or I will go to the right and I will get an immediate reward of plus one. It's an immediate
+
+230
+00:26:28,240 --> 00:26:34,079
+reward. We're not discounting it. I will end up in S4 and from S4 again I have two options
+
+231
+00:26:34,160 --> 00:26:42,240
+back to the left to S3 with zero reward or to the right with the amazing reward of plus 10
+
+232
+00:26:42,240 --> 00:26:50,640
+and the terminal state of S5. That's my map of immediate rewards. That's not my discounted
+
+233
+00:26:50,640 --> 00:26:54,799
+return. What we're going to do now is we're going to backtrack up the tree in order to
+
+234
+00:26:54,799 --> 00:27:05,569
+compute the discounted returns. Actually if I'm in S3 right here I see that I can get an immediate
+
+235
+00:27:05,569 --> 00:27:13,410
+reward in S4 of plus one and I want to compute my maximum return that I can get from when I'm
+
+236
+00:27:13,410 --> 00:27:20,690
+in S3. My maximum return is that in S4 I could get a plus 10 but I need to discount that.
+
+237
+00:27:21,569 --> 00:27:28,930
+My discount is 0.9 so I multiply 10 by 0.9. What it tells me is that from S4 I can expect nine
+
+238
+00:27:29,329 --> 00:27:34,849
+plus one which I get as an immediate reward from moving from S3 to S4. I can update this number
+
+239
+00:27:34,849 --> 00:27:42,690
+to 10 meaning from S3 the best you can hope for is a discounted return of 10 which is one
+
+240
+00:27:43,009 --> 00:27:52,289
+plus 0.9 times 10. Everyone follows? Now let's do the same exercise one step before in S2.
+
+241
+00:27:54,130 --> 00:28:04,210
+In S2 I have an immediate reward of zero for going to S3 or an immediate reward of two for
+
+242
+00:28:04,210 --> 00:28:11,329
+going to S1. S1 is not going to be worth it. We already know that because when I'm in S3
+
+243
+00:28:11,329 --> 00:28:20,049
+I can actually expect 10 which I have to discount. 0.9 times 10 gives me nine plus zero immediate
+
+244
+00:28:20,049 --> 00:28:26,210
+reward from S2 to S3. That tells me that the discounted return from state two which is our
+
+245
+00:28:26,210 --> 00:28:36,529
+initial state is nine. Follow? Just a simple backtracking. Now I can copy back this so
+
+246
+00:28:36,529 --> 00:28:48,289
+S3 I know that when I'm in S3 you know I can expect zero immediate reward if I'm in S2
+
+247
+00:28:48,289 --> 00:28:56,289
+I can expect zero immediate reward plus a discount times the plus nine that I could expect
+
+248
+00:28:56,289 --> 00:29:03,970
+in S3. That gives me values that should cover everything that we have in this
+
+249
+00:29:04,049 --> 00:29:10,210
+queue table. So I do that backtracking. I copy paste all of that into my queue table
+
+250
+00:29:10,210 --> 00:29:16,849
+all the way up here and this is what I get. We essentially finish the game at this point. We
+
+251
+00:29:17,890 --> 00:29:25,569
+can look at a certain row. So let's say I'm in state number three. I look on the third row
+
+252
+00:29:25,569 --> 00:29:31,890
+of that queue table and I see that I have two options. If I go back to S2 ultimately
+
+253
+00:29:32,450 --> 00:29:43,329
+my discounted return will be 8.1. If I actually go to S4 on the right I will get 10 because I
+
+254
+00:29:43,329 --> 00:29:51,410
+will get one plus 0.9 times 10 which is 10. So this is a toy example but it tells you that
+
+255
+00:29:51,410 --> 00:29:56,049
+if you were able to backtrack through the entire environment you will be able to build
+
+256
+00:29:56,049 --> 00:30:01,089
+a massive queue table and you will be able to give it to your agent to make its decisions.
+
+257
+00:30:02,690 --> 00:30:07,329
+Yeah sorry can you repeat?
+
+258
+00:30:10,609 --> 00:30:17,809
+Yeah here I'm simplifying. I'm not considering the time remaining but in practice if I remove
+
+259
+00:30:17,809 --> 00:30:22,210
+the time component so I remove the fact that there's a three minute deadline before the
+
+260
+00:30:22,210 --> 00:30:27,329
+garbage collector comes then this would be slightly more difficult because you would have
+
+261
+00:30:27,329 --> 00:30:33,089
+to do a time series essentially of adding the discount times the reward that you collect.
+
+262
+00:30:33,650 --> 00:30:36,609
+But I'm simplifying here and that's why I use the three minute rule.
+
+263
+00:30:39,019 --> 00:30:50,420
+Any question on the queue table? Super. Okay so this was the queue table and in fact we can
+
+264
+00:30:50,420 --> 00:30:56,420
+put together our strategy for gamma equals 0.9. The best strategy is still the same. You go to
+
+265
+00:30:56,420 --> 00:31:05,490
+the right and you can expect a return of 9. Now one of the most important concepts in
+
+266
+00:31:05,490 --> 00:31:12,609
+reinforcement learning is this equation on the board called the Bellman optimality equation.
+
+267
+00:31:13,650 --> 00:31:19,410
+Oftentimes you see it's noted as q star of state s and action a
+
+268
+00:31:21,329 --> 00:31:29,490
+equals r plus gamma times the max of that same function applied to s prime a prime.
+
+269
+00:31:31,009 --> 00:31:34,130
+Let me explain this equation for you because it's super important.
+
+270
+00:31:34,930 --> 00:31:42,609
+This equation is called the optimality equation because your optimal q table will follow this
+
+271
+00:31:42,609 --> 00:31:48,849
+equation. If you have finished the game this equation can be applied to any state action
+
+272
+00:31:48,849 --> 00:31:55,890
+pair and it will still be true. The intuition behind why the Bellman equation is the
+
+273
+00:31:55,890 --> 00:32:03,250
+optimality equation is that if you have the perfect q function q table
+
+274
+00:32:04,930 --> 00:32:10,769
+and you're in a certain state and you perform a certain action a you will observe a reward and
+
+275
+00:32:11,809 --> 00:32:16,690
+this reward will you know you have taken an action so you would be in a new state
+
+276
+00:32:16,690 --> 00:32:22,609
+and from that new state you can repeat what you just did right and because you've done
+
+277
+00:32:22,609 --> 00:32:27,490
+the backtracking and stuff like that you will get this equation to be true because it's the
+
+278
+00:32:27,490 --> 00:32:36,480
+reward plus discount times the best next action that you could be taking. Does that make sense?
+
+279
+00:32:36,480 --> 00:32:40,960
+Any question on that? That's exactly the backtracking that we did by the way.
+
+280
+00:32:42,319 --> 00:32:49,200
+Immediate reward plus discount times the best possible action that you can take in the next
+
+281
+00:32:49,200 --> 00:33:00,480
+state s prime. The last concept I cover in terms of vocabulary is the policy. The policy
+
+282
+00:33:00,480 --> 00:33:07,039
+is the function that given your state is going to tell you what to do and in q learning the way
+
+283
+00:33:07,039 --> 00:33:15,680
+this policy is defined is argmax of q star across the action so essentially what it says is like
+
+284
+00:33:15,680 --> 00:33:21,759
+look in the table and look at a certain state s you want the policy which is what you should
+
+285
+00:33:21,759 --> 00:33:26,799
+do it's the function that tells you our best strategy you just look at the two possible
+
+286
+00:33:26,799 --> 00:33:38,019
+actions which one has the highest q value and select that action that's it. This is a very
+
+287
+00:33:38,019 --> 00:33:45,460
+simple example but it's the core of q learning that you know later on you will use policies
+
+288
+00:33:45,460 --> 00:33:49,779
+widely there's a lot of reinforcement learning algorithms but this concept of understanding
+
+289
+00:33:49,779 --> 00:33:54,579
+the policy the function telling us our best strategy in q learning it's the argmax of the
+
+290
+00:33:54,579 --> 00:33:59,220
+best q value in a given state it tells you which action to take that's the core thing you
+
+291
+00:33:59,220 --> 00:34:04,180
+need to understand. So remember this Bellman equation because we're going to reuse it
+
+292
+00:34:05,940 --> 00:34:18,019
+in a bit. The main issue with this approach of a q table is that state and action spaces can be
+
+293
+00:34:18,019 --> 00:34:26,019
+super large and having a matrix that you discover through backtracking and where every
+
+294
+00:34:26,019 --> 00:34:31,860
+time you want to do an action you have to look up the given states the possible action it becomes
+
+295
+00:34:31,860 --> 00:34:39,940
+impossible like imagine you using this algorithm for the game of go where there's so many states
+
+296
+00:34:39,940 --> 00:34:44,820
+there's so many possible actions you can put your stone anywhere on the board you can imagine
+
+297
+00:34:44,820 --> 00:34:51,539
+how big this matrix becomes and how impossible it is to use so that's our problem and that's
+
+298
+00:34:51,539 --> 00:34:58,369
+the moment where deep learning comes into play so let's look at it.
+
+299
+00:35:02,849 --> 00:35:06,530
+Actually before I go there I'm just going to cover some vocabulary we said the environment
+
+300
+00:35:06,530 --> 00:35:10,769
+the agent the state the action the reward the total return and the discount factor we learned
+
+301
+00:35:10,769 --> 00:35:15,570
+all of that we saw that the q table is the matrix of entries representing how good is it to
+
+302
+00:35:15,570 --> 00:35:20,369
+take action a in state s and the policy is the function that tells us what's the best
+
+303
+00:35:20,369 --> 00:35:25,010
+strategy to adopt and the Bellman equation is satisfied by the optimal q table.
+
+304
+00:35:29,170 --> 00:35:34,449
+So let's get to deep learning which is what I was about to say is we are going to frame the
+
+305
+00:35:34,449 --> 00:35:40,369
+problem slightly differently so instead of using a q table we're going to use the fact
+
+306
+00:35:40,369 --> 00:35:46,050
+that neural networks are universal function approximators and we're going to define a
+
+307
+00:35:46,050 --> 00:35:51,730
+q function that's essentially a neural network so that the function can take a state s
+
+308
+00:35:52,690 --> 00:36:00,210
+and an action a and tell you how good that action is in state s so instead of a lookup
+
+309
+00:36:00,210 --> 00:36:05,730
+in a matrix you just run a forward pass in a neural network and it gives you the answer
+
+310
+00:36:06,449 --> 00:36:10,690
+that feels like a better solution for games where there's a lot of states and a lot of
+
+311
+00:36:10,690 --> 00:36:19,059
+actions so here is the same problem statement in the past we looked for a q table and this
+
+312
+00:36:19,139 --> 00:36:24,900
+time we will look for a neural network one of the things we're going to do is to define
+
+313
+00:36:24,900 --> 00:36:30,739
+the output layer to have two outputs so given a certain state as input think about it as a one
+
+314
+00:36:30,739 --> 00:36:36,420
+hot vector including the states so this one is the example of state two zero one zero zero
+
+315
+00:36:36,420 --> 00:36:43,619
+zero if you pass state two in this q function with multiple layers it will give you two
+
+316
+00:36:43,619 --> 00:36:53,300
+outputs one output that corresponds to q of s action right and the other one q of s action left
+
+317
+00:36:53,940 --> 00:36:59,059
+because it's the two actions if we had more actions to take we would just increase the
+
+318
+00:36:59,059 --> 00:37:09,099
+output layer and we might have many more neurons in the output layer so the big question
+
+319
+00:37:09,099 --> 00:37:14,780
+is how the hell are we going to train that network because we're not in classic supervised
+
+320
+00:37:14,780 --> 00:37:25,599
+learning we don't have labels so this one is a hard question but what do you what would you do
+
+321
+00:37:25,599 --> 00:37:33,760
+given we don't have traditional x and y pairs how are you going to train this neural network
+
+322
+00:37:35,599 --> 00:37:39,679
+because remember at the beginning this neural network will give you garbage it will take a
+
+323
+00:37:39,679 --> 00:37:43,599
+state s and it might tell you go to the left or to the right but it's completely random
+
+324
+00:37:44,239 --> 00:37:59,199
+so how are you going to tune it to the level where it makes really good decisions yes assume
+
+325
+00:37:59,199 --> 00:38:11,539
+based on some prior knowledge tell me more what so what are the things we know about this
+
+326
+00:38:11,539 --> 00:38:17,780
+problem right now what are the the rules of the game that we could use in order to
+
+327
+00:38:19,219 --> 00:38:22,659
+i'm i'm seeing what you say you say we could estimate what good looks like
+
+328
+00:38:22,659 --> 00:38:35,659
+but based on what okay so reward structure you're saying that's one thing we have in
+
+329
+00:38:35,659 --> 00:38:41,260
+every game we have a reward structure for every state that definitely should be used in order to
+
+330
+00:38:41,260 --> 00:38:46,860
+estimate the good what a good decision looks like yeah the problem is not in every state
+
+331
+00:38:46,860 --> 00:38:53,420
+you will see a reward and if you look at many games of like go you might not see a reward
+
+332
+00:38:53,420 --> 00:38:59,579
+until 50 moves so what do you do in this case yes
+
+333
+00:39:09,630 --> 00:39:14,269
+so you could you're you're actually bringing up a sort of a three search
+
+334
+00:39:14,909 --> 00:39:19,150
+right you go down the tree you do every possible action and then you backtrack
+
+335
+00:39:21,630 --> 00:39:22,510
+so which actions
+
+336
+00:39:22,989 --> 00:39:29,309
+trying to spread it out okay that's that's what we're getting there so first possibility is we
+
+337
+00:39:29,309 --> 00:39:33,469
+just go down the tree in the game of go you could put your stone everywhere so the tree
+
+338
+00:39:33,469 --> 00:39:40,510
+already starts by your 13 by 13 options and then it's exponentially grows impossible it's
+
+339
+00:39:40,510 --> 00:39:44,190
+intractable but what you said is what if there are certain actions that are more likely
+
+340
+00:39:44,190 --> 00:39:48,829
+than others do we need actually to explore the entire tree what's this like what are
+
+341
+00:39:48,829 --> 00:39:52,909
+you using when you're saying that how do you determine what action might be better than another
+
+342
+00:39:52,909 --> 00:39:59,760
+one expected return we're getting close yeah but you know how do you know the expected return
+
+343
+00:39:59,760 --> 00:40:06,639
+without going through the tree once at least okay you can estimate it using what
+
+344
+00:40:10,500 --> 00:40:16,179
+yeah maybe yeah what what so that's exactly what we're going to do actually but we're
+
+345
+00:40:16,179 --> 00:40:21,300
+going to use the the bellman equation because there are two things we know about this problem
+
+346
+00:40:21,300 --> 00:40:27,219
+we know the reward structure which you brought up and we also know that the perfect q function
+
+347
+00:40:27,219 --> 00:40:32,260
+will follow the bellman equation that we know as well at the end the bellman equation should
+
+348
+00:40:32,260 --> 00:40:40,340
+be respected meaning for every state if you want to know the q value of that state given
+
+349
+00:40:40,340 --> 00:40:45,539
+an action the way you will get that is you will look at the immediate reward plus a discount
+
+350
+00:40:46,099 --> 00:40:52,900
+times the best q value from the next state across all actions that equation will be respected
+
+351
+00:40:52,900 --> 00:40:58,019
+so those are the only information we have and we're going to use them drastically to define
+
+352
+00:40:58,019 --> 00:41:03,539
+our labels and sort of mimic a classic supervised learning approach so here's what we have we have
+
+353
+00:41:03,539 --> 00:41:09,219
+our neural network we have q s to the left and q s to the right that represent how good it
+
+354
+00:41:09,219 --> 00:41:14,659
+is to go to the left in that state versus the right and then i've pasted the bellman
+
+355
+00:41:14,659 --> 00:41:19,780
+equation on top right of the screen we're going to define a loss function so let's say for the
+
+356
+00:41:19,780 --> 00:41:27,619
+sake of simplicity because those are scalar values that we use you know l2 loss quadratic
+
+357
+00:41:27,619 --> 00:41:36,260
+loss that compares a certain label y to a certain q value of a state in a certain action
+
+358
+00:41:36,980 --> 00:41:42,980
+so what we would like is to minimize this loss function meaning y and the q value for
+
+359
+00:41:43,059 --> 00:41:48,659
+a given action in a given state is as close as possible to each other and we're going
+
+360
+00:41:48,659 --> 00:41:54,820
+to leverage the reward and the bellman equation so let's do two things right now we don't have
+
+361
+00:41:54,820 --> 00:41:59,699
+a y so in supervised learning you will have a picture of a cat there's a cat the y is one
+
+362
+00:41:59,699 --> 00:42:05,619
+or zero here we don't have a y so we have to come up with an estimate of a good y
+
+363
+00:42:05,699 --> 00:42:13,300
+actually is better than random so let's say at this point in time when i send a state s
+
+364
+00:42:13,300 --> 00:42:19,059
+in the network it turns out that q of going to the left is higher than q of going to the right
+
+365
+00:42:20,099 --> 00:42:24,980
+which means that today at that moment the q function tells me it's better to go to the
+
+366
+00:42:24,980 --> 00:42:31,219
+left than to go to the right that is random at the beginning it's completely random all right
+
+367
+00:42:31,219 --> 00:42:38,659
+so what i'm going to do is i'm going to use as my target value y the immediate reward that
+
+368
+00:42:38,659 --> 00:42:49,300
+i observe on the left plus gamma times the best q value that i can get so the best action that
+
+369
+00:42:49,300 --> 00:42:58,829
+i could take in the next step based on my current q value that's very important so
+
+370
+00:42:59,710 --> 00:43:06,510
+remember this target is off it's not a perfect target but it's better than nothing meaning
+
+371
+00:43:06,510 --> 00:43:13,070
+not only it tells us hey there is a good reward to the left we should consider that in saying
+
+372
+00:43:13,070 --> 00:43:18,190
+that that might be a good move because we're seeing an immediate reward but on top of that
+
+373
+00:43:18,190 --> 00:43:23,949
+we also know that at the end of training the q value should follow the bellman equation so
+
+374
+00:43:23,949 --> 00:43:29,710
+why don't we set the target as the bellman equation so we add the discounted maximum
+
+375
+00:43:29,710 --> 00:43:34,750
+future reward when you are in the next state so you were in state s you go to the left now
+
+376
+00:43:34,750 --> 00:43:41,230
+you're in state s next left and you look again at your q values and you select the best one
+
+377
+00:43:41,949 --> 00:43:47,389
+then you add that number here so there is actually two forward paths in that process
+
+378
+00:43:49,699 --> 00:43:58,449
+right there's one forward path where you send the state s in q and you look at the two options
+
+379
+00:43:58,449 --> 00:44:02,610
+left or right and you're like okay i'm going to the left and then you're like i'm going to
+
+380
+00:44:02,610 --> 00:44:08,530
+compare that value to a target y but to get that target y i need to do another forward path
+
+381
+00:44:08,530 --> 00:44:15,730
+so i take my action left i perform it i get an s prime state s next and i send that s next
+
+382
+00:44:15,809 --> 00:44:21,329
+into the q network i look at the two options i have i pick the best one and i add it here
+
+383
+00:44:21,329 --> 00:44:30,369
+with the discount so fundamentally what's happening is is the following is we have a
+
+384
+00:44:30,369 --> 00:44:37,010
+q network that's random at the beginning it has never observed the rewards we just know
+
+385
+00:44:37,010 --> 00:44:43,889
+that at some point if we get to the q it will get to a perfect you know policy it will get
+
+386
+00:44:43,889 --> 00:44:51,889
+to a perfect q function but the best we can do right now is to say as a guide to for our agent
+
+387
+00:44:51,889 --> 00:44:56,289
+we will look at the immediate reward and we will look at the bellman equation which should tell
+
+388
+00:44:56,289 --> 00:45:01,969
+us a better estimate than where we are right now and we will try to catch up to that estimate
+
+389
+00:45:02,690 --> 00:45:06,929
+and then we do that again and again so remember every time your q gets better
+
+390
+00:45:07,489 --> 00:45:12,050
+it gets better for the next state as well so you know the bellman equation tells you
+
+391
+00:45:12,050 --> 00:45:16,130
+estimate it with the second forward path and you just keep getting better and better
+
+392
+00:45:16,130 --> 00:45:37,659
+as you're observing more rewards how would it so describe the loop you
+
+393
+00:45:42,940 --> 00:45:51,889
+yeah yeah you would stop at that point so what you yeah this is a good question i'll show
+
+394
+00:45:51,889 --> 00:45:58,130
+you how we fix certain things but you do only one step meaning you have your q value
+
+395
+00:45:58,130 --> 00:46:03,969
+at this point and it tells you go to the left and you just want to target y so what
+
+396
+00:46:03,969 --> 00:46:09,170
+you do is you put left and you look at your next state you forward propagate your next state you
+
+397
+00:46:09,170 --> 00:46:14,210
+look at the two options you pick the best you don't go further you just use that one step you
+
+398
+00:46:14,210 --> 00:46:18,929
+look one step ahead essentially you don't look multiple steps ahead you could but it will be
+
+399
+00:46:18,929 --> 00:46:44,659
+more computationally heavy to do one more step again and so on so yeah yeah no it will
+
+400
+00:46:44,659 --> 00:46:50,659
+typically be a function of the environment the state space how long it will take to converge
+
+401
+00:46:50,659 --> 00:46:58,260
+but you're perfectly right that as the q function get better the estimate y also gets better
+
+402
+00:46:58,900 --> 00:47:03,300
+so the two things get better together right because the y is based on the q function
+
+403
+00:47:03,300 --> 00:47:09,539
+and if the state space is massive you might have a very difficult time training this model
+
+404
+00:47:09,539 --> 00:47:16,099
+there's better approaches that we see later yep correct there was a question there
+
+405
+00:47:23,070 --> 00:47:28,989
+yeah so here i'm just saying let's say when you send state s in q the left happens to be higher
+
+406
+00:47:28,989 --> 00:47:34,110
+than right but the same happens on the other side let's say let's say the left is worse than
+
+407
+00:47:34,110 --> 00:47:39,550
+right then what you will do is you will define your target y as the reward that you observe
+
+408
+00:47:39,550 --> 00:47:45,550
+on the right plus from the next state of having gone to the right what's the best action
+
+409
+00:47:45,550 --> 00:47:50,829
+and what's the q value for that pair and then it will give you the target for that scenario
+
+410
+00:47:55,280 --> 00:48:02,400
+so one complication with this training is that when you want to differentiate l so you want to perform
+
+411
+00:48:02,400 --> 00:48:06,559
+a back propagation you want to take the derivative of l with respect to the parameters of the
+
+412
+00:48:06,559 --> 00:48:12,159
+network you want y to be a fixed thing right because in supervised learning y is not differentiable
+
+413
+00:48:12,159 --> 00:48:16,960
+it's just a fixed number zero or one or a certain number so here we're going to simplify
+
+414
+00:48:16,960 --> 00:48:21,519
+and we're going to say this term that is dependent on the q network so technically this
+
+415
+00:48:21,519 --> 00:48:25,760
+term has parameters so if you actually differentiate it it will give you a value
+
+416
+00:48:25,760 --> 00:48:34,800
+we just hold it fixed so we say we do use our q network to perform an estimate of our y
+
+417
+00:48:34,800 --> 00:48:45,679
+but we will not differentiate it we will say it's not it's fixed yeah because you know going
+
+418
+00:48:45,679 --> 00:48:50,320
+back to the reason we discount is like the value of time it's like you probably want to say
+
+419
+00:48:50,880 --> 00:48:54,960
+if you can win the game in 10 moves we need in 10 moves rather than 100 moves
+
+420
+00:48:56,239 --> 00:49:00,639
+or if you can get one dollar today get one dollar today rather than in 10 years
+
+421
+00:49:00,639 --> 00:49:04,800
+all of that is why we have a discount here and the discount is a
+
+422
+00:49:04,800 --> 00:49:10,159
+is a hyper parameter that you would define this way that would influence the strategy of your
+
+423
+00:49:10,159 --> 00:49:16,960
+agent we're going to see it after actually i'm going to do a concrete example because
+
+424
+00:49:16,960 --> 00:49:26,670
+it's a little complicated yeah yeah no no that was it's a good point it's not that it's
+
+425
+00:49:26,670 --> 00:49:33,150
+just q of it's it's a two by two it's a one by two so you have left and right i was just
+
+426
+00:49:33,150 --> 00:49:45,809
+going down the first case so i put the state left yeah yeah what if the rewards are not
+
+427
+00:49:45,809 --> 00:49:49,250
+fixed i mean in most games we're going to see right now the rewards are going to be fixed
+
+428
+00:49:49,250 --> 00:49:54,369
+by the designer of the game the human that's designing the game in practice you could have
+
+429
+00:49:54,369 --> 00:50:00,289
+a separate function that's actually comes up with the reward we're going to see an example
+
+430
+00:50:00,289 --> 00:50:05,090
+later in the lecture where the reward might be different in different scenarios and there's a
+
+431
+00:50:05,090 --> 00:50:10,449
+function or a sometimes called a critique that determines what's the reward in a certain state
+
+432
+00:50:12,530 --> 00:50:15,969
+okay this is yeah one last question and then we move because we're going to see a concrete
+
+433
+00:50:15,969 --> 00:50:22,130
+example is going to be clear so when we like hold it fixed for laptop is that what
+
+434
+00:50:22,130 --> 00:50:31,010
+differentiates this from all of the like possible yeah yeah so instead of doing the
+
+435
+00:50:31,010 --> 00:50:36,530
+backtracking down the tree and going over everything we're saying we're going to limit
+
+436
+00:50:36,530 --> 00:50:40,929
+ourselves to just picking the best action based on our current understanding of the network
+
+437
+00:50:42,369 --> 00:50:47,409
+is he like my network is kind of intelligent not great we're in the middle of training
+
+438
+00:50:47,409 --> 00:50:51,329
+it says that i should go to the left and then if i look at the next state when i'm in the left
+
+439
+00:50:52,289 --> 00:50:57,170
+it says i should go to the right i will trust it because it's the best i have best estimate i have
+
+440
+00:50:57,170 --> 00:51:02,210
+but i will discount that and then if you keep repeating that it turns out that not only your
+
+441
+00:51:02,210 --> 00:51:06,610
+estimate gets better but your model gets trained and then ultimately both together get
+
+442
+00:51:06,610 --> 00:51:16,159
+to an optimality equation so it's a it's a funky concept right but you get it we're going
+
+443
+00:51:16,239 --> 00:51:24,000
+to see examples okay so then once you have been able to use the bellman equation to
+
+444
+00:51:24,000 --> 00:51:31,199
+estimate your targets you perform a classic back propagation and you update the parameters
+
+445
+00:51:31,199 --> 00:51:40,960
+of the network and you repeat that process okay here is concretely if you were to code it in
+
+446
+00:51:40,960 --> 00:51:48,000
+pseudo code here is what it would look like to train an rl agent using q learning we start
+
+447
+00:51:48,000 --> 00:51:54,400
+by initializing our q network parameters so initialization it's random at first
+
+448
+00:51:55,199 --> 00:52:00,239
+then we will loop over episode as a reminder episodes are one full game from start to terminal
+
+449
+00:52:00,239 --> 00:52:06,960
+state within an episode we're going to start from the initial state s and we're going to
+
+450
+00:52:06,960 --> 00:52:15,119
+loop over time steps until we reach a terminal state so within one time step here is what we
+
+451
+00:52:15,119 --> 00:52:22,159
+will do we forward propagate the state s in the q network we will execute the action a that has
+
+452
+00:52:22,159 --> 00:52:30,400
+the maximum q value we will observe a reward and we will also observe a next state s prime
+
+453
+00:52:31,360 --> 00:52:37,119
+we will use that s prime to compute our target y by forward propagating s prime in the q network
+
+454
+00:52:38,079 --> 00:52:44,000
+and then computing our last function and based on that we will use gradient descent to update
+
+455
+00:52:44,000 --> 00:52:53,699
+the parameters of the network should be simpler looked at like that right okay so this is the
+
+456
+00:52:53,699 --> 00:53:00,980
+vanilla q learning so to summarize again the one the main difference is that we don't have a
+
+457
+00:53:00,980 --> 00:53:05,860
+target and we use our own network to estimate the target and the rewards are what's going to
+
+458
+00:53:05,860 --> 00:53:15,119
+help us get better over time by the way it's okay if you don't understand everything this
+
+459
+00:53:15,119 --> 00:53:20,480
+is an entire class at stanford you know an entire quarter of studying that type of stuff
+
+460
+00:53:20,480 --> 00:53:27,440
+so we're trying to get the basics within an hour and a half two hours okay let's go a
+
+461
+00:53:27,440 --> 00:53:35,550
+little further now together and apply that to an actual game so here's the game it's called
+
+462
+00:53:36,429 --> 00:53:40,110
+we want to destroy all the bricks who has played breakout in the past
+
+463
+00:53:40,110 --> 00:53:46,030
+what do you feel okay good so you have a paddle that you control and you are trying to
+
+464
+00:53:47,070 --> 00:53:52,670
+destroy the bricks if the ball gets past your paddle you lost and if the bricks are all
+
+465
+00:53:52,670 --> 00:54:02,369
+destroyed you won't that's it let's do it together what's um what is the input of our
+
+466
+00:54:02,369 --> 00:54:20,139
+q network what would you use as input to remember in yeah yes entire screen okay let's do that
+
+467
+00:54:20,139 --> 00:54:25,659
+so i think i define that as the state s which is the input to my q network uh what's the
+
+468
+00:54:25,659 --> 00:54:37,260
+output of the q network yes good question we'll get there i'm gonna ask you but do we have to
+
+469
+00:54:38,219 --> 00:54:43,980
+look at the full screen the answer is no but we'll see why what's the output yeah
+
+470
+00:54:45,340 --> 00:54:49,980
+the game score uh no but we're going to talk about the game score in the back
+
+471
+00:54:53,889 --> 00:54:57,809
+yeah let's let's talk about the output first and then we'll talk about this stuff we can
+
+472
+00:54:57,809 --> 00:55:07,119
+get rid of on the inputs but what's the output yeah the actions yeah the actions
+
+473
+00:55:07,199 --> 00:55:14,000
+so yeah it will be the q values associated with the actions in state s remember it's a q function
+
+474
+00:55:14,000 --> 00:55:19,519
+so the output is we need one value for left one value for right and one value for idle
+
+475
+00:55:20,159 --> 00:55:25,199
+you could make this game more complicated and say we have eight actions we have a little bit
+
+476
+00:55:25,199 --> 00:55:30,000
+to the left a lot to the left a lot more to the left you know if you add multiple buttons
+
+477
+00:55:30,000 --> 00:55:33,679
+but let's simplify and say three actions either you don't move you move to the left
+
+478
+00:55:33,679 --> 00:55:38,480
+or you move to the right so these are the outputs so now let's get to the question of the screen
+
+479
+00:55:38,480 --> 00:55:53,619
+do we need the entire screen so you were saying something earlier okay so you say you need the
+
+480
+00:55:53,619 --> 00:55:58,659
+tray and the bricks i would argue uh you need more because there's the walls and i guess that
+
+481
+00:55:58,659 --> 00:56:02,420
+you could if you're an expert player you could know where the walls are but generally you need
+
+482
+00:56:02,420 --> 00:56:06,260
+a little more than that what what what would be obviously things we can get rid of and why
+
+483
+00:56:06,260 --> 00:56:20,099
+would we do that okay the score the score at the top who would remove the score at the top
+
+484
+00:56:23,409 --> 00:56:41,260
+about half why would you not remove it why would you remove it okay you want to always win
+
+485
+00:56:41,260 --> 00:56:46,780
+so the score doesn't matter it's true we would remove the score so you could actually crop the
+
+486
+00:56:46,780 --> 00:56:51,179
+top you could also crop the bottom i mean if you pass the paddle you don't care about the
+
+487
+00:56:51,179 --> 00:56:57,099
+few pixels at the bottom you could get rid of them this is not always true there are games
+
+488
+00:56:57,099 --> 00:57:05,820
+where the score matters and in fact you know i like football soccer the in soccer if you're
+
+489
+00:57:05,820 --> 00:57:11,659
+one zero up you can park the bus so your strategy is dependent of the score that you
+
+490
+00:57:11,659 --> 00:57:15,980
+have like you wouldn't park the bus if you're losing one zero parking the bus meaning you
+
+491
+00:57:15,980 --> 00:57:19,739
+ask every player to come back and defend if you're losing you would actually do the
+
+492
+00:57:19,739 --> 00:57:25,260
+opposite you will go all out attack so in certain games you want the scores in others
+
+493
+00:57:25,260 --> 00:57:29,900
+you don't want and so it's part of the designer the the ai engineer that's working on that to
+
+494
+00:57:29,900 --> 00:57:33,900
+determine what information we need and what we don't need what else can we do to reduce
+
+495
+00:57:33,900 --> 00:57:36,940
+the dimensionality of the problem and make our computation faster
+
+496
+00:57:39,659 --> 00:57:45,260
+yeah remove the rgb channels so do grayscale essentially that's true here you actually don't
+
+497
+00:57:45,260 --> 00:57:50,699
+need the colors it's just nice as a user for user experience purposes you don't need i don't
+
+498
+00:57:50,699 --> 00:57:54,699
+think there are different points based on the bricks that you destroy it's all the same
+
+499
+00:57:55,900 --> 00:58:02,940
+they're actually funny enough this algorithm was used by deep mind to play a lot of
+
+500
+00:58:02,940 --> 00:58:07,340
+Atari games and they did a single pre-processing where they removed the channels
+
+501
+00:58:07,340 --> 00:58:11,579
+because they said it doesn't matter turns out in one of the games i think it was
+
+502
+00:58:12,059 --> 00:58:18,300
+i forgot which one the fish disappeared when you did that and so that game didn't work
+
+503
+00:58:18,300 --> 00:58:22,619
+the agent couldn't crack it because they thought that the same pre-processing could
+
+504
+00:58:22,619 --> 00:58:41,889
+apply to every game but actually they had to make a slight tweak correct so just to recap
+
+505
+00:58:41,889 --> 00:58:47,170
+you could do it even better by using a low dimensional representation of this game that
+
+506
+00:58:47,170 --> 00:58:52,449
+describes the game it's true but because we want to use a single algorithm for 50 plus
+
+507
+00:58:52,449 --> 00:58:57,489
+Atari games we say the human sees the screen we just give the screen and it will probably scale
+
+508
+00:58:57,489 --> 00:59:02,610
+better essentially but you're perfectly right if you are working on only that game okay so let's
+
+509
+00:59:02,610 --> 00:59:07,090
+do that we'll do pre-processing there's one last thing that nobody mentioned which is history
+
+510
+00:59:07,650 --> 00:59:11,489
+because in fact if you get only one screen you don't know where the ball is going
+
+511
+00:59:12,289 --> 00:59:17,010
+so actually you can't solve the game and the way you fix that is by giving a history
+
+512
+00:59:17,010 --> 00:59:21,409
+of multiple screens for example four screens so that you see the direction that the ball is
+
+513
+00:59:21,409 --> 00:59:28,690
+going in so our pre-processing function is you know called phi of s let's say and phi of s is
+
+514
+00:59:28,690 --> 00:59:34,289
+a mix of um you know you might do convert to grayscale reduce the dimension the height and
+
+515
+00:59:34,289 --> 00:59:40,929
+width and also add the history of four frames and that should be enough turns out in most
+
+516
+00:59:40,929 --> 00:59:44,610
+games you will need the history a little bit of history to know where the ball is going or
+
+517
+00:59:44,610 --> 00:59:50,929
+where in this example you know just improve the like velocity vector of the ball yeah you could
+
+518
+00:59:50,929 --> 00:59:57,090
+you could replace exactly you could replace um the history so multiple screen by just adding
+
+519
+00:59:57,090 --> 01:00:01,570
+the gradients or the velocity of where the ball is going that's true but would it scale to
+
+520
+01:00:01,570 --> 01:00:06,050
+every game you know turns out this because we know humans look at the Atari machine and
+
+521
+01:00:06,050 --> 01:00:13,949
+they look at pixels this would be more likely to scale to every game like think about a
+
+522
+01:00:13,949 --> 01:00:18,909
+game where actually sea quest is a good game or space invaders where you have multiple enemies
+
+523
+01:00:18,909 --> 01:00:24,269
+coming at you then you would need to change your pre-processing to take into account the
+
+524
+01:00:24,269 --> 01:00:28,349
+velocity of all these enemies so it wouldn't work the same way while if you actually give
+
+525
+01:00:28,349 --> 01:00:32,349
+the pixels you actually from the pixels get the velocity of all your enemies and the
+
+526
+01:00:32,349 --> 01:00:37,789
+directions they're going okay so this is our pre-processing i'm going to refer to it as
+
+527
+01:00:38,750 --> 01:00:44,909
+and our deep q network architecture because we're working with pixels is going to be a
+
+528
+01:00:44,909 --> 01:00:49,150
+convolutional network don't worry if you haven't learned it yet in the class but it's a bunch
+
+529
+01:00:49,150 --> 01:00:57,869
+of conf and relu activations and then we end with a fully connected layer that gives us the
+
+530
+01:00:57,869 --> 01:01:06,429
+three q values for the different actions so nothing special here now we're going to go
+
+531
+01:01:06,429 --> 01:01:11,710
+back to our vanilla training so this one that we saw together earlier and we're going to look
+
+532
+01:01:11,710 --> 01:01:16,750
+at tips to train reinforcement learning algorithms those tips are not specific to q learning some
+
+533
+01:01:16,750 --> 01:01:21,309
+of them are applied to a lot more than q learning and they're very important to know
+
+534
+01:01:22,349 --> 01:01:26,989
+and they're part of the reason reinforcement learning has worked better in the last few years
+
+535
+01:01:28,349 --> 01:01:33,389
+so one of the things that's pretty simple that we forgot to do is the pre-processing
+
+536
+01:01:33,389 --> 01:01:39,070
+that we just did so anywhere i had an s i'm going to instead run s through the pre-processing step
+
+537
+01:01:39,070 --> 01:01:45,710
+i'm going to use phi of s so i initialize instead of s with phi of s i start from the
+
+538
+01:01:45,710 --> 01:01:54,590
+initial state five s and then i for propagate five s i um i get the q of that pre-processed
+
+539
+01:01:54,590 --> 01:02:00,829
+states in action a and etc etc and then when i get my next state so let's say
+
+540
+01:02:01,789 --> 01:02:10,110
+i look at my current pre-processed state i forward propagate it once i see the three q values
+
+541
+01:02:10,110 --> 01:02:15,710
+in our case the two q values one of them was better than the other action right then i get
+
+542
+01:02:15,710 --> 01:02:19,150
+my next state s prime i want to pre-process that state as well
+
+543
+01:02:21,869 --> 01:02:27,150
+so that's pretty straightforward you just replace all of that the second thing we forgot
+
+544
+01:02:27,150 --> 01:02:31,469
+to do is to keep track of the terminal states in our pseudocode there is no concept of
+
+545
+01:02:31,469 --> 01:02:36,269
+terminal state it's pretty easy to add you would probably just do an if l statement you
+
+546
+01:02:36,269 --> 01:02:41,150
+would create a boolean to detect terminal state so let's say your boolean is terminal equals
+
+547
+01:02:41,150 --> 01:02:46,349
+false and then as you loop over the time step of a single episode every time you're going to
+
+548
+01:02:46,349 --> 01:02:52,590
+check is the state that i'm going in based on the action i'm taking a terminal state
+
+549
+01:02:52,590 --> 01:02:56,989
+if it's a terminal state then get out of the loop you know there's nothing else after
+
+550
+01:02:57,550 --> 01:03:02,590
+the one thing that you need to be careful of is if it's a terminal state then your target
+
+551
+01:03:02,590 --> 01:03:07,789
+is not the bellman equation is just the immediate reward remember you get to the terminal state
+
+552
+01:03:07,789 --> 01:03:13,389
+you get a reward of 10 there's no bellman equation to apply it's just 10 it's immediate
+
+553
+01:03:13,389 --> 01:03:24,190
+reward there's no discount etc okay so these are fairly easy changes now we're going to
+
+554
+01:03:24,190 --> 01:03:30,429
+look at a new method that will enable more data efficiency it's called experience replay
+
+555
+01:03:31,150 --> 01:03:38,269
+one of the a couple of issues with the way we've been training so far is one the correlation
+
+556
+01:03:38,989 --> 01:03:45,630
+of successive screens it's like imagine in the Atari game you have the ball that's in the top
+
+557
+01:03:45,630 --> 01:03:51,710
+left corner and it's traveling to the bottom right of the screen you have like many many
+
+558
+01:03:51,710 --> 01:03:56,909
+time steps that are essentially the same it's all the ball traveling in the same stuff in the same
+
+559
+01:03:56,909 --> 01:04:02,989
+place so you're actually training repetitively on something that is not that meaningful you
+
+560
+01:04:02,989 --> 01:04:07,389
+don't need to just train on a batch the equivalent in supervised learning is let's say
+
+561
+01:04:07,389 --> 01:04:11,789
+you're trying to differentiate cats and dogs and you train on a mini batch of cats then
+
+562
+01:04:11,789 --> 01:04:15,550
+you train on a mini batch of dogs then you train on a mini batch of cats and you will
+
+563
+01:04:15,550 --> 01:04:21,230
+never converge it will just index too much on cats and then index too much on dogs so you
+
+564
+01:04:21,230 --> 01:04:27,789
+want to add some sort of a experience replay concept that we see in order to create more
+
+565
+01:04:27,789 --> 01:04:34,989
+mixes in the data and get more diversity the other thing that is important is in our current
+
+566
+01:04:35,869 --> 01:04:41,469
+training process we are not reusing our data like you experience something you immediately
+
+567
+01:04:41,469 --> 01:04:45,550
+train on it you never see it again unless you re-experience the same thing sometimes
+
+568
+01:04:45,630 --> 01:04:50,829
+in the future which might or might not happen experience replay is going to help us to keep
+
+569
+01:04:51,389 --> 01:04:57,389
+experiences in memory and maybe retrain on them on a regular basis so that one experience might
+
+570
+01:04:57,389 --> 01:05:02,670
+be useful multiple times which intuitively makes sense like maybe you do an experience
+
+571
+01:05:02,670 --> 01:05:06,510
+you get an amazing reward and you don't want to forget it you want to retrain the model on
+
+572
+01:05:06,510 --> 01:05:13,070
+it on a regular basis it's more data efficiency so here's what it looks like the current way
+
+573
+01:05:13,070 --> 01:05:17,070
+we were training was we're in a state i'm just going to state state instead of pre-processed
+
+574
+01:05:17,070 --> 01:05:23,550
+states but it's pre-processed we're in a state s we perform action a we get a reward r and we
+
+575
+01:05:23,550 --> 01:05:29,150
+get into the next state from that next state we perform another action a prime we get a
+
+576
+01:05:29,150 --> 01:05:35,469
+reward r prime and we get into s second and so on you know and so on and each of these
+
+577
+01:05:35,469 --> 01:05:40,510
+would be called one experience it's one iteration of gradient descent it's one experience
+
+578
+01:05:41,230 --> 01:05:46,750
+so right now we're training on these experiences so the training looks like i train on e1
+
+579
+01:05:47,550 --> 01:05:52,989
+i update my parameters then i train on e2 i update my parameters then i train on e3
+
+580
+01:05:52,989 --> 01:05:57,150
+update my parameters those are highly correlated because they're part of the same
+
+581
+01:05:57,150 --> 01:06:01,789
+episode and as i was saying with the ball traveling in one direction that might actually
+
+582
+01:06:01,789 --> 01:06:06,989
+not be that helpful to train on all of these you know so instead what we'll do is we'll
+
+583
+01:06:06,989 --> 01:06:12,989
+use experience replay where we will collect our first experience but instead of training on it
+
+584
+01:06:12,989 --> 01:06:20,429
+we will put it in a memory called the replay memory d we put it in there and then at every
+
+585
+01:06:20,429 --> 01:06:25,630
+step we will sample from that memory to decide what to train on so of course at the
+
+586
+01:06:25,630 --> 01:06:31,389
+beginning if we just have one experience in the memory we will train on that experience
+
+587
+01:06:31,389 --> 01:06:38,030
+but over time you will see that we get more diversity and reuse out of our experiences so
+
+588
+01:06:38,030 --> 01:06:43,789
+for example let's say i experience e2 i put it in the memory and then instead of training on
+
+589
+01:06:43,789 --> 01:06:48,510
+e2 i'm going to randomly sample from the memory i might get e1 or i might get e2
+
+590
+01:06:49,070 --> 01:06:54,750
+then i experience e3 and i put it in the memory and i might get one of the three you
+
+591
+01:06:54,750 --> 01:07:01,710
+know this is the vanilla experience replay in practice there is more methods like prioritize
+
+592
+01:07:01,710 --> 01:07:06,110
+sweeping which might tell you which experience you want to weigh maybe some experiences had a
+
+593
+01:07:06,110 --> 01:07:10,510
+higher gradient so you want to prioritize them more often you know things like that
+
+594
+01:07:12,510 --> 01:07:16,829
+so all in all this is what our training looks like with experience replay we experience
+
+595
+01:07:17,789 --> 01:07:25,309
+e1 we train on e1 then we the next training iteration is not on e2 it's on a sample from
+
+596
+01:07:25,309 --> 01:07:30,269
+e1 and e2 either or the third experience is then put in the replay memory but we
+
+597
+01:07:30,269 --> 01:07:34,909
+don't train on it we train on a sample from whatever is in the replay memory and we repeat
+
+598
+01:07:34,909 --> 01:07:41,630
+and that is more sample more efficient allows more reusability and less cross correlation in our
+
+599
+01:07:42,190 --> 01:07:50,539
+um training batch okay so that's called replay memory
+
+600
+01:07:52,139 --> 01:07:55,420
+and you can use it with mini batch gradient descent note that
+
+601
+01:07:56,699 --> 01:08:00,780
+you still experience in the direction that the game is played like we still
+
+602
+01:08:00,780 --> 01:08:05,179
+go and take the action as expected we just don't necessarily update our model
+
+603
+01:08:05,179 --> 01:08:09,500
+parameter based on the action that we ended up taking we put it in the replay memory we
+
+604
+01:08:09,500 --> 01:08:21,020
+may train on it later okay um so here's how it modifies our vanilla setup we've added an
+
+605
+01:08:21,020 --> 01:08:28,939
+experience from state s to state s prime to the replay memory you know like let me walk you
+
+606
+01:08:28,939 --> 01:08:34,140
+through it again within one time step we forward propagate our state into the q network we
+
+607
+01:08:34,140 --> 01:08:39,979
+execute the best action given the q values this gives us a reward and the next state
+
+608
+01:08:39,979 --> 01:08:46,460
+the next state is pre-processed and then instead of training on that instead of training we just
+
+609
+01:08:46,460 --> 01:08:52,779
+add that transition to the replay memory and instead we sample randomly a mini batch of
+
+610
+01:08:52,779 --> 01:08:58,619
+transition from the replay memory and we train on those and we redo the same thing again and
+
+611
+01:09:00,899 --> 01:09:23,140
+yes yeah yeah you you would uh you would within one episode but you know if you if you play
+
+612
+01:09:23,140 --> 01:09:28,739
+multiple chess games your replay memory will get already bigger so then you would see some end
+
+613
+01:09:28,739 --> 01:09:37,149
+game some middle of the game some early games yeah and in practice it's actually useful because
+
+614
+01:09:38,270 --> 01:09:41,630
+you might imagine that in a chess game you know all of us
+
+615
+01:09:41,710 --> 01:09:47,470
+uh let's say if you're a beginner you you see a lot of beginning of the games you actually people
+
+616
+01:09:47,470 --> 01:09:51,630
+that are beginners they're good at openings but they're bad at end games because they don't get
+
+617
+01:09:51,630 --> 01:09:57,229
+to play a lot of end games uh well that type of approach could be useful you can retrain on
+
+618
+01:09:57,229 --> 01:10:03,390
+end games more often and you know a more advanced version of the replay memory would
+
+619
+01:10:03,390 --> 01:10:09,630
+also weigh the experience in the replay memory based on how much the gradient is going to be
+
+620
+01:10:09,630 --> 01:10:14,029
+so if you have an experience that actually was super insightful you can weigh it higher so
+
+621
+01:10:14,029 --> 01:10:21,260
+that you you you prioritize grabbing it and retraining on it essentially so let's say you
+
+622
+01:10:21,260 --> 01:10:25,340
+blunder in chess you might actually want to re-see that blunder later so that you don't
+
+623
+01:10:25,340 --> 01:10:32,140
+do it again okay um okay so these were all the different methods another one that's very
+
+624
+01:10:32,859 --> 01:10:40,539
+intuitive and very important is when during the training process our um agent gets stuck
+
+625
+01:10:40,539 --> 01:10:47,100
+gets stuck in a local minima here is how it would work in practice you start in initial
+
+626
+01:10:47,100 --> 01:10:53,500
+state s1 and you have three states ahead of you if you take action a1 you go to state 2 which
+
+627
+01:10:53,500 --> 01:10:58,939
+is a terminal state if you take and you get a reward of zero if you take action a2 you
+
+628
+01:10:58,939 --> 01:11:05,420
+get to s3 also a terminal state and you get a reward of one and if you get action a3 you
+
+629
+01:11:05,500 --> 01:11:12,220
+get to state four terminal state with the reward of a thousand so of course to us it's obvious
+
+630
+01:11:12,220 --> 01:11:17,739
+that we would want to explore the state number four it's pretty obvious in practice let's say
+
+631
+01:11:17,739 --> 01:11:24,859
+you update you you initialize your network and in the first forward path that's what you get
+
+632
+01:11:25,739 --> 01:11:33,500
+first forward path the network is random you get q value for action 1.5 for action 2.4
+
+633
+01:11:33,500 --> 01:11:39,579
+for action 3.3 what does that mean it means the agent is saying i'm going to go to action one
+
+634
+01:11:40,539 --> 01:11:47,260
+so i take action one and i see an immediate reward of zero right because it's a terminal
+
+635
+01:11:47,260 --> 01:11:51,659
+state the bellman equation thing doesn't happen i just have the immediate reward
+
+636
+01:11:52,220 --> 01:11:57,579
+which becomes my target y and so i perform a gradient descent update to say this q value
+
+637
+01:11:57,579 --> 01:12:07,260
+should have been zero so i convert this q value to zero now second try this time the q value
+
+638
+01:12:07,260 --> 01:12:13,819
+is saying take action two it's the highest q value i take action two i have an immediate
+
+639
+01:12:13,819 --> 01:12:20,539
+reward ahead of me that's one because it's a terminal state there's no second discounted
+
+640
+01:12:20,539 --> 01:12:28,380
+future reward term so i just take y equals one i perform my gradient descent update and
+
+641
+01:12:28,380 --> 01:12:37,100
+this converts to one and then third time the agent is still saying go to a2 go to the take
+
+642
+01:12:37,100 --> 01:12:44,220
+action a2 reward of one good that's what you predicted nothing to do just keep going
+
+643
+01:12:44,220 --> 01:12:50,060
+we're done with training we're stuck we never visit the state we actually wanted to visit
+
+644
+01:12:51,260 --> 01:12:56,779
+okay so that that that wouldn't work for us we will never visit that state using our current
+
+645
+01:12:56,779 --> 01:13:02,060
+algorithm does that make sense why we wouldn't ever visit that state in practice this is a
+
+646
+01:13:02,060 --> 01:13:09,500
+big issue the analogy of this concept of exploration versus exploitation is when every
+
+647
+01:13:09,500 --> 01:13:16,939
+day you take your bike and you cross campus you have a favorite route and turns out that
+
+648
+01:13:17,579 --> 01:13:21,739
+the more you take that route the better you get every time like you get a little faster maybe
+
+649
+01:13:21,739 --> 01:13:25,659
+your turn is faster or something or you can predict how many people are going to be at
+
+650
+01:13:25,659 --> 01:13:29,819
+that roundabout and you know how to take it in the wide way so you go faster we've all
+
+651
+01:13:29,819 --> 01:13:35,739
+done that that's exploitation you exploit what you already know and you get better at it
+
+652
+01:13:35,739 --> 01:13:39,180
+but maybe there's another route that you're not thinking of that's pretty
+
+653
+01:13:39,739 --> 01:13:44,140
+instead of going north from campus you go south and maybe it might be better you will
+
+654
+01:13:44,140 --> 01:13:49,020
+never see because you don't have the courage or the patience to do it that's the difference
+
+655
+01:13:49,020 --> 01:13:55,659
+between exploration and exploitation in practice a good model would be able to handle both to
+
+656
+01:13:55,659 --> 01:14:01,260
+explore 22 to exploit to explore when it needs to explore the way we do it in practice in our
+
+657
+01:14:01,260 --> 01:14:09,020
+pseudocode is to inject some randomness so for example when we are looping over time step
+
+658
+01:14:09,020 --> 01:14:15,180
+with probability epsilon let's say five percent take a random action so from time to time on
+
+659
+01:14:15,180 --> 01:14:20,140
+average one time every 20 times you take a random action it will allow you to visit
+
+660
+01:14:20,140 --> 01:14:26,380
+maybe a new path the analogy in chess is you know you might use a creative move from time to
+
+661
+01:14:26,380 --> 01:14:31,260
+time that might be worse today but might allow you to learn something and to get better over
+
+662
+01:14:31,260 --> 01:14:33,260
+time yeah
+
+663
+01:14:45,819 --> 01:14:50,460
+setting the the couldn't we resolve this problem by setting the initial values from
+
+664
+01:14:50,460 --> 01:14:55,579
+into infinity well the problem if you set the initial values to infinity so you would say
+
+665
+01:14:55,579 --> 01:15:00,140
+instead of randomly initializing your network you initialize it in a way that the outputs are
+
+666
+01:15:00,140 --> 01:15:12,539
+equal to infinity well in practice if the three q values are infinity then you can't make a
+
+667
+01:15:12,539 --> 01:15:17,420
+decision on the spot so you're saying just pick one randomly because if the three are
+
+668
+01:15:17,420 --> 01:15:24,140
+infinity you you can't decide which one to take right and also if if it's infinity and the
+
+669
+01:15:24,140 --> 01:15:28,300
+reward is one i mean if it's a really large number and the reward is one your gradient is
+
+670
+01:15:28,300 --> 01:15:33,899
+going to be massive right so it's gonna i guess the loss function is going to be massive
+
+671
+01:15:34,460 --> 01:15:39,819
+and i don't know i imagine it would be really hard to train it but in practice you start with
+
+672
+01:15:39,819 --> 01:15:45,659
+the random initialization because this might be one example but you know if in the game of
+
+673
+01:15:45,659 --> 01:15:53,180
+chess actually the the reward is one at the end and zero all the time or maybe the reward
+
+674
+01:15:53,180 --> 01:15:58,539
+is a thousand at the end and when you lose your rook it's a it's a negative reward you can't
+
+675
+01:15:58,539 --> 01:16:02,539
+predict what the reward structure is going to be you want an agent that is able to adapt to it
+
+676
+01:16:02,539 --> 01:16:07,899
+and it's better to find a method that can scale to different environments essentially
+
+677
+01:16:11,390 --> 01:16:19,229
+okay so this was epsilon greedy action which is adding some randomness with probability
+
+678
+01:16:19,229 --> 01:16:26,430
+epsilon take a random action okay so adding all our techniques because we get good at training
+
+679
+01:16:26,430 --> 01:16:31,710
+reinforcement learning algorithms this is what we have we initialize our q network parameters
+
+680
+01:16:31,710 --> 01:16:37,149
+we have a random network we initialize our replay memory d and then we loop over episodes
+
+681
+01:16:37,149 --> 01:16:41,470
+we start from an initial state we create a boolean that allows us to detect terminal states
+
+682
+01:16:42,270 --> 01:16:46,590
+with probability epsilon we're going to take a random action otherwise we're going to follow
+
+683
+01:16:46,590 --> 01:16:51,310
+what we know which is forward propagate the state in the q network take the action that has the
+
+684
+01:16:51,310 --> 01:16:56,989
+highest q value that allows you to observe a reward and the next state take that next state
+
+685
+01:16:57,789 --> 01:17:06,239
+forward propagate it again instead and then and then instead of um oh no sorry sorry
+
+686
+01:17:06,960 --> 01:17:13,439
+observe that next state add it to the replay memory sample from the replay memory and then
+
+687
+01:17:13,439 --> 01:17:18,239
+train on that sample and in the process you will need to do another forward path because you
+
+688
+01:17:18,239 --> 01:17:23,039
+need to estimate your target y using the immediate reward plus the bellman equation
+
+689
+01:17:23,039 --> 01:17:34,590
+plus the discounted future reward okay are you experts at q learning okay good
+
+690
+01:17:35,789 --> 01:17:41,229
+sounds good and here's where we get at the end you can claim proudly you have trained an
+
+691
+01:17:41,229 --> 01:17:44,670
+atari it's not that complicated as you can see other than the bellman equation piece
+
+692
+01:17:45,710 --> 01:17:50,430
+turns out the agent has discovered that it can send the ball on the back and it's actually
+
+693
+01:17:50,430 --> 01:17:55,789
+much easier to finish the game like that which is quite interesting you know a good player would
+
+694
+01:17:55,789 --> 01:17:59,869
+know that you can dig a tunnel and you can finish the game without too much issues yeah
+
+695
+01:18:04,779 --> 01:18:13,439
+how do you quantify when when the game has ended yeah well first you would you would
+
+696
+01:18:13,439 --> 01:18:19,520
+you would start seeing the model get two good rewards as it play like it manages to get
+
+697
+01:18:19,520 --> 01:18:26,000
+really good rewards why earlier it might not you know and so that's probably your best guess for
+
+698
+01:18:26,000 --> 01:18:30,399
+how good the model is in practice if you're alfago you can also test it against the best
+
+699
+01:18:30,399 --> 01:18:33,920
+humans in the world and you can observe that they're losing against the model
+
+700
+01:18:53,340 --> 01:19:00,020
+you can get them to play together so you know you could you could actually monitor the
+
+701
+01:19:00,020 --> 01:19:05,859
+loss function and look at is the bellman equation respected if the bellman equation
+
+702
+01:19:05,859 --> 01:19:10,659
+is respected then your model is really really good and then we're we're going to see an
+
+703
+01:19:10,659 --> 01:19:15,460
+example of competitive self-play where you get the model to play against other models
+
+704
+01:19:15,460 --> 01:19:19,939
+and then over time as you watch them play for thousands and thousands of time you can tell
+
+705
+01:19:19,939 --> 01:19:26,020
+which model is ahead of another one you can then sort of copy paste the best model into
+
+706
+01:19:26,020 --> 01:19:30,579
+the other models and then make them play again for many times and because you have the epsilon
+
+707
+01:19:30,579 --> 01:19:35,460
+greedy approach one of the model is naturally going to get better than the others because
+
+708
+01:19:35,460 --> 01:19:43,699
+of the randomness that you are okay let's look at a few examples and then we'll spend
+
+709
+01:19:43,699 --> 01:19:51,939
+20 minutes on the rlhf here are other examples this is pong which is one v one sea quests
+
+710
+01:19:54,350 --> 01:19:59,869
+which is an underwater game and then the one that's maybe more of you know space invaders
+
+711
+01:19:59,869 --> 01:20:06,189
+very popular game as well so the impressive thing that they showed is that you can
+
+712
+01:20:06,829 --> 01:20:14,350
+actually solve many games with the exact same algorithm no tweaks which is quite impressive
+
+713
+01:20:18,210 --> 01:20:24,609
+let's go a little further and talk about advanced topics here is a game called
+
+714
+01:20:24,689 --> 01:20:31,810
+montezuma revenge this game is particular because you're controlling a little character right here
+
+715
+01:20:31,810 --> 01:20:37,810
+and this character is trying to go and grab let's say this key right here and it has some
+
+716
+01:20:37,810 --> 01:20:44,770
+obstacles or some enemies that it needs to take care of what what do you think is going to
+
+717
+01:20:44,770 --> 01:20:53,789
+be an issue if we apply what we just learned to this game what makes this game especially
+
+718
+01:20:53,789 --> 01:21:04,029
+hard in comparison to let's say chess or go yes the reward is very delayed like if you start
+
+719
+01:21:04,029 --> 01:21:09,390
+with a random network what are the chances that the network is going to figure out that
+
+720
+01:21:09,390 --> 01:21:14,109
+to get to the key it actually should go in the opposite direction it should go in the
+
+721
+01:21:14,109 --> 01:21:19,310
+opposite direction it could jump down here it should catch the rope the rope will probably
+
+722
+01:21:19,310 --> 01:21:24,750
+allow the character to go to the ladder it goes down the ladder it has to go jump up
+
+723
+01:21:24,750 --> 01:21:30,430
+this enemy my guess is it's an enemy i'm not sure but i think it's an enemy because of the color
+
+724
+01:21:31,069 --> 01:21:35,390
+and i know that in gaming if it was green it might not have been an enemy but if it's gray
+
+725
+01:21:35,390 --> 01:21:40,750
+or red it might be an enemy and then go up the ladder and grab the key the chance is
+
+726
+01:21:41,630 --> 01:21:47,550
+very low that the agent is going to make that successive good decisions to get there you're
+
+727
+01:21:47,550 --> 01:21:52,270
+right why is it use why is it easier for a human to actually solve that game
+
+728
+01:21:56,479 --> 01:22:02,159
+intuition prior knowledge so for example when you look at this game even if you have never
+
+729
+01:22:02,159 --> 01:22:06,560
+played it my guess is you would know you can go down the ladder because you know what a
+
+730
+01:22:06,560 --> 01:22:10,479
+ladder is or you can see this little rope and you're like i'm going to catch the rope
+
+731
+01:22:10,479 --> 01:22:14,079
+i'm going to jump and go to the other side and you look at this little monster and you're
+
+732
+01:22:14,079 --> 01:22:18,319
+like i'd better not touch this monster or if anything i will jump on top of it because
+
+733
+01:22:18,319 --> 01:22:25,680
+you've played mario let's say so all of this is human intuition sometimes you would call as a
+
+734
+01:22:25,680 --> 01:22:29,920
+baby survival instinct like you throw the baby in the water and suddenly it flips and it can
+
+735
+01:22:31,680 --> 01:22:36,239
+swim those are things that are to a certain extent encoded in our dna but at the very
+
+736
+01:22:36,239 --> 01:22:39,760
+least encoded in our experience of doing other things that have nothing to do with this game
+
+737
+01:22:40,319 --> 01:22:46,560
+and so the the problem here is called imitation learning is is there a better way to start our
+
+738
+01:22:46,560 --> 01:22:51,439
+network than a random initialization that allows the network to for example guess that this is a
+
+739
+01:22:51,439 --> 01:22:56,159
+ladder and turns out that if the network knows that if we be more likely to get to the reward
+
+740
+01:22:56,159 --> 01:23:02,159
+first and then learn from that reward and then get better over time the other part that can
+
+741
+01:23:02,159 --> 01:23:06,399
+also use human knowledge which is what we're going to see together is reinforcement learning
+
+742
+01:23:06,399 --> 01:23:12,880
+from human feedback where you have an analogy here which is you can train a language model
+
+743
+01:23:12,880 --> 01:23:16,880
+and it might be completely misaligned with what actually humans care about
+
+744
+01:23:16,880 --> 01:23:19,840
+how does reinforcement learning help in those situations that's going to be the
+
+745
+01:23:19,840 --> 01:23:25,199
+next topic in the last part of the lecture okay let me show you a few other results
+
+746
+01:23:26,079 --> 01:23:32,640
+quickly today we talked about dq and deep q learning in practice there is a lot more
+
+747
+01:23:32,640 --> 01:23:36,880
+reinforcement learning algorithm but you got the gist of it you got the concept of making good
+
+748
+01:23:36,880 --> 01:23:43,600
+sequences of decision epsilon really exploration exploitation terminal state starting state all
+
+749
+01:23:43,600 --> 01:23:49,680
+of that you you got the one the one algorithm that is very popular right now is called ppo
+
+750
+01:23:49,680 --> 01:23:55,119
+proximal policy optimization there is one that is even more popular right now that's actually
+
+751
+01:23:55,119 --> 01:24:00,960
+from a year ago at stanford called dpo that we won't study in the class one of the things
+
+752
+01:24:00,960 --> 01:24:05,520
+to know about ppo just just to go over it really quickly and i i pasted two important
+
+753
+01:24:05,520 --> 01:24:12,399
+papers from shulman et al a few years back trust trpo and ppo is that it is not a value
+
+754
+01:24:12,399 --> 01:24:17,119
+based algorithm so in q learning you learn the q values and then you define your policy
+
+755
+01:24:17,119 --> 01:24:24,000
+as the arg max of the q values in ppo you learn the policy directly which is a more
+
+756
+01:24:24,000 --> 01:24:30,159
+probabilistic method it also works well with continuous spaces if you look at the q learning
+
+757
+01:24:30,159 --> 01:24:38,079
+we learned one output for one action if you actually have a game that has continuous action
+
+758
+01:24:38,079 --> 01:24:42,720
+like autonomous driving where it's not like just turn the wheel to the right or to the left
+
+759
+01:24:42,720 --> 01:24:47,680
+it's like what degree you turn it it's continuous then the qn would not work
+
+760
+01:24:48,319 --> 01:24:52,399
+well or you would have to granularize the number of action a little bit to the right
+
+761
+01:24:52,399 --> 01:24:57,039
+a little more a little more which would not be really useful instead you would use ppo
+
+762
+01:24:58,000 --> 01:25:11,010
+yeah yeah so the question is how do you define the reward in the qn
+
+763
+01:25:11,970 --> 01:25:18,050
+different reward structure will lead to different types of you know agent strategies but you're
+
+764
+01:25:18,050 --> 01:25:22,850
+right for the game of go you could actually define the reward as one if you win and zero
+
+765
+01:25:22,850 --> 01:25:27,489
+if you don't win that's it you know every move will be zero until the last move is a
+
+766
+01:25:27,489 --> 01:25:32,050
+win in chess you might actually do intermediate reward because you want to tell the you want
+
+767
+01:25:32,050 --> 01:25:37,329
+to tell the agent that is good to kill the opponent's pieces to get rid of them you could
+
+768
+01:25:37,329 --> 01:25:41,729
+also do end-to-end and say i don't give any intermediate reward i just give a final reward
+
+769
+01:25:41,729 --> 01:25:45,649
+which might be more complicated to train on but it might actually lead to a more optimal
+
+770
+01:25:45,649 --> 01:25:50,369
+strategy because in fact you could actually win without taking any piece from your opponent
+
+771
+01:25:52,689 --> 01:25:59,010
+other things about ppo is you know it's more probabilistic it has a concept of an expected
+
+772
+01:25:59,090 --> 01:26:05,090
+advantage which at every step instead of telling you how good that action is it would tell you
+
+773
+01:26:05,090 --> 01:26:09,970
+how much better it is than random than the current state like how much better would it be
+
+774
+01:26:09,970 --> 01:26:13,409
+to do certain thing versus what you would have done otherwise i'm not going to go into the
+
+775
+01:26:13,409 --> 01:26:18,369
+details it's all in the paper but those are things that are important here's a few examples
+
+776
+01:26:18,369 --> 01:26:25,409
+of ppo so this example on the left is from open ai a few years back where you can see it's
+
+777
+01:26:25,409 --> 01:26:33,729
+a continuous space where the agent is being bullied a little bit but it's trying to grab
+
+778
+01:26:33,729 --> 01:26:39,890
+the rewards but it's also subject to external forces that are sort of throwing balls at it
+
+779
+01:26:39,890 --> 01:26:47,250
+it's a little bit mean but you can imagine that this is a continuous space meaning you're
+
+780
+01:26:47,250 --> 01:26:52,210
+controlling the nodes you're controlling the joints of the agent and you're controlling the
+
+781
+01:26:52,210 --> 01:26:56,689
+forces the angles and so it's a that's why ppo would be better in that case
+
+782
+01:26:58,609 --> 01:27:07,310
+super here is a competitive self-play which i really like where you have agent play with
+
+783
+01:27:07,310 --> 01:27:11,470
+each other and this is the sumo game push the opponent outside the ring and you get a reward
+
+784
+01:27:12,989 --> 01:27:16,510
+so actually it's interesting because you're seeing some emergent behavior which is they
+
+785
+01:27:16,510 --> 01:27:24,270
+attack each other's feet or they lower their center of gravity to be more stable for example
+
+786
+01:27:24,270 --> 01:27:34,770
+yeah yeah it's versions sometimes different initializations for example so no but good
+
+787
+01:27:34,770 --> 01:27:40,369
+question so oftentimes what opening i would do back you know back in that time is they would
+
+788
+01:27:41,250 --> 01:27:45,970
+create copies of the same model they would initialize them differently and they will let
+
+789
+01:27:45,970 --> 01:27:50,210
+them learn and turns out one of the model we get better than the others and then they
+
+790
+01:27:50,210 --> 01:27:54,449
+will copy again that model to the rest and do the same thing again and again pretty much
+
+791
+01:27:56,050 --> 01:28:00,130
+oh yeah it's kind of funny isn't it that's a good catch
+
+792
+01:28:05,680 --> 01:28:15,359
+that's a good goal could watch that for hours okay they're a little awkward you have to say
+
+793
+01:28:15,359 --> 01:28:21,039
+but but it works okay so at least you know i let you watch the video it's going to be
+
+794
+01:28:21,039 --> 01:28:26,880
+shared but here's another set of games that are even more complicated that i mentioned early on
+
+795
+01:28:26,880 --> 01:28:32,399
+open ai5 which you can think of an equivalent of league of legend dota where you have
+
+796
+01:28:33,199 --> 01:28:39,760
+five v five game so you have to collaborate etc which makes it adds like literally one
+
+797
+01:28:39,760 --> 01:28:48,399
+additional degree of complexity and starcraft alpha star from deep mind is an example of
+
+798
+01:28:48,399 --> 01:28:54,000
+where the observation is not the entire states you have fog and so that adds another layer
+
+799
+01:28:54,000 --> 01:29:01,920
+of complexity not going to see that together today i would encourage you to look at the
+
+800
+01:29:01,920 --> 01:29:05,600
+alpha go documentary on netflix if you haven't who has seen it already
+
+801
+01:29:06,560 --> 01:29:13,359
+nobody okay well you can now watch it with a different eye understanding reinforcement learning
+
+802
+01:29:13,359 --> 01:29:23,039
+and at some point in the in the documentary you will see that alpha go makes a very
+
+803
+01:29:23,039 --> 01:29:29,760
+odd move a very creative move and people are like i don't understand that move even the top
+
+804
+01:29:29,760 --> 01:29:34,239
+researchers or the best players would say in the video they don't understand that move
+
+805
+01:29:35,039 --> 01:29:40,640
+it turns out that that move is very unintuitive for humans because as humans we are trained to
+
+806
+01:29:40,640 --> 01:29:46,000
+maximize our chances of winning like literally if i can eat all your pieces in chess i will
+
+807
+01:29:46,000 --> 01:29:52,079
+eat all your pieces and if i can surround your stones and go as much as i can i will do it
+
+808
+01:29:52,079 --> 01:29:56,399
+the agent is just programmed to win so that move actually looked counter-intuitive because
+
+809
+01:29:56,399 --> 01:30:02,159
+the agent doesn't care about winning by one or winning by a you know 20 stones it just cares
+
+810
+01:30:02,159 --> 01:30:07,680
+about winning and that move specifically put the agent in a good place to win by a small
+
+811
+01:30:07,680 --> 01:30:12,239
+margin you know so that's an example of an insight that you will learn you you understand
+
+812
+01:30:12,239 --> 01:30:20,079
+from this class and you will see in the in the documentary okay i think we have 10 minutes
+
+813
+01:30:20,159 --> 01:30:25,520
+i'm just going to introduce reinforcement learning from human feedback because it's a more
+
+814
+01:30:27,279 --> 01:30:32,800
+modern topic that's is very trendy right now it's important to know and so let's look at it
+
+815
+01:30:32,800 --> 01:30:37,359
+together we're going to start by recapping how language models are trained in a nutshell
+
+816
+01:30:37,359 --> 01:30:43,039
+and then we'll see what self what supervised fine tuning looks like we'll talk about how do
+
+817
+01:30:43,039 --> 01:30:49,359
+we train a critique model a reward model and then finally what rlhf looks like and why is
+
+818
+01:30:49,359 --> 01:30:57,199
+it so trending in the news so our training objective for language models is next token
+
+819
+01:30:57,199 --> 01:31:02,720
+prediction right we've already talked about it in a formal lecture the idea is that i will get
+
+820
+01:31:02,720 --> 01:31:09,520
+some inputs i'm reading wikipedia let's say or some sort of a text online and i read a sentence
+
+821
+01:31:09,520 --> 01:31:15,760
+and i predict the last token and i do that again and again so for example deep learning
+
+822
+01:31:15,760 --> 01:31:25,840
+and then deep learning is deep learning is so deep learning is so cool and that's it
+
+823
+01:31:27,279 --> 01:31:31,039
+so you get the idea right you're always spreading the next token and then over time
+
+824
+01:31:31,039 --> 01:31:37,920
+it forces the model to explicit emerging behaviors and it understands the connections
+
+825
+01:31:37,920 --> 01:31:44,239
+between those concepts and it's really good at generating texts we compute a loss function
+
+826
+01:31:44,239 --> 01:31:49,760
+you're actually going to study this loss function in c5 so i'm not going to talk about
+
+827
+01:31:49,760 --> 01:31:57,680
+it right now but you perform you know a gradient descent loop and this is how you get your first
+
+828
+01:31:57,680 --> 01:32:02,560
+pre-trained language model you get a pre-trained language model you can call it on a text or
+
+829
+01:32:02,560 --> 01:32:06,000
+prompt and it will continually generate and you call it again and again and again and
+
+830
+01:32:06,000 --> 01:32:12,720
+it generate generate generates everybody's comfortable with that right okay so that's
+
+831
+01:32:12,720 --> 01:32:18,000
+how we trained a language model but there is a couple of problems the first problem
+
+832
+01:32:18,960 --> 01:32:27,119
+is that online data does not reflect helpfulness so to give you a concrete example
+
+833
+01:32:28,399 --> 01:32:32,800
+what you might find in the training set is something like deep learning is so cool
+
+834
+01:32:32,800 --> 01:32:37,760
+when actually what you might find in practice is people asking what is deep learning
+
+835
+01:32:38,159 --> 01:32:43,920
+so the data is not really reflective of you want an agent to be helpful and that's a problem
+
+836
+01:32:43,920 --> 01:32:50,239
+because the model was trained to continue text rather than answer questions and in practice
+
+837
+01:32:50,239 --> 01:32:55,760
+you would see it's a big problem another problem is the model has no concept of good polite
+
+838
+01:32:55,760 --> 01:33:01,840
+or helpful yet and to give you a concrete example you might actually ask a pre-trained
+
+839
+01:33:02,800 --> 01:33:08,479
+language model my laptop won't turn on what should i do and then the model responds because
+
+840
+01:33:08,479 --> 01:33:13,680
+it has read it on reddit or on wikipedia is laptops sometimes don't turn on because of
+
+841
+01:33:13,680 --> 01:33:20,239
+power issues which is not what you ask you ask what should i do and in fact a better answer
+
+842
+01:33:20,239 --> 01:33:25,920
+would have been check your charger if is properly connected or the outlet works if that's
+
+843
+01:33:25,920 --> 01:33:29,520
+fine try holding the power button for 10 seconds if it still doesn't start the battery
+
+844
+01:33:29,520 --> 01:33:33,600
+or motor board may blah blah blah that's a better answer that's what you want a language
+
+845
+01:33:33,600 --> 01:33:40,079
+model to do nowadays and the model can give you factual text because that's what it's been
+
+846
+01:33:40,079 --> 01:33:44,960
+trained on but it's it doesn't understand being helpful or having an answer that looks
+
+847
+01:33:44,960 --> 01:33:53,069
+like a human-like answer so our solution to it we'll start with using supervised fine tuning
+
+848
+01:33:53,949 --> 01:33:59,069
+which is going to be learning from human written demonstrations of helpful behavior
+
+849
+01:33:59,069 --> 01:34:05,069
+and then we get to even further and use rlhf which will optimize not only for human written
+
+850
+01:34:05,069 --> 01:34:10,029
+sentences or paragraphs but for preferences and the word preference is the key word
+
+851
+01:34:11,149 --> 01:34:14,590
+let's talk about how we can improve our pre-trained model with supervised fine tuning
+
+852
+01:34:15,470 --> 01:34:20,189
+i take that we want to align models with human written responses
+
+853
+01:34:22,189 --> 01:34:27,710
+and the step one that we're going to lose is to build a data set let's build a data set
+
+854
+01:34:27,710 --> 01:34:33,630
+of human prompt response pairs so what actually opening is going to do i'll explain it in a
+
+855
+01:34:33,630 --> 01:34:40,029
+second is it might collect some of the prompts that we all use and then ask humans to respond
+
+856
+01:34:40,029 --> 01:34:45,470
+to those prompts and put that in a data set it might also ask separately experts to write
+
+857
+01:34:45,470 --> 01:34:51,710
+really good prompts and then answer those prompts it's a fully human-made data set and
+
+858
+01:34:51,710 --> 01:34:56,430
+then we use that data set to fine tune our pre-trained model and by now you've learned
+
+859
+01:34:56,430 --> 01:35:01,470
+fine tuning in the online video so you know what i'm talking about using supervised learning so what
+
+860
+01:35:01,470 --> 01:35:07,149
+it looks like is i take my pre-trained model that i just told you how we train and then i
+
+861
+01:35:07,149 --> 01:35:13,470
+give it a prompt explain deep learning to a beginner and i also will concatenate to it
+
+862
+01:35:14,350 --> 01:35:20,750
+a response a good response written by a human deep learning is a type of machine learning
+
+863
+01:35:20,750 --> 01:35:25,789
+that uses neural and then i expect the model to come up with the word networks
+
+864
+01:35:27,149 --> 01:35:33,390
+so it's literally do whatever we need to train the pre-trained model but we do it on human written
+
+865
+01:35:34,189 --> 01:35:42,300
+prompt response pairs and if you do that many times and you use the you know the same loss
+
+866
+01:35:42,300 --> 01:35:48,140
+function how far the model's response is from a human response you do that many times and
+
+867
+01:35:48,140 --> 01:35:59,100
+you will get sft supervised fine tuning but it has some shortcomings one of the shortcomings
+
+868
+01:35:59,100 --> 01:36:05,579
+is it is data that is extremely costly to collect in fact i believe in the first version
+
+869
+01:36:05,579 --> 01:36:13,100
+of that instruct gpt there was only 13 000 prompt response pairs and turns out it did
+
+870
+01:36:13,100 --> 01:36:22,000
+really well despite that um the second aspect is it's unlikely to generalize well because
+
+871
+01:36:22,000 --> 01:36:27,600
+you're again you're not doing reinforcement learning here you're doing supervised learning
+
+872
+01:36:28,560 --> 01:36:34,560
+and so you're just showing a set of examples 13 000 examples that you want to learn but it's
+
+873
+01:36:34,560 --> 01:36:40,319
+what tells you that it will generalize to an unseen prompt that will come up from your user
+
+874
+01:36:40,319 --> 01:36:48,560
+base and so this approach sft really teaches the model to imitate good behavior from humans
+
+875
+01:36:48,560 --> 01:36:56,239
+and that's the key it's it's imitation it is not preference optimization to do preference
+
+876
+01:36:56,239 --> 01:37:01,359
+optimization that's where we're going to train a reward model and we're going to do proper
+
+877
+01:37:01,359 --> 01:37:07,119
+rlhf so let me talk to you about the rm reward model and then i'll tell you about
+
+878
+01:37:08,159 --> 01:37:17,279
+rlhf in a nutshell the problem of rlhf is to align not with human responses but with
+
+879
+01:37:17,279 --> 01:37:23,760
+human preferences so what what's going to happen is we're going to train a separate
+
+880
+01:37:23,760 --> 01:37:30,239
+model to predict which responses human prefer and we're going to call that model the reward
+
+881
+01:37:30,239 --> 01:37:36,800
+model it's a separate model from whatever we've trained before the model is going to use data
+
+882
+01:37:36,800 --> 01:37:42,560
+from labelers so you're going to show labelers two or more responses to the same prompts
+
+883
+01:37:44,000 --> 01:37:50,720
+and those responses will be sampled from the sft so your best model right now is the sft
+
+884
+01:37:51,279 --> 01:37:56,399
+you will sample three or four responses and you know how we sample right you you can tweak
+
+885
+01:37:56,399 --> 01:38:02,640
+the temperature you can select not only the top priority word the top the softmax layers
+
+886
+01:38:02,640 --> 01:38:07,760
+number one word but you can sometimes sample differently and you will get a variety of answers
+
+887
+01:38:08,399 --> 01:38:13,920
+and then you will ask a human labeler to say answer b is better than answer c and answer c is
+
+888
+01:38:13,920 --> 01:38:18,800
+better than answer a and answer a is sort of equal to answer d that's it
+
+889
+01:38:22,859 --> 01:38:27,340
+they will be asked which response they prefer and it can get more complicated it doesn't have
+
+890
+01:38:27,340 --> 01:38:33,500
+to be just a simple ranking you have multiple liker scale methods and so on but the point
+
+891
+01:38:33,500 --> 01:38:37,500
+is that you will collect those pairwise comparison that we call preference data
+
+892
+01:38:37,500 --> 01:38:42,060
+and you will use it to train a reward model which is initialized from your sft
+
+893
+01:38:42,539 --> 01:38:48,859
+so your sft is here it's your best model to date and you're going to modify the last layer so the
+
+894
+01:38:48,859 --> 01:38:54,380
+softmax layer at the end of a language model that will tell you this is the token we should
+
+895
+01:38:54,380 --> 01:38:59,899
+output or this is the word we should write instead of that you'll get rid of that layer
+
+896
+01:38:59,899 --> 01:39:04,779
+you'll put a scalar value as output you'll put a linear layer with a scalar value that
+
+897
+01:39:04,779 --> 01:39:10,699
+will represent the reward head it will predict the the reward you know which is a proxy for
+
+898
+01:39:10,699 --> 01:39:17,180
+the preference of the human the way you'll train that reward model is you'll give it a batch of
+
+899
+01:39:17,180 --> 01:39:23,739
+two you know you'll give it a prompt x with a response a and the preference of the user and
+
+900
+01:39:23,739 --> 01:39:29,340
+you'll give it the same prompt with a response b from the sft with the preference of the user
+
+901
+01:39:29,340 --> 01:39:34,859
+so here the user is saying response a is better than response b and so if you actually
+
+902
+01:39:34,859 --> 01:39:40,539
+were sending that into this model you will get a predicted reward for the preferred answer
+
+903
+01:39:40,539 --> 01:39:52,300
+and a predicted reward for the this preferred answer that allows you to train using a loss
+
+904
+01:39:52,300 --> 01:39:56,779
+function that i'm not going to cover given our time sensitivity the loss function will
+
+905
+01:39:56,779 --> 01:40:02,699
+encourage the model to assign higher rewards to preferred responses so you're trying to
+
+906
+01:40:02,699 --> 01:40:08,699
+dissociate the higher reward better preference from the lower reward for lower preference
+
+907
+01:40:08,699 --> 01:40:14,220
+and it turns out that if you do that many times you will have a reward model that even a prompt
+
+908
+01:40:14,220 --> 01:40:20,859
+and a response will be approximating human preference so you've just trained a critique
+
+909
+01:40:21,739 --> 01:40:26,779
+that represents your humans it's a proxy for what humans prefer it's been trained on a lot
+
+910
+01:40:26,779 --> 01:40:32,220
+of human preferences the reason is better to use a model than actual humans is because we
+
+911
+01:40:32,220 --> 01:40:39,340
+can use it widely on all sorts of inputs and it can scale from a data standpoint also note
+
+912
+01:40:39,340 --> 01:40:44,380
+that this method is better than sft because it's way easier to ask humans what's your preference
+
+913
+01:40:44,380 --> 01:40:48,779
+between those two things and to ask them to come up with answers to prompts takes way less
+
+914
+01:40:48,779 --> 01:40:53,899
+time and if you've used chat gpt you've probably been asked before to to tell them
+
+915
+01:40:53,899 --> 01:41:01,220
+which response you prefer so once trained the reward model replaces the human as the
+
+916
+01:41:01,220 --> 01:41:06,819
+evaluator during reinforcement learning with from human feedback and reinforcement learning from
+
+917
+01:41:06,819 --> 01:41:12,340
+human feedback is very comfortable for you now i will i will show you what it looks like given
+
+918
+01:41:12,340 --> 01:41:17,460
+the q learning algorithm we learn but essentially we we have first taught the model what good
+
+919
+01:41:17,460 --> 01:41:22,739
+behavior looks like with sft and then we built a reward model that can tell us how good
+
+920
+01:41:22,739 --> 01:41:28,979
+an answer is according to human preferences and the rlhf approach is where we will let this
+
+921
+01:41:28,979 --> 01:41:35,619
+model practice get scored by the reward model or the critic and update itself to produce higher
+
+922
+01:41:36,180 --> 01:41:43,300
+scoring answers so more preferred answers and it's the same as the games we've seen together
+
+923
+01:41:43,300 --> 01:41:49,619
+but some things differ so i just pasted here the exact setup that we've learned together
+
+924
+01:41:50,659 --> 01:41:56,180
+for reinforcement learning the differences are the following you know our objective is still
+
+925
+01:41:56,180 --> 01:42:02,340
+to maximize expected reward that is produced by the reward model aligned with human preferences
+
+926
+01:42:05,260 --> 01:42:13,060
+the agent is the language model being fine-tuned the environment is the space of possible prompts
+
+927
+01:42:13,060 --> 01:42:22,180
+and continuations it's any any text that you can encounter the state is the specific prompt
+
+928
+01:42:22,180 --> 01:42:28,659
+plus the tokens that were generated so far the next state is one more token added
+
+929
+01:42:29,380 --> 01:42:32,979
+and the action is the next token that is chosen by the agent or the model
+
+930
+01:42:33,779 --> 01:42:43,140
+which is of course determined by the policy and then the reward is estimated by the reward model
+
+931
+01:42:43,140 --> 01:42:54,369
+that we trained to represent human preferences in this case one episode is one full prompt
+
+932
+01:42:55,170 --> 01:42:59,250
+so imagine that you get a prompt and you start generating and you go through this
+
+933
+01:42:59,250 --> 01:43:03,250
+reinforcement learning loop and you observe the rewards and then you try to maximize the future
+
+934
+01:43:03,250 --> 01:43:08,369
+rewards and then at the end of training you end up with having your pre-trained model turn into
+
+935
+01:43:08,369 --> 01:43:21,140
+an sft and your sft turn into a way better model using rlhf okay so a few things to note
+
+936
+01:43:21,140 --> 01:43:28,340
+to end on this the model does not get a reward at every single token it gets a reward
+
+937
+01:43:28,420 --> 01:43:35,060
+at the end of a sequence when the completion is finished because the reward model was was asked to
+
+938
+01:43:35,060 --> 01:43:40,819
+rate prompts and responses together so you need to finish the generation in order to see what's
+
+939
+01:43:40,819 --> 01:43:45,699
+the reward and so again going back to making good sequences of decision that's exactly it you
+
+940
+01:43:45,699 --> 01:43:51,300
+want the model to make enough good sequences of decision so that the response is preferred by
+
+941
+01:43:51,300 --> 01:43:58,420
+the critique which represents a proxy to the human preferences so all intermediary rewards are
+
+942
+01:43:58,420 --> 01:44:06,659
+typically zero and that makes it a very sparse reward episodic tasks just like a game of chess
+
+943
+01:44:06,659 --> 01:44:10,420
+where you only get a reward when you finish assuming you're not defining intermediary
+
+944
+01:44:10,420 --> 01:44:16,659
+reward so you only know if you did well at the end and you have to then use that information
+
+945
+01:44:16,659 --> 01:44:22,340
+to update your network and get a better proxy for it super there's a very nice video we're
+
+946
+01:44:22,340 --> 01:44:27,140
+not going to play for the sake of time but i will send it online it's from four days ago
+
+947
+01:44:27,140 --> 01:44:35,140
+it's you know a former stanford students andres carpati who is very thoughtful and
+
+948
+01:44:35,140 --> 01:44:41,220
+articulate and was explaining four days ago why reinforcement learning can be terrible at
+
+949
+01:44:41,220 --> 01:44:46,420
+times and that human minds work way more efficiently and so i would encourage you to
+
+950
+01:44:46,420 --> 01:44:51,699
+watch this four-minute video because he's very clearly outlying why reinforcement learning
+
+951
+01:44:51,699 --> 01:45:01,699
+is still not great even if it's the best thing we can use in many ways
+

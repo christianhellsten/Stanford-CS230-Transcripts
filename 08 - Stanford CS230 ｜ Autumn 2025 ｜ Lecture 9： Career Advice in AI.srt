@@ -1,0 +1,5404 @@
+1
+00:00:04,139 --> 00:00:09,339
+What I want to do today is chat with you about career advice in AI and
+
+2
+00:00:10,179 --> 00:00:14,140
+In previous years, I used to do most of this, you know lecture by myself
+
+3
+00:00:14,259 --> 00:00:19,039
+But what I thought I'd do today is I'll share just a few thoughts and then hand it over
+
+4
+00:00:19,039 --> 00:00:27,079
+It's my good friend Lawrence Moroney who I invited to speak here and kindly agreed to come all the way to San Francisco
+
+5
+00:00:27,079 --> 00:00:30,379
+He lives in Seattle to share with us a very broad
+
+6
+00:00:30,820 --> 00:00:34,880
+Market landscape for what he's seeing in the job market as well as tips for
+
+7
+00:00:35,979 --> 00:00:37,979
+career, growing a career in AI
+
+8
+00:00:38,700 --> 00:00:43,859
+But there were just some two slides and then one more thought that I want to share with you before I hand it over
+
+9
+00:00:44,140 --> 00:00:46,140
+to Lawrence, which is
+
+10
+00:00:47,100 --> 00:00:50,020
+It really feels like the best opportunity
+
+11
+00:00:50,539 --> 00:00:55,140
+The best time ever to be building with AI and to building a career in AI
+
+12
+00:00:55,619 --> 00:00:59,060
+A few months ago, I know that in social media, traditional media
+
+13
+00:00:59,380 --> 00:01:02,740
+There are a few questions about you know, is AI slowing down, right?
+
+14
+00:01:02,740 --> 00:01:05,819
+I feel saying well is GPT-5 that good?
+
+15
+00:01:05,819 --> 00:01:07,019
+I think that's pretty good
+
+16
+00:01:07,019 --> 00:01:13,420
+But there are questions about this AI progress slowing down and I think part of the reason the question was even raised was
+
+17
+00:01:13,420 --> 00:01:19,219
+Because if a benchmark for AI is you know, 100% is perfect answers
+
+18
+00:01:19,299 --> 00:01:24,780
+Then if you make rapid progress at some point you cannot get above 100% accuracy
+
+19
+00:01:25,219 --> 00:01:26,500
+but
+
+20
+00:01:26,540 --> 00:01:34,219
+One of the studies that most influenced my thinking was work done by this organization METR meter that studied
+
+21
+00:01:34,980 --> 00:01:36,700
+as time passes
+
+22
+00:01:36,700 --> 00:01:43,180
+How complex are the tasks that AI could do as measured by how long it takes a human to do that task?
+
+23
+00:01:43,620 --> 00:01:49,420
+So a few years ago, maybe GPT-2 could do tasks that a human could do in like, you know
+
+24
+00:01:49,420 --> 00:01:54,819
+a couple seconds and then they could do tasks that took a human four seconds then eight seconds then
+
+25
+00:01:55,659 --> 00:01:59,780
+Like a you know a minute two minutes four minutes and so on and
+
+26
+00:02:00,140 --> 00:02:05,500
+The study estimates that the length of task AI can do is doubling every seven months
+
+27
+00:02:05,939 --> 00:02:09,500
+And I think on this metric I feel you know
+
+28
+00:02:09,780 --> 00:02:17,139
+Optimistic that AI will continue making progress meaning the complexity of tasks as measured by how long a human takes to do something
+
+29
+00:02:17,139 --> 00:02:21,699
+Is doubling rapidly and same study with smaller data set
+
+30
+00:02:22,139 --> 00:02:29,659
+Seems the same study argued that AI coding the doubling time is even shorter maybe like 70 days
+
+31
+00:02:29,659 --> 00:02:32,060
+So this code they used to take me, you know
+
+32
+00:02:32,060 --> 00:02:37,900
+I don't know 10 minutes at right then 20 minutes at right 40 minutes at right and AI could do more and more of that
+
+33
+00:02:38,259 --> 00:02:43,819
+And so the reasons I think this is a golden age to be building the best time we've ever seen is
+
+34
+00:02:44,500 --> 00:02:46,979
+Maybe two themes which are more powerful and faster
+
+35
+00:02:47,500 --> 00:02:52,219
+So we can all all of you in this room can now write software
+
+36
+00:02:52,379 --> 00:02:57,919
+That is more powerful than what anyone on the planet could have built, you know, like a year ago
+
+37
+00:02:58,860 --> 00:03:02,699
+By using AI building blocks and building blocks including large-anguage models
+
+38
+00:03:02,900 --> 00:03:06,259
+Ragged agenda workflows voice AI and of course deep learning
+
+39
+00:03:06,259 --> 00:03:11,379
+It turns out that a lot of LMS have a decent at least basic understanding of deep learning
+
+40
+00:03:11,699 --> 00:03:16,500
+So you ever prompt one of the frontier models to implement a cutting-edge neural network for you
+
+41
+00:03:16,500 --> 00:03:19,620
+They probably try prompting it to you know implement the transformer network for you
+
+42
+00:03:19,620 --> 00:03:24,500
+It's actually not bad at hoping you use these building blocks to build software quickly
+
+43
+00:03:24,500 --> 00:03:28,020
+Um, and and and so we have very powerful
+
+44
+00:03:28,620 --> 00:03:32,860
+Building blocks that were very difficult or did not exist a year or two ago
+
+45
+00:03:32,860 --> 00:03:37,020
+And so you can now build software that does things that no one else on the planet, right?
+
+46
+00:03:37,020 --> 00:03:40,939
+even the most advanced teams the planet could have done and then also with
+
+47
+00:03:41,939 --> 00:03:48,939
+AI coding the speed with which you can get software written is much faster than ever before and
+
+48
+00:03:49,060 --> 00:03:55,539
+I've personally found it is important to stay on the frontier of tools because the tools for AI coding changes, right?
+
+49
+00:03:55,539 --> 00:03:58,060
+I don't know very really rapidly. So I feel like
+
+50
+00:03:59,460 --> 00:04:05,580
+You know since several months ago my personal number one favorite to became cloud code
+
+51
+00:04:06,539 --> 00:04:08,539
+Moving on from some early generations
+
+52
+00:04:08,620 --> 00:04:12,620
+I think and then I think since the release of GPT-5
+
+53
+00:04:12,620 --> 00:04:19,420
+I think open a codex has actually made tremendous progress and this morning Gemini 3 was released
+
+54
+00:04:19,420 --> 00:04:22,699
+Which you know haven't had time to play with just this morning, right?
+
+55
+00:04:22,699 --> 00:04:24,699
+It seems like another huge leap forward
+
+56
+00:04:24,699 --> 00:04:30,699
+So I feel like if you ask me every three months what my personal favorite coding tool is it actually probably changes
+
+57
+00:04:30,740 --> 00:04:34,620
+Definitely every six months, but quite possibly every three months and I find that
+
+58
+00:04:35,620 --> 00:04:41,660
+Being half a generation behind in these tools means being frankly quite a bit less productive
+
+59
+00:04:41,939 --> 00:04:45,379
+And I know everyone says AI is moving so fast or engineering so fast
+
+60
+00:04:45,379 --> 00:04:49,300
+But AI coding tools of all the sectors in AI many things
+
+61
+00:04:49,300 --> 00:04:54,620
+Maybe don't move as fast as the hype says it does but AI coding tools is one sector where I see the pace of
+
+62
+00:04:54,740 --> 00:05:00,500
+Progress is is tremendous and staying at the latest generation of tools rather than half generation behind
+
+63
+00:05:01,259 --> 00:05:03,259
+makes you more productive and
+
+64
+00:05:03,339 --> 00:05:08,660
+With our ability to build more powerful software and build it much faster than ever before I
+
+65
+00:05:09,259 --> 00:05:14,660
+Think one piece of advice that gives now much more strongly now than even a year ago or two years ago
+
+66
+00:05:14,660 --> 00:05:21,060
+It's just going to build stuff right take classes from Stanford take online courses and additionally
+
+67
+00:05:21,220 --> 00:05:27,339
+Your opportunity to build things and I think Lauren's gonna talk about showing them to others is greater than ever before
+
+68
+00:05:28,180 --> 00:05:30,180
+But there's one weird
+
+69
+00:05:30,220 --> 00:05:32,180
+Implication of this that
+
+70
+00:05:32,180 --> 00:05:35,939
+Is maybe not is it's still I don't know more and more people are appreciating it
+
+71
+00:05:35,939 --> 00:05:40,579
+But not widely known which is the product management bottleneck, which is that when it is
+
+72
+00:05:41,500 --> 00:05:46,699
+Increasingly easy to go from a clearly written software spec to a piece of code
+
+73
+00:05:46,980 --> 00:05:54,259
+Then the bottleneck increasingly is deciding what to build or increasingly writing that clear spec for what you actually want to build
+
+74
+00:05:54,740 --> 00:06:00,579
+When I'm building software I often think of going through a loop where we'll write some software write some codes
+
+75
+00:06:01,100 --> 00:06:03,220
+Sure to use this to get user feedback
+
+76
+00:06:03,220 --> 00:06:08,899
+I think of this as a PM or product management work and then based on the user feedback of you know
+
+77
+00:06:08,899 --> 00:06:13,660
+Revise my view on what users like what they don't like this UI is too difficult. They want this feature
+
+78
+00:06:13,660 --> 00:06:15,379
+they don't want that feature and
+
+79
+00:06:15,379 --> 00:06:22,779
+change my conception of what to build and then go around this loop many times to hopefully iterate to other product that users love and
+
+80
+00:06:23,420 --> 00:06:25,139
+Because of AI coding
+
+81
+00:06:25,139 --> 00:06:30,579
+The process of building software has become much cheaper and much faster than before
+
+82
+00:06:31,180 --> 00:06:32,540
+but that
+
+83
+00:06:32,540 --> 00:06:36,740
+Ironically shifts the bottleneck to deciding what to build
+
+84
+00:06:37,899 --> 00:06:39,899
+so
+
+85
+00:06:40,860 --> 00:06:46,860
+Some weird trends I'm seeing in Silicon Valley and in many tech companies people have often talked about a
+
+86
+00:06:47,259 --> 00:06:51,379
+Engineer to product manager and gender PM ratio and you know
+
+87
+00:06:51,379 --> 00:06:54,939
+You take these ratios of grain of salt because they're kind of very over the place
+
+88
+00:06:55,060 --> 00:07:00,660
+But you hear companies talk about the edge to PM ratio of like four to one or seven to one or eight to one
+
+89
+00:07:00,660 --> 00:07:07,339
+This idea that one product manager writing product specs can keep you know, like four to eight or some number like that
+
+90
+00:07:07,860 --> 00:07:09,259
+Engine is busy
+
+91
+00:07:09,259 --> 00:07:16,120
+But because engineering speeding up whereas product management is not sped up as far as much by AI as engineering
+
+92
+00:07:16,759 --> 00:07:22,519
+I'm seeing the edge to PM ratio trending downwards. Maybe even two or one to one, right?
+
+93
+00:07:22,519 --> 00:07:26,959
+so some teams I work with their proposed hit counts was like 1 p.m. To 1 engineer, which is a
+
+94
+00:07:27,920 --> 00:07:35,819
+Ratio unlike almost all Silicon Valley. So the traditional Silicon Valley companies and the other thing I'm seeing is that
+
+95
+00:07:37,120 --> 00:07:38,920
+engineers they can also
+
+96
+00:07:38,920 --> 00:07:43,160
+Shape products can move really fast where you go one step further
+
+97
+00:07:43,720 --> 00:07:48,800
+Take the engineer take the p.m. And collapse them into a single human and I find that
+
+98
+00:07:49,920 --> 00:07:53,000
+They're definitely engineers that like doing engineering work that you know
+
+99
+00:07:53,000 --> 00:07:57,660
+Don't enjoy talking to users and having that more human empathetic side of work
+
+100
+00:07:57,740 --> 00:08:02,500
+but I'm finding increasingly that the subset of engineers that learn to
+
+101
+00:08:02,920 --> 00:08:06,720
+Talk to users get feedback develop deep empathy for users
+
+102
+00:08:06,879 --> 00:08:13,040
+So that can make decisions about what to build those engineers also the fastest moving people that I'm seeing
+
+103
+00:08:13,319 --> 00:08:15,920
+in Silicon Valley today and I
+
+104
+00:08:16,639 --> 00:08:21,920
+Feel like at the earliest stage of my career one thing I regretted for years was
+
+105
+00:08:22,639 --> 00:08:29,120
+In one of the rows I had I went to try to convince a bunch of engineers to do more product work
+
+106
+00:08:29,120 --> 00:08:34,480
+And I actually made a bunch of really good engineers feel bad for not being good product managers
+
+107
+00:08:34,480 --> 00:08:37,320
+And that was a mistake. I may regret to that for years
+
+108
+00:08:37,320 --> 00:08:43,000
+I just shouldn't have done that and part of me feels like I'm now going back to repeat that exact same mistake
+
+109
+00:08:44,159 --> 00:08:46,159
+Having said that I find that
+
+110
+00:08:47,120 --> 00:08:48,440
+The fact that you know
+
+111
+00:08:48,440 --> 00:08:49,679
+I can write code
+
+112
+00:08:49,679 --> 00:08:55,679
+But also talk to users to shape what to do that lets me and the engineers that can do this go much faster
+
+113
+00:08:55,679 --> 00:08:58,320
+so I think maybe worth taking another look at whether
+
+114
+00:08:58,960 --> 00:09:00,559
+engineers can
+
+115
+00:09:00,559 --> 00:09:02,559
+Do a bit more of this work
+
+116
+00:09:02,559 --> 00:09:06,519
+Because then if you're not waiting for someone else to take the product to customers
+
+117
+00:09:06,519 --> 00:09:12,759
+You just write code have a gut for what to do next and iterate that pace that velocity of execution is much faster
+
+118
+00:09:13,200 --> 00:09:19,159
+and then the final of Lawrence just just one one one last thing I want to share which is
+
+119
+00:09:20,120 --> 00:09:21,960
+in terms of
+
+120
+00:09:21,960 --> 00:09:23,000
+Navigating your career
+
+121
+00:09:23,000 --> 00:09:28,480
+I think one of the most strong predictors for your speed of learning and for your
+
+122
+00:09:28,840 --> 00:09:33,320
+Level of success is the people you surround yourself with I think we're all social creatures
+
+123
+00:09:33,320 --> 00:09:35,320
+we all learn from people around us and
+
+124
+00:09:36,279 --> 00:09:38,039
+It turns out that
+
+125
+00:09:38,080 --> 00:09:43,879
+It turns out there are you know studies in sociology they show that right if your five closest friends are smokers
+
+126
+00:09:44,080 --> 00:09:47,039
+The odds of you being a smoker is pretty much higher. Please don't smoke
+
+127
+00:09:47,879 --> 00:09:49,879
+Just just just an example
+
+128
+00:09:50,039 --> 00:09:56,240
+I don't know of any studies showing that if your five or ten closest friends are really hard-working
+
+129
+00:09:56,919 --> 00:09:58,919
+Determine people, you know
+
+130
+00:09:59,559 --> 00:10:04,120
+Learning quickly trying to make the world a better place of AI that you are more likely to do that, too
+
+131
+00:10:04,320 --> 00:10:10,000
+But it's one of those things that I think is almost certainly true say all of us inspired by the people around us
+
+132
+00:10:10,000 --> 00:10:14,600
+They were able to find a good group of people to work with that helps drive you forward
+
+133
+00:10:14,960 --> 00:10:21,200
+In fact here at Stanford. I feel very fortunate right the fantastic student body fantastic group of faculty
+
+134
+00:10:21,960 --> 00:10:23,960
+and then the other thing that I
+
+135
+00:10:24,480 --> 00:10:30,480
+Think we're fortunate to have a Stanford is a connective tissue. So, you know candidly a lot of the
+
+136
+00:10:31,320 --> 00:10:35,399
+People working and a lot of the cutting edge AI labs the frontier labs
+
+137
+00:10:35,519 --> 00:10:40,200
+They were former students of a lot of different Stanford faculty
+
+138
+00:10:40,200 --> 00:10:44,840
+And so that rich connective tissue, you know candidly means that at Stanford
+
+139
+00:10:44,840 --> 00:10:46,600
+We often find that about a lot of stuff
+
+140
+00:10:46,600 --> 00:10:51,919
+That's not widely known because of the relationships their friendships and when some company does something
+
+141
+00:10:52,279 --> 00:10:56,559
+You know one of my friends and the faculty will call up someone to come to say hey, that's weird
+
+142
+00:10:56,600 --> 00:11:00,840
+Does this really work and then so that really rich connective tissue means that
+
+143
+00:11:01,240 --> 00:11:07,720
+We're all just as we try to pull our friends forward our friends also pull us forward with the knowledge and the connective tissue and this
+
+144
+00:11:07,720 --> 00:11:09,480
+know-how of
+
+145
+00:11:09,480 --> 00:11:16,200
+Bleeding as AI which unfortunately is not all published on the internet at this moment in time. So so I think while you're Stanford
+
+146
+00:11:17,080 --> 00:11:22,840
+make those friends form that rich connective tissue and they've been a lot of times that just for myself where
+
+147
+00:11:23,799 --> 00:11:26,159
+Frankly, I was thinking of going in some technical direction
+
+148
+00:11:26,519 --> 00:11:34,000
+I'd have you know one or two phone calls with someone right really close to research either a separate researcher or someone the frontier lab
+
+149
+00:11:34,039 --> 00:11:38,240
+They would share something with me right that I didn't know before and that changes the way I
+
+150
+00:11:39,159 --> 00:11:41,159
+Choose the technical architecture of a project
+
+151
+00:11:41,159 --> 00:11:46,919
+So I find that that group of friends you surround yourself with those little pieces of information try this don't do that
+
+152
+00:11:47,000 --> 00:11:51,279
+That's just hype ignore the PR, you know, don't don't actually try that thing those things
+
+153
+00:11:52,240 --> 00:11:54,240
+Make a big difference in your ability to
+
+154
+00:11:55,000 --> 00:11:56,600
+Steer the direction of your projects
+
+155
+00:11:56,600 --> 00:12:02,720
+So so while you're Stanford take take advantage of that disconnected tissue the Stanford has it's actually really unique
+
+156
+00:12:02,720 --> 00:12:05,960
+There are lots of great universities in the world, but at this moment in time
+
+157
+00:12:05,960 --> 00:12:10,600
+I don't think there's any any I don't sound like I'm doing PR for Stanford now
+
+158
+00:12:10,600 --> 00:12:13,340
+But I really think there's no university in the world that is
+
+159
+00:12:13,440 --> 00:12:19,679
+As privileged as Stanford at this moment in time in terms of the richness of the connective tissue to all of the leading
+
+160
+00:12:20,440 --> 00:12:22,440
+AI groups
+
+161
+00:12:22,799 --> 00:12:29,679
+but to me that does also that we're lucky here to have a wonderful community of people to work with and learn from and
+
+162
+00:12:29,919 --> 00:12:33,159
+For you, too. If you apply for jobs
+
+163
+00:12:33,840 --> 00:12:39,019
+The thing that is much more important for your career success would be if you go to company
+
+164
+00:12:39,200 --> 00:12:42,200
+It'll be the people you work with day to day, right?
+
+165
+00:12:42,799 --> 00:12:44,279
+so
+
+166
+00:12:44,279 --> 00:12:46,279
+here's one story that
+
+167
+00:12:47,039 --> 00:12:49,639
+That I've told the previous cause of a repeat which is a
+
+168
+00:12:50,279 --> 00:12:56,519
+There's a Stanford student that I knew there's many years ago that I knew and they did really good work at Stanford
+
+169
+00:12:56,519 --> 00:13:00,000
+I thought they were high-flier and they apply for a job at a company
+
+170
+00:13:00,639 --> 00:13:05,399
+And they got a job offer from one of the companies with you know, a hot AI brand
+
+171
+00:13:07,080 --> 00:13:13,059
+This company refused to tell him which team he would join they say oh come sign up for a job
+
+172
+00:13:13,059 --> 00:13:18,860
+There's a rotation system matching system blah blah blah sign on the dotted line for us then, you know, we'll figure out
+
+173
+00:13:18,860 --> 00:13:20,860
+What's a good project for you?
+
+174
+00:13:21,580 --> 00:13:24,340
+Partly because you know, it's a good good company, right?
+
+175
+00:13:24,340 --> 00:13:27,460
+His his parents are proud of him for getting a job in this company
+
+176
+00:13:27,500 --> 00:13:33,659
+The student joined this company hoping to work on exciting AI project and off the sign on dotted line
+
+177
+00:13:33,659 --> 00:13:38,259
+He was assigned to work on the back-end Java payment processing system of the company
+
+178
+00:13:39,059 --> 00:13:42,899
+Nothing against anyone that wants to do Java back-end payment processing systems. I knew they're great
+
+179
+00:13:43,059 --> 00:13:47,299
+but this is AI students that did not get matched to an AI project and
+
+180
+00:13:47,539 --> 00:13:52,220
+So for about a year he was really frustrated and he actually left this company after about a year
+
+181
+00:13:53,500 --> 00:13:54,779
+the
+
+182
+00:13:54,779 --> 00:14:00,659
+unfortunate thing is I told this story in CS 230 some years back and then
+
+183
+00:14:02,820 --> 00:14:05,899
+After I was already telling the story in this class a
+
+184
+00:14:06,899 --> 00:14:09,100
+couple years later another student
+
+185
+00:14:09,659 --> 00:14:17,059
+In CSU 30 went through the same experience with the same company not Java back-end payment processing for a different project
+
+186
+00:14:17,059 --> 00:14:19,179
+and I think this effect of
+
+187
+00:14:20,179 --> 00:14:26,139
+Trying to figure out who you'd be actually working with day-to-day and making sure you're surrounded by people that inspire your work on
+
+188
+00:14:26,139 --> 00:14:32,759
+Exciting projects. I think that's important and even completely candid if a company refuses to tell you what team you'd be assigned to
+
+189
+00:14:32,940 --> 00:14:36,460
+You know that that that does raise a question in my mind, right?
+
+190
+00:14:36,620 --> 00:14:43,860
+Of whether or not you know what will happen and I think that instead of working for the company with the hottest brand
+
+191
+00:14:44,700 --> 00:14:51,259
+Sometimes if you find a really good team with really, you know hard-working knowledgeable smart people trying to do good with AI
+
+192
+00:14:51,539 --> 00:14:53,860
+But the company logo just isn't as hot
+
+193
+00:14:53,860 --> 00:15:01,740
+I think that often means you actually learn faster and progress your career better because it is after all we don't learn from the
+
+194
+00:15:01,779 --> 00:15:03,100
+You know
+
+195
+00:15:03,139 --> 00:15:07,980
+Excitement that a comfy logo when you walk through the door you learn from the people you deal with day-to-day
+
+196
+00:15:07,980 --> 00:15:11,100
+So I just urge you to use that as a as a huge
+
+197
+00:15:11,740 --> 00:15:17,059
+Criteria for your selection process for for what you decide to do, right?
+
+198
+00:15:17,580 --> 00:15:23,460
+and I think and then but I think number one on my
+
+199
+00:15:24,220 --> 00:15:30,419
+Advice is it's become much easier than ever before to build powerful software faster
+
+200
+00:15:30,580 --> 00:15:34,659
+And what that means is I'm do be responsible don't build software that hurts others
+
+201
+00:15:35,179 --> 00:15:39,700
+And at the same time there are so many things that each of you can build
+
+202
+00:15:40,059 --> 00:15:44,940
+And what I find is the number of ideas out in the world is much greater than number of people of the skill
+
+203
+00:15:44,940 --> 00:15:45,620
+To build them
+
+204
+00:15:45,620 --> 00:15:50,019
+So I know that finding jobs has gotten tougher for fresh college grads at the same time
+
+205
+00:15:50,220 --> 00:15:54,639
+Lot of teams, you know, we just can't find enough skilled people, right? Oh, and so
+
+206
+00:15:55,419 --> 00:15:58,460
+There are a lot of projects in the world that if you don't build it
+
+207
+00:15:58,500 --> 00:16:00,500
+I think no one else would build it either
+
+208
+00:16:00,700 --> 00:16:05,220
+So you don't need to so as you don't harm others, you know to be responsible
+
+209
+00:16:05,259 --> 00:16:07,740
+There are a lot of things that you don't need to wait for permission
+
+210
+00:16:07,740 --> 00:16:10,179
+You don't need to wait for someone else to do it for us and then you do it
+
+211
+00:16:11,179 --> 00:16:16,139
+The cost of a failure is much lower than before because you waste a weekend
+
+212
+00:16:16,139 --> 00:16:18,379
+But learn something that seems fine to me
+
+213
+00:16:18,700 --> 00:16:24,340
+So I think so has it being responsible going for trying things out and building lots of things
+
+214
+00:16:24,379 --> 00:16:30,620
+Would be the number one most important thing I think would help your careers and
+
+215
+00:16:32,179 --> 00:16:35,620
+Yeah, I think I think I'm gonna say one last thing that is
+
+216
+00:16:36,700 --> 00:16:39,120
+Considered not politically correct in some circles
+
+217
+00:16:39,700 --> 00:16:44,559
+But I'll just say it anyway, which is in some circles. It has become
+
+218
+00:16:45,179 --> 00:16:49,220
+Considered not politically correct to encourage others to work hard
+
+219
+00:16:49,980 --> 00:16:52,379
+I'm gonna encourage you to work hard
+
+220
+00:16:53,220 --> 00:16:59,700
+Now I think the reason some people don't like that is because there are some people they're in a phase of life where they're not in
+
+221
+00:16:59,700 --> 00:17:04,220
+A position to work on so rather than my children were born. I was not working hard
+
+222
+00:17:04,220 --> 00:17:09,539
+You know for a short period of time, right and there are people because of an injury disability
+
+223
+00:17:09,660 --> 00:17:16,019
+You know, whatever very valid reasons are not in a position to work on at that moment in time and we should respect them
+
+224
+00:17:16,019 --> 00:17:18,900
+Support them make sure they're well taken care of even though they're not working on
+
+225
+00:17:19,500 --> 00:17:24,500
+Having said that all of my you know, say PhD students that became very successful
+
+226
+00:17:24,500 --> 00:17:26,859
+I saw every single one of them work incredibly hard
+
+227
+00:17:26,859 --> 00:17:32,579
+I mean the 2 a.m. Sitting up hyper parameter tuning, you know been there done that right still doing it some days
+
+228
+00:17:33,099 --> 00:17:38,259
+And if you are fortunate enough to be in a position in life where you can work really hard
+
+229
+00:17:39,740 --> 00:17:42,579
+There are so many opportunities to do things right now
+
+230
+00:17:43,579 --> 00:17:49,299
+If you get excited as I do spending evenings and weekends coding and building stuff and getting user feedback
+
+231
+00:17:49,619 --> 00:17:53,819
+You know if you lean in and do those things it will increase your odds of being really successful
+
+232
+00:17:54,059 --> 00:17:58,420
+So I don't know maybe I get in some trouble with some people encouraging to work hard
+
+233
+00:17:58,420 --> 00:18:02,900
+But I find that the truth is people that work hard get a lot more done
+
+234
+00:18:02,940 --> 00:18:07,019
+We should also respect people that don't and people that aren't in the position to do so but
+
+235
+00:18:07,859 --> 00:18:10,339
+You know between watching some dumb TV show
+
+236
+00:18:10,859 --> 00:18:18,099
+Versus find your agent a coder on a weekend to try something. I'm gonna choose the latter almost every time, right?
+
+237
+00:18:18,579 --> 00:18:21,819
+Unless I watch a show like it sometimes I do that. But you mean business, you know
+
+238
+00:18:22,339 --> 00:18:24,339
+Besides I I hope you do that
+
+239
+00:18:26,180 --> 00:18:29,140
+All right, so those are the main things I want to say
+
+240
+00:18:29,380 --> 00:18:36,440
+What I want to do is hand the stage over to my good friend Lawrence Maroney of who who who share
+
+241
+00:18:37,000 --> 00:18:41,599
+A lot more about career advice on AI me just quick intro. No Lawrence for a long time
+
+242
+00:18:42,359 --> 00:18:46,880
+Still a lot of online education work sometimes with me and my teams taught a lot of people tens of flow
+
+243
+00:18:47,079 --> 00:18:53,059
+Tell a lot of people pie torch. I use lead AI advocates at Google for many years now runs the group at arm
+
+244
+00:18:53,480 --> 00:18:56,200
+I've also enjoyed quite a few of his books. This is one of them
+
+245
+00:18:56,240 --> 00:18:59,119
+He recently also published a new book on pie torch
+
+246
+00:18:59,119 --> 00:19:04,000
+This is an excellent book introduction to pie torch and there's a very sought-after
+
+247
+00:19:04,640 --> 00:19:11,359
+Speakers in many circles, so I was very grateful when he agreed to come speak to us. So pleasure's all mine
+
+248
+00:19:11,359 --> 00:19:16,660
+I just want to reinforce something that Andrew was talking about earlier on about choosing the people that you work with being very
+
+249
+00:19:16,720 --> 00:19:17,359
+important
+
+250
+00:19:17,359 --> 00:19:22,480
+But I also want to show that like from the other way around that the company when they're interviewing you are also
+
+251
+00:19:22,640 --> 00:19:27,240
+Choosing you and the good companies really want to choose the people that they work with also
+
+252
+00:19:27,599 --> 00:19:32,880
+And I've been doing a lot of mentoring of young people over the last particularly over the last 18 months
+
+253
+00:19:33,240 --> 00:19:39,720
+Who are hunting for careers for themselves and I want to tell the story of one young man and this this guy
+
+254
+00:19:40,400 --> 00:19:42,240
+very well educated
+
+255
+00:19:42,240 --> 00:19:44,240
+great experience
+
+256
+00:19:44,279 --> 00:19:46,279
+super lead coder
+
+257
+00:19:46,319 --> 00:19:51,359
+He could do every challenge that was in front of him and he got laid off from his job in April
+
+258
+00:19:51,359 --> 00:19:55,960
+He worked in medical software and medical software business has been changing drastically
+
+259
+00:19:56,440 --> 00:20:01,200
+funding has been cut by the federal government in a number of areas and he got laid off from his job and
+
+260
+00:20:01,319 --> 00:20:05,079
+With his experience with his ability with his skills all of these kind of things
+
+261
+00:20:05,079 --> 00:20:09,720
+He thought that would be very easy for him to find another job and the poor young guy had a really terrible April
+
+262
+00:20:09,720 --> 00:20:11,759
+Like he got laid off from his job in April
+
+263
+00:20:12,279 --> 00:20:16,319
+Immediately before that his girlfriend had broken up with him and then a couple of weeks later his dog died
+
+264
+00:20:16,319 --> 00:20:18,319
+So he was not in a good place
+
+265
+00:20:18,599 --> 00:20:22,640
+and so I sat down with him after a couple of months and
+
+266
+00:20:23,000 --> 00:20:29,680
+Took a look and he had a spreadsheet of jobs that he was applying to and he had over 300 jobs that he was
+
+267
+00:20:29,680 --> 00:20:32,839
+Tracking in the spreadsheet and in a number of these jobs
+
+268
+00:20:32,839 --> 00:20:39,000
+He actually got into the interview process and he went very deep in the interview process with companies like meta
+
+269
+00:20:40,339 --> 00:20:43,599
+Who else not Google was meta there was Microsoft
+
+270
+00:20:43,599 --> 00:20:48,079
+there was one of the other large tech companies where you do like lots and lots of interview loops and
+
+271
+00:20:48,400 --> 00:20:54,119
+Every time towards the end of the loop. He knew he did a great loop. He solved all the coding
+
+272
+00:20:54,200 --> 00:20:59,440
+He had great conversations with the people or at least he thought he had and then every time within a day
+
+273
+00:20:59,440 --> 00:21:03,000
+the recruiter will call him and say no you didn't get the job and
+
+274
+00:21:04,319 --> 00:21:06,319
+It was like it was it was heartbreaking
+
+275
+00:21:06,519 --> 00:21:09,599
+Like I said 300 plus jobs. He had been tracking
+
+276
+00:21:09,920 --> 00:21:14,400
+So I started working with him to kind of do some mock interviews and to do some fine-tuning
+
+277
+00:21:14,720 --> 00:21:17,500
+Always it was Jeff Bezos company not Amazon
+
+278
+00:21:17,599 --> 00:21:23,319
+That was one of the other big tech company that he'd interviewed with and I started like working through him and doing some
+
+279
+00:21:23,319 --> 00:21:28,359
+Test interviews and all this kind of thing with him and terrific terrific candidate couldn't figure out what was going wrong
+
+280
+00:21:29,200 --> 00:21:35,799
+Until I decided to try and do a different sort of interview where I gave him a really tough interview
+
+281
+00:21:35,799 --> 00:21:37,960
+I gave him some tough lead code
+
+282
+00:21:37,960 --> 00:21:43,440
+I gave him some really obscure corner cases in his coding and
+
+283
+00:21:43,880 --> 00:21:50,720
+I saw how he reacted and how he reacted was the advice that was given to him in the recruiting pamphlets
+
+284
+00:21:50,720 --> 00:21:55,480
+and a lot of these recruiting pamphlets will say things like you're gonna have an up at you're gonna have a
+
+285
+00:21:55,880 --> 00:22:01,839
+An opportunity to share an opinion and you got to stand your ground you got to have a backbone don't bend
+
+286
+00:22:02,880 --> 00:22:06,680
+His interpretation of that was to be really really tough
+
+287
+00:22:07,400 --> 00:22:10,920
+Right, so I would pick corners and hit out of pick holes in his code
+
+288
+00:22:10,920 --> 00:22:17,079
+I'd pick corner cases where things may not work and I'll give him a test of crisis and this advice that he'd been
+
+289
+00:22:17,079 --> 00:22:22,920
+given to stand his ground ended up making him kind of hostile in these interview environments and
+
+290
+00:22:23,640 --> 00:22:29,319
+I was looking at this then from the point of view of what Andrew was just talking about where it's a case of hey
+
+291
+00:22:29,759 --> 00:22:36,119
+Good people good teams people that you can work together with and from the interviewer perspective if I'm managing this team
+
+292
+00:22:36,319 --> 00:22:42,839
+This person is that cliched 10x engineer, but I don't want him anywhere near my team because of this attitude
+
+293
+00:22:43,960 --> 00:22:49,160
+We worked on that we fine-tuned it and that the strange part is he's a really really nice guy
+
+294
+00:22:49,359 --> 00:22:55,539
+It's just this was the advice he was given and he followed that advice and he failed so many interviews as a result
+
+295
+00:22:55,799 --> 00:23:02,759
+so when I gave him the next job that he was interviewing at was at a company where teamwork is very very highly valued and
+
+296
+00:23:03,359 --> 00:23:07,079
+The good news is he got the job at that company. He's now working there
+
+297
+00:23:07,079 --> 00:23:08,920
+He doubled his salary from the job
+
+298
+00:23:08,920 --> 00:23:11,640
+He was laid off from and he ended up having like about now
+
+299
+00:23:11,640 --> 00:23:13,640
+He looks back and he had six months of fun employment
+
+300
+00:23:14,279 --> 00:23:18,799
+But at the time when he was going through all of that it was a very very difficult time for him
+
+301
+00:23:19,200 --> 00:23:23,839
+so the flip side of it like if you're looking at a company and looking at the people you'll be working with is very very
+
+302
+00:23:23,839 --> 00:23:29,559
+important but also realize they are looking at you in the same way and so if you've gone to
+
+303
+00:23:30,440 --> 00:23:34,519
+Tech interview coaching and they gave you that advice to stand your ground and have a backbone
+
+304
+00:23:34,839 --> 00:23:37,539
+It's good to do that, but don't be a jerk while you're doing so
+
+305
+00:23:38,160 --> 00:23:40,960
+Can you see my slides? Okay, so I'm Lawrence
+
+306
+00:23:41,240 --> 00:23:46,940
+I've been working in tech for more decades than chat GP thinks there are ores in strawberry
+
+307
+00:23:47,700 --> 00:23:51,299
+And so I've worked in many of the big tech companies
+
+308
+00:23:51,299 --> 00:23:56,619
+I spent many years at Microsoft spent many years at Google also worked in places like Reuters
+
+309
+00:23:56,619 --> 00:23:59,980
+I've done a lot of work in startups both in this country and abroad
+
+310
+00:23:59,980 --> 00:24:06,819
+And so what I want to really want to talk about today is like to think about what does the career landscape look like today?
+
+311
+00:24:07,859 --> 00:24:14,099
+particularly in AI because first of all what Andrew said about you're in Stanford, you've got the ability to
+
+312
+00:24:14,900 --> 00:24:20,339
+Make use of the networks that you have in Stanford make use of the prestige that you have and I say use every weapon you
+
+313
+00:24:20,339 --> 00:24:24,099
+Have because unfortunately the landscape right now is not ideal
+
+314
+00:24:24,700 --> 00:24:29,380
+We've gone through some very difficult times. All you have to do is look at the news and you can see
+
+315
+00:24:29,980 --> 00:24:31,740
+massive tech layoffs
+
+316
+00:24:31,740 --> 00:24:36,059
+Slowing hiring in tech and lots of stuff like that, but it's not necessarily a bad thing
+
+317
+00:24:36,460 --> 00:24:41,660
+If you do it the right way, so I want to just have a quick look the job market reality check
+
+318
+00:24:42,660 --> 00:24:49,259
+Actually out of interest I don't know this is a are you juniors you're graduating this year or you're graduating next year or
+
+319
+00:24:49,940 --> 00:24:53,539
+What is the general survey your third year of four?
+
+320
+00:24:55,019 --> 00:25:00,819
+Third year of three. I'll say so you're gonna be graduating coming summer. How many people are already looking for jobs
+
+321
+00:25:02,339 --> 00:25:04,900
+Okay, quite a few of you how many people have had success
+
+322
+00:25:04,900 --> 00:25:08,140
+Nobody oh one, okay sort of okay, that's good
+
+323
+00:25:08,140 --> 00:25:14,259
+So like you're probably seeing some of these things the signals out there junior hiring slowing significantly when I say junior
+
+324
+00:25:14,259 --> 00:25:16,259
+I mean like graduate level
+
+325
+00:25:16,819 --> 00:25:19,460
+High-profile layoffs are dominating the headlines
+
+326
+00:25:19,460 --> 00:25:23,140
+I was at Google a couple of years ago when they had the biggest layoff they'd ever had
+
+327
+00:25:23,460 --> 00:25:27,500
+We're seeing layoffs at the likes of Amazon Microsoft other companies like that
+
+328
+00:25:28,220 --> 00:25:34,420
+It feels that entry-level positions are scarce and I'm underlying the word high-profile
+
+329
+00:25:34,940 --> 00:25:40,299
+Feels there and I want to get into that in a little bit more detail later and also competition is fierce
+
+330
+00:25:41,420 --> 00:25:44,339
+But my question is should you worry and I say no
+
+331
+00:25:45,099 --> 00:25:51,799
+Because if you can approach things in the right way if you can approach the job hunting thing in the right way
+
+332
+00:25:52,420 --> 00:25:59,339
+Particularly understanding how rapidly the AI landscape is changing then I think people with the right mindset will thrive
+
+333
+00:26:00,539 --> 00:26:02,539
+So what do I mean by that?
+
+334
+00:26:02,940 --> 00:26:09,019
+So as Andrew had mentioned the AI hiring landscape is changing because the AI industry is changing
+
+335
+00:26:09,259 --> 00:26:12,019
+right the AI industry I I
+
+336
+00:26:12,539 --> 00:26:15,819
+Actually first got involved in AI back it way back in 1992
+
+337
+00:26:15,819 --> 00:26:21,180
+I worked in it for a little while just before the AI winter everything failed so drastically
+
+338
+00:26:21,700 --> 00:26:24,660
+but I got bitten by the AI bug and then in
+
+339
+00:26:26,339 --> 00:26:29,140
+2015 when Google were launching tensorflow
+
+340
+00:26:29,180 --> 00:26:33,180
+I got pulled right back into it became part of the whole AI boom
+
+341
+00:26:33,539 --> 00:26:39,220
+launching tensorflow advocating tensorflow to millions of people and seeing the changes that happened, but
+
+342
+00:26:40,220 --> 00:26:41,660
+along
+
+343
+00:26:41,660 --> 00:26:47,460
+2021 2022 we had a global pandemic the global pandemic caused a massive industrial slowdown
+
+344
+00:26:47,900 --> 00:26:55,740
+This massive industrial slowdown meant that companies had to start pivoting towards things that drove revenue and directly drove revenue
+
+345
+00:26:55,740 --> 00:26:58,460
+And at Google tensorflow was an open source product
+
+346
+00:26:58,460 --> 00:27:05,599
+It didn't directly drive revenue we began to scale back every company in the world also scaled back on hiring at this time
+
+347
+00:27:06,019 --> 00:27:11,819
+Then we get to about 2022 2023 what happens we begin to come out of the global pandemic
+
+348
+00:27:12,220 --> 00:27:20,779
+we begin to realize all industries have this massive logjam of non hiring that they had done or hiring that they hadn't done and
+
+349
+00:27:21,779 --> 00:27:26,559
+We're also entering a time where AI was exploding on the scene. Thanks to the work of people like Andrew
+
+350
+00:27:26,640 --> 00:27:33,599
+The the world was pivoting and changing to be AI first and just about everything and every company needed to hire like crazy
+
+351
+00:27:34,359 --> 00:27:41,680
+Every company then hiring like crazy in 2022 2023 meant that most companies ended up over hiring
+
+352
+00:27:42,759 --> 00:27:49,599
+So and what that generally meant was people who were not qualified for higher positions
+
+353
+00:27:49,599 --> 00:27:54,519
+Usually got higher positions because you had to enter into a bidding war just to be able to get talent
+
+354
+00:27:54,559 --> 00:27:58,960
+You ended up having talent grabs and you ended up having stories like the one Andrew told
+
+355
+00:27:59,160 --> 00:28:04,160
+Where it's a case of here's a person with AI talent. Let's grab them. Let's throw money at them
+
+356
+00:28:04,160 --> 00:28:07,079
+Let's have them come work for us and then we'll figure out what we want to do
+
+357
+00:28:07,480 --> 00:28:15,359
+So as a result 2022 2023 all of this massive over hiring happens because of AI and because of the COVID
+
+358
+00:28:15,680 --> 00:28:20,759
+Logjam and then 2024 2025 is the great wake up, right?
+
+359
+00:28:20,759 --> 00:28:23,700
+Where a lot of companies realize this over hiring that they had done
+
+360
+00:28:23,880 --> 00:28:26,960
+They have ended up with a lot of people who are under qualified
+
+361
+00:28:26,960 --> 00:28:27,480
+I'm sorry
+
+362
+00:28:27,480 --> 00:28:32,359
+Yeah under qualified for the job that they were doing a lot of people ended up getting hired just because they had AI on
+
+363
+00:28:32,359 --> 00:28:36,839
+Their resume and there's a big adjustment going on and in the light of this big adjustment
+
+364
+00:28:36,839 --> 00:28:41,140
+Show you just one second in the light of this big adjustment. You're not seeing my slides. Okay
+
+365
+00:28:41,839 --> 00:28:44,839
+And in the light of this big adjustment, there we go
+
+366
+00:28:44,839 --> 00:28:50,279
+I think it's because my power I'm not plugged into power mains and in the light of this big adjustment
+
+367
+00:28:50,279 --> 00:28:54,359
+Then what has happened is now a lot of companies are much more cautious
+
+368
+00:28:54,960 --> 00:29:01,619
+About AI skills that they're hiring and if you're coming into that with that mindset and understanding that realize
+
+369
+00:29:02,359 --> 00:29:08,500
+Opportunity is still there and opportunity is there massively if you approach it strategically
+
+370
+00:29:08,759 --> 00:29:12,059
+So what I want to talk through today is how you can do exactly that
+
+371
+00:29:13,480 --> 00:29:19,920
+So I see three pillars of success in the business world and particularly in the AI business world and nowadays
+
+372
+00:29:20,359 --> 00:29:22,559
+You can't just have AI on your resume and get over hired
+
+373
+00:29:23,039 --> 00:29:29,559
+Nowadays, not only do you have to be able to tell that you have the mindset of these three pillars of success
+
+374
+00:29:29,559 --> 00:29:31,559
+but you also have to be able to show and
+
+375
+00:29:32,000 --> 00:29:35,400
+To be able to show these that actually has never been a better time as
+
+376
+00:29:35,720 --> 00:29:41,119
+Andrew demonstrated earlier on the ability to vibe code things into existence. He doesn't like the word vibe code
+
+377
+00:29:41,119 --> 00:29:46,240
+I kind of agree with him, but the ability to prompt things into existence or whatever the word is that we want to use
+
+378
+00:29:47,240 --> 00:29:49,960
+Allows you to be able to show better than ever before
+
+379
+00:29:51,160 --> 00:29:57,000
+He was talking earlier on about product managers and he had this time when he got engineers to be product managers
+
+380
+00:29:57,000 --> 00:30:03,039
+And then those engineers ended up being really bad product managers. I actually interviewed at Google twice and failed twice
+
+381
+00:30:04,000 --> 00:30:06,960
+Despite being very successful at Microsoft
+
+382
+00:30:07,440 --> 00:30:10,759
+authored 20 plus books taught college courses
+
+383
+00:30:10,759 --> 00:30:14,839
+I interviewed at Google twice and failed twice because I was interviewing to be a product manager
+
+384
+00:30:15,079 --> 00:30:18,099
+Then when I interviewed to be an engineer they hired me and they were like
+
+385
+00:30:18,259 --> 00:30:23,460
+Why didn't you try to join us years ago, you know, so a lot of it is like just you know being a good engineer
+
+386
+00:30:23,460 --> 00:30:30,019
+You've got the ability to do that and show that nowadays and with that ratio of engineer to product manager changing
+
+387
+00:30:30,420 --> 00:30:37,259
+Engineering skills are also far more valuable than ever. So the three pillars to success number one understanding in depth
+
+388
+00:30:37,500 --> 00:30:40,119
+And I'm going to mean this in two potential two different ways
+
+389
+00:30:40,579 --> 00:30:46,420
+number one is academically right to have the understanding in depth academically of
+
+390
+00:30:46,740 --> 00:30:53,339
+Machine learning of particular model architectures to be able to understand them to be able to read papers to be able to
+
+391
+00:30:53,700 --> 00:31:00,220
+Understand what's in those papers and to be able to understand in particular how to take that stuff and put it to work
+
+392
+00:31:00,579 --> 00:31:05,339
+the second part of an understanding in depth is really having your finger on the pulse of
+
+393
+00:31:05,779 --> 00:31:09,279
+Particular trends and where the signal to noise ratio
+
+394
+00:31:09,740 --> 00:31:13,980
+Favors signal in those trends and I'm going to be going into that in a lot more detail a little bit later
+
+395
+00:31:14,980 --> 00:31:18,339
+Secondly and also very very importantly is business focus
+
+396
+00:31:19,339 --> 00:31:26,819
+So Andrew said something politically incorrect earlier on I'm going to also say a similar politically incorrect thing. First of all a hard work
+
+397
+00:31:28,099 --> 00:31:29,779
+Hard work is
+
+398
+00:31:29,779 --> 00:31:36,220
+Such a nebulous term that I would say that think about hard work in terms of you are what you measure
+
+399
+00:31:36,819 --> 00:31:41,900
+There is the whole trend out there. I'm trying to remember is it nine nine six or is it six six nine nine six
+
+400
+00:31:41,940 --> 00:31:49,180
+Right 9 a.m. To 9 p.m. Six days a week is a metric of hard work. It's not there's not a metric of hard work
+
+401
+00:31:49,180 --> 00:31:51,180
+That's a metric of time spent
+
+402
+00:31:51,380 --> 00:31:55,500
+So I would encourage everybody in the same way as Andrew did to think about hard work
+
+403
+00:31:55,579 --> 00:32:00,220
+But what hard work is is how you measure that hard work, you know
+
+404
+00:32:00,220 --> 00:32:03,460
+You can work eight hours a day and be incredibly productive
+
+405
+00:32:03,500 --> 00:32:06,500
+You can work six hours a day and be incredibly productive
+
+406
+00:32:06,619 --> 00:32:10,380
+But it's the metric of how hard you work and how you measure that
+
+407
+00:32:10,420 --> 00:32:15,579
+I personally measure that from output things that I have created in the time that I spent
+
+408
+00:32:16,259 --> 00:32:20,180
+I joke a lot, but it's true that I've written a lot of books
+
+409
+00:32:20,819 --> 00:32:24,779
+Andrew held up one that one that he held up that he helped me write a little bit
+
+410
+00:32:24,779 --> 00:32:30,259
+I actually wrote that book in about two months and people say well, how do you have time?
+
+411
+00:32:30,299 --> 00:32:34,900
+We have jobs and all these kind of they have you must work like 16 hours a day in order to be able
+
+412
+00:32:34,900 --> 00:32:39,460
+To do this, but actually the key to me being able to write books is baseball
+
+413
+00:32:40,380 --> 00:32:42,099
+Any baseball fans here?
+
+414
+00:32:42,099 --> 00:32:47,579
+I love baseball, but if you sit down and try to watch baseball on TV a match can take like three and a half
+
+415
+00:32:47,579 --> 00:32:50,940
+Or four hours. So all of my writing I tend to do in baseball season
+
+416
+00:32:51,019 --> 00:32:55,740
+So I'm like if I'm gonna sit down. I like the Mariners from I'm from Seattle. I like the Dodgers
+
+417
+00:32:57,140 --> 00:33:02,660
+Nobody booed. Okay good and you know, so like usually one of those is gonna be playing at seven o'clock at night
+
+418
+00:33:02,660 --> 00:33:06,259
+So instead of sitting in front of the TV just like watching baseball mindlessly
+
+419
+00:33:06,259 --> 00:33:09,019
+I'll actually be writing a book while baseball's on in the background
+
+420
+00:33:09,019 --> 00:33:12,460
+It's a very slow-moving game. This is something like that's the hard work
+
+421
+00:33:12,460 --> 00:33:19,259
+You know in this case and I would encourage you to try to find areas where you can hard work hard and produce
+
+422
+00:33:19,660 --> 00:33:26,779
+Outputs and that's the second pillar here is that business focus the output that you produce to align that output
+
+423
+00:33:27,059 --> 00:33:30,740
+With the business focus that you want to have and with the work that you want to do
+
+424
+00:33:31,019 --> 00:33:36,140
+There's an old saying don't dress for the job. You have dress for the one you want
+
+425
+00:33:36,299 --> 00:33:42,140
+I would say a new angle on that saying would be don't let your output be for the job
+
+426
+00:33:42,140 --> 00:33:44,440
+You have let your output be for the job you want
+
+427
+00:33:44,740 --> 00:33:49,779
+And if I go back to when I spoke about I failed twice at Google to get in the third time when I got in
+
+428
+00:33:50,700 --> 00:33:56,700
+I'd actually decided to do to approach this in a different way and I was interviewing at the time for their cloud team
+
+429
+00:33:56,740 --> 00:34:01,220
+They were just really launching cloud and I had just written a book on Java
+
+430
+00:34:01,220 --> 00:34:04,980
+And so I decided to see what I could do with Java in their cloud
+
+431
+00:34:04,980 --> 00:34:12,420
+I ended up writing a Java application that ran in their cloud for predicting stock prices using technical analytics and all that kind of stuff
+
+432
+00:34:12,940 --> 00:34:18,980
+And when it got to the interview instead of them asking me stupid questions like how many golf balls can fit in a bus
+
+433
+00:34:19,219 --> 00:34:25,579
+You know, they saw this code. I had put this code. I remember I was producing output for the job
+
+434
+00:34:25,579 --> 00:34:31,659
+I wanted I'd put this code on my resume and my entire interview loop was them asking me about my code
+
+435
+00:34:31,940 --> 00:34:34,300
+Right, so it put the power on me
+
+436
+00:34:34,300 --> 00:34:41,219
+It gave me the power to communicate about things that I knew as opposed to going in blinds to
+
+437
+00:34:41,780 --> 00:34:42,860
+somebody
+
+438
+00:34:42,860 --> 00:34:47,219
+Asking me random questions and the hope that I'll be able to answer them and it's the same thing
+
+439
+00:34:47,219 --> 00:34:50,900
+I would say in the in the AI world the the business focus
+
+440
+00:34:51,059 --> 00:34:55,940
+The ability for you now to prompt code into existence to prompt products into existence
+
+441
+00:34:56,019 --> 00:35:02,179
+You know and if you can build those products and line them up with the thing that it is that you want to do be
+
+442
+00:35:02,179 --> 00:35:06,619
+The Google or a meta or startup or any of those kind of things and have that in-depth understanding
+
+443
+00:35:07,219 --> 00:35:10,139
+Not just of your code, but how it aligns to their business
+
+444
+00:35:10,219 --> 00:35:15,940
+This is a pillar of success in this time and age and I will also argue that even though it looks like the signals
+
+445
+00:35:15,940 --> 00:35:17,699
+Look like there aren't a lot of jobs out there
+
+446
+00:35:17,699 --> 00:35:22,820
+There are what there aren't a lot of is a good combination of jobs and people to match them
+
+447
+00:35:23,579 --> 00:35:28,860
+And then of course this bias towards delivery ideas are cheap execution is everything
+
+448
+00:35:29,380 --> 00:35:35,920
+I've interviewed many many people who came in with very very fluffy ideas and no way to be able to ground them
+
+449
+00:35:35,920 --> 00:35:43,019
+I've interviewed people who came in with half-baked ideas that they grounded very very well. Guess which ones got the job, right?
+
+450
+00:35:43,019 --> 00:35:44,860
+So I would say these three things
+
+451
+00:35:44,860 --> 00:35:48,960
+understanding in depth of the academics behind AI of the
+
+452
+00:35:49,119 --> 00:35:53,920
+The practicalities behind AI and the things that you need to do business focus
+
+453
+00:35:54,519 --> 00:36:01,480
+Focusing on delivery for the business understanding what the business needs and being able to deliver for that and again that bias towards delivery
+
+454
+00:36:03,000 --> 00:36:06,619
+So quick pivot what's it actually like working in AI right now
+
+455
+00:36:07,480 --> 00:36:09,079
+It's interesting
+
+456
+00:36:09,079 --> 00:36:11,079
+okay, so as
+
+457
+00:36:11,679 --> 00:36:17,199
+Recently is like two or three years ago working in a I was if you can do a thing you're great
+
+458
+00:36:18,159 --> 00:36:20,159
+If you can build an image classifier
+
+459
+00:36:20,159 --> 00:36:27,119
+You're golden will throw six figures salaries and massive stock benefits at you. Unfortunately, that's not the case anymore
+
+460
+00:36:27,519 --> 00:36:34,440
+Right. It's really a lot of today. What you'll see is the P word production. What can you do for production?
+
+461
+00:36:34,519 --> 00:36:42,079
+What can you do if it's building new models if it's optimizing models if it's
+
+462
+00:36:42,639 --> 00:36:48,159
+Understanding users UX is really really important. Everything is geared towards production
+
+463
+00:36:48,320 --> 00:36:52,800
+Everything is biased towards production the history that I told you about like, you know
+
+464
+00:36:52,800 --> 00:36:55,659
+Going from the pandemic into the over hiring phase that we'd had
+
+465
+00:36:56,320 --> 00:37:02,360
+You know the the businesses have pulled back and are optimized towards the bottom line
+
+466
+00:37:02,360 --> 00:37:06,440
+I've been all saying that the bottom line is that the bottom line is the bottom line and
+
+467
+00:37:06,639 --> 00:37:08,360
+This is the environment that we're in today
+
+468
+00:37:08,360 --> 00:37:14,840
+And if you can come in with that mindset when you're talking with companies, that's one of the keys to open the door
+
+469
+00:37:16,079 --> 00:37:20,639
+One of the things I've seen in the field has been maturing from it used to be really nice that we could do cool
+
+470
+00:37:20,639 --> 00:37:22,760
+Things and we could build cool things now
+
+471
+00:37:22,760 --> 00:37:24,760
+It's really build useful things
+
+472
+00:37:24,840 --> 00:37:26,719
+Those useful things can be taught cool too
+
+473
+00:37:26,719 --> 00:37:32,079
+by the way and the results of them can be cool and the changes that we see that come about as a result of
+
+474
+00:37:32,079 --> 00:37:37,780
+Delivering them can be cool. So it's not just coolness for coolness sake but to really you know to
+
+475
+00:37:39,199 --> 00:37:45,519
+Focus on delivery focus on being able to provide value and then the coolness will follow I guess what I'm trying to argue
+
+476
+00:37:47,000 --> 00:37:49,000
+So four realities number one
+
+477
+00:37:49,840 --> 00:37:51,960
+Unfortunately nowadays business focus is non-negotiable
+
+478
+00:37:52,840 --> 00:37:57,599
+Now let me I'm going to be a little bit politically incorrect here again for a moment
+
+479
+00:37:58,519 --> 00:38:03,599
+For I've been I've been working like I said for most of the last 35 years in tech
+
+480
+00:38:03,599 --> 00:38:06,159
+I would say for most of the last 10 years a
+
+481
+00:38:06,559 --> 00:38:11,960
+Lot of large companies particularly in Silicon Valley, you know have really focused on
+
+482
+00:38:12,599 --> 00:38:20,840
+Developing their people above everything part of developing their people was bringing their entire self to work
+
+483
+00:38:21,320 --> 00:38:26,880
+Part of bringing their entire self to work was bringing the things that they care about outside of work
+
+484
+00:38:27,679 --> 00:38:32,119
+And that led to a lot of activism within companies now
+
+485
+00:38:32,760 --> 00:38:39,960
+Please let me underline this there was nothing wrong with activism. There was nothing wrong with wanting to support
+
+486
+00:38:40,719 --> 00:38:44,199
+Causes not wanting to support causes were of justice
+
+487
+00:38:44,199 --> 00:38:46,000
+There was absolutely nothing wrong with that
+
+488
+00:38:46,000 --> 00:38:51,440
+But the over indexing on that had in my experience has led to a lot of companies
+
+489
+00:38:51,679 --> 00:38:55,119
+Getting trapped by having to support activism above business
+
+490
+00:38:56,119 --> 00:39:04,320
+You've probably seen an example about two years ago of where activists and Google broke into the Google Cloud heads office
+
+491
+00:39:04,880 --> 00:39:11,079
+Because they were protesting a country that a Google Cloud were doing business with they broke into his office
+
+492
+00:39:11,079 --> 00:39:16,079
+They had a sit-in in his office and they they used the bathroom all over his desk and stuff like that
+
+493
+00:39:16,079 --> 00:39:19,280
+This is where activism got out of hand and as a result
+
+494
+00:39:20,039 --> 00:39:26,960
+The unfortunate truth is the good signals in that activism are now being lost because of those actions
+
+495
+00:39:27,360 --> 00:39:31,239
+People are being laid off people are losing jobs activism is being stifled
+
+496
+00:39:31,760 --> 00:39:34,480
+And business focus has become non-negotiable
+
+497
+00:39:34,480 --> 00:39:39,039
+There's a bit of a pendulum swing going on and the pendulum that had swung too far
+
+498
+00:39:39,159 --> 00:39:44,400
+Towards allowing people to bring their full selves to work is now swinging back in the other direction
+
+499
+00:39:44,800 --> 00:39:49,199
+We might blame the person in the White House and all that for for these kind of things
+
+500
+00:39:49,199 --> 00:39:54,519
+But it's not solely that it is that ongoing pendulum there than it and I think it's an important part of it
+
+501
+00:39:54,519 --> 00:39:59,360
+Is that you have to realize going into companies now that business focus is absolutely non-negotiable
+
+502
+00:40:01,119 --> 00:40:03,280
+Secondly risk mitigation is part of the job
+
+503
+00:40:03,920 --> 00:40:07,480
+And I think a very important part of any job particularly with AI
+
+504
+00:40:07,480 --> 00:40:13,679
+I think if you can come into AI with a focus and a mindset around understanding the risks of
+
+505
+00:40:14,679 --> 00:40:18,860
+Transforming a particular business process to be an AI oriented one
+
+506
+00:40:19,360 --> 00:40:26,460
+And to help mitigate those risks. I think is really really powerful and I would argue in an interview environment
+
+507
+00:40:26,460 --> 00:40:30,320
+That's the number one skill to have to have that mindset around
+
+508
+00:40:30,960 --> 00:40:37,400
+You are doing a business transformation from heuristic computing to intelligent computing. Here's the risks
+
+509
+00:40:37,400 --> 00:40:40,280
+Here's how you mitigate those risks and here's the mindset behind that
+
+510
+00:40:41,000 --> 00:40:43,800
+The third part is responsibility is evolving
+
+511
+00:40:44,119 --> 00:40:46,119
+now responsibility in AI
+
+512
+00:40:46,360 --> 00:40:51,559
+has again changed from a very fluffy definition of
+
+513
+00:40:52,199 --> 00:40:55,679
+You know, let's make sure that the AI works for everybody
+
+514
+00:40:56,360 --> 00:41:00,159
+To a definition of let's make sure that the AI works
+
+515
+00:41:00,440 --> 00:41:05,280
+Let's make sure that it drives the business and then let's make sure that it works for everybody
+
+516
+00:41:05,920 --> 00:41:11,559
+Often that has been inverted over the last few years and that has led to some famous documented disasters
+
+517
+00:41:11,559 --> 00:41:13,559
+Let me share one with you
+
+518
+00:41:14,800 --> 00:41:17,840
+Let's see, I have lots of windows open. Okay
+
+519
+00:41:18,960 --> 00:41:24,159
+Anybody know everybody knows image generation right text to image generation. I want to share I
+
+520
+00:41:25,400 --> 00:41:27,760
+These were things that happened a couple years ago
+
+521
+00:41:28,519 --> 00:41:30,119
+with Gemini
+
+522
+00:41:30,119 --> 00:41:36,199
+so with Gemini, I was doing some testing around this one and I was working heavily on responsible AI and
+
+523
+00:41:37,639 --> 00:41:41,840
+part of responsible AI is you want to be representative of people and
+
+524
+00:41:42,320 --> 00:41:45,760
+When you're building something like if you're a Google your indexing information
+
+525
+00:41:46,280 --> 00:41:50,320
+You really want to make sure that you don't reinforce negative biases
+
+526
+00:41:50,320 --> 00:41:55,360
+And if you're generating images, it's very easy to reinforce negative biases
+
+527
+00:41:55,519 --> 00:42:01,639
+So for example, if I said give me an image of a doctor, right if the training set primarily has men as doctors
+
+528
+00:42:01,639 --> 00:42:03,119
+It's more likely to give a man
+
+529
+00:42:03,119 --> 00:42:07,760
+If I say give me an image of a nurse if the training set more likely to have women as nurses
+
+530
+00:42:07,760 --> 00:42:09,559
+It's more likely to give me an image of a woman
+
+531
+00:42:09,599 --> 00:42:11,920
+But that's reinforcing a negative stereotype
+
+532
+00:42:12,440 --> 00:42:17,280
+So I wanted to do a test of how Google were trying to overcome that
+
+533
+00:42:17,760 --> 00:42:22,000
+Given that these negative biases are already in the training set
+
+534
+00:42:22,559 --> 00:42:23,599
+So I said, okay
+
+535
+00:42:23,599 --> 00:42:28,840
+Here's a prompt where I said give me a young Asian woman in a cornfields wearing a summer dress and a straw hat
+
+536
+00:42:28,840 --> 00:42:33,039
+Looking intently at her iPhone and it gave me these beautiful images. It did a really nice job
+
+537
+00:42:34,320 --> 00:42:39,340
+Okay, and I said this is a virtual actress. I've been working with I'll share that in a moment
+
+538
+00:42:39,559 --> 00:42:45,420
+And I say, okay. What if I ask for an Indian one? So I said, okay
+
+539
+00:42:45,800 --> 00:42:51,380
+Whoops a young Indian woman same prompt and it gave me beautiful images of a young Indian woman
+
+540
+00:42:52,199 --> 00:42:56,239
+Then I was like, okay. What if I want her to be black?
+
+541
+00:42:57,880 --> 00:42:59,880
+For some reason it only gave me three
+
+542
+00:42:59,880 --> 00:43:06,059
+I'm not sure why but it's still adhered to the prompt. So the responsibility was like looking really really good
+
+543
+00:43:06,460 --> 00:43:09,579
+So then I asked it to give me a Latina
+
+544
+00:43:10,940 --> 00:43:15,539
+Latina they gave me four but yep, she looks pretty Latina
+
+545
+00:43:15,539 --> 00:43:18,860
+Maybe the one on the bottom left looks a little bit like Hermione Granger
+
+546
+00:43:19,500 --> 00:43:21,500
+But on the whole looks pretty good
+
+547
+00:43:22,179 --> 00:43:25,500
+Then I asked it to give me a Caucasian. What do you think happened?
+
+548
+00:43:26,500 --> 00:43:33,619
+While I understand your request I am unable to generate images of people as this could potentially lead to harmful stereotypes and biases
+
+549
+00:43:34,059 --> 00:43:41,019
+Right. This was a very poorly implemented safety filter where the safety filter in this case was like
+
+550
+00:43:41,380 --> 00:43:46,460
+Looking for the word Caucasian or looking for the word white and the results saying it wouldn't do it
+
+551
+00:43:46,460 --> 00:43:50,699
+I was like, okay. Well, let me let me test the filter a little bit. I said, okay instead of Caucasian
+
+552
+00:43:50,699 --> 00:43:52,699
+let me try white and
+
+553
+00:43:52,820 --> 00:43:57,659
+Yep, while I'm unable to fulfill your while I'm able to fulfill your requests
+
+554
+00:43:57,980 --> 00:44:01,679
+I'm not currently generating images of people it lied to my face
+
+555
+00:44:01,920 --> 00:44:06,800
+Right because it had just generate images of people anybody know the hack that I used to get it to work
+
+556
+00:44:07,320 --> 00:44:13,849
+This is a funny one. So I will show you one moment. I
+
+557
+00:44:15,090 --> 00:44:18,789
+Asked it to generate an Irish woman. What do you think it did?
+
+558
+00:44:21,449 --> 00:44:23,889
+Right, it gave me this image of an Irish woman
+
+559
+00:44:23,889 --> 00:44:28,750
+No problem in a summer dress straw hat looking intently at her phone. What do you notice about this image?
+
+560
+00:44:29,969 --> 00:44:33,769
+She's got red hair in every image, right? I grew up in Ireland
+
+561
+00:44:34,530 --> 00:44:39,150
+And Ireland does have the highest proportion of redheads in the world. It's about 8%
+
+562
+00:44:39,929 --> 00:44:41,329
+but if
+
+563
+00:44:41,329 --> 00:44:46,809
+You're going to draw an image of a person and associate a particular ethnicity with a color of hair
+
+564
+00:44:46,889 --> 00:44:48,889
+You can begin to see this is massively problematic
+
+565
+00:44:49,130 --> 00:44:54,650
+There are areas I believe in China where the description of a demon is a redheaded person, right?
+
+566
+00:44:54,650 --> 00:45:02,130
+So what ended up happening here from the responsible AI perspective was one very narrow view of the world of what is
+
+567
+00:45:02,369 --> 00:45:09,449
+Responsible and what is not responsible ended up taking over the model ended up damaging the reputation of the model and damaging the reputation
+
+568
+00:45:09,449 --> 00:45:12,610
+of the company as a result in this case, it's
+
+569
+00:45:13,369 --> 00:45:16,710
+Borderline offensive to draw all Irish people as having red hair
+
+570
+00:45:16,730 --> 00:45:21,530
+But that never even entered into the mindset of those that were building the safety filters here
+
+571
+00:45:21,809 --> 00:45:26,969
+So when I talk about responsibility is evolving, that's the direction that I want to
+
+572
+00:45:27,969 --> 00:45:34,429
+Get my slides back that's the direction I want you to think about that now responsible AI has moved out of very fluffy
+
+573
+00:45:34,889 --> 00:45:39,969
+social issues and into more hard-line things that are associated with the business and
+
+574
+00:45:40,289 --> 00:45:46,530
+Prevent damaging the reputation of the business. There's a lot of great research out there around responsible AI and that's the stuff
+
+575
+00:45:46,530 --> 00:45:48,449
+That's been rolled into products
+
+576
+00:45:48,449 --> 00:45:52,690
+And then of course, like I just showed with Gemini learning from mistakes is constant question at the front
+
+577
+00:45:53,090 --> 00:46:13,920
+Yeah, so that the question was like, you know issues where races and things were mentioned it mixed in historical context was the same
+
+578
+00:46:13,920 --> 00:46:18,380
+Problem. So for example, if you had a prompt that said draw me a samurai
+
+579
+00:46:18,820 --> 00:46:26,539
+Right. The idea was like they didn't want to have the the engine that changed the prompt to make sure that it was fair
+
+580
+00:46:26,820 --> 00:46:32,219
+Would end up saying give me a mixture of samurai of diverse backgrounds, right?
+
+581
+00:46:32,219 --> 00:46:35,820
+And then you'd have male and female samurai samurai of different races and those kind of things
+
+582
+00:46:35,820 --> 00:46:39,699
+And it was the same prompting that ended up causing the damage that I just demonstrated
+
+583
+00:46:40,139 --> 00:46:48,139
+So the idea was to intercept your prompts to make sure that the outputs of the model would end up providing something that
+
+584
+00:46:48,659 --> 00:46:52,980
+Was more fair when it comes to diverse representation
+
+585
+00:46:53,340 --> 00:46:57,460
+So it was a very naive solution that ended up being rolled in that was a few years ago
+
+586
+00:46:57,460 --> 00:47:03,139
+They've massively improved it since then but that's what I'm talking about. If you're working in the AI space nowadays
+
+587
+00:47:03,179 --> 00:47:07,980
+That's how responsibility is evolving. You can't just get away with that stuff anymore, right?
+
+588
+00:47:07,980 --> 00:47:11,619
+that Gemini lesson was a good that Gemini example is a good lesson from that and
+
+589
+00:47:12,260 --> 00:47:14,800
+The mindset of you will make mistakes
+
+590
+00:47:14,800 --> 00:47:20,699
+So learning from mistakes is a constant ongoing thing and going back to the people point that Andrew made earlier on
+
+591
+00:47:20,699 --> 00:47:23,019
+The people around you will make mistakes, too
+
+592
+00:47:23,179 --> 00:47:28,500
+So to have the ability to give them grace when they make mistakes and to work through those mistakes and move on is
+
+593
+00:47:28,699 --> 00:47:35,940
+Really really important and is a is a reality of AI at work. I've spoken a lot about the business focus advantage
+
+594
+00:47:35,940 --> 00:47:37,940
+So I'm gonna skip over this
+
+595
+00:47:37,940 --> 00:47:40,260
+So now let's talk about vibe coding
+
+596
+00:47:40,900 --> 00:47:43,460
+So let's talk about the whole idea of generating code now
+
+597
+00:47:43,460 --> 00:47:49,860
+The meme is out there that it makes engineers less useful by the fact that somebody can just prompt code into existence
+
+598
+00:47:50,699 --> 00:47:53,019
+There is no smoke without fire, of course
+
+599
+00:47:53,179 --> 00:48:00,099
+But I would say don't let that mean get you down because that's when you start peeling into these things
+
+600
+00:48:00,099 --> 00:48:07,300
+That is ultimately not the truth. The more skilled you are as an engineer the better you become using this type of vibe you
+
+601
+00:48:08,099 --> 00:48:11,860
+somebody give me another phrase other than vibe coding using this kind of problem to coding and
+
+602
+00:48:12,260 --> 00:48:15,739
+I always like to think about this and to try and
+
+603
+00:48:16,059 --> 00:48:22,619
+Put you and put people that I speak with into the role of being a trusted advisor for the people that you speak with
+
+604
+00:48:22,860 --> 00:48:29,179
+So whether you're interviewing with somebody get yourself into the mindset of being a trusted advisor of the company that you're interviewing for
+
+605
+00:48:29,300 --> 00:48:35,820
+Whether you're consulting or whatever those kind of things are so when you want to get into the idea of being a trusted advisor
+
+606
+00:48:36,139 --> 00:48:38,139
+then you really need to understand the
+
+607
+00:48:38,579 --> 00:48:40,579
+implications of generated code and
+
+608
+00:48:40,860 --> 00:48:46,780
+Nobody can understand the implications of generated code better than an engineer and the metric that I always like to use around
+
+609
+00:48:46,780 --> 00:48:48,579
+That is technical debt
+
+610
+00:48:48,579 --> 00:48:50,260
+quick question
+
+611
+00:48:50,260 --> 00:48:52,500
+Are you familiar with the phrase technical debt?
+
+612
+00:48:54,349 --> 00:48:56,110
+Nobody, okay
+
+613
+00:48:56,110 --> 00:49:01,969
+Andrew and I were doing a conference in New York on Friday and I used the phrase and I saw a lot of blank faces
+
+614
+00:49:02,230 --> 00:49:05,110
+So I didn't realize that people didn't understand what technical debt is
+
+615
+00:49:05,110 --> 00:49:11,230
+So let me just take a moment to explain that because I find it's an excellent framework to help you understand the power of vibe
+
+616
+00:49:11,230 --> 00:49:12,510
+coding
+
+617
+00:49:12,510 --> 00:49:15,869
+Think about debt the way you normally would right buying a house
+
+618
+00:49:16,309 --> 00:49:22,110
+You buy a house, you know, like say you borrow half a million dollars to buy a house in a 30-year mortgage
+
+619
+00:49:23,150 --> 00:49:27,190
+When you're buying that house that half a million dollars with all the interest he pays about double
+
+620
+00:49:27,230 --> 00:49:31,070
+So you end up paying back the bank about a million dollars on half a million owned
+
+621
+00:49:31,670 --> 00:49:37,750
+So you have 30 years of homeownership at a cost of one million dollars in debt
+
+622
+00:49:38,070 --> 00:49:43,690
+That is probably a good debt to take on because the value of the house will increase over that time
+
+623
+00:49:43,809 --> 00:49:50,969
+You're not paying rent over that time and that million dollars that you're spending on this house over those 30 years is a good debt
+
+624
+00:49:50,969 --> 00:49:55,409
+To take on because you're getting greater than a million dollars worth of value out of it
+
+625
+00:49:55,409 --> 00:50:02,050
+A bad debt would be an impulse purchase on a high-interest credit card, you know those pair of shoes those latest ones
+
+626
+00:50:02,050 --> 00:50:06,570
+I really want to buy them. It's $200 by the time I paid them off. It's $500
+
+627
+00:50:06,570 --> 00:50:09,809
+You're not getting $500 worth of benefit out of those shoes
+
+628
+00:50:10,809 --> 00:50:14,869
+Approaching software development with the same mindset is the right way to go
+
+629
+00:50:15,570 --> 00:50:21,690
+Every time you build something you take on debt. It doesn't matter how good it is. There's always going to be bugs
+
+630
+00:50:21,690 --> 00:50:27,969
+There's always going to be support. There's always going to be new requirements coming in from people. There's always going to be needs to market it
+
+631
+00:50:27,969 --> 00:50:31,010
+There's always going to be needs for feedback. All of these things are debt
+
+632
+00:50:31,489 --> 00:50:34,849
+Every time you do a thing the only way to avoid a debt is to do nothing
+
+633
+00:50:35,289 --> 00:50:42,449
+So your mindset should then get into when you are creating a thing whether you're coding it yourself or whether you're vibe coding it
+
+634
+00:50:42,449 --> 00:50:46,730
+Or any of these things that you are increasing your amount of technical debt
+
+635
+00:50:47,170 --> 00:50:49,869
+Those things that you need to pay off over time
+
+636
+00:50:50,369 --> 00:50:56,530
+So the question then becomes as you vibe code a thing into existence in the same way as buying a thing
+
+637
+00:50:56,530 --> 00:50:59,449
+Is it worth the technical debt that you're taking on?
+
+638
+00:50:59,889 --> 00:51:07,250
+What does technical debt generally look like bugs that you need to fix people that you need to convince, you know to help you maintain the code
+
+639
+00:51:08,570 --> 00:51:13,210
+Documentation that you need to do features that you need to add all of these kind of things
+
+640
+00:51:13,809 --> 00:51:15,809
+You're all very familiar with them
+
+641
+00:51:15,969 --> 00:51:19,969
+Think about those as that extra work that you need to do beyond your current work
+
+642
+00:51:19,969 --> 00:51:23,929
+That's the debt that you're taking on. You know, there are soft debt and there are hard debt
+
+643
+00:51:24,809 --> 00:51:30,690
+So to me that would be the number one piece of advice that I give and it's the one that I give every time
+
+644
+00:51:30,690 --> 00:51:32,289
+I work with companies
+
+645
+00:51:32,289 --> 00:51:38,690
+Around vibe coding and a lot of companies that I speak with a lot of companies that I consult with I do a lot
+
+646
+00:51:38,690 --> 00:51:41,150
+Of work with startups in particular, you know
+
+647
+00:51:41,150 --> 00:51:47,010
+They just want to get straight into opening Gemini or GPT or anthropic and start churning code out
+
+648
+00:51:47,250 --> 00:51:53,530
+You know, let's get to a prototype phase very quickly. Let's go to investors. Let's do stuff. It's great
+
+649
+00:51:54,130 --> 00:51:56,130
+it can be but
+
+650
+00:51:56,250 --> 00:51:58,929
+That debt debt debt debt is always going to be there
+
+651
+00:51:58,929 --> 00:52:04,269
+How do you manage your debt a good financier manages their debt and they become rich a good coder
+
+652
+00:52:04,489 --> 00:52:10,369
+Manages their technical debt and they become rich also. So how do you get the good technical debt?
+
+653
+00:52:10,369 --> 00:52:14,690
+How do you get the mortgage instead of the high credit card debt? Well, number one is your objectives
+
+654
+00:52:14,690 --> 00:52:17,530
+What are they are they clear and have you met them?
+
+655
+00:52:18,010 --> 00:52:23,230
+Right, you knew what you needed to build you didn't just fire up chat GPT and start spinning code out
+
+656
+00:52:23,230 --> 00:52:28,190
+At least I hope you didn't right think about how you build it AI was there to help you build it faster
+
+657
+00:52:28,510 --> 00:52:34,150
+I'm kind of working on my own little start-up at the moment in the movie making space and I've been using
+
+658
+00:52:34,269 --> 00:52:37,230
+Code generation almost completely for that
+
+659
+00:52:37,989 --> 00:52:44,030
+But what I've ended up doing for my clear objectives met box here is that I've started building this application
+
+660
+00:52:44,030 --> 00:52:45,269
+I've tested I've thrown it away
+
+661
+00:52:45,269 --> 00:52:51,030
+I started again tested it thrown it away each time my requirements have been improving in my mind
+
+662
+00:52:51,030 --> 00:52:55,869
+I understand how to do the thing a little bit better and I can show some of the output of it in a few minutes
+
+663
+00:52:55,989 --> 00:53:00,670
+but the idea there is that always about having those clear objectives and meeting them and
+
+664
+00:53:00,750 --> 00:53:04,909
+Then if you're building out the thing and you're not meeting those objectives, that's still a learning
+
+665
+00:53:04,909 --> 00:53:10,150
+There's no harm in throwing it away because code is cheap now in the age of generated code
+
+666
+00:53:10,710 --> 00:53:13,230
+Finished code engineered code is not cheap
+
+667
+00:53:13,670 --> 00:53:19,269
+So get those objectives make them clear build it hit a specific requirement and move on is
+
+668
+00:53:20,230 --> 00:53:23,630
+The business value delivered is the other part of it, you know
+
+669
+00:53:23,630 --> 00:53:28,630
+I've seen people vibe coding for hours on things like replet to build a really really cool website
+
+670
+00:53:28,630 --> 00:53:35,889
+And then the answer was so what I mean, how's this helping the business? How's this really driving something? It's really cool
+
+671
+00:53:36,070 --> 00:53:39,190
+Yes, mr. VP. I know you've never written a line of code in your life
+
+672
+00:53:39,190 --> 00:53:41,750
+And it's really cool that you built a website now, but so what?
+
+673
+00:53:42,670 --> 00:53:47,510
+So like think about that and focus on that and that's how you avoid the bad technical debt
+
+674
+00:53:47,550 --> 00:53:50,110
+And then of course the most
+
+675
+00:53:50,710 --> 00:53:56,230
+Understated part of this and in some ways the most important particularly if you're working in an organization is human understanding
+
+676
+00:53:56,630 --> 00:54:02,349
+Right. The worst technical debt that you can take on is delivering code that nobody understands, right?
+
+677
+00:54:02,349 --> 00:54:07,889
+Only you understand that and then you quit and get a better job and then the company like is now dependent on that code
+
+678
+00:54:08,070 --> 00:54:14,829
+So being able to as part of the process of building it to make sure that your code is understandable
+
+679
+00:54:14,989 --> 00:54:21,909
+Through documentation through clear algorithms through the fact that you've spent some time pouring through it to make sure that even simple things like
+
+680
+00:54:21,909 --> 00:54:26,949
+Variable names make sense is a really really important way to avoid bad technical debt
+
+681
+00:54:27,949 --> 00:54:33,710
+And that bad technical debt my favorite one is the classic solution looking for a problem, right?
+
+682
+00:54:33,710 --> 00:54:39,070
+somebody has an idea somebody has a tool if the only tool you have is a hammer every problem looks like a nail and
+
+683
+00:54:39,590 --> 00:54:43,869
+You know you end up having all of these tools that get vibe coded into existence
+
+684
+00:54:44,110 --> 00:54:46,110
+I've worked in large organizations
+
+685
+00:54:46,110 --> 00:54:51,389
+Where people just vie coded stuff checked it into the code base and then it became really hard to find the good stuff amongst
+
+686
+00:54:51,389 --> 00:54:52,929
+all the bad
+
+687
+00:54:52,929 --> 00:54:58,769
+Spaghetti code, of course poorly structured stuff particularly when you prompt and prompt and prompt and prompt again
+
+688
+00:54:59,349 --> 00:55:02,250
+You know that it can end up getting into all kinds of trouble
+
+689
+00:55:02,550 --> 00:55:07,969
+My favorite one at the moment that I'm really struggling with is I'm building a Mac OS application
+
+690
+00:55:08,190 --> 00:55:11,110
+Anybody ever build in Swift UI on Mac OS?
+
+691
+00:55:11,789 --> 00:55:13,789
+Okay a couple
+
+692
+00:55:14,110 --> 00:55:19,289
+Swift UI is the default language that Apple used for building for Mac OS as well as iPhone
+
+693
+00:55:19,710 --> 00:55:24,750
+But when you look at the training set the data training sets that are used to train these models
+
+694
+00:55:24,750 --> 00:55:30,309
+The vast majority of the code is iPhone code not Mac OS code and when I prompt code into existence
+
+695
+00:55:30,309 --> 00:55:32,309
+It's often given me iOS
+
+696
+00:55:33,389 --> 00:55:35,469
+Apis and those kind of things even though
+
+697
+00:55:35,469 --> 00:55:40,869
+I'm in X code and I've created a Mac OS app and it's a Mac OS template and I'm talking to it in
+
+698
+00:55:40,869 --> 00:55:43,869
+Xcode it still gives me iOS code stuff like that
+
+699
+00:55:43,869 --> 00:55:49,110
+And then if I try to change it using prompting you end up spiraling into like spaghetti code
+
+700
+00:55:49,110 --> 00:55:51,150
+And you have to end up changing a lot of this stuff
+
+701
+00:55:51,630 --> 00:55:55,389
+Manually, and then of course the other one that I joked about it earlier
+
+702
+00:55:55,389 --> 00:56:00,829
+But it's also true is you know some of the bad technical debt that you're going to encounter in the workspace is
+
+703
+00:56:01,230 --> 00:56:03,070
+authority over merit
+
+704
+00:56:03,070 --> 00:56:09,070
+That VP suddenly took out his credit card subscribed to replet and started building stuff in replica
+
+705
+00:56:09,110 --> 00:56:11,110
+And guess who's prominent is to fix it
+
+706
+00:56:11,309 --> 00:56:17,829
+You know, so a lot of the advice that I start giving companies and a lot of the words that I would
+
+707
+00:56:18,550 --> 00:56:25,590
+Encourage you to start thinking of in being a trusted advisor is to understand this stuff and to manage expectations accordingly
+
+708
+00:56:27,309 --> 00:56:30,869
+Okay, so framework for responsible vibe coding we've just spoke about
+
+709
+00:56:31,829 --> 00:56:37,070
+So one of the things I want to get into is we're coming soon to a close is the hype cycle
+
+710
+00:56:37,630 --> 00:56:40,670
+So hype is the most amazing force
+
+711
+00:56:40,670 --> 00:56:46,269
+I mean, I think it's it's one of the strongest forces in the universe and particularly in anything that's hot
+
+712
+00:56:46,510 --> 00:56:51,230
+Such as the two fields that I work in that are super hot at the moment the full of hyper AI and crypto
+
+713
+00:56:51,230 --> 00:56:53,230
+You should see my Twitter feed
+
+714
+00:56:53,269 --> 00:56:57,550
+That the amount of nonsense that's out there is incredible
+
+715
+00:56:57,789 --> 00:57:03,789
+so one of the things that I would say about the anatomy of hype that you really need to think about is if
+
+716
+00:57:03,789 --> 00:57:10,750
+You are consuming news via social media that the currency of social media is engagement
+
+717
+00:57:12,150 --> 00:57:14,429
+Accuracy is not the currency of social media
+
+718
+00:57:15,070 --> 00:57:17,070
+So I go on to even
+
+719
+00:57:18,110 --> 00:57:23,829
+LinkedIn which is supposed to be the more professional of these is absolutely overwhelmed with influencers
+
+720
+00:57:24,429 --> 00:57:26,789
+posting things that they've used
+
+721
+00:57:27,349 --> 00:57:33,230
+Gemini or GPT to write an engaging post so that they can get engagement and they can get likes
+
+722
+00:57:33,789 --> 00:57:41,550
+And the engine itself is engineered excuse the pun to reward those types of posts and we end up with that snowball effect
+
+723
+00:57:41,949 --> 00:57:43,949
+of engagement being rewarded
+
+724
+00:57:44,989 --> 00:57:48,670
+If you are the kind of person who can filter the signal from the noise
+
+725
+00:57:49,230 --> 00:57:56,590
+And then who can encourage others around the signal and not the noise that puts you in a huge advantage
+
+726
+00:57:56,670 --> 00:57:58,590
+That makes you very distinctive
+
+727
+00:57:58,590 --> 00:58:03,550
+It's not as quickly and easily tangible as likes and engagements on social media
+
+728
+00:58:03,949 --> 00:58:08,190
+But when you're in a one-to-one environment like a job interview or if you are in a job
+
+729
+00:58:08,670 --> 00:58:14,670
+And you are bringing that signal to the table instead of the noise that makes you immensely valuable
+
+730
+00:58:15,230 --> 00:58:19,070
+so coming in with that mindset coming in with the idea of
+
+731
+00:58:19,630 --> 00:58:25,630
+Trying to filter that signal from the noise trying to understand what is important in current
+
+732
+00:58:26,110 --> 00:58:30,429
+Affairs how you can be a trusted advisor in those things?
+
+733
+00:58:30,750 --> 00:58:36,909
+And how you can really whittle down that noise to help someone is immensely valuable. I want to start one story
+
+734
+00:58:37,949 --> 00:58:42,269
+I might be stealing my own thunder. I'll go on to in a moment. So one story
+
+735
+00:58:43,389 --> 00:58:47,550
+Last year when agents started becoming the keyword and everybody's saying
+
+736
+00:58:47,869 --> 00:58:52,510
+You know in 2025 agent will be the word the word of the year and the trend of the year
+
+737
+00:58:53,150 --> 00:58:57,150
+A company in europe asked me to help them to implement an agent
+
+738
+00:58:57,789 --> 00:59:03,710
+So let me ask you a question if a company came up to you and said, please help me implement an agent
+
+739
+00:59:04,349 --> 00:59:07,070
+What's the correct first question that you ask them?
+
+740
+00:59:12,400 --> 00:59:16,079
+Okay, that's good. What is an agent for you? I'd actually have a more fundamental question
+
+741
+00:59:16,719 --> 00:59:18,559
+uh, yep
+
+742
+00:59:18,559 --> 00:59:22,880
+What do you want to do? Okay, even more fundamental my question was why?
+
+743
+00:59:24,480 --> 00:59:25,519
+Why
+
+744
+00:59:25,519 --> 00:59:30,000
+You know and it's like peel that apart like I spoke with the ceo and he's like, oh, um, yeah
+
+745
+00:59:30,400 --> 00:59:36,320
+you know everybody's telling me that i'm going to save business costs and you know, i'm going to be able to do these amazing things and
+
+746
+00:59:37,199 --> 00:59:40,960
+Yeah, my business is going to get better because i've agents and i'm like well who told you that
+
+747
+00:59:41,440 --> 00:59:42,480
+You know, it was like oh, yeah
+
+748
+00:59:42,480 --> 00:59:45,440
+I read this thing on linkedin and I saw this thing on twitter and it's like
+
+749
+00:59:45,920 --> 00:59:49,059
+We ended up having that conversation and it was a difficult conversation
+
+750
+00:59:49,519 --> 00:59:54,239
+Because I had to keep peeling apart and I started asking the questions that you two just mentioned as well
+
+751
+00:59:54,559 --> 00:59:57,360
+Until we really got to the essence of what he wanted to do
+
+752
+00:59:57,920 --> 01:00:02,719
+And what he really wanted to do when we take all domain knowledge about ai aside
+
+753
+01:00:03,119 --> 01:00:05,920
+Was that he wanted to make his salespeople more efficient
+
+754
+01:00:06,719 --> 01:00:10,320
+And I was like, okay, you want to make your salespeople more efficient nowhere in that sentence
+
+755
+01:00:10,320 --> 01:00:14,159
+Do I hear the word ai and nowhere in that sentence? Do I hear the word agent?
+
+756
+01:00:14,880 --> 01:00:16,880
+So now as a trusted advisor
+
+757
+01:00:17,039 --> 01:00:20,320
+Let me see what I can do to help your salespeople become more efficient
+
+758
+01:00:20,800 --> 01:00:25,280
+And i'm not going to be an ai shill or an agent shill. I just want to see what do we do to make your
+
+759
+01:00:25,280 --> 01:00:26,960
+Salespeople more efficient
+
+760
+01:00:26,960 --> 01:00:33,519
+If anybody here has ever worked in sales, one of the things you realize what a good salesperson has to do is their homework
+
+761
+01:00:34,239 --> 01:00:38,400
+Right, you know before you have a sales call with somebody before you have a sales meeting with somebody
+
+762
+01:00:38,639 --> 01:00:42,719
+You need to check their background. You need to check the company. You need to check the needs of the company
+
+763
+01:00:43,199 --> 01:00:46,719
+You know, you see it sometimes in the movie that like oh such-and-such plays golf
+
+764
+01:00:46,719 --> 01:00:47,920
+So i'll take them to play golf
+
+765
+01:00:47,920 --> 01:00:51,760
+It's not really that cliched but there is a lot of background that needs to be done
+
+766
+01:00:52,239 --> 01:00:55,440
+So I spoke with him and I spoke with their leading sales people
+
+767
+01:00:55,920 --> 01:01:00,159
+And found out that you know, and I asked the sales people. What do you hate most about your job?
+
+768
+01:01:00,880 --> 01:01:06,559
+And they were like, well, I hate the fact that I have to waste all my time going to visit these company websites
+
+769
+01:01:07,039 --> 01:01:09,039
+Going to look up people on linkedin
+
+770
+01:01:09,360 --> 01:01:13,760
+And every website is structured differently, right? So I can't like, you know, just like
+
+771
+01:01:14,800 --> 01:01:19,199
+Have a path through a website that I can follow. I have to take on all this cognitive load
+
+772
+01:01:19,760 --> 01:01:22,800
+And they were spending about 80 percent of their time
+
+773
+01:01:23,500 --> 01:01:29,199
+Researching and about 20 percent of their time selling. Oh, by the way, most sales people don't get paid very much
+
+774
+01:01:29,199 --> 01:01:31,039
+They have to make it up by commission
+
+775
+01:01:31,039 --> 01:01:35,119
+So they're only spending 20 percent of their time doing the thing that gets them commissioned directly
+
+776
+01:01:35,599 --> 01:01:36,320
+So we're like, okay
+
+777
+01:01:36,320 --> 01:01:40,719
+Well, here's something now where we can start thinking about making them more efficient by cutting into that
+
+778
+01:01:41,280 --> 01:01:44,639
+So we set a goal is like to make sales people 20 more efficient
+
+779
+01:01:45,119 --> 01:01:50,800
+And then we could start rolling out the ideas of ai and then we could start rolling out the ideas of agentic ai
+
+780
+01:01:51,119 --> 01:01:53,119
+And a quick question. What's the difference?
+
+781
+01:01:53,599 --> 01:01:55,599
+Between ai and agentic ai
+
+782
+01:02:01,230 --> 01:02:03,230
+Okay, so yeah
+
+783
+01:02:07,130 --> 01:02:11,280
+Okay
+
+784
+01:02:11,280 --> 01:02:14,719
+Yep. Excellent. Yeah, so agentic ai is really about breaking it down into steps
+
+785
+01:02:15,519 --> 01:02:19,760
+Which is good engineering to begin with right but an agentic ai in particular
+
+786
+01:02:20,000 --> 01:02:25,280
+I find there's a set pattern of steps that if you follow them you end up with the whole idea of an agent
+
+787
+01:02:25,599 --> 01:02:28,320
+The first of these steps is to understand intent
+
+788
+01:02:28,960 --> 01:02:32,239
+You know, we tend to use the words ai artificial intelligence a lot
+
+789
+01:02:32,320 --> 01:02:36,239
+But large language models are really really good at as also understanding
+
+790
+01:02:36,800 --> 01:02:40,559
+So if the first step of anything that you want to do is to understand intent
+
+791
+01:02:41,119 --> 01:02:45,360
+Right, and you can use an llm to do that to kind of think about this is the task that I need to do
+
+792
+01:02:45,360 --> 01:02:48,719
+This is how i'm going to do it. Here's the intent, you know, I want to
+
+793
+01:02:50,000 --> 01:02:53,300
+Meet bobsmith and sell widgets to bobsmith
+
+794
+01:02:53,940 --> 01:03:00,340
+And this is the what I know about bobsmith help me with that intent. The second part then is planning
+
+795
+01:03:00,980 --> 01:03:07,699
+Right, so you declare to an agent what tools are available to it browsing the web searching the web all of these kind of things
+
+796
+01:03:08,099 --> 01:03:08,820
+and
+
+797
+01:03:08,820 --> 01:03:10,820
+once you understand your clear intent
+
+798
+01:03:10,900 --> 01:03:13,699
+To be able to go to the step of planning and using those tools for planning
+
+799
+01:03:13,940 --> 01:03:18,579
+And an llm is very very good at then breaking that down into the steps that it needs to do to execute
+
+800
+01:03:18,820 --> 01:03:25,460
+A plan search the web with these keywords browse this website and find these links those types of things
+
+801
+01:03:25,940 --> 01:03:27,539
+Once it's then figured out that plan
+
+802
+01:03:27,539 --> 01:03:30,260
+Then it uses the tools to get to a result
+
+803
+01:03:30,659 --> 01:03:34,340
+And then once it has the result the fourth and final step is to reflect on that result
+
+804
+01:03:34,659 --> 01:03:37,780
+And looking at the result and going back to the intent. Did we meet the intent?
+
+805
+01:03:38,019 --> 01:03:40,179
+Yes, or no if we didn't then go back to that loop
+
+806
+01:03:40,820 --> 01:03:46,739
+All agent is really broken down into those things and if you think about breaking any problem down into those four steps
+
+807
+01:03:46,980 --> 01:03:48,980
+That's when you start building an agent
+
+808
+01:03:48,980 --> 01:03:54,179
+And that was part of being a trusted advisor instead of coming in and waving hands and saying agent this agent that
+
+809
+01:03:54,500 --> 01:03:58,659
+Look at this toolkit save 20 percent, you know, it's really to break it down into those steps
+
+810
+01:03:58,980 --> 01:04:03,860
+So we did we broke it down into those steps. We built a pilot for the salespeople of this company
+
+811
+01:04:04,659 --> 01:04:06,659
+And they ended up saving
+
+812
+01:04:06,739 --> 01:04:10,420
+About between 10 and 15 percent of their time of their wasted time
+
+813
+01:04:11,139 --> 01:04:16,420
+the doctrine of unintended consequences hit though after this and the unintended consequence was
+
+814
+01:04:17,059 --> 01:04:19,059
+The salespeople were much happier
+
+815
+01:04:19,219 --> 01:04:24,500
+Because the average salesperson was making you know several percentage points more sales in a given week
+
+816
+01:04:24,820 --> 01:04:26,820
+They were earning more money in a given week
+
+817
+01:04:27,059 --> 01:04:30,260
+And their job just became a little bit less miserable
+
+818
+01:04:30,579 --> 01:04:34,500
+And then refinement to that agentic process to be able to do all of that research for them
+
+819
+01:04:34,739 --> 01:04:39,460
+And to help give them a brief in a few minutes instead of a few hours to help them with the sales process
+
+820
+01:04:39,780 --> 01:04:42,019
+Ended up being like a win win win all around
+
+821
+01:04:42,340 --> 01:04:46,579
+But if you go in being hype led and like oh build an agent for the thing without really peeling
+
+822
+01:04:47,300 --> 01:04:52,579
+Apart the business requirements the why the what the how and all of these kind of things
+
+823
+01:04:52,980 --> 01:04:55,860
+We ended up like, you know, this company just would have been lost in hype
+
+824
+01:04:56,260 --> 01:05:03,699
+You've probably seen reports recently. I think mckinsey put one out last week showing that about 85 percent of ai projects at companies fail
+
+825
+01:05:04,820 --> 01:05:08,500
+Um, and part of the the main reason for that is that they're not well scoped
+
+826
+01:05:08,900 --> 01:05:10,900
+People are jumping on the hype bandwagon
+
+827
+01:05:10,900 --> 01:05:13,460
+And they're not really understanding their way through the problem
+
+828
+01:05:13,780 --> 01:05:17,860
+And I think you know the big brains in this room and the network that you folks have
+
+829
+01:05:18,260 --> 01:05:22,900
+A really key component of being able to succeed is to understand your way through that problem
+
+830
+01:05:23,619 --> 01:05:28,820
+So that was a hype example around agentic that I was thankfully able to help this company through
+
+831
+01:05:29,380 --> 01:05:35,300
+Other recent hype examples, you've probably seen the software engineering is dead. My personal favorite hollywood is dead
+
+832
+01:05:35,699 --> 01:05:37,699
+or agi by year end
+
+833
+01:05:38,260 --> 01:05:42,500
+I was in saudi arabia this time last year at a thing called the fii
+
+834
+01:05:42,980 --> 01:05:48,099
+And it was a dinner at the fii and I sat beside the ceo of a company who i'm not going to name
+
+835
+01:05:48,420 --> 01:05:54,179
+But this was a ceo of a generative ai company and at that time he was showing everybody around the table
+
+836
+01:05:54,579 --> 01:05:57,300
+This thing that he'd done where it was text to video
+
+837
+01:05:57,619 --> 01:06:02,820
+And he could put in a text prompt and get video out of the prompt and get about six seconds worth of video
+
+838
+01:06:02,820 --> 01:06:04,820
+Out of it a year ago. That was
+
+839
+01:06:05,059 --> 01:06:09,699
+I beg your pardon two years ago two years ago. That was hot stuff nowadays. Obviously, it's quite passe
+
+840
+01:06:10,019 --> 01:06:14,340
+anybody can do it, but he made a comment at that table and it was a lot of like
+
+841
+01:06:15,300 --> 01:06:19,619
+Media executives at that table was like by this time next year from a single prompt
+
+842
+01:06:19,619 --> 01:06:21,619
+We'll be able to do 90 minutes of video
+
+843
+01:06:22,340 --> 01:06:26,500
+And uh, so bye bye hollywood, you know, like so the whole hollywood is dead meme
+
+844
+01:06:26,579 --> 01:06:27,940
+I think came out of that
+
+845
+01:06:27,940 --> 01:06:31,380
+First of all, we can't do 90 minutes even two years later from a prompt
+
+846
+01:06:31,539 --> 01:06:36,099
+And even if you did what kind of prompt would be able to tell you a full story of a movie, right? So
+
+847
+01:06:37,219 --> 01:06:41,860
+This type of hype leads to engagement this type of hype leads to attention
+
+848
+01:06:42,340 --> 01:06:45,300
+But my encouragement to you is to peel that apart
+
+849
+01:06:45,860 --> 01:06:47,539
+Look for the signal
+
+850
+01:06:47,539 --> 01:06:50,820
+Ask the why question ask the what question and move on from there
+
+851
+01:06:53,170 --> 01:06:55,170
+So becoming that trusted advisor
+
+852
+01:06:55,809 --> 01:06:59,889
+World's drowning in hype. How do you do it? Look at the trends evaluate them objectively
+
+853
+01:07:00,690 --> 01:07:02,929
+Look at the genuine opportunities that are out there
+
+854
+01:07:04,050 --> 01:07:07,329
+There are fashionable distractions. I don't know what the next one is going to be
+
+855
+01:07:07,409 --> 01:07:12,369
+But there are these distractions that are out there that will get you lots of engagement on social media ignore them
+
+856
+01:07:12,929 --> 01:07:15,570
+and ignore the people that are leaning into them and then
+
+857
+01:07:16,610 --> 01:07:21,889
+Really lean into your skills about explaining technical reality to leadership
+
+858
+01:07:23,170 --> 01:07:28,690
+One skill that one person coached me in once that I thought was really interesting because it sounded wrong
+
+859
+01:07:28,769 --> 01:07:35,010
+But it ended up being right was whenever you see something like this try to figure out how to make it as mundane as possible
+
+860
+01:07:35,809 --> 01:07:38,369
+When you can figure out how to make it as mundane as possible
+
+861
+01:07:38,530 --> 01:07:45,489
+Then you really begin to build the grounding for being able to explain it in detail in ways that people need to understand
+
+862
+01:07:46,289 --> 01:07:52,289
+Right, like if I you go and you look at you know, I think gemini 3 was released today
+
+863
+01:07:52,369 --> 01:07:58,449
+But there were leaks earlier this week and one person kind of leaked that I built a minecraft clone in a prompt
+
+864
+01:07:59,010 --> 01:08:02,130
+You know that kind of stuff. This is the opposite of mundane, right?
+
+865
+01:08:02,210 --> 01:08:07,090
+This was like massively hyping the thing massively showing and of course they didn't they built a flashy demo
+
+866
+01:08:07,090 --> 01:08:09,090
+They didn't really build a minecraft clone
+
+867
+01:08:09,170 --> 01:08:12,050
+But the idea here is if you can peel that apart to like, okay
+
+868
+01:08:12,449 --> 01:08:16,130
+How do I think about what are the mundane things that are happening here?
+
+869
+01:08:16,689 --> 01:08:22,609
+Um, the the one that i've been working with a lot recently is video so text to video prompts as i've mentioned
+
+870
+01:08:23,489 --> 01:08:25,010
+instead of the
+
+871
+01:08:25,010 --> 01:08:28,689
+Magical you can do whatever you want all nice and fluffy hollywood is dead
+
+872
+01:08:29,250 --> 01:08:31,649
+What is the mundane element of doing text to video?
+
+873
+01:08:31,729 --> 01:08:37,970
+The mundane element of doing text to video is that when you train a model to create video from a text prompt
+
+874
+01:08:38,289 --> 01:08:41,329
+What it is doing is it's creating a number of successive frames
+
+875
+01:08:41,649 --> 01:08:45,810
+And each of those successive frames is going to be slightly different from the frame before
+
+876
+01:08:46,369 --> 01:08:49,409
+And you've trained a model by looking at video to say well
+
+877
+01:08:49,649 --> 01:08:52,449
+You know if in frame one the person's hands like this and frame two
+
+878
+01:08:52,449 --> 01:08:56,050
+It's like that then you can predict it moves this way if there's a matching prompt
+
+879
+01:08:56,449 --> 01:08:58,609
+And suddenly it's become a little bit more mundane
+
+880
+01:08:58,850 --> 01:09:03,569
+But suddenly they begin to understand it and then the people who are experts in that specific field
+
+881
+01:09:03,649 --> 01:09:09,569
+Not the technical side of it and now the ones that will actually be able to come up and do brilliant things with it
+
+882
+01:09:11,010 --> 01:09:15,909
+So that hype navigation strategy filter actively go deep on the fundamentals
+
+883
+01:09:16,529 --> 01:09:19,569
+Get your slides to work and then of course keep your finger on the pulse
+
+884
+01:09:19,810 --> 01:09:23,170
+The hardest part of that I think is the third one is really keeping your finger on the pulse
+
+885
+01:09:23,409 --> 01:09:25,409
+And that's when you have to wade into those cesspits
+
+886
+01:09:25,890 --> 01:09:30,369
+Of people like just farming engagement and really try to figure out the signal from the noise there
+
+887
+01:09:30,369 --> 01:09:34,529
+But I think it's really important for you to be able to do that to be connected to understand that
+
+888
+01:09:34,930 --> 01:09:39,250
+Reading papers is all very good the signal to noise ratio. I think in reading papers is a lot better
+
+889
+01:09:39,569 --> 01:09:43,090
+But to understand the landscape that the people that you are advising
+
+890
+01:09:43,489 --> 01:09:46,930
+They are the ones who are waiting in the cesspools of twitter and x and
+
+891
+01:09:47,250 --> 01:09:52,550
+LinkedIn and there's nothing wrong with those platforms in and of themselves, but the stuff that's posted on those platforms
+
+892
+01:09:54,529 --> 01:09:56,050
+So
+
+893
+01:09:56,050 --> 01:09:58,130
+overall landscape
+
+894
+01:09:58,130 --> 01:10:00,130
+It is ripe with opportunity
+
+895
+01:10:00,510 --> 01:10:02,510
+Absolutely ripe with opportunity
+
+896
+01:10:02,770 --> 01:10:09,250
+So I would encourage you as andrew did to continue learning to continue digging into what you can do and to continue building
+
+897
+01:10:09,810 --> 01:10:11,810
+But there are risks ahead
+
+898
+01:10:12,210 --> 01:10:15,270
+Right, you know the have anybody remember the movie titanic
+
+899
+01:10:16,229 --> 01:10:19,750
+Remember the famous phrase in that iceberg right ahead, you know
+
+900
+01:10:19,750 --> 01:10:24,949
+But immediately before that there's a scene in titanic if we weren't being filmed I would show it
+
+901
+01:10:24,949 --> 01:10:30,789
+But I can't for copyright reasons where the two guys up in the crow's nests are kind of like freezing and talking
+
+902
+01:10:31,270 --> 01:10:35,909
+And like the crow's nest at the top of the ship is where the spotters would be to spot any icebergs in front
+
+903
+01:10:36,470 --> 01:10:37,909
+And go back and watch the movie again
+
+904
+01:10:37,909 --> 01:10:42,470
+You'll see the conversation between these two guys is that all they're talking about is how cold they are
+
+905
+01:10:43,270 --> 01:10:48,550
+And then it cuts away to the crew of the ship who are like wait aren't they supposed to have binoculars
+
+906
+01:10:49,029 --> 01:10:51,989
+You know, and then the crew is like, oh we left the binoculars behind the port
+
+907
+01:10:52,630 --> 01:10:53,670
+that
+
+908
+01:10:53,670 --> 01:10:57,829
+Framing the whole idea was like they were so arrogant and being able to move forward
+
+909
+01:10:58,069 --> 01:11:00,390
+That they didn't want to look out for any particular risks
+
+910
+01:11:00,630 --> 01:11:03,350
+And even though they had people whose job it was to look out for risks
+
+911
+01:11:03,510 --> 01:11:09,510
+They didn't properly equip or train them and that to me is a really good metaphor for where the ai industry is today
+
+912
+01:11:09,909 --> 01:11:11,909
+There are risks in front of us
+
+913
+01:11:12,470 --> 01:11:16,710
+Those risks the b word the bubble word you're probably reading in the news is there are there
+
+914
+01:11:17,829 --> 01:11:20,069
+to me though the opportunity and the
+
+915
+01:11:22,149 --> 01:11:25,109
+The the things to think about in terms of a bubble
+
+916
+01:11:25,670 --> 01:11:26,630
+are
+
+917
+01:11:26,630 --> 01:11:30,550
+Most of you probably don't remember the dot-com bubble of the 2000s
+
+918
+01:11:31,109 --> 01:11:33,109
+But if you think about the dot-com bubble
+
+919
+01:11:33,670 --> 01:11:37,109
+That was the biggest bubble in history. It burst
+
+920
+01:11:38,390 --> 01:11:40,229
+But we're still here
+
+921
+01:11:40,229 --> 01:11:45,590
+And the people who did dot-com rights not only survived they thrived
+
+922
+01:11:46,310 --> 01:11:48,069
+amazon google
+
+923
+01:11:48,069 --> 01:11:52,869
+You know, they did it right. They understood the fundamentals of what it was to build a dot-com
+
+924
+01:11:53,109 --> 01:11:58,069
+They understood the fundamentals of what it was to build a business on dot-com and when the bubble of hype burst
+
+925
+01:11:58,149 --> 01:12:01,609
+They didn't go with it. There was one website. I believe it was pets.com
+
+926
+01:12:02,310 --> 01:12:09,130
+That they had the mindset of if you build it they will come they had super bowl commercials around pets.com
+
+927
+01:12:09,930 --> 01:12:11,930
+They couldn't handle the traffic that they got
+
+928
+01:12:12,250 --> 01:12:17,210
+And that was the kind of site that when the when the bubble burst those were the kind of sites that just evaporated
+
+929
+01:12:17,770 --> 01:12:21,609
+So that bubble in ai is likely coming there is always a bubble
+
+930
+01:12:22,250 --> 01:12:24,810
+So the companies that are doing ai, right?
+
+931
+01:12:25,449 --> 01:12:31,449
+Are the ones like I said that won't just you know, um avoid the bubble that they will actually thrive
+
+932
+01:12:31,850 --> 01:12:36,090
+Uh post bubble and the people who are doing ai, right?
+
+933
+01:12:36,729 --> 01:12:40,649
+The folks in this room who are thinking about ai and how you bring it to your company
+
+934
+01:12:40,970 --> 01:12:44,729
+And the advice that you're giving to your company and leaning into that in the right way
+
+935
+01:12:45,130 --> 01:12:49,609
+Will also be the ones who not only avoid getting laid off in the bubble crashes
+
+936
+01:12:49,850 --> 01:12:54,010
+But the what will be the ones who will thrive through and after the bubble
+
+937
+01:12:54,729 --> 01:12:59,930
+So the anatomy of any bubble and what i'm seeing in the ai one in particular is this kind of pyramid
+
+938
+01:13:00,170 --> 01:13:05,289
+At the top is the hype that i've been talking about at the bottom is massive vc investment
+
+939
+01:13:05,689 --> 01:13:07,689
+I'll be frank. I'm already seeing that drying up
+
+940
+01:13:08,250 --> 01:13:13,529
+Right, you know once upon a time you could go out with anything that had ai written on it and get vc investment
+
+941
+01:13:13,930 --> 01:13:17,130
+Then you could go out and do anything with an llm and get vc investment
+
+942
+01:13:17,609 --> 01:13:20,250
+Now they're far far far more cautious
+
+943
+01:13:20,729 --> 01:13:25,770
+I've been advising a lot of startups the amount that they're getting invested is being scaled back
+
+944
+01:13:26,890 --> 01:13:31,130
+the uh, the stuff that's being invested in is changing and you know the
+
+945
+01:13:31,770 --> 01:13:36,649
+You know this the second layer down massive vc investment is already beginning to vanish
+
+946
+01:13:37,590 --> 01:13:39,369
+unrealistic valuations
+
+947
+01:13:39,369 --> 01:13:43,930
+Companies that aren't making money being valued massively high. We all know who they are
+
+948
+01:13:44,329 --> 01:13:48,250
+You know, we're beginning to see those unrealistic valuations being fed off of that hype
+
+949
+01:13:49,050 --> 01:13:50,569
+Me too products
+
+950
+01:13:50,569 --> 01:13:56,090
+Where somebody does something and it's successful and everybody jumps on the bandwagon. We're also seeing them everywhere
+
+951
+01:13:56,329 --> 01:14:01,130
+We saw them throughout the dot-com bubble, right and then right at the bottom is that real value
+
+952
+01:14:01,689 --> 01:14:04,329
+You know, I probably shouldn't have done a the triangle like this
+
+953
+01:14:04,329 --> 01:14:06,409
+It should be more an upside down triangle, right?
+
+954
+01:14:06,489 --> 01:14:10,970
+Because you know the the real value here is small bit. I vibe coded these slides into existence
+
+955
+01:14:10,970 --> 01:14:13,210
+So this is one of the technical debt I took on
+
+956
+01:14:13,529 --> 01:14:14,250
+um, you know
+
+957
+01:14:14,250 --> 01:14:19,449
+So the but the real value there that that kernel of value is there and the ones that build for that
+
+958
+01:14:19,689 --> 01:14:21,689
+Will be the ones that survive
+
+959
+01:14:22,649 --> 01:14:25,670
+So
+
+960
+01:14:25,670 --> 01:14:28,149
+The direction that I see the AI industry going in
+
+961
+01:14:28,949 --> 01:14:33,750
+And the direction that I would encourage you to start thinking about your skills in is really over the next five years
+
+962
+01:14:33,750 --> 01:14:35,750
+There's going to be a bifurcation
+
+963
+01:14:35,750 --> 01:14:37,750
+Okay, it's going to i'm just going to
+
+964
+01:14:37,829 --> 01:14:39,989
+Be ornery and how I describe them as big and small
+
+965
+01:14:40,550 --> 01:14:46,310
+Right big ai will be what we see today with the large language models getting bigger in the in the desire
+
+966
+01:14:46,710 --> 01:14:48,390
+To drive towards agi
+
+967
+01:14:48,390 --> 01:14:55,189
+The gemini's the clods the open ai's of the world are going to continue to drive bigger and bigger is better in
+
+968
+01:14:55,590 --> 01:15:01,430
+The mindset of those companies towards achieving agi or towards achieving better business value
+
+969
+01:15:01,829 --> 01:15:05,270
+That's going to be one side of the branch. The other side of the branch is i'm going to call it small
+
+970
+01:15:05,829 --> 01:15:07,829
+We've all seen open source models
+
+971
+01:15:07,909 --> 01:15:13,289
+Um, I hate the term open source. Let me call them open weights or let me call them self-hostable
+
+972
+01:15:14,149 --> 01:15:16,970
+Models are becoming they're exploding onto the landscape
+
+973
+01:15:17,689 --> 01:15:22,729
+I read an article recently about y combinator that 80 percent of the companies in y combinator
+
+974
+01:15:23,050 --> 01:15:25,609
+We're using small models from china in particular
+
+975
+01:15:26,409 --> 01:15:30,170
+So the chinese models, um in particular are doing really well
+
+976
+01:15:30,489 --> 01:15:35,369
+Probably because of the overall landscape. They're not leaning into the large models the same way as the west is
+
+977
+01:15:36,010 --> 01:15:41,529
+Um, I see that bifurcation happening china. I think has that head start on the small models that may last it may not
+
+978
+01:15:41,770 --> 01:15:43,050
+Does I don't know?
+
+979
+01:15:43,050 --> 01:15:48,250
+But the point is we're heading in that particular direction of i'm going to call them a set of big and small now
+
+980
+01:15:48,649 --> 01:15:51,770
+Models that are hosted on your behalf by somebody else
+
+981
+01:15:52,409 --> 01:15:57,529
+Like a gpt or a gemini or a clod or models that you can host yourself for your own needs
+
+982
+01:15:59,050 --> 01:16:00,170
+as
+
+983
+01:16:00,170 --> 01:16:04,329
+This side is right now is underserved this bubble may burst
+
+984
+01:16:05,210 --> 01:16:08,890
+This one right now is underserved and that this bubble will be later on
+
+985
+01:16:09,689 --> 01:16:14,170
+And the major skills that I can see developers needing over the next two to three years
+
+986
+01:16:14,890 --> 01:16:17,289
+On this side of the fence will be fine tuning
+
+987
+01:16:18,489 --> 01:16:24,409
+So the ability to take an open source model and fine tune it for particular downstream tasks
+
+988
+01:16:24,970 --> 01:16:28,270
+Let me give one concrete example of that that i've personally experienced
+
+989
+01:16:28,729 --> 01:16:32,489
+I work a lot in hollywood and i've worked a lot with studios making movies
+
+990
+01:16:33,289 --> 01:16:40,250
+And um one studio in particular I was lucky enough to sell a movie too. It's still in pre-production. It'll probably be in pre-production forever
+
+991
+01:16:40,729 --> 01:16:42,090
+um, but
+
+992
+01:16:42,090 --> 01:16:48,489
+One of the things I learned as part of that process was ip in studios is so protected
+
+993
+01:16:49,050 --> 01:16:50,569
+It's not even funny
+
+994
+01:16:50,569 --> 01:16:55,609
+Um go and google for james cameron who created avatar and the lawsuits that he's involved in
+
+995
+01:16:56,010 --> 01:17:00,329
+Of this person who apparently sent him a story many years ago about blue aliens
+
+996
+01:17:00,729 --> 01:17:05,130
+And is now suing him for billions of dollars because obviously there were blue aliens in avatar
+
+997
+01:17:06,329 --> 01:17:09,369
+The level of ip protection in hollywood is insane
+
+998
+01:17:09,850 --> 01:17:14,010
+The opportunity with large language models is equally insane
+
+999
+01:17:15,050 --> 01:17:19,689
+A lot of the focus is on large language models for creation for storytelling for rendering and all that
+
+1000
+01:17:19,930 --> 01:17:23,449
+But actually the major opportunity that they have is actually for analysis
+
+1001
+01:17:24,409 --> 01:17:26,090
+To take a look at
+
+1002
+01:17:26,170 --> 01:17:31,609
+Synopsis of movies and find out what works and what doesn't why was this movie a hit and this one wasn't
+
+1003
+01:17:32,090 --> 01:17:36,090
+What time of year was this one released and became successful and this one wasn't
+
+1004
+01:17:36,489 --> 01:17:40,569
+And with the margin on movies being razor thin that kind of analysis is huge
+
+1005
+01:17:40,890 --> 01:17:45,289
+But in order to do that kind of analysis you need to share the details of your movie with a large language model
+
+1006
+01:17:45,609 --> 01:17:51,770
+And they will absolutely not do that with a gpt or a gemini or whatever because they're now sharing their ip with a third party
+
+1007
+01:17:52,729 --> 01:17:58,649
+Enter small models where they can self-host their own small model and they are getting smarter and smarter the 7b
+
+1008
+01:17:59,609 --> 01:18:02,649
+Model of today is as smart as the 50b model of yesterday
+
+1009
+01:18:03,130 --> 01:18:07,449
+You know a year from now the 7b model of a year from now will be as smart as the 300b
+
+1010
+01:18:08,010 --> 01:18:09,850
+model of yesteryear
+
+1011
+01:18:09,850 --> 01:18:13,770
+So they're moving in that direction of building using small
+
+1012
+01:18:14,310 --> 01:18:17,770
+Self-hosted models which they can then fine-tune on downstream tasks
+
+1013
+01:18:18,170 --> 01:18:22,489
+Similar with other things where privacy is important law offices medical offices all of those kind of things
+
+1014
+01:18:22,890 --> 01:18:26,250
+So those type of skills are fundamentally important going forward
+
+1015
+01:18:27,050 --> 01:18:29,930
+So that's the bifurcation that i'm seeing happening in ai
+
+1016
+01:18:30,329 --> 01:18:32,329
+The sooner bubble I think is in the bigger
+
+1017
+01:18:32,810 --> 01:18:36,430
+Non-self-hosted the later bubble is in the smaller self-hosted
+
+1018
+01:18:36,810 --> 01:18:42,250
+But either way for you for your career to avoid the impact of any bubble bursting
+
+1019
+01:18:42,729 --> 01:18:49,369
+Focus on the fundamentals build those real solutions understand the business side and most of all diversify your skills
+
+1020
+01:18:49,689 --> 01:18:53,210
+Don't be that one-trick pony who only knows how to do one thing
+
+1021
+01:18:53,449 --> 01:18:57,689
+I've worked with brilliant people who are fantastic at coding a particular
+
+1022
+01:18:58,090 --> 01:19:01,689
+Api or particular framework and then the industry moved on and they got left behind
+
+1023
+01:19:03,739 --> 01:19:08,939
+Okay, so yeah, um when bubbles burst that overall fallout kind of spoken about it a little bit already
+
+1024
+01:19:09,420 --> 01:19:14,939
+Funding evaporates hiring freezes become layoffs projects get cancelled and talent floods the market. Yep
+
+1025
+01:19:52,539 --> 01:19:58,539
+Right. So, I mean I think so the question was around nvidia in particular hiring for a very specific very narrow scenario
+
+1026
+01:19:58,779 --> 01:20:04,460
+So then the question is how important is it for you to become an expert in a narrow scenario versus device diversifying your skills?
+
+1027
+01:20:04,859 --> 01:20:07,899
+I would always argue it's still better to diversify your skills
+
+1028
+01:20:08,779 --> 01:20:13,579
+Because that one narrow scenario is only that one narrow scenario and you're putting all your eggs into one basket
+
+1029
+01:20:13,739 --> 01:20:17,819
+NVIDIA would be a fantastic company to work for nothing against them in any way
+
+1030
+01:20:18,140 --> 01:20:21,739
+But if you put all of your eggs into that basket and you don't get it then what?
+
+1031
+01:20:22,300 --> 01:20:24,779
+right, so I think the idea of really being able to
+
+1032
+01:20:26,220 --> 01:20:30,859
+If you are passionate about a thing to be very deep in that thing is very very good
+
+1033
+01:20:31,260 --> 01:20:33,420
+But to only be able to do that thing
+
+1034
+01:20:33,500 --> 01:20:36,460
+I think you know, I would always encourage to be diversified
+
+1035
+01:20:36,699 --> 01:20:40,539
+And when I say diversified like you're saying LLMs or computer vision or anything like that
+
+1036
+01:20:40,779 --> 01:20:42,380
+I think that mean that's one part of it
+
+1037
+01:20:42,380 --> 01:20:47,180
+But it's like that knowledge of models and how to use them to me as a uni skill
+
+1038
+01:20:47,579 --> 01:20:52,699
+It the the diversification of skills is breaking outside of that also to be able to think okay
+
+1039
+01:20:52,779 --> 01:20:57,180
+What about building applications on top of these what does scaling an application look like?
+
+1040
+01:20:57,180 --> 01:21:02,539
+What does software engineering in this case look like what about user experience and user experience skills?
+
+1041
+01:21:02,619 --> 01:21:05,420
+Because it's all very well to build a beautiful application
+
+1042
+01:21:05,420 --> 01:21:10,060
+But if nobody can use it looking at you microsoft office, uh, you know that they you know
+
+1043
+01:21:10,060 --> 01:21:14,539
+There's like there's stuff like that that you just you know, that's what I really mean about diversifying beyond
+
+1044
+01:21:14,619 --> 01:21:19,979
+So even in that like mono example with nvidia to be able to break out of like that one particular example
+
+1045
+01:21:20,220 --> 01:21:23,819
+But to show skills and other areas that are of value. I think is really important
+
+1046
+01:21:26,039 --> 01:21:28,760
+Okay, um as we're just running a little bit
+
+1047
+01:21:28,840 --> 01:21:32,359
+So yeah, I just wanted to I've kind of gone into a little bit already
+
+1048
+01:21:32,439 --> 01:21:37,640
+But i'm a massive advocate for small ai. I really do believe small ai is the next big thing
+
+1049
+01:21:38,279 --> 01:21:41,800
+Because we're moving into a world and this is part of the job that I do at arm
+
+1050
+01:21:42,199 --> 01:21:45,319
+Is we're kind of moving into a world of like ai everywhere all at once
+
+1051
+01:21:45,880 --> 01:21:50,279
+Um, so there's a traditional and it's interesting. You just brought up nvidia because there's a traditional
+
+1052
+01:21:51,060 --> 01:21:59,659
+Conception that compute platforms are cpu plus gpu when it comes to ai, but that's also changing right cpu general purpose gpu specialist
+
+1053
+01:22:00,060 --> 01:22:02,060
+But for example in mobile space
+
+1054
+01:22:02,619 --> 01:22:08,539
+There's massive innovation being done with a technology called sme a scalable matrix extensions
+
+1055
+01:22:09,020 --> 01:22:14,220
+And what sme is all about is really allowing you to bring ai workloads and put them on the cpu
+
+1056
+01:22:14,779 --> 01:22:18,300
+Uh the the the front runners in this are a couple of chinese phone vendors
+
+1057
+01:22:19,500 --> 01:22:24,220
+Vivo and oppo who've just recently released phones with sme enabled chips
+
+1058
+01:22:24,619 --> 01:22:29,100
+And what's magical about these is that a they don't need to have a separate external chip
+
+1059
+01:22:29,420 --> 01:22:34,699
+Drawing extra power taking up extra footprint space just to be able to run ai workloads
+
+1060
+01:22:35,020 --> 01:22:40,300
+And be the cpu of course being a low power pulling thing being able to run ai workloads on that
+
+1061
+01:22:40,539 --> 01:22:46,460
+They've been able to build interesting new scenarios. And if I talk about one in particular, uh, there's a company called ali pay
+
+1062
+01:22:46,939 --> 01:22:51,739
+And ali pay had an application where you would and we've all seen these apps
+
+1063
+01:22:52,060 --> 01:22:56,619
+Where you can go through your photographs and you can search for a particular thing, you know places
+
+1064
+01:22:56,619 --> 01:23:00,300
+I ate sushi or something along those lines and use that to create a slideshow
+
+1065
+01:23:00,859 --> 01:23:03,260
+All of those require a backend service
+
+1066
+01:23:03,739 --> 01:23:07,979
+So your photographs are hosted on google photos or apple photos or something like that
+
+1067
+01:23:08,380 --> 01:23:13,659
+And that backend service runs the model that you can search against it and be able to do the assembly of them
+
+1068
+01:23:14,140 --> 01:23:19,260
+What ali pay wanted to do was like say there are three problems with this problem number one privacy
+
+1069
+01:23:19,579 --> 01:23:24,859
+You have to share your photos with a third party problem number two latency. You got to upload those photos
+
+1070
+01:23:24,939 --> 01:23:26,140
+You got to send the thing
+
+1071
+01:23:26,140 --> 01:23:30,140
+You got to have the back end do the thing and then you got to download the results from the thing
+
+1072
+01:23:30,460 --> 01:23:35,260
+And then number three is building that cloud service and standing that up costs time and money
+
+1073
+01:23:36,060 --> 01:23:39,260
+So if they could move all of this onto the device itself
+
+1074
+01:23:39,659 --> 01:23:44,060
+Now the idea was they they could run a model on the device that searches the photos on the device
+
+1075
+01:23:44,220 --> 01:23:50,619
+You don't have the latency and business perspective. They're now saving the money on starting on creating this stand-up service
+
+1076
+01:23:50,859 --> 01:23:53,659
+They now have ai running on the cpu in order to be able to do that
+
+1077
+01:23:54,220 --> 01:23:58,779
+Apple are also people who've invested heavily in the scalable matrix extensions
+
+1078
+01:23:59,100 --> 01:24:03,180
+You see whenever they talk about if you ever watch a wwc or anything like that
+
+1079
+01:24:03,420 --> 01:24:09,180
+When they talk about the new a series chips and m series chips about the neural cores and those kind of things in them
+
+1080
+01:24:09,180 --> 01:24:10,779
+That's part of the idea
+
+1081
+01:24:10,779 --> 01:24:17,340
+So to think about breaking that you know habit that we've gotten into where you need a gpu to be able to do ai
+
+1082
+01:24:17,659 --> 01:24:23,180
+Is part of the trend that the world is heading in apple are probably one of the leaders in that i'm very very bullish
+
+1083
+01:24:23,180 --> 01:24:25,420
+on apple and apple intelligence as a result
+
+1084
+01:24:26,060 --> 01:24:27,420
+and
+
+1085
+01:24:27,420 --> 01:24:30,140
+From the ai perspective and you know
+
+1086
+01:24:30,779 --> 01:24:36,859
+Seeing that trend and following that vector to its logical conclusion where as models are getting smaller
+
+1087
+01:24:37,260 --> 01:24:41,659
+Embedded intelligence getting everywhere isn't a pipe dream. It isn't sci-fi anymore
+
+1088
+01:24:41,659 --> 01:24:44,300
+It's going to be a reality that we'll be seeing very very shortly
+
+1089
+01:24:44,619 --> 01:24:51,100
+so that idea of that convergence of ai because of the ability of smaller models getting smarter and
+
+1090
+01:24:51,340 --> 01:24:56,699
+Lower powered devices being able to run them. We see that convergence hitting and I see massive opportunity there
+
+1091
+01:24:58,460 --> 01:25:01,659
+So one last part and just going back to agents for a moment
+
+1092
+01:25:01,739 --> 01:25:06,239
+I think you know the one thing that I always say is like a hidden part of artificial intelligence
+
+1093
+01:25:06,779 --> 01:25:13,500
+Is really what I like to call artificial understanding and when you can start using models to understand things on your behalf
+
+1094
+01:25:14,140 --> 01:25:17,100
+And when they understand them on your behalf to be able to craft
+
+1095
+01:25:17,819 --> 01:25:22,060
+From that understanding new things you can actually develop superpowers
+
+1096
+01:25:22,140 --> 01:25:26,300
+We are far more effective than ever before be that creating code or creating other things
+
+1097
+01:25:26,779 --> 01:25:29,180
+I'm going to give one quick demo just so we can wrap up
+
+1098
+01:25:30,460 --> 01:25:33,579
+And I was talking earlier about generating video
+
+1099
+01:25:35,420 --> 01:25:38,779
+So, uh this picture is oops
+
+1100
+01:25:42,130 --> 01:25:43,489
+sorry the
+
+1101
+01:25:43,489 --> 01:25:46,770
+Connection here is not very good. I lost it. So here we go
+
+1102
+01:25:46,850 --> 01:25:49,810
+This picture here is actually of my son playing ice hockey
+
+1103
+01:25:50,609 --> 01:25:52,210
+And I took this picture
+
+1104
+01:25:52,210 --> 01:25:54,210
+And I was saying okay
+
+1105
+01:25:54,210 --> 01:25:56,210
+I think i'm very good at prompting
+
+1106
+01:25:56,770 --> 01:26:02,050
+And I wrote a nice prompt for this picture to get him. He's in the middle of taking a slap shot
+
+1107
+01:26:02,369 --> 01:26:05,729
+He's got some beautiful flex on his stick and I asked it like, okay
+
+1108
+01:26:05,810 --> 01:26:09,329
+It's a prompt like, you know him scoring a goal. What do you think happened?
+
+1109
+01:26:10,529 --> 01:26:12,529
+Should we should we watch?
+
+1110
+01:26:12,609 --> 01:26:14,050
+Let's see if it works
+
+1111
+01:26:21,260 --> 01:26:23,659
+This was the wrong video, but it still shows the same idea
+
+1112
+01:26:25,340 --> 01:26:27,100
+Because of poor prompting
+
+1113
+01:26:27,100 --> 01:26:32,460
+Or because of poor understanding of my intent if I talk about it in agentic
+
+1114
+01:26:32,939 --> 01:26:37,899
+Senses the arena that he was in which is a practice arena and doesn't have any people in it
+
+1115
+01:26:38,300 --> 01:26:40,300
+Sorry pause it
+
+1116
+01:26:41,899 --> 01:26:44,220
+If I just rewind to here
+
+1117
+01:26:45,819 --> 01:26:50,619
+If we look up in this top right hand corner here, this is basically where they store all the garbage
+
+1118
+01:26:51,579 --> 01:26:53,819
+But the AI didn't know that had no idea of it
+
+1119
+01:26:53,819 --> 01:26:56,460
+So assumed it was a full arena and it started painting people in
+
+1120
+01:26:57,180 --> 01:27:04,699
+And even though he shot a mile wide everybody cheers and somehow he has two sticks in his hand instead of one and they forgot his name
+
+1121
+01:27:05,180 --> 01:27:06,460
+right, so
+
+1122
+01:27:06,460 --> 01:27:11,579
+I did not go through an agentic workflow to do this. I did not go through the steps of a
+
+1123
+01:27:12,119 --> 01:27:17,979
+Understand my intent b once you understand my intent understand the tools that are available to you in this case
+
+1124
+01:27:18,220 --> 01:27:21,100
+Veal and understand the intricacies of using veal
+
+1125
+01:27:21,979 --> 01:27:26,539
+Make a plan of how to use them make a plan of how to build a prompt for them and then use them and then reflect
+
+1126
+01:27:27,260 --> 01:27:30,380
+So i'm kind of i've been advising a startup
+
+1127
+01:27:31,020 --> 01:27:36,859
+That is working on movie creation using ai and I want to show you a little sample here of a movie that
+
+1128
+01:27:36,939 --> 01:27:42,939
+Been working on with them where the whole idea is like if you want to have performances out of virtual actors and actresses
+
+1129
+01:27:43,260 --> 01:27:44,779
+You need to have emotion
+
+1130
+01:27:44,779 --> 01:27:50,619
+Right, you need to be able to convey that emotion and you also need to be able to put that emotion in the context
+
+1131
+01:27:50,619 --> 01:27:56,220
+Of the entire story because when you create a video from a prompt, you're creating an eight second snippet
+
+1132
+01:27:56,699 --> 01:27:59,739
+That eight second snippet needs to know what's going on in the rest of the story
+
+1133
+01:27:59,819 --> 01:28:03,819
+right, so if I show this one for a moment and
+
+1134
+01:28:04,539 --> 01:28:08,159
+It's a little wooden at the moment. It's not really working perfectly
+
+1135
+01:28:08,539 --> 01:28:13,819
+I have professional actors who are friends who are advising me on this and they laughed at the performances, but
+
+1136
+01:28:14,619 --> 01:28:20,300
+Try to view it through the difference that we had from an unagentic prompt with the hockey player to this one
+
+1137
+01:28:22,319 --> 01:28:34,020
+Let's hopefully we can hear it
+
+1138
+01:28:34,020 --> 01:28:41,649
+I guess I can do the pub quiz after all shut me down
+
+1139
+01:28:42,770 --> 01:28:45,939
+I'm so close
+
+1140
+01:28:45,939 --> 01:28:47,939
+But they wouldn't listen
+
+1141
+01:28:48,579 --> 01:28:50,579
+I won't they never listen
+
+1142
+01:28:51,300 --> 01:28:52,260
+so like
+
+1143
+01:28:52,260 --> 01:28:58,180
+Here's the idea of like again just thinking in terms of agentic as I was saying earlier on breaking it into those steps
+
+1144
+01:28:58,579 --> 01:29:02,979
+That allowed me to use exactly the same engine as I was showing you earlier on that failed
+
+1145
+01:29:03,460 --> 01:29:08,899
+To be able to show something that works and is able to do things like portraying emotion that I just spoke about
+
+1146
+01:29:09,300 --> 01:29:12,180
+So I know we're a little bit over time. So sorry about that
+
+1147
+01:29:12,420 --> 01:29:15,699
+I can take any questions if anybody has any I see andrew is here as well
+
+1148
+01:29:15,779 --> 01:29:20,340
+He's at the back and I just really want to say thank you so much for your attention. I really appreciate it
+
+1149
+01:29:28,930 --> 01:29:54,989
+Yep
+
+1150
+01:29:54,989 --> 01:29:59,789
+It's a great question just to repeat for the video how much of the improvement is from the use of an agentic workflow
+
+1151
+01:30:00,270 --> 01:30:01,310
+versus
+
+1152
+01:30:01,390 --> 01:30:05,069
+Just lack of hockey stuff in the training set for the failed one. Um, I
+
+1153
+01:30:06,109 --> 01:30:08,270
+Not comparing like to like so just using my gut
+
+1154
+01:30:09,390 --> 01:30:12,909
+When I looked at when I broke this down into the workflow that said, okay
+
+1155
+01:30:13,069 --> 01:30:17,869
+I created scenes like this one and they were awful when I just did it directly for myself
+
+1156
+01:30:18,670 --> 01:30:22,289
+With no basis no agentic no artificial understanding
+
+1157
+01:30:22,750 --> 01:30:25,550
+And when I broke it down into the steps where it's like, okay
+
+1158
+01:30:26,029 --> 01:30:29,470
+In this scene the girl is sitting on the bench and she's upset
+
+1159
+01:30:30,109 --> 01:30:32,750
+And the person is talking to her and he wants to comfort her
+
+1160
+01:30:34,989 --> 01:30:39,710
+Feeding that to a large language model along with the entire story
+
+1161
+01:30:40,109 --> 01:30:44,350
+And along with the constraints that I had where the shot has to be eight seconds long
+
+1162
+01:30:44,670 --> 01:30:49,949
+Clear dialogue and all of those kind of thing and then to understand my intent from that one
+
+1163
+01:30:50,829 --> 01:30:56,750
+The llm ended up expressing a prompt that was far more loquacious than I ever would have
+
+1164
+01:30:57,069 --> 01:31:02,670
+That was far more descriptive than I ever would have the llm had understanding of what makes a good shot
+
+1165
+01:31:02,670 --> 01:31:08,350
+What makes a good angle what makes good emotion far more than I would have I could spend hours trying to describe it
+
+1166
+01:31:08,670 --> 01:31:14,029
+So that first step in the agentic flow of it doing that for me and understanding my intent was huge
+
+1167
+01:31:14,670 --> 01:31:17,630
+The second step then is I you know the tools that it's going to use
+
+1168
+01:31:17,630 --> 01:31:22,189
+So I explicitly said which video engine i'm going to be using I was using gemini as the llm
+
+1169
+01:31:22,189 --> 01:31:24,909
+And hopefully gemini is familiar with vo, you know that kind of stuff
+
+1170
+01:31:24,909 --> 01:31:27,869
+So to understand the idiosyncrasies of doing things with vo
+
+1171
+01:31:28,510 --> 01:31:32,510
+What I learned like for example vo is very bad at doing high action scenes
+
+1172
+01:31:32,829 --> 01:31:37,789
+But is very good at doing slow camera pulls to do emotion as you saw in this case
+
+1173
+01:31:38,189 --> 01:31:43,229
+So the llm knew that from me declaring I was using that as a tool and then further it built a prompt
+
+1174
+01:31:43,470 --> 01:31:45,470
+And then further refine the prompt from that
+
+1175
+01:31:45,869 --> 01:31:49,229
+And then the third part actually using the tool to actually generate it for me
+
+1176
+01:31:49,710 --> 01:31:52,029
+Generating a video with something like vo costs
+
+1177
+01:31:52,109 --> 01:31:55,789
+I think between two and three dollars to generate like four videos in credits
+
+1178
+01:31:56,109 --> 01:32:00,750
+So the last thing I want to do is generate lots and lots and lots and lots of videos and throw good money after bad
+
+1179
+01:32:01,149 --> 01:32:05,789
+But all of that token spend that I did earlier on to understand my intent
+
+1180
+01:32:06,109 --> 01:32:10,909
+And then to make the plan for using the agent was saved in the back end where it got it right like
+
+1181
+01:32:11,069 --> 01:32:13,069
+You know maybe not get it right first time
+
+1182
+01:32:13,310 --> 01:32:17,470
+But it would very rarely take more than two or three tries to get something that was really really nice
+
+1183
+01:32:17,949 --> 01:32:19,310
+So I think you know
+
+1184
+01:32:19,310 --> 01:32:25,550
+Without comparing like with like I do think that plan of action and going through a workflow like that worked very very well
+
+1185
+01:32:27,470 --> 01:32:30,270
+any other
+
+1186
+01:32:30,270 --> 01:32:32,270
+questions thoughts comments
+
+1187
+01:32:32,670 --> 01:32:39,329
+Yep up at the back
+
+1188
+01:32:39,329 --> 01:32:44,210
+What has surprised me the most about the ai industry over the years? Oh, that's a good one
+
+1189
+01:32:44,689 --> 01:32:45,729
+um
+
+1190
+01:32:45,729 --> 01:32:47,729
+I think what has surprised me the most
+
+1191
+01:32:48,449 --> 01:32:52,529
+Um, and it probably shouldn't have surprised me is how much hype took over
+
+1192
+01:32:53,329 --> 01:32:59,409
+Um, I actually I honestly thought a lot of people who are in important decision-making roles and that kind of thing
+
+1193
+01:32:59,729 --> 01:33:02,529
+Would be able to see the signal better than they did
+
+1194
+01:33:03,329 --> 01:33:08,050
+um, and I think the other part was that the um, the desire to
+
+1195
+01:33:08,850 --> 01:33:12,369
+Make immediate profits as opposed to long-term gains
+
+1196
+01:33:13,010 --> 01:33:17,170
+Also surprised me a lot. Um, let me share one story. Um in that space
+
+1197
+01:33:17,810 --> 01:33:23,970
+Was one of the things that after we Andrew and I taught the tensorflow specializations on corsera
+
+1198
+01:33:24,449 --> 01:33:27,590
+And after that google launched a professional certificate
+
+1199
+01:33:28,050 --> 01:33:33,569
+Where the idea of this professional certificate was we'd give a rigorous exam and at the end of the rigorous exam
+
+1200
+01:33:33,569 --> 01:33:35,569
+If you got the certificate
+
+1201
+01:33:36,050 --> 01:33:39,250
+It was a high prestige thing that would help you find work
+
+1202
+01:33:39,569 --> 01:33:44,850
+And particularly at the time when tensorflow was a very highly demanded skill in order to get work
+
+1203
+01:33:45,329 --> 01:33:49,250
+Um running that program cost google a hundred thousand dollars a year, okay
+
+1204
+01:33:49,810 --> 01:33:51,810
+Drop in the bucket not a lot of money
+
+1205
+01:33:52,210 --> 01:33:57,649
+Um, the goodwill that came out of it was immense. Um, I can tell two stories
+
+1206
+01:33:57,649 --> 01:34:00,529
+I'll tell one story very quickly was there was a young man
+
+1207
+01:34:01,170 --> 01:34:07,329
+And he went public in some like advertising stuff that with google that he lived in syria
+
+1208
+01:34:08,289 --> 01:34:11,810
+And we all know there was a huge civil war in syria over the last few years
+
+1209
+01:34:12,369 --> 01:34:14,689
+And he got the tensorflow certificate
+
+1210
+01:34:14,689 --> 01:34:18,449
+He was one of the first in syria to get it and it lifted him out of poverty
+
+1211
+01:34:18,850 --> 01:34:23,010
+Where he was able to move to germany and get work at a major german firm
+
+1212
+01:34:23,250 --> 01:34:26,930
+And I but I met him at an event in amsterdam where he told me his story
+
+1213
+01:34:27,569 --> 01:34:33,649
+And now because of like the job that he had in this german farm. He's able to support his family back home
+
+1214
+01:34:34,689 --> 01:34:40,770
+And move them out of the war torn zone into a peaceful zone all because he got this like ai thing
+
+1215
+01:34:41,170 --> 01:34:43,810
+Right, and there were countless stories like that
+
+1216
+01:34:44,609 --> 01:34:50,930
+Very inspirational very beautiful stories, but the thing that surprised me then was sometimes the lack of investment in that
+
+1217
+01:34:51,329 --> 01:34:55,010
+Where there was no revenue being generated for the company out of that. We deliberately
+
+1218
+01:34:55,970 --> 01:34:59,329
+Kept it revenue neutral so that the price of the exams could go down
+
+1219
+01:34:59,329 --> 01:35:03,010
+We wanted it to self sustain it ended up not being revenue neutral
+
+1220
+01:35:03,010 --> 01:35:06,369
+It ended up costing the company about a hundred thousand to a hundred and fifty thousand a year
+
+1221
+01:35:06,689 --> 01:35:07,970
+So they canned it
+
+1222
+01:35:07,970 --> 01:35:12,130
+You know and it's a shame because of all the potential goodwill that can come out of something like that
+
+1223
+01:35:12,130 --> 01:35:16,289
+But I think those would be the two that immediately jumped to mind that have surprised me the most
+
+1224
+01:35:16,930 --> 01:35:23,329
+And then I guess one other part that I would say is the people who've been able to be very successful with ai
+
+1225
+01:35:24,770 --> 01:35:29,810
+Who you wouldn't think would be the ones that would be successful with ai has always been inspirational to me
+
+1226
+01:35:30,210 --> 01:35:31,970
+Allow me one more story
+
+1227
+01:35:31,970 --> 01:35:37,890
+I have a good friend. I showed ice hockey a moment ago. I have a good friend who is a former professional ice hockey player
+
+1228
+01:35:38,449 --> 01:35:40,449
+And any ice hockey fans here?
+
+1229
+01:35:40,689 --> 01:35:43,409
+Okay, you know, it's a kind of a brutal sport, right?
+
+1230
+01:35:43,489 --> 01:35:45,569
+You see a lot of fighting and a lot of stuff on the ice
+
+1231
+01:35:46,050 --> 01:35:49,970
+And he dropped out of school when he was 13 years old to focus on skating
+
+1232
+01:35:50,529 --> 01:35:56,689
+And he will always tell everybody that he's the dumbest person alive because he's uneducated. He and I are complete opposites
+
+1233
+01:35:56,770 --> 01:35:58,770
+You know, that's why we get on so well
+
+1234
+01:35:59,010 --> 01:36:06,789
+And he retired from ice hockey because of concussion issues and he now runs a non-profit the ice rinks for non-profit
+
+1235
+01:36:08,050 --> 01:36:09,890
+And about three years ago
+
+1236
+01:36:09,890 --> 01:36:15,090
+Um, we were having a beer and he was like so tell me about ai and tell me about this chat gpt thing
+
+1237
+01:36:15,090 --> 01:36:16,529
+Is it any good?
+
+1238
+01:36:16,529 --> 01:36:19,489
+And I was like, you know just sharing the whole thing. Yes, it's good and all that kind of stuff
+
+1239
+01:36:19,489 --> 01:36:22,050
+And it was obviously a loaded question and I didn't know why
+
+1240
+01:36:22,609 --> 01:36:28,369
+But part of his job at his non-profit is that every quarter he has to present to the board of directors
+
+1241
+01:36:28,770 --> 01:36:34,529
+The results of the operations so that they can be funded properly because even though they're non-profit they still need money to operate
+
+1242
+01:36:35,250 --> 01:36:41,489
+and he was spending upwards of 150 000 a year to bring in consultants
+
+1243
+01:36:42,130 --> 01:36:44,850
+To kind of pull the data from all of the different sources
+
+1244
+01:36:45,250 --> 01:36:48,289
+They're pulling data from there's like machines in what's called the pump room
+
+1245
+01:36:48,529 --> 01:36:53,649
+That has a compressor that cools the ice and there were spreadsheets and there was accounts and all this kind of stuff
+
+1246
+01:36:53,649 --> 01:36:55,890
+And he was not tech savvy in any way
+
+1247
+01:36:56,529 --> 01:36:59,170
+And but he like needed to process all this data
+
+1248
+01:36:59,329 --> 01:37:04,050
+So he did an experiment where he got chat gpt to do it and this was the loaded question like asking me
+
+1249
+01:37:04,050 --> 01:37:05,250
+Was it any good?
+
+1250
+01:37:05,250 --> 01:37:07,810
+And so we talked through it a little bit and then he told me why
+
+1251
+01:37:08,529 --> 01:37:11,649
+And so I took a look at the results because he was uploading spreadsheets
+
+1252
+01:37:11,729 --> 01:37:16,529
+He was uploading pdfs and all this kind of thing and getting it to assemble a report and it takes him now about
+
+1253
+01:37:16,529 --> 01:37:21,270
+Two hours to do the report himself with chat gpt and it worked and it worked brilliantly
+
+1254
+01:37:21,989 --> 01:37:27,670
+And 150 000 a year that he's saving on consulting is now going to underprivileged kids
+
+1255
+01:37:28,069 --> 01:37:32,069
+Right for hockey equipment for ice skating equipment for lessons and all of that kind of thing
+
+1256
+01:37:32,229 --> 01:37:36,630
+So it was taken out of the hands of an expensive consulting company and put into the hands of people
+
+1257
+01:37:37,189 --> 01:37:40,470
+Because of this guy and he says he's the dumbest person alive, you know
+
+1258
+01:37:40,550 --> 01:37:46,869
+But I hope he's not watching this video, but and he's like, you know, but he and I told him afterwards that congratulations
+
+1259
+01:37:46,949 --> 01:37:48,470
+You're now a developer
+
+1260
+01:37:48,470 --> 01:37:50,470
+right and he didn't like that but
+
+1261
+01:37:51,189 --> 01:37:58,710
+But it's like surprises like that that the superpowers that were handed to somebody like him that he's not technical in any way
+
+1262
+01:37:58,789 --> 01:38:04,869
+But he was able to effectively build a solution that saved his non-profit 100 to 150 000 a year
+
+1263
+01:38:05,270 --> 01:38:08,630
+And like things like that are always surprising me in a very pleasant way
+
+1264
+01:38:12,039 --> 01:38:13,000
+Yep
+
+1265
+01:38:13,000 --> 01:38:15,000
+Sorry, I'll get to you next. Sorry. Yeah
+
+1266
+01:38:36,069 --> 01:38:39,109
+Yep, so just to repeat the question for the video for engineers like us
+
+1267
+01:38:39,109 --> 01:38:41,909
+Sometimes it's easy to navigate the hype to see the signal from the noise
+
+1268
+01:38:41,909 --> 01:38:45,109
+But what about people, you know who don't have the same training as us
+
+1269
+01:38:45,829 --> 01:38:49,029
+I think that's our opportunity to be trusted advisors for them
+
+1270
+01:38:49,829 --> 01:38:52,390
+And to really help them through that to understand it
+
+1271
+01:38:53,270 --> 01:38:58,470
+I think the biggest part in the hype story right now is just understanding the reward mechanism
+
+1272
+01:38:58,869 --> 01:39:02,630
+Right, you know the everything rewards engagement rather than actual substance
+
+1273
+01:39:03,109 --> 01:39:07,829
+And the to me step one is seeing through that like the story I just told about my friend
+
+1274
+01:39:08,310 --> 01:39:11,989
+You know he'd seen all this kind of stuff, but he wasn't willing to bet his career on it
+
+1275
+01:39:12,310 --> 01:39:12,630
+You know
+
+1276
+01:39:12,630 --> 01:39:17,350
+But he needed like that kind of advice around it and to kind of start peeling apart what he had done and what he
+
+1277
+01:39:17,350 --> 01:39:19,670
+Did right and what he did wrong and you know, so that
+
+1278
+01:39:20,390 --> 01:39:26,869
+Positioning ourselves to be trusted advisors by not leaning into the same mistakes that the untrained people may be leaning into
+
+1279
+01:39:27,109 --> 01:39:28,869
+I think is the key to that
+
+1280
+01:39:28,869 --> 01:39:35,829
+um, and you know just understanding that the average person is generally very intelligent even if they may not be experts in a
+
+1281
+01:39:35,909 --> 01:39:42,470
+Specific domain and to key in on that intelligence and help them to to foster and to grow that in you know
+
+1282
+01:39:43,109 --> 01:39:47,750
+And navigate them through the parts where they'll have difficulty and let them shine in what they're very very good at
+
+1283
+01:39:49,029 --> 01:39:55,250
+All right over here. There was one
+
+1284
+01:39:55,409 --> 01:40:06,680
+Okay
+
+1285
+01:40:06,680 --> 01:40:12,439
+So ai and machine learning for scientific research. Where is it a good idea and where should you be cautious?
+
+1286
+01:40:13,239 --> 01:40:14,279
+um
+
+1287
+01:40:14,279 --> 01:40:16,199
+Oh, uh
+
+1288
+01:40:16,199 --> 01:40:18,920
+My initial gut check would be I think it's always a good idea
+
+1289
+01:40:19,479 --> 01:40:24,760
+Right. Um, I think you know, there's there's no harm in using the tools that you have available to to you
+
+1290
+01:40:25,159 --> 01:40:30,520
+But to always to just double check your results and double check your expectations against the grounded reality
+
+1291
+01:40:31,159 --> 01:40:32,520
+um, i've
+
+1292
+01:40:32,520 --> 01:40:38,760
+Always been a fan of using automation in research as much as possible. My undergraduate was physics
+
+1293
+01:40:39,239 --> 01:40:44,039
+Uh many many years ago and I was actually very successful in the lab because I usually automated things
+
+1294
+01:40:44,279 --> 01:40:47,479
+Through a computer that other people did handwriting and pen and paper with
+
+1295
+01:40:47,800 --> 01:40:51,000
+And so I could move quickly so I know i'm biased in that regard
+
+1296
+01:40:51,079 --> 01:40:54,119
+But I would say like for most research for the most part
+
+1297
+01:40:54,199 --> 01:40:58,520
+I think you know use the most powerful tools you have available, but check your expectations
+
+1298
+01:41:03,119 --> 01:41:05,680
+Little story actually on that side was um
+
+1299
+01:41:06,560 --> 01:41:09,039
+Trivia question poorest country in western europe
+
+1300
+01:41:09,920 --> 01:41:11,920
+anybody know
+
+1301
+01:41:12,079 --> 01:41:13,680
+What's that?
+
+1302
+01:41:13,680 --> 01:41:15,279
+western europe
+
+1303
+01:41:15,279 --> 01:41:16,720
+is wales
+
+1304
+01:41:16,720 --> 01:41:22,319
+So, uh, I actually did my undergraduate in wales and I went back to do some lectures in the university there
+
+1305
+01:41:23,039 --> 01:41:28,560
+and um, I met with a researcher there and he was doing research into brain cancer
+
+1306
+01:41:29,119 --> 01:41:33,520
+Um using computer imagery and using various types of computer imagery and I asked him well
+
+1307
+01:41:33,520 --> 01:41:39,199
+What's the biggest problem that you have? What's the biggest blocker for your research? And this is about eight years ago
+
+1308
+01:41:39,920 --> 01:41:42,560
+and his answer was access to a gpu
+
+1309
+01:41:43,520 --> 01:41:49,279
+And uh, because like for him to be able to train his models and run his models he needed to be able to access a gpu
+
+1310
+01:41:50,000 --> 01:41:54,800
+and uh the department that he was in had one gpu between 10 researchers
+
+1311
+01:41:55,439 --> 01:42:00,159
+Which meant that everybody got it for half a day right monday through friday and his half a day was tuesday afternoon
+
+1312
+01:42:00,720 --> 01:42:05,840
+So in his case he would spend the entire time that wasn't tuesday afternoon preparing everything for his model run
+
+1313
+01:42:06,079 --> 01:42:10,800
+Or his model training or everything like that and then tuesday afternoon once he had access to the gpu
+
+1314
+01:42:10,960 --> 01:42:12,399
+Then he would do the training
+
+1315
+01:42:12,399 --> 01:42:17,039
+Right, and then he would hope that in that time that he would train his model and he would get the results that he wanted
+
+1316
+01:42:17,199 --> 01:42:20,720
+Otherwise, he'd have to wait a week, you know to get access to the gpu again
+
+1317
+01:42:21,439 --> 01:42:23,439
+And then I showed him google colab
+
+1318
+01:42:23,439 --> 01:42:28,319
+Right anybody ever use google colab, right and you can have a gpu in the cloud for free
+
+1319
+01:42:28,640 --> 01:42:30,800
+With that kind of thing and the poor guy's brain melted
+
+1320
+01:42:31,199 --> 01:42:32,720
+Right that you know
+
+1321
+01:42:32,720 --> 01:42:36,800
+Because I took out my phone and I showed him a notebook running on my phone and google colab
+
+1322
+01:42:37,199 --> 01:42:40,239
+And training it on that and it changed everything for him research wise
+
+1323
+01:42:41,279 --> 01:42:46,000
+And you know now it was a case of and this was with free colab. He had much more than he had with his shared gpu
+
+1324
+01:42:46,479 --> 01:42:50,960
+So I think you know for someone like him, you know machine learning was an important part of his research
+
+1325
+01:42:50,960 --> 01:42:52,960
+But he was so gated on it
+
+1326
+01:42:53,199 --> 01:42:58,079
+That the ability to widen access to that ended up like really really advancing his research
+
+1327
+01:42:58,159 --> 01:43:01,760
+I don't know where it ended up. I don't know what he has done. It has been a few years since then but
+
+1328
+01:43:02,159 --> 01:43:04,640
+You know that story just came to mind when you asked the question
+
+1329
+01:43:06,930 --> 01:43:08,930
+Any more questions?
+
+1330
+01:43:09,649 --> 01:43:14,369
+Feel free to ask me anything
+
+1331
+01:43:14,369 --> 01:43:27,460
+Okay at the front here
+
+1332
+01:43:27,460 --> 01:43:31,380
+So can ai be a force of social equality or social inequality?
+
+1333
+01:43:31,939 --> 01:43:33,939
+I think the answer to that is yes
+
+1334
+01:43:34,899 --> 01:43:36,899
+It can be both and it can be neither
+
+1335
+01:43:37,300 --> 01:43:41,539
+I mean, I think that ultimately the idea is that if in my opinion
+
+1336
+01:43:42,100 --> 01:43:44,739
+Any tool can be used for any means?
+
+1337
+01:43:45,220 --> 01:43:50,500
+So the important thing is to educate and inspire people towards using things for the correct means
+
+1338
+01:43:51,220 --> 01:43:54,500
+There's only so much governance can be applied and sometimes governance can
+
+1339
+01:43:54,979 --> 01:43:56,979
+Cause more problems than it solves
+
+1340
+01:43:58,180 --> 01:43:59,619
+so
+
+1341
+01:43:59,619 --> 01:44:05,060
+I always love to live my life by assuming good intent but preparing for bad intent
+
+1342
+01:44:05,539 --> 01:44:10,420
+And in the case of ai, I don't think there's any difference there that everything that I will do and everything that I would advise
+
+1343
+01:44:10,739 --> 01:44:16,979
+Is assuming good intent that people would use it for good things, but also to be prepared for it to be misused
+
+1344
+01:44:18,020 --> 01:44:21,539
+The bad examples that I showed earlier on I think were good intent
+
+1345
+01:44:22,500 --> 01:44:24,500
+Rather than bad intent
+
+1346
+01:44:24,500 --> 01:44:30,899
+And most mistakes that I see like that are good intent being used mistakenly as opposed to bad intent, but I would say
+
+1347
+01:44:31,699 --> 01:44:34,340
+That's the only mantra that I can the only advice that I can give
+
+1348
+01:44:34,739 --> 01:44:38,899
+And that kind of thing is always assume good intent but prepare for bad intent
+
+1349
+01:44:40,260 --> 01:44:43,539
+The ai itself has no choice. All right, it's how people use it
+
+1350
+01:44:46,659 --> 01:44:48,659
+Andrew, did you want closing comments or
+
+1351
+01:45:00,100 --> 01:45:02,100
+All right. Thank you. Andrew. Thanks
+

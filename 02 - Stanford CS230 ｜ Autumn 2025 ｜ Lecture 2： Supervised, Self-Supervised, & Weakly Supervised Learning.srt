@@ -1,0 +1,8396 @@
+1
+00:00:05,169 --> 00:00:10,169
+I'm Kian Caton-Fourouche and I am the co-creator and
+
+2
+00:00:10,169 --> 00:00:14,650
+co-lecturer with Andrew for this class, CS230.
+
+3
+00:00:14,650 --> 00:00:21,250
+And I will teach about half of the in-person lectures this quarter.
+
+4
+00:00:21,250 --> 00:00:24,289
+Outside of Stanford, I work in industry.
+
+5
+00:00:24,289 --> 00:00:28,570
+I lead a company called Workera, which uses AI to measure skills.
+
+6
+00:00:28,570 --> 00:00:34,009
+And with the history of CS230 students that have started AI startups and
+
+7
+00:00:34,009 --> 00:00:38,689
+companies, what I try to do usually is to bring a lot of examples from industry.
+
+8
+00:00:38,689 --> 00:00:43,450
+So what you should expect from these in-class lectures is not as much
+
+9
+00:00:43,450 --> 00:00:48,890
+of the academic side of things which we learn anyway in the online videos,
+
+10
+00:00:48,890 --> 00:00:53,929
+but also the industry specific inputs.
+
+11
+00:00:53,929 --> 00:00:59,049
+And some of the topics that we cover this year together
+
+12
+00:00:59,090 --> 00:01:05,010
+include decision making in AI projects, which we're going to see today.
+
+13
+00:01:05,010 --> 00:01:09,209
+I want you to come out of today's lecture feeling like you had some fun,
+
+14
+00:01:09,209 --> 00:01:14,530
+it was interactive, and also you have a better way to make decisions in AI projects
+
+15
+00:01:14,530 --> 00:01:19,530
+because you've seen how deep learning researchers, engineers and scientists
+
+16
+00:01:19,530 --> 00:01:24,010
+make their decisions solving problems in industry.
+
+17
+00:01:24,010 --> 00:01:28,689
+Other topics later in the quarter for the in-classroom time include
+
+18
+00:01:28,689 --> 00:01:32,370
+things like adversarial attacks and defenses.
+
+19
+00:01:32,370 --> 00:01:35,209
+We might have some time to cover it today.
+
+20
+00:01:35,209 --> 00:01:38,450
+Deep reinforcement learning, which is really hot in the market right now,
+
+21
+00:01:38,450 --> 00:01:41,090
+and I think it's very important to know about it.
+
+22
+00:01:41,090 --> 00:01:45,250
+And then all the stuff that is very practical, like retrieval,
+
+23
+00:01:45,250 --> 00:01:49,290
+augmented generation, AI agents, multi-agent system.
+
+24
+00:01:49,290 --> 00:01:54,370
+As we go deeper into the class and you get the baggage of neural networks,
+
+25
+00:01:54,370 --> 00:01:56,569
+we'll be able to cover even more fun topics.
+
+26
+00:01:58,930 --> 00:02:04,730
+So today's lecture is going to be structured in three parts,
+
+27
+00:02:04,730 --> 00:02:08,129
+maybe four depending on whether we have time.
+
+28
+00:02:08,129 --> 00:02:12,210
+We'll start with a little recap of the week,
+
+29
+00:02:12,210 --> 00:02:15,810
+what you've learned online about neurons and layers and deep neural networks.
+
+30
+00:02:15,810 --> 00:02:20,370
+Then we get into a set of supervised learning projects,
+
+31
+00:02:20,370 --> 00:02:25,449
+including a day and night simple, you know, vanilla classification,
+
+32
+00:02:25,449 --> 00:02:29,330
+the trigger word detection, which is actually a project you're going to build
+
+33
+00:02:29,330 --> 00:02:33,729
+at the end of the class yourself, and then face verification,
+
+34
+00:02:33,729 --> 00:02:38,330
+which we'll see also variation of how face verification algorithms work.
+
+35
+00:02:38,330 --> 00:02:42,050
+In the third section, we focus on self-supervised learning
+
+36
+00:02:42,050 --> 00:02:43,530
+and weekly supervised learning.
+
+37
+00:02:43,530 --> 00:02:45,050
+Don't worry if you don't know these terms.
+
+38
+00:02:45,050 --> 00:02:49,289
+We're going to learn them together and we'll talk a lot about embeddings
+
+39
+00:02:49,289 --> 00:02:56,449
+because embeddings are the connective tissue of many AI systems online today
+
+40
+00:02:56,449 --> 00:02:58,129
+and it's important to know about them.
+
+41
+00:02:58,129 --> 00:03:02,169
+And finally, if we have time, we'll also talk about adversarial attacks
+
+42
+00:03:02,169 --> 00:03:07,050
+and defenses with more and more AI systems in the wild.
+
+43
+00:03:07,050 --> 00:03:10,930
+Knowing how to defend them is very important and knowing how to attack them
+
+44
+00:03:10,930 --> 00:03:12,610
+can also teach you how to defend them.
+
+45
+00:03:12,610 --> 00:03:14,409
+So we'll cover that as well.
+
+46
+00:03:15,250 --> 00:03:15,889
+Sounds good.
+
+47
+00:03:16,930 --> 00:03:19,650
+Please interrupt me as we go through the lecture.
+
+48
+00:03:19,650 --> 00:03:24,729
+We want this to be very conversational as much as possible.
+
+49
+00:03:24,729 --> 00:03:34,210
+So recap of the week is the core way that AI learns from data
+
+50
+00:03:34,210 --> 00:03:37,009
+in a traditional supervised learning setup.
+
+51
+00:03:37,009 --> 00:03:40,810
+You can think of it as an input such as this little image
+
+52
+00:03:40,810 --> 00:03:46,729
+of the confused cat and an output, in this case, a number between 0 and 1
+
+53
+00:03:46,729 --> 00:03:51,650
+that represents the chance that there might be a cat on the picture 1
+
+54
+00:03:51,650 --> 00:03:54,969
+or there is no cat on the picture 0.
+
+55
+00:03:54,969 --> 00:03:58,449
+What the model is, and oftentimes you'll see me refer to the model
+
+56
+00:03:58,449 --> 00:04:00,650
+as two things, there's an architecture,
+
+57
+00:04:00,650 --> 00:04:06,169
+which is essentially the blueprint of the model, the skeleton, and parameters.
+
+58
+00:04:06,169 --> 00:04:09,689
+It might be a few parameters, it might be billions of parameters
+
+59
+00:04:09,729 --> 00:04:13,409
+like the models that OpenAI, DeepMind, and others work on.
+
+60
+00:04:16,649 --> 00:04:22,370
+Outside of that, and so when you think about AI models being deployed in the wild,
+
+61
+00:04:22,370 --> 00:04:24,810
+like when you think about what's happening with ChatGPT,
+
+62
+00:04:25,970 --> 00:04:30,810
+you can really come down to there's two files somewhere on the cloud,
+
+63
+00:04:30,810 --> 00:04:33,250
+one that describes the architecture of the model,
+
+64
+00:04:33,250 --> 00:04:36,610
+one that describes the parameters that are part of this architecture,
+
+65
+00:04:36,610 --> 00:04:39,089
+and you keep calling those two files
+
+66
+00:04:39,089 --> 00:04:41,529
+and you get your inference or your outputs.
+
+67
+00:04:41,529 --> 00:04:43,730
+That's really what's happening behind the scene,
+
+68
+00:04:43,730 --> 00:04:45,490
+much more complicated than that obviously,
+
+69
+00:04:45,490 --> 00:04:48,769
+but those are the two critical components of a neural network,
+
+70
+00:04:48,769 --> 00:04:51,250
+architecture and its parameters that are trained.
+
+71
+00:04:54,329 --> 00:05:00,009
+How does the model learn is through a gradient descent optimization,
+
+72
+00:05:00,009 --> 00:05:03,730
+meaning I send the picture of the cat through the model
+
+73
+00:05:03,730 --> 00:05:08,209
+and the model at the beginning is not trained, so it's probably wrong.
+
+74
+00:05:08,209 --> 00:05:11,449
+It tells me, I think there's no cat, I think it's zero,
+
+75
+00:05:11,449 --> 00:05:16,009
+and then I use something called the loss function to compare the ground truth.
+
+76
+00:05:16,009 --> 00:05:19,850
+There is a cat on the picture with the prediction from the model
+
+77
+00:05:19,850 --> 00:05:21,689
+at this point in time.
+
+78
+00:05:21,689 --> 00:05:24,250
+Those two numbers are far from each other.
+
+79
+00:05:24,250 --> 00:05:28,529
+That should be a penalty, which the loss function describes,
+
+80
+00:05:28,529 --> 00:05:31,649
+and then in order to give feedback to the parameters,
+
+81
+00:05:31,649 --> 00:05:34,490
+we use this gradient descent updates.
+
+82
+00:05:34,490 --> 00:05:36,529
+We do that many, many times.
+
+83
+00:05:36,569 --> 00:05:39,730
+What it means is that we take our parameters and we tell them,
+
+84
+00:05:39,730 --> 00:05:41,970
+hey, you should go a little bit more to the right
+
+85
+00:05:41,970 --> 00:05:46,009
+or a little bit more to the left until that number
+
+86
+00:05:46,009 --> 00:05:49,490
+that is the prediction for the cat is closer to the ground truth.
+
+87
+00:05:49,490 --> 00:05:51,649
+We do that with batches of data,
+
+88
+00:05:51,649 --> 00:05:56,290
+millions of images of cats and images of anything else,
+
+89
+00:05:56,290 --> 00:06:00,370
+and we give that feedback repetitively to the model
+
+90
+00:06:00,370 --> 00:06:03,410
+until the parameters are calibrated
+
+91
+00:06:03,410 --> 00:06:07,290
+and the model is in fact finding the cat on this picture.
+
+92
+00:06:07,290 --> 00:06:09,250
+Nothing new here, you've seen it in the videos.
+
+93
+00:06:09,250 --> 00:06:12,610
+Any question on that learning setup?
+
+94
+00:06:12,610 --> 00:06:14,089
+No?
+
+95
+00:06:14,089 --> 00:06:15,689
+Okay, easy so far.
+
+96
+00:06:15,689 --> 00:06:17,610
+There's many things that can change in this setup
+
+97
+00:06:17,610 --> 00:06:18,810
+and you'll see in the class.
+
+98
+00:06:18,810 --> 00:06:20,410
+First thing is the input.
+
+99
+00:06:20,410 --> 00:06:22,370
+The input does not have to be an image.
+
+100
+00:06:22,370 --> 00:06:26,290
+It can be text, like when you chat, you know, we chat GPT.
+
+101
+00:06:26,290 --> 00:06:30,610
+It can be audio, it can be video, it can be structured data,
+
+102
+00:06:30,610 --> 00:06:32,810
+it can be spreadsheets and numbers.
+
+103
+00:06:32,810 --> 00:06:35,009
+Those we see a variety of examples in the class
+
+104
+00:06:35,009 --> 00:06:39,089
+and how it influences the architecture.
+
+105
+00:06:39,089 --> 00:06:41,610
+The output again doesn't have to be zero and one.
+
+106
+00:06:41,610 --> 00:06:44,209
+This is an example of a classification.
+
+107
+00:06:44,209 --> 00:06:47,050
+You could turn this problem into a regression.
+
+108
+00:06:47,050 --> 00:06:48,610
+For example, if I was asking you
+
+109
+00:06:48,610 --> 00:06:50,050
+what's the age of the cat,
+
+110
+00:06:50,050 --> 00:06:51,730
+estimate the age of the cat,
+
+111
+00:06:51,730 --> 00:06:53,649
+that would be a regression task,
+
+112
+00:06:53,649 --> 00:06:55,649
+not a classification task anymore.
+
+113
+00:06:55,649 --> 00:06:58,449
+Later in the class, we'll also see generative task.
+
+114
+00:06:58,449 --> 00:07:01,689
+In fact, lecture four is gonna focus on diffusion models,
+
+115
+00:07:01,689 --> 00:07:03,569
+generative adversarial networks,
+
+116
+00:07:03,569 --> 00:07:06,129
+where the output actually is much bigger
+
+117
+00:07:06,129 --> 00:07:08,250
+than the input typically, you know.
+
+118
+00:07:08,250 --> 00:07:11,569
+So you can have a low resolution of a cat as input
+
+119
+00:07:11,569 --> 00:07:14,370
+and the output is a high resolution of the same cat.
+
+120
+00:07:14,370 --> 00:07:16,209
+The output is bigger than the inputs,
+
+121
+00:07:16,209 --> 00:07:18,370
+which can be counter-intuitive to people.
+
+122
+00:07:19,769 --> 00:07:23,089
+Other things that can change include the architecture.
+
+123
+00:07:23,089 --> 00:07:27,129
+You've learned about the vanilla multilayer perceptron
+
+124
+00:07:27,129 --> 00:07:28,889
+or the fully connected neural network.
+
+125
+00:07:28,889 --> 00:07:32,170
+That's what we're learning right now online together.
+
+126
+00:07:32,170 --> 00:07:33,290
+By the end of the class,
+
+127
+00:07:33,290 --> 00:07:36,290
+you'll have many architectures that you'll be familiar with
+
+128
+00:07:36,290 --> 00:07:41,290
+from RNNs and convolutional neural networks,
+
+129
+00:07:41,290 --> 00:07:42,810
+transformer models.
+
+130
+00:07:42,810 --> 00:07:44,649
+All of these, at the end of the day,
+
+131
+00:07:44,649 --> 00:07:46,490
+use the basis neural network
+
+132
+00:07:46,490 --> 00:07:48,769
+that you're learning right now.
+
+133
+00:07:48,769 --> 00:07:51,569
+They're just stacked on top of each other differently.
+
+134
+00:07:52,689 --> 00:07:56,009
+The loss function is actually a big focus of today's class
+
+135
+00:07:56,009 --> 00:07:58,370
+and of the class in general.
+
+136
+00:07:58,370 --> 00:08:01,449
+The loss function, which is what gives the feedback
+
+137
+00:08:01,449 --> 00:08:05,050
+to the model, you were right or you were wrong
+
+138
+00:08:05,050 --> 00:08:07,449
+and what to do about it is an art.
+
+139
+00:08:07,449 --> 00:08:09,209
+Designing good loss functions,
+
+140
+00:08:09,209 --> 00:08:13,250
+great deep learning researchers are very creative
+
+141
+00:08:13,250 --> 00:08:15,449
+when it comes to designing loss functions.
+
+142
+00:08:15,449 --> 00:08:19,490
+And in fact, when we built the algorithm called YOLO,
+
+143
+00:08:19,490 --> 00:08:23,290
+it is called YOLO for you only look once,
+
+144
+00:08:23,290 --> 00:08:24,649
+not you only live once,
+
+145
+00:08:24,689 --> 00:08:27,810
+but YOLO has a very, you know,
+
+146
+00:08:27,810 --> 00:08:30,009
+difficult to understand at first loss function
+
+147
+00:08:30,009 --> 00:08:32,129
+and there's a reason why the loss function
+
+148
+00:08:32,129 --> 00:08:33,210
+was designed like that.
+
+149
+00:08:33,210 --> 00:08:34,649
+So by the end of this class,
+
+150
+00:08:34,649 --> 00:08:35,889
+you'll also have a better intuition
+
+151
+00:08:35,889 --> 00:08:38,730
+on how do we design great loss functions.
+
+152
+00:08:40,409 --> 00:08:42,529
+Other things I'm not gonna cover right now,
+
+153
+00:08:42,529 --> 00:08:45,090
+the activation functions in your neural network,
+
+154
+00:08:45,090 --> 00:08:48,049
+the optimizer that you use for your gradient descent loop
+
+155
+00:08:48,049 --> 00:08:50,490
+and then the hyperparameters that might come in
+
+156
+00:08:50,490 --> 00:08:52,210
+when you train your algorithms.
+
+157
+00:08:52,210 --> 00:08:54,850
+Okay, nothing new here.
+
+158
+00:08:54,850 --> 00:08:56,370
+This is the basic setup.
+
+159
+00:08:56,370 --> 00:08:59,769
+You've also learned this week about neurons.
+
+160
+00:08:59,769 --> 00:09:01,529
+The easiest way to think about a neuron
+
+161
+00:09:01,529 --> 00:09:05,169
+is the classic logistic regression algorithm
+
+162
+00:09:05,169 --> 00:09:07,250
+where I'm taking the image of the cat.
+
+163
+00:09:07,250 --> 00:09:10,330
+So an image in computer science,
+
+164
+00:09:10,330 --> 00:09:13,409
+the way the machine reads it is three channels,
+
+165
+00:09:13,409 --> 00:09:16,649
+RGB for the three colors, red, green, blue.
+
+166
+00:09:16,649 --> 00:09:18,529
+And we take all these numbers,
+
+167
+00:09:18,529 --> 00:09:20,129
+we put them in a vector,
+
+168
+00:09:20,129 --> 00:09:22,850
+the vector is then fed into a neuron
+
+169
+00:09:22,850 --> 00:09:24,529
+and the neuron has two components,
+
+170
+00:09:24,529 --> 00:09:27,529
+the linear part, W transpose X plus B,
+
+171
+00:09:27,529 --> 00:09:30,169
+W being the weight and B being the bias
+
+172
+00:09:30,169 --> 00:09:32,210
+and then an activation function.
+
+173
+00:09:32,210 --> 00:09:34,009
+In this case, the sigmoid function,
+
+174
+00:09:34,009 --> 00:09:36,970
+which is very handy because it takes any number
+
+175
+00:09:36,970 --> 00:09:38,850
+and it puts it between zero and one
+
+176
+00:09:38,850 --> 00:09:41,250
+so that the output can look like a probability.
+
+177
+00:09:42,409 --> 00:09:43,330
+Classic setup.
+
+178
+00:09:44,289 --> 00:09:47,090
+And here the probability is 0.73,
+
+179
+00:09:47,090 --> 00:09:49,490
+which is above 0.5,
+
+180
+00:09:49,490 --> 00:09:50,769
+which tells me the model thinks
+
+181
+00:09:50,769 --> 00:09:52,009
+there's a cat on the picture
+
+182
+00:09:52,009 --> 00:09:54,049
+because one is a cat, zero is no cat.
+
+183
+00:09:55,769 --> 00:09:58,289
+So question for you to get started.
+
+184
+00:09:58,289 --> 00:10:03,090
+How would you modify this binary classification
+
+185
+00:10:03,090 --> 00:10:05,570
+that detects cats in an algorithm
+
+186
+00:10:05,570 --> 00:10:07,809
+that would be able to detect multiple animals
+
+187
+00:10:07,809 --> 00:10:10,490
+such as a cat, a dog and a giraffe?
+
+188
+00:10:11,490 --> 00:10:15,409
+What do you need to change about this neural network?
+
+189
+00:10:15,409 --> 00:10:22,649
+Yeah.
+
+190
+00:10:22,649 --> 00:10:25,009
+Okay, so you would change the output layer
+
+191
+00:10:25,009 --> 00:10:28,129
+to match to the number of animals you wanna detect.
+
+192
+00:10:28,129 --> 00:10:29,769
+Yeah, correct.
+
+193
+00:10:29,769 --> 00:10:30,970
+Anyone wants to add anything else?
+
+194
+00:10:30,970 --> 00:10:31,809
+Yeah.
+
+195
+00:10:32,850 --> 00:10:33,809
+The data that goes in there,
+
+196
+00:10:33,809 --> 00:10:37,730
+how would you change the data?
+
+197
+00:10:37,730 --> 00:10:38,809
+Okay, very good.
+
+198
+00:10:38,809 --> 00:10:41,409
+Yeah, you need data from dogs and giraffes
+
+199
+00:10:41,409 --> 00:10:45,250
+and also maybe nature in general.
+
+200
+00:10:45,250 --> 00:10:47,210
+What else do we need not to forget?
+
+201
+00:10:47,210 --> 00:10:54,570
+Yeah.
+
+202
+00:10:54,570 --> 00:10:55,409
+Yeah, okay.
+
+203
+00:10:55,409 --> 00:10:56,850
+Add one neuron per animal,
+
+204
+00:10:56,850 --> 00:10:59,169
+those neurons will be independent from each other
+
+205
+00:10:59,169 --> 00:11:01,409
+and each neuron would focus on one animal.
+
+206
+00:11:01,409 --> 00:11:03,049
+Yeah, good point.
+
+207
+00:11:03,049 --> 00:11:04,610
+It's actually what we're gonna do.
+
+208
+00:11:04,610 --> 00:11:07,809
+So yes, I think your suggestions were the right one.
+
+209
+00:11:07,809 --> 00:11:10,090
+We could multiply this output layer
+
+210
+00:11:10,090 --> 00:11:12,450
+to have three neurons instead of one.
+
+211
+00:11:12,450 --> 00:11:14,889
+All of them, because it's a fully connected neural net,
+
+212
+00:11:14,889 --> 00:11:19,009
+see the entire pixels flattened in the vector
+
+213
+00:11:19,009 --> 00:11:21,690
+and then each of them will be focused on an animal.
+
+214
+00:11:21,690 --> 00:11:24,210
+The number one mistake that we see in projects
+
+215
+00:11:24,210 --> 00:11:26,850
+is that people add more data
+
+216
+00:11:26,850 --> 00:11:29,330
+but forget to adjust the labels.
+
+217
+00:11:29,330 --> 00:11:31,929
+So how do the labels need to be adjusted here?
+
+218
+00:11:31,929 --> 00:11:33,809
+It's not anymore zero and one, right?
+
+219
+00:11:34,850 --> 00:11:48,259
+What type of labels do we need to train this?
+
+220
+00:11:48,259 --> 00:11:52,529
+Yeah, yeah, okay.
+
+221
+00:11:52,529 --> 00:11:53,889
+You know how we call that?
+
+222
+00:11:56,289 --> 00:11:58,009
+Okay, so yeah, yeah.
+
+223
+00:11:59,730 --> 00:12:00,970
+Yeah, vectors, yeah.
+
+224
+00:12:00,970 --> 00:12:02,649
+I think you're saying the same thing.
+
+225
+00:12:02,649 --> 00:12:05,929
+Yeah, so here you would use a one-hot vector
+
+226
+00:12:05,929 --> 00:12:07,649
+or a multi-hot.
+
+227
+00:12:07,649 --> 00:12:12,649
+One-hot means you'll have a vector of size three
+
+228
+00:12:13,210 --> 00:12:15,370
+and if there is a cat on the picture,
+
+229
+00:12:15,370 --> 00:12:17,730
+the label is gonna be zero, one, zero
+
+230
+00:12:17,730 --> 00:12:19,769
+because the second neuron is gonna be responsible
+
+231
+00:12:19,769 --> 00:12:20,769
+to detect cats.
+
+232
+00:12:21,730 --> 00:12:25,049
+In fact, that would be called the one-hot vector.
+
+233
+00:12:25,049 --> 00:12:27,169
+Oftentimes, you'll have multiple animals on the picture
+
+234
+00:12:27,169 --> 00:12:29,210
+because cats and dogs can appear together.
+
+235
+00:12:29,210 --> 00:12:30,970
+Cats and giraffes less so
+
+236
+00:12:30,970 --> 00:12:31,889
+and dogs and giraffes,
+
+237
+00:12:31,889 --> 00:12:33,210
+I've never seen one in the same picture
+
+238
+00:12:33,210 --> 00:12:35,970
+but anyway, you'll have a multi-hot vector.
+
+239
+00:12:35,970 --> 00:12:38,250
+If you have a cat and a dog on the picture,
+
+240
+00:12:38,250 --> 00:12:40,970
+you'll probably label it as one, one, zero.
+
+241
+00:12:40,970 --> 00:12:42,370
+And the reason I'm mentioning that,
+
+242
+00:12:42,370 --> 00:12:44,210
+it may sound silly but in a lot of projects,
+
+243
+00:12:44,210 --> 00:12:45,250
+people change their data,
+
+244
+00:12:45,250 --> 00:12:46,809
+they forget to change their labels
+
+245
+00:12:46,809 --> 00:12:48,850
+and then they wonder why it doesn't work.
+
+246
+00:12:50,730 --> 00:12:51,769
+Okay, cool.
+
+247
+00:12:51,769 --> 00:12:54,370
+Now, in the class, we use a specific notation
+
+248
+00:12:54,370 --> 00:12:56,289
+with superscript and subscript
+
+249
+00:12:56,289 --> 00:13:00,289
+so when you see me refer to something like A11,
+
+250
+00:13:02,690 --> 00:13:06,049
+the superscript in square brackets
+
+251
+00:13:06,049 --> 00:13:08,090
+indicates the layer that you're in.
+
+252
+00:13:08,090 --> 00:13:10,090
+So you're in the first layer.
+
+253
+00:13:10,169 --> 00:13:15,169
+The subscript refers to the index of the neuron, okay?
+
+254
+00:13:15,610 --> 00:13:19,210
+And A is for activation.
+
+255
+00:13:19,210 --> 00:13:23,049
+So A subscript three, square bracket one,
+
+256
+00:13:23,049 --> 00:13:28,049
+is the output of the third neuron of the first layer, okay?
+
+257
+00:13:29,690 --> 00:13:30,929
+Again, if I continue,
+
+258
+00:13:30,929 --> 00:13:33,090
+second layer would be written like that
+
+259
+00:13:33,090 --> 00:13:34,889
+and then you'll get your probability.
+
+260
+00:13:34,889 --> 00:13:38,769
+The deeper the network is, the more capacity it has.
+
+261
+00:13:38,769 --> 00:13:39,730
+What's the word we use?
+
+262
+00:13:39,730 --> 00:13:40,570
+Capacity.
+
+263
+00:13:41,450 --> 00:13:43,850
+What it means is that if you send
+
+264
+00:13:43,850 --> 00:13:45,409
+a million pictures of cats
+
+265
+00:13:45,409 --> 00:13:49,570
+and a million pictures of non-cats to a shallow network,
+
+266
+00:13:49,570 --> 00:13:50,970
+it might not have the capacity
+
+267
+00:13:50,970 --> 00:13:52,169
+to learn what's in the dataset.
+
+268
+00:13:52,169 --> 00:13:54,210
+It's just not flexible enough.
+
+269
+00:13:54,210 --> 00:13:56,610
+The deeper the network, the more capacity it has.
+
+270
+00:13:56,610 --> 00:13:58,809
+So in fact, a network that is super deep,
+
+271
+00:13:58,809 --> 00:14:01,730
+imagine a billion-parameter transformer model
+
+272
+00:14:01,730 --> 00:14:04,490
+with one million pictures of cat and non-cat,
+
+273
+00:14:04,490 --> 00:14:06,769
+it will just overfit to those pictures,
+
+274
+00:14:06,769 --> 00:14:08,490
+meaning it's not gonna learn what a cat is,
+
+275
+00:14:08,490 --> 00:14:10,889
+it's just gonna learn by heart those million pictures
+
+276
+00:14:10,889 --> 00:14:13,450
+because its capacity is way bigger
+
+277
+00:14:13,450 --> 00:14:14,929
+than the dataset it's fed.
+
+278
+00:14:14,929 --> 00:14:16,850
+So it's very important to understand
+
+279
+00:14:16,850 --> 00:14:18,570
+the amount of data you're gonna feed
+
+280
+00:14:18,570 --> 00:14:21,210
+and the complexity, diversity of that data
+
+281
+00:14:21,210 --> 00:14:23,330
+will probably dictate the capacity
+
+282
+00:14:23,330 --> 00:14:27,419
+of the models you need to use.
+
+283
+00:14:27,419 --> 00:14:30,139
+Okay, now just to give you a little bit more intuition
+
+284
+00:14:30,139 --> 00:14:32,740
+on what happens inside those neural networks,
+
+285
+00:14:32,740 --> 00:14:34,940
+we take this relatively shallow network,
+
+286
+00:14:34,940 --> 00:14:37,340
+but call it three layers,
+
+287
+00:14:37,340 --> 00:14:42,340
+and we train it on a dataset of facial images.
+
+288
+00:14:43,059 --> 00:14:44,019
+Ignore the task.
+
+289
+00:14:44,019 --> 00:14:47,460
+In face datasets, there's a lot of tasks you could do.
+
+290
+00:14:47,460 --> 00:14:49,019
+You could do a face verification,
+
+291
+00:14:49,019 --> 00:14:50,220
+you could do a face recognition,
+
+292
+00:14:50,220 --> 00:14:55,100
+you could do face clustering, things like that.
+
+293
+00:14:55,100 --> 00:14:56,659
+We'll talk about that later,
+
+294
+00:14:56,659 --> 00:14:58,659
+but let's say it's been trained really well
+
+295
+00:14:58,659 --> 00:15:01,259
+on understanding faces.
+
+296
+00:15:01,259 --> 00:15:03,019
+If you now unpack this network
+
+297
+00:15:03,019 --> 00:15:04,940
+and you sort of query each neuron
+
+298
+00:15:04,940 --> 00:15:07,139
+and look what's going on inside,
+
+299
+00:15:07,980 --> 00:15:11,980
+what you'll notice is that the first layers
+
+300
+00:15:11,980 --> 00:15:16,620
+are gonna be better at encoding low-complexity features,
+
+301
+00:15:16,620 --> 00:15:19,419
+while the deeper networks are gonna be better
+
+302
+00:15:19,419 --> 00:15:22,500
+at encoding higher-complexity features.
+
+303
+00:15:22,500 --> 00:15:25,820
+So here's how it goes, nothing too complicated for now.
+
+304
+00:15:25,820 --> 00:15:28,460
+The neuron in the first layers,
+
+305
+00:15:28,460 --> 00:15:30,340
+they're looking at pixels,
+
+306
+00:15:30,340 --> 00:15:32,860
+because you're giving them directly the pixels.
+
+307
+00:15:32,860 --> 00:15:33,980
+So they're gonna be good
+
+308
+00:15:33,980 --> 00:15:35,740
+at stitching those pixels together,
+
+309
+00:15:35,779 --> 00:15:39,659
+the first neuron will be good at detecting a diagonal edge,
+
+310
+00:15:39,659 --> 00:15:42,620
+the second neuron will be good at vertical edges,
+
+311
+00:15:42,620 --> 00:15:44,899
+and the third one at horizontal edges,
+
+312
+00:15:44,899 --> 00:15:46,500
+because they're just looking at pixels
+
+313
+00:15:46,500 --> 00:15:49,019
+and trying to make sense out of them.
+
+314
+00:15:49,019 --> 00:15:51,899
+Now you go one layer deeper in the middle of the network.
+
+315
+00:15:51,899 --> 00:15:53,340
+Those are not seeing pixels,
+
+316
+00:15:53,340 --> 00:15:55,259
+they're seeing the output of the first layer,
+
+317
+00:15:55,259 --> 00:15:57,740
+which is already slightly more complex.
+
+318
+00:15:57,740 --> 00:15:59,700
+So what you can expect the layers
+
+319
+00:15:59,700 --> 00:16:02,220
+in the middle of the network to give you
+
+320
+00:16:02,220 --> 00:16:04,700
+or to activate for is higher level features,
+
+321
+00:16:04,700 --> 00:16:07,580
+like an eye or a nose or an ear,
+
+322
+00:16:07,580 --> 00:16:09,980
+because it turns out if you have a few edges,
+
+323
+00:16:09,980 --> 00:16:11,820
+you can start detecting circles.
+
+324
+00:16:11,820 --> 00:16:13,500
+And so you would see a neuron
+
+325
+00:16:13,500 --> 00:16:17,419
+that is really good at detecting circles, eyes.
+
+326
+00:16:17,419 --> 00:16:18,700
+The deeper you go in the network,
+
+327
+00:16:18,700 --> 00:16:21,379
+the more you get closer to the task itself,
+
+328
+00:16:21,379 --> 00:16:24,940
+which in this case, facial analysis, let's say,
+
+329
+00:16:24,940 --> 00:16:27,299
+you would see the last few neurons
+
+330
+00:16:27,299 --> 00:16:29,620
+detect larger features of the face,
+
+331
+00:16:29,620 --> 00:16:33,059
+because again, they're seeing higher-complexity information.
+
+332
+00:16:33,059 --> 00:16:34,220
+Does that make sense?
+
+333
+00:16:35,220 --> 00:16:37,220
+This concept, we call it encoding.
+
+334
+00:16:37,220 --> 00:16:39,059
+We'll also talk about embeddings.
+
+335
+00:16:39,059 --> 00:16:43,860
+It's very important because when you train neural networks,
+
+336
+00:16:43,860 --> 00:16:45,019
+you wanna make sure first
+
+337
+00:16:45,019 --> 00:16:46,899
+that they're understanding what they're doing.
+
+338
+00:16:46,899 --> 00:16:49,179
+And that's one way to see it.
+
+339
+00:16:49,179 --> 00:16:51,019
+We'll have an entire lecture on interpreting
+
+340
+00:16:51,019 --> 00:16:53,539
+and visualizing neural networks later this quarter.
+
+341
+00:16:54,500 --> 00:16:55,779
+And on top of that,
+
+342
+00:16:56,899 --> 00:16:59,259
+you probably can make use
+
+343
+00:16:59,259 --> 00:17:02,299
+of some of those encodings and embeddings.
+
+344
+00:17:02,299 --> 00:17:03,419
+We'll see that later.
+
+345
+00:17:03,419 --> 00:17:05,900
+But why in the vector space,
+
+346
+00:17:05,900 --> 00:17:09,180
+the distances between those concepts are important.
+
+347
+00:17:09,180 --> 00:17:12,539
+You can already imagine that for tasks like search,
+
+348
+00:17:12,539 --> 00:17:14,059
+searching in a database,
+
+349
+00:17:14,059 --> 00:17:16,900
+having a neural network able to encode information
+
+350
+00:17:16,900 --> 00:17:18,460
+in a very meaningful way
+
+351
+00:17:18,460 --> 00:17:20,700
+can allow you to find concepts that are close
+
+352
+00:17:20,700 --> 00:17:23,940
+to each other and associate them with each other
+
+353
+00:17:23,940 --> 00:17:25,779
+and concepts that are far from each other
+
+354
+00:17:25,779 --> 00:17:29,500
+and dissociate them from each other.
+
+355
+00:17:29,500 --> 00:17:32,619
+Okay, so this was the warmup for today.
+
+356
+00:17:32,619 --> 00:17:33,539
+How much time we spent?
+
+357
+00:17:33,539 --> 00:17:34,859
+Okay, 15 minutes on the warmup.
+
+358
+00:17:34,859 --> 00:17:35,700
+That's good.
+
+359
+00:17:35,700 --> 00:17:37,259
+So we learned a few new words,
+
+360
+00:17:37,259 --> 00:17:40,859
+model, architecture, parameters.
+
+361
+00:17:40,859 --> 00:17:41,700
+I didn't talk about it,
+
+362
+00:17:41,700 --> 00:17:43,900
+but feature engineering versus feature learning.
+
+363
+00:17:43,900 --> 00:17:47,059
+That's the core concept in deep learning
+
+364
+00:17:47,059 --> 00:17:48,299
+is feature engineering
+
+365
+00:17:48,299 --> 00:17:49,900
+is what we used to do before deep learning,
+
+366
+00:17:49,900 --> 00:17:52,740
+which is you might actually build an algorithm
+
+367
+00:17:52,740 --> 00:17:54,180
+that is good at detecting eyes.
+
+368
+00:17:54,180 --> 00:17:55,859
+It's just good at scanning eyes.
+
+369
+00:17:55,859 --> 00:17:57,940
+You manually build it.
+
+370
+00:17:57,940 --> 00:17:59,380
+And then you build another one
+
+371
+00:17:59,380 --> 00:18:02,180
+that is good at detecting a mouth.
+
+372
+00:18:02,180 --> 00:18:03,339
+And then you put them together
+
+373
+00:18:03,339 --> 00:18:05,460
+to feel and detect faces.
+
+374
+00:18:05,460 --> 00:18:06,779
+We don't do that anymore.
+
+375
+00:18:06,779 --> 00:18:08,059
+We do end-to-end learning,
+
+376
+00:18:08,059 --> 00:18:09,779
+meaning we let the data speak for itself
+
+377
+00:18:09,779 --> 00:18:10,859
+and train the model.
+
+378
+00:18:10,859 --> 00:18:12,460
+This is called feature learning.
+
+379
+00:18:12,460 --> 00:18:13,660
+It's automatic.
+
+380
+00:18:13,660 --> 00:18:15,220
+And that's how the neural network
+
+381
+00:18:15,220 --> 00:18:16,460
+actually learns those features
+
+382
+00:18:16,460 --> 00:18:19,180
+without you needing to tell it
+
+383
+00:18:19,180 --> 00:18:21,019
+eyes are important to detect faces.
+
+384
+00:18:21,019 --> 00:18:22,420
+You don't need to do that.
+
+385
+00:18:23,980 --> 00:18:25,059
+Encoding and embedding.
+
+386
+00:18:25,059 --> 00:18:26,819
+The real difference is encoding
+
+387
+00:18:26,819 --> 00:18:29,180
+is any vector representation
+
+388
+00:18:29,180 --> 00:18:31,579
+and an embedding though, sorry,
+
+389
+00:18:31,579 --> 00:18:33,700
+it should have been an embedding is
+
+390
+00:18:33,700 --> 00:18:36,140
+when an encoding has meaning,
+
+391
+00:18:36,140 --> 00:18:40,700
+meaning the distance between two encodings has meaning.
+
+392
+00:18:40,700 --> 00:18:42,500
+They might be close or far from each other
+
+393
+00:18:42,500 --> 00:18:43,539
+and it tells you something.
+
+394
+00:18:43,539 --> 00:18:44,900
+There is a logic to it.
+
+395
+00:18:46,420 --> 00:18:49,740
+And then we talked about one-hot and multi-hot vectors.
+
+396
+00:18:49,740 --> 00:18:51,019
+Okay.
+
+397
+00:18:51,019 --> 00:18:52,619
+So end of the recap now.
+
+398
+00:18:52,619 --> 00:18:54,819
+Let's go into supervised learning projects
+
+399
+00:18:54,819 --> 00:18:57,019
+and we're gonna make decisions together
+
+400
+00:18:57,019 --> 00:18:57,859
+and walk through it.
+
+401
+00:18:57,900 --> 00:19:02,019
+The first case study is day and night classification.
+
+402
+00:19:02,019 --> 00:19:04,579
+So here's my problem for you.
+
+403
+00:19:04,579 --> 00:19:07,740
+Given an image that I give you,
+
+404
+00:19:07,740 --> 00:19:10,819
+classify it as whether it's the day
+
+405
+00:19:10,819 --> 00:19:12,619
+or whether it's the night.
+
+406
+00:19:12,619 --> 00:19:14,779
+Okay, open-ended problem.
+
+407
+00:19:14,779 --> 00:19:18,460
+Ignore that foundation models exist.
+
+408
+00:19:18,460 --> 00:19:21,500
+You don't have access to chat GPT or cloud or whatever.
+
+409
+00:19:21,500 --> 00:19:22,980
+The point is to get under the hood
+
+410
+00:19:22,980 --> 00:19:23,900
+and have those discussions
+
+411
+00:19:23,900 --> 00:19:25,940
+because obviously it's a toy example.
+
+412
+00:19:25,940 --> 00:19:27,940
+So what do you do?
+
+413
+00:19:27,940 --> 00:19:35,049
+Like what data do you wanna collect to solve this problem?
+
+414
+00:19:35,049 --> 00:19:35,890
+Start.
+
+415
+00:19:35,890 --> 00:19:42,920
+Yes.
+
+416
+00:19:42,920 --> 00:19:43,759
+So tell me more.
+
+417
+00:19:43,759 --> 00:19:57,700
+Check how pixels in the same row are.
+
+418
+00:19:57,700 --> 00:20:00,019
+What does it tell you that if you look at the row
+
+419
+00:20:00,019 --> 00:20:01,579
+of pixel and the row next to it,
+
+420
+00:20:01,579 --> 00:20:07,839
+if they're very different, what does it tell you?
+
+421
+00:20:07,839 --> 00:20:10,240
+Okay, so you say if the delta between pixels
+
+422
+00:20:10,240 --> 00:20:15,240
+that are closed geographically to each other is high,
+
+423
+00:20:15,440 --> 00:20:18,519
+then there's probably colors, color changes.
+
+424
+00:20:18,519 --> 00:20:20,240
+So it's day most likely, is that it?
+
+425
+00:20:20,240 --> 00:20:21,079
+Okay.
+
+426
+00:20:21,079 --> 00:20:24,279
+So that's an example of feature engineering.
+
+427
+00:20:24,279 --> 00:20:25,839
+It's like you're going for it and great.
+
+428
+00:20:25,839 --> 00:20:26,680
+Like you're going for it
+
+429
+00:20:26,680 --> 00:20:28,440
+and you're trying to understand what's a pattern
+
+430
+00:20:28,440 --> 00:20:31,279
+that tells me that a picture is day or night.
+
+431
+00:20:31,279 --> 00:20:42,559
+What else can you do in the world of neural networks?
+
+432
+00:20:42,559 --> 00:20:44,160
+The other ideas?
+
+433
+00:20:44,160 --> 00:20:45,240
+Yeah.
+
+434
+00:20:45,240 --> 00:20:49,980
+Okay, good, yeah.
+
+435
+00:20:49,980 --> 00:20:51,000
+So yeah, I agree.
+
+436
+00:20:52,339 --> 00:20:53,579
+I said 10,000 images,
+
+437
+00:20:53,579 --> 00:20:56,380
+but how do you even determine how many pictures you need
+
+438
+00:20:57,380 --> 00:20:59,380
+to get started with this project?
+
+439
+00:21:04,039 --> 00:21:04,880
+Feed some data.
+
+440
+00:21:04,880 --> 00:21:06,279
+So you start with like 10 pictures
+
+441
+00:21:06,279 --> 00:21:07,400
+and then you continue to go.
+
+442
+00:21:07,400 --> 00:21:08,680
+Yeah, you could do that.
+
+443
+00:21:08,680 --> 00:21:10,119
+Might take some time.
+
+444
+00:21:10,119 --> 00:21:12,519
+I think the question is how easy is it
+
+445
+00:21:12,519 --> 00:21:13,599
+to collect that data?
+
+446
+00:21:13,599 --> 00:21:21,059
+Like how would you collect that data?
+
+447
+00:21:21,059 --> 00:21:23,640
+Okay, yeah, we could put our phone out there
+
+448
+00:21:23,640 --> 00:21:25,740
+and then record the day and the night
+
+449
+00:21:25,740 --> 00:21:26,980
+and have a stream of pictures
+
+450
+00:21:26,980 --> 00:21:28,220
+and add it to the data set.
+
+451
+00:21:28,220 --> 00:21:31,220
+Same location, but different lightings.
+
+452
+00:21:31,220 --> 00:22:14,259
+Yeah, that's a great point.
+
+453
+00:22:14,259 --> 00:22:17,500
+So just to repeat for the people online,
+
+454
+00:22:17,500 --> 00:22:19,299
+you have to define the task first
+
+455
+00:22:19,299 --> 00:22:20,660
+because the task can be easy.
+
+456
+00:22:20,660 --> 00:22:23,980
+You can be in a park in a very specific location
+
+457
+00:22:23,980 --> 00:22:26,180
+and say just detect if it's day or night
+
+458
+00:22:26,180 --> 00:22:27,480
+or you can have a problem
+
+459
+00:22:27,480 --> 00:22:29,859
+which is your camera can be anywhere
+
+460
+00:22:29,859 --> 00:22:31,819
+and that makes it more complicated.
+
+461
+00:22:31,819 --> 00:22:33,440
+And also the amount of data you'll need
+
+462
+00:22:33,440 --> 00:22:36,180
+is probably much more for that second problem.
+
+463
+00:22:36,180 --> 00:22:37,619
+That's what you said, right?
+
+464
+00:22:37,619 --> 00:22:40,059
+Now, actually that's a great thread.
+
+465
+00:22:40,059 --> 00:22:41,900
+Tell me about cases where this problem
+
+466
+00:22:41,900 --> 00:22:43,839
+would be really hard to solve.
+
+467
+00:22:45,259 --> 00:22:51,240
+Yeah, yeah, indoor, indoor pictures.
+
+468
+00:22:51,240 --> 00:22:54,099
+Actually, can you, how could you tell
+
+469
+00:22:54,099 --> 00:22:57,039
+if you took a picture of me with the screen here,
+
+470
+00:22:57,039 --> 00:22:58,720
+what time it was?
+
+471
+00:22:58,720 --> 00:22:59,880
+You couldn't?
+
+472
+00:22:59,880 --> 00:23:01,660
+You actually can, yeah.
+
+473
+00:23:01,660 --> 00:23:02,759
+There's a clock here.
+
+474
+00:23:04,160 --> 00:23:05,279
+So that's very interesting
+
+475
+00:23:05,279 --> 00:23:09,200
+because if that was part of the task,
+
+476
+00:23:09,200 --> 00:23:10,859
+then our problem would be hard
+
+477
+00:23:10,859 --> 00:23:12,680
+and 10,000 images is not gonna cut it
+
+478
+00:23:12,680 --> 00:23:13,799
+to understand time.
+
+479
+00:23:14,839 --> 00:23:17,160
+And so it's very important to define the task very well.
+
+480
+00:23:17,160 --> 00:23:22,700
+What else can be hard other than indoor pictures?
+
+481
+00:23:22,700 --> 00:23:25,859
+Also, also the clock can be AM or PM
+
+482
+00:23:25,859 --> 00:23:29,380
+but you can probably take additional information
+
+483
+00:23:29,380 --> 00:23:32,460
+which is how people are dressed
+
+484
+00:23:32,460 --> 00:23:35,339
+and think that it might be warmer outside than colder.
+
+485
+00:23:35,339 --> 00:23:38,220
+You could, again, it can be very complicated
+
+486
+00:23:38,220 --> 00:23:39,059
+at the end of the day.
+
+487
+00:23:39,059 --> 00:23:41,779
+But a human would say someone is teaching,
+
+488
+00:23:41,779 --> 00:23:43,259
+students are in class,
+
+489
+00:23:43,259 --> 00:23:46,900
+it's probably not 12 AM, you know.
+
+490
+00:23:46,900 --> 00:23:48,980
+So I mean like it gets complicated.
+
+491
+00:23:49,180 --> 00:23:52,539
+What else can be hard?
+
+492
+00:23:52,539 --> 00:23:58,589
+Okay, sunny, cloudy, yeah.
+
+493
+00:23:58,589 --> 00:23:59,430
+Great point.
+
+494
+00:23:59,430 --> 00:24:02,750
+If you're in the north of Norway right now or Sweden,
+
+495
+00:24:02,750 --> 00:24:05,829
+even the clock can tell you probably if it's day or night.
+
+496
+00:24:07,349 --> 00:24:09,029
+Dawn and dusk, yeah, exactly.
+
+497
+00:24:09,029 --> 00:24:10,349
+Those are great examples.
+
+498
+00:24:10,349 --> 00:24:11,829
+Actually, this is a good semantic one
+
+499
+00:24:11,829 --> 00:24:13,349
+because you'd need also to define
+
+500
+00:24:13,349 --> 00:24:15,509
+exactly what's the definition of day and night.
+
+501
+00:24:15,509 --> 00:24:17,670
+So long story short,
+
+502
+00:24:17,670 --> 00:24:20,150
+the problem can seem easy at first
+
+503
+00:24:20,150 --> 00:24:22,190
+and can be very complicated.
+
+504
+00:24:22,190 --> 00:24:24,230
+And trust me, if you wanted to do this really well,
+
+505
+00:24:24,230 --> 00:24:26,190
+even the foundation models today
+
+506
+00:24:26,190 --> 00:24:27,910
+couldn't do it in certain cases.
+
+507
+00:24:29,829 --> 00:24:31,509
+Okay, let's say we have 10,000 images
+
+508
+00:24:31,509 --> 00:24:33,710
+and you talked about the split of images earlier
+
+509
+00:24:33,710 --> 00:24:34,549
+and I agree with you.
+
+510
+00:24:34,549 --> 00:24:36,630
+You want a mix of different situations
+
+511
+00:24:36,630 --> 00:24:39,269
+in order to be able to cover all of them.
+
+512
+00:24:39,269 --> 00:24:41,910
+And going back to our discussion on model capacity,
+
+513
+00:24:41,910 --> 00:24:43,950
+if it's just a simple problem,
+
+514
+00:24:43,950 --> 00:24:46,630
+you probably need just a small capacity model.
+
+515
+00:24:46,630 --> 00:24:48,470
+If you want to add all these edge cases,
+
+516
+00:24:48,470 --> 00:24:51,190
+you probably are looking for bigger capacity models
+
+517
+00:24:51,190 --> 00:24:52,029
+and more data.
+
+518
+00:24:53,029 --> 00:24:55,269
+What's the inputs to our model?
+
+519
+00:24:56,670 --> 00:24:57,750
+I think someone said it already.
+
+520
+00:24:57,750 --> 00:25:02,750
+So let's say a picture of a day or night or whatever.
+
+521
+00:25:05,430 --> 00:25:07,390
+What's the resolution we're gonna work with?
+
+522
+00:25:07,390 --> 00:25:10,549
+How do you determine resolution when you build a data set
+
+523
+00:25:10,549 --> 00:25:17,369
+and why does it matter?
+
+524
+00:25:17,369 --> 00:25:26,119
+Yes, yeah.
+
+525
+00:25:26,119 --> 00:25:28,079
+Okay, so you want to choose a resolution
+
+526
+00:25:28,079 --> 00:25:29,440
+that's gonna be the same across the board.
+
+527
+00:25:29,440 --> 00:25:30,599
+You're gonna vectorize everything
+
+528
+00:25:30,599 --> 00:25:33,079
+that's gonna fit in the same size matrix.
+
+529
+00:25:33,079 --> 00:25:36,480
+Yeah, why is it important to have
+
+530
+00:25:36,480 --> 00:25:50,289
+the right resolution, let's say.
+
+531
+00:25:50,289 --> 00:25:52,809
+Okay, so you're saying we want homogeneity
+
+532
+00:25:52,809 --> 00:25:54,849
+in the data set in terms of resolution.
+
+533
+00:25:54,849 --> 00:25:55,930
+I would say that could be a thing,
+
+534
+00:25:55,930 --> 00:25:58,329
+but today you can actually write scripts
+
+535
+00:25:58,329 --> 00:26:00,329
+that downsize high resolution images
+
+536
+00:26:00,329 --> 00:26:02,170
+before it gets in the model.
+
+537
+00:26:02,170 --> 00:26:03,609
+And so it would probably solve.
+
+538
+00:26:03,609 --> 00:26:05,130
+Upsizing is slightly harder.
+
+539
+00:26:05,130 --> 00:26:06,529
+You would need another algorithm,
+
+540
+00:26:06,529 --> 00:26:09,089
+but it's okay to have different resolutions,
+
+541
+00:26:09,089 --> 00:26:11,809
+but you still wanna know what's the target resolution
+
+542
+00:26:11,809 --> 00:26:19,190
+that you're looking for.
+
+543
+00:26:19,190 --> 00:26:20,349
+Exactly.
+
+544
+00:26:21,190 --> 00:26:23,109
+Low resolution, we lack information,
+
+545
+00:26:23,109 --> 00:26:24,630
+so we might get things wrong.
+
+546
+00:26:24,630 --> 00:26:27,950
+For example, the clock might not appear in the picture
+
+547
+00:26:27,950 --> 00:26:29,430
+if it's too low resolution.
+
+548
+00:26:29,430 --> 00:26:31,710
+High resolution means more compute needed.
+
+549
+00:26:31,710 --> 00:26:33,710
+If you have big pictures,
+
+550
+00:26:33,710 --> 00:26:36,269
+it's gonna be heavier to train your model,
+
+551
+00:26:36,269 --> 00:26:37,589
+and you're gonna pay more,
+
+552
+00:26:37,589 --> 00:26:40,789
+and also your cycles of iterations are gonna be longer.
+
+553
+00:26:40,789 --> 00:26:44,309
+In an AI project, that's why resolution matter a lot.
+
+554
+00:26:44,309 --> 00:26:51,039
+So my question is what resolution do we go for?
+
+555
+00:26:51,079 --> 00:26:54,759
+Is there a way to just get to a number really quickly
+
+556
+00:26:54,759 --> 00:26:56,200
+in the next 10 minutes, let's say,
+
+557
+00:26:56,200 --> 00:27:08,799
+if we were doing this project?
+
+558
+00:27:08,799 --> 00:27:13,369
+Yeah, who's?
+
+559
+00:27:13,369 --> 00:27:14,769
+Oh yeah, exactly.
+
+560
+00:27:14,769 --> 00:27:16,289
+I think that's a great idea.
+
+561
+00:27:16,289 --> 00:27:19,049
+You're saying use the human as a proxy?
+
+562
+00:27:19,049 --> 00:27:22,250
+Yeah, so actually, this is how we did it.
+
+563
+00:27:22,250 --> 00:27:26,569
+Back in the days, we would print pictures
+
+564
+00:27:26,569 --> 00:27:29,329
+in different resolutions and run it through our friends
+
+565
+00:27:29,329 --> 00:27:32,210
+and say, can you tell if it's the day or the night?
+
+566
+00:27:32,210 --> 00:27:34,289
+And it turns out that below a certain resolution,
+
+567
+00:27:34,289 --> 00:27:35,450
+we can't anymore.
+
+568
+00:27:35,450 --> 00:27:38,089
+It's just like, I don't have the information I need.
+
+569
+00:27:38,089 --> 00:27:43,089
+And where we ended is somewhere around 64 by 64 by three.
+
+570
+00:27:44,730 --> 00:27:48,369
+And I stress the three because later this quarter,
+
+571
+00:27:48,369 --> 00:27:51,049
+we'll see that OpenAI and DeepMind,
+
+572
+00:27:51,049 --> 00:27:54,210
+DeepMind as well in reinforcement learning,
+
+573
+00:27:54,210 --> 00:27:56,410
+turns out for one of the famous algorithm
+
+574
+00:27:56,410 --> 00:28:00,130
+we learned together for reinforcement learning,
+
+575
+00:28:00,130 --> 00:28:02,650
+discovered that you can actually remove colors
+
+576
+00:28:02,650 --> 00:28:04,410
+and the model is not impacted,
+
+577
+00:28:04,410 --> 00:28:06,369
+but your training is way simpler.
+
+578
+00:28:07,250 --> 00:28:09,650
+In this case, I think colors matter
+
+579
+00:28:09,650 --> 00:28:11,250
+because of the blue sky,
+
+580
+00:28:11,250 --> 00:28:14,250
+because it does have an inherent information
+
+581
+00:28:14,250 --> 00:28:15,930
+about whether it's day or night.
+
+582
+00:28:15,930 --> 00:28:18,170
+And it turns out the task, if you give it to humans,
+
+583
+00:28:18,170 --> 00:28:20,970
+is much harder without colors than it is with colors.
+
+584
+00:28:22,130 --> 00:28:23,690
+So those type of insights we could get
+
+585
+00:28:23,690 --> 00:28:25,849
+over the next 10 minutes, literally,
+
+586
+00:28:25,849 --> 00:28:27,849
+by using humans as a proxy.
+
+587
+00:28:27,849 --> 00:28:29,250
+This is a toy example,
+
+588
+00:28:29,250 --> 00:28:31,769
+but I want you to think about that in your AI project.
+
+589
+00:28:31,769 --> 00:28:32,769
+You're gonna be at points
+
+590
+00:28:32,769 --> 00:28:34,690
+where you wanna validate the hypothesis
+
+591
+00:28:34,690 --> 00:28:36,970
+and the best proxy you'll have is the human.
+
+592
+00:28:39,390 --> 00:28:45,579
+Okay, what's the output for this model?
+
+593
+00:28:45,579 --> 00:28:47,299
+Yeah, day or night, zero or one?
+
+594
+00:29:02,160 --> 00:29:03,000
+Yeah, good question.
+
+595
+00:29:03,000 --> 00:29:06,920
+So does the size of the image impact the input layer?
+
+596
+00:29:06,920 --> 00:29:09,039
+The size of the input layer, is that it?
+
+597
+00:29:09,039 --> 00:29:10,319
+Yeah, it doesn't.
+
+598
+00:29:10,319 --> 00:29:11,599
+You can make your decisions.
+
+599
+00:29:11,599 --> 00:29:13,720
+You can have three neurons
+
+600
+00:29:13,720 --> 00:29:17,039
+and you send the massive picture inside it.
+
+601
+00:29:17,039 --> 00:29:19,519
+Oftentimes, and that's why I often say
+
+602
+00:29:19,519 --> 00:29:21,440
+deep learning is an engineering field.
+
+603
+00:29:21,440 --> 00:29:24,119
+You have to try it or you have to know the hacks.
+
+604
+00:29:25,559 --> 00:29:29,039
+Typically, the network, if it's a,
+
+605
+00:29:29,039 --> 00:29:31,599
+in a binary classification,
+
+606
+00:29:31,599 --> 00:29:34,319
+you're going from a high dimensional input
+
+607
+00:29:34,319 --> 00:29:36,640
+to a very low dimensional output.
+
+608
+00:29:36,640 --> 00:29:38,640
+So by nature, you'd imagine your network
+
+609
+00:29:38,640 --> 00:29:41,359
+is gonna be like this, probably.
+
+610
+00:29:41,359 --> 00:29:44,880
+Meaning you need more edge detection at the beginning
+
+611
+00:29:44,880 --> 00:29:46,519
+and then higher feature and higher feature
+
+612
+00:29:46,519 --> 00:29:47,960
+until at the end it detects the face.
+
+613
+00:29:47,960 --> 00:29:49,200
+So it's gonna be like that.
+
+614
+00:29:49,200 --> 00:29:51,279
+We're gonna see examples in week four
+
+615
+00:29:51,279 --> 00:29:54,000
+where the output is bigger than the inputs
+
+616
+00:29:54,000 --> 00:29:56,880
+and your network is probably like this.
+
+617
+00:29:56,880 --> 00:29:59,279
+So you'll build intuition during the class
+
+618
+00:29:59,279 --> 00:30:02,039
+to know when you want to downsize your input layer
+
+619
+00:30:02,039 --> 00:30:03,440
+or upsize your input layer.
+
+620
+00:30:05,079 --> 00:30:07,559
+And by the way, these hacks are valuable.
+
+621
+00:30:07,559 --> 00:30:10,519
+Why does Meta go out and give crazy offers
+
+622
+00:30:10,519 --> 00:30:11,839
+to a few researchers?
+
+623
+00:30:11,839 --> 00:30:13,160
+Because they know that stuff.
+
+624
+00:30:13,160 --> 00:30:14,960
+They know those hacks, literally.
+
+625
+00:30:15,359 --> 00:30:16,200
+Okay.
+
+626
+00:30:18,960 --> 00:30:22,319
+Okay, so again, someone said it.
+
+627
+00:30:22,319 --> 00:30:24,359
+The output is zero or one.
+
+628
+00:30:24,359 --> 00:30:26,480
+The last activation is gonna be a sigmoid.
+
+629
+00:30:26,480 --> 00:30:38,799
+Yes, question?
+
+630
+00:30:38,799 --> 00:30:39,640
+Yeah, you can do that.
+
+631
+00:30:39,640 --> 00:30:41,359
+You can probably say in the data set,
+
+632
+00:30:41,359 --> 00:30:42,680
+I don't care of the sizes
+
+633
+00:30:42,680 --> 00:30:44,799
+because I'm scraping data from everywhere.
+
+634
+00:30:44,799 --> 00:30:46,440
+I'm collecting data on my phone.
+
+635
+00:30:46,440 --> 00:30:48,279
+I'm putting it all in a database.
+
+636
+00:30:48,279 --> 00:30:51,000
+I write a script that down samples or up samples
+
+637
+00:30:51,000 --> 00:30:52,720
+everything to the same resolution.
+
+638
+00:30:52,759 --> 00:30:56,000
+And then I send those lower res images in the network
+
+639
+00:30:56,000 --> 00:30:58,640
+because what I care about is the training of my network.
+
+640
+00:30:58,640 --> 00:31:00,839
+I want it to be fast and efficient.
+
+641
+00:31:00,839 --> 00:31:02,599
+You could do that, yeah, for sure.
+
+642
+00:31:03,720 --> 00:31:05,279
+And there are networks we're gonna see
+
+643
+00:31:05,279 --> 00:31:07,000
+in the YOLO is an example of a network
+
+644
+00:31:07,000 --> 00:31:09,640
+where in the later versions of YOLO,
+
+645
+00:31:09,640 --> 00:31:11,039
+it does that automatically.
+
+646
+00:31:11,039 --> 00:31:12,559
+It can take any resolution
+
+647
+00:31:12,559 --> 00:31:14,599
+and it just samples it accordingly.
+
+648
+00:31:16,319 --> 00:31:18,759
+Okay, last activation is gonna be sigmoid.
+
+649
+00:31:18,759 --> 00:31:20,920
+We wanted the output to be between zero and one
+
+650
+00:31:20,920 --> 00:31:24,720
+and the architecture, most likely a shallow network.
+
+651
+00:31:24,720 --> 00:31:26,200
+We don't need too much capacity
+
+652
+00:31:26,200 --> 00:31:28,160
+unless the task is highly complex
+
+653
+00:31:28,160 --> 00:31:30,640
+and a convolution should do the work really well.
+
+654
+00:31:30,640 --> 00:31:32,079
+You don't know what a convolution is yet.
+
+655
+00:31:32,079 --> 00:31:33,720
+You're gonna know in a few weeks
+
+656
+00:31:33,720 --> 00:31:35,240
+but those are known to be good
+
+657
+00:31:35,240 --> 00:31:37,599
+for sequences and for images.
+
+658
+00:31:38,480 --> 00:31:39,880
+And finally, the loss function.
+
+659
+00:31:39,880 --> 00:31:45,019
+What loss function would you use?
+
+660
+00:31:45,019 --> 00:31:47,420
+Oh, which one?
+
+661
+00:31:47,420 --> 00:31:50,660
+Sigmoid, no, sigmoid is the activation.
+
+662
+00:31:50,660 --> 00:31:55,819
+What's the loss function?
+
+663
+00:31:55,819 --> 00:31:56,660
+Logistic loss, yeah.
+
+664
+00:31:56,660 --> 00:32:00,299
+Logistic loss, also called binary cross-entropy loss,
+
+665
+00:32:00,299 --> 00:32:03,259
+which is the one you've seen in the videos this week.
+
+666
+00:32:03,259 --> 00:32:21,440
+You know, yeah, yeah.
+
+667
+00:32:21,440 --> 00:32:23,039
+So repeating the question,
+
+668
+00:32:23,039 --> 00:32:25,400
+how much the amount of hardware
+
+669
+00:32:25,400 --> 00:32:27,079
+and the quality of the hardware you have
+
+670
+00:32:27,079 --> 00:32:29,799
+at your disposal influences those decisions,
+
+671
+00:32:29,799 --> 00:32:31,039
+the answer is a lot.
+
+672
+00:32:32,720 --> 00:32:35,480
+But in fact, I'm assuming you're training it
+
+673
+00:32:35,480 --> 00:32:38,960
+on your laptop right now, which will work
+
+674
+00:32:38,960 --> 00:32:40,759
+but you need to make those trade-offs
+
+675
+00:32:40,799 --> 00:32:42,680
+and I think that's why those skills matter.
+
+676
+00:32:42,680 --> 00:32:45,519
+Now, if the task is more complicated,
+
+677
+00:32:45,519 --> 00:32:47,359
+you look at the hardware you have available,
+
+678
+00:32:47,359 --> 00:32:50,279
+you'll make a quick back of the envelope calculation.
+
+679
+00:32:50,279 --> 00:32:51,960
+The calculation is really about
+
+680
+00:32:51,960 --> 00:32:54,359
+how fast our iteration cycles can be.
+
+681
+00:32:54,359 --> 00:32:56,279
+It's not about necessarily the performance
+
+682
+00:32:56,279 --> 00:32:57,599
+of the model in the end.
+
+683
+00:32:57,599 --> 00:32:59,920
+You wanna be able to iterate super quickly
+
+684
+00:32:59,920 --> 00:33:02,279
+and if your model takes one year to train,
+
+685
+00:33:02,279 --> 00:33:03,799
+you're not gonna be able to iterate.
+
+686
+00:33:03,799 --> 00:33:05,480
+You know, you need to reduce it somehow.
+
+687
+00:33:05,480 --> 00:33:14,039
+So there are situations that were going from like 65.
+
+688
+00:33:14,039 --> 00:33:15,920
+Yeah, yeah, for sure.
+
+689
+00:33:16,559 --> 00:33:23,579
+Yeah.
+
+690
+00:33:24,779 --> 00:33:25,819
+What do you mean?
+
+691
+00:33:25,819 --> 00:33:26,660
+The-
+
+692
+00:33:26,660 --> 00:33:32,690
+Like every single-
+
+693
+00:33:32,690 --> 00:33:35,450
+So the 64 by 64 by three is like literally
+
+694
+00:33:35,450 --> 00:33:38,769
+you look at a picture and you look at one pixel.
+
+695
+00:33:38,769 --> 00:33:41,650
+These have three values that describe the color, right?
+
+696
+00:33:41,650 --> 00:33:43,329
+And then you just flatten it
+
+697
+00:33:43,329 --> 00:33:44,769
+and then those numbers are given
+
+698
+00:33:44,769 --> 00:33:46,970
+to the input layer of your neural network.
+
+699
+00:33:46,970 --> 00:33:48,250
+The input layer of the picture.
+
+700
+00:33:48,250 --> 00:33:49,089
+Yeah.
+
+701
+00:33:50,410 --> 00:33:51,809
+Okay.
+
+702
+00:33:51,809 --> 00:33:53,650
+Let's move on just for the sake of time.
+
+703
+00:33:53,650 --> 00:33:55,369
+This was just the easy warmup.
+
+704
+00:33:55,369 --> 00:33:57,009
+The two things I just want you to remember
+
+705
+00:33:57,009 --> 00:33:59,130
+from that project is we're gonna build
+
+706
+00:33:59,130 --> 00:34:01,089
+a lot of proxy projects and it's important
+
+707
+00:34:01,089 --> 00:34:03,250
+to remember them for your own project.
+
+708
+00:34:03,250 --> 00:34:05,089
+So you remember, oh, I remember this experiment
+
+709
+00:34:05,089 --> 00:34:07,529
+we did on humans or I remember how many images
+
+710
+00:34:07,529 --> 00:34:09,170
+we needed for that project
+
+711
+00:34:09,170 --> 00:34:12,250
+and then that can help you make decisions faster.
+
+712
+00:34:12,250 --> 00:34:14,369
+And then the other thing that is worth highlighting
+
+713
+00:34:14,369 --> 00:34:16,769
+is the human experiments.
+
+714
+00:34:16,769 --> 00:34:18,409
+We're gonna do a lot of human experiments
+
+715
+00:34:18,409 --> 00:34:20,010
+starting with the next example
+
+716
+00:34:20,010 --> 00:34:22,769
+and those are usually helpful to make quick decisions
+
+717
+00:34:22,769 --> 00:34:25,130
+in your project when you're in the industry.
+
+718
+00:34:25,170 --> 00:34:27,570
+So second project, trigger word detection.
+
+719
+00:34:27,570 --> 00:34:30,130
+Let me give some context on this.
+
+720
+00:34:30,130 --> 00:34:33,130
+The general problem, okay.
+
+721
+00:34:33,130 --> 00:34:38,010
+You're familiar with like Alexa and all these,
+
+722
+00:34:38,010 --> 00:34:40,130
+let's say Siri and things like that
+
+723
+00:34:40,130 --> 00:34:42,929
+that you might have in your kitchen listening to you.
+
+724
+00:34:42,929 --> 00:34:43,769
+Everybody knows.
+
+725
+00:34:43,769 --> 00:34:47,409
+So the way these network typically work,
+
+726
+00:34:47,409 --> 00:34:49,809
+these models is it's not a single model.
+
+727
+00:34:49,809 --> 00:34:52,250
+It's a cascade of models
+
+728
+00:34:52,250 --> 00:34:54,889
+for energy and efficiency purposes.
+
+729
+00:34:55,650 --> 00:34:58,369
+So for example, if you have a virtual assistant
+
+730
+00:34:58,369 --> 00:35:02,329
+in your kitchen, the first model is activity detection.
+
+731
+00:35:02,329 --> 00:35:04,289
+It just detects if there is any volume
+
+732
+00:35:05,530 --> 00:35:06,769
+because you don't wanna listen
+
+733
+00:35:06,769 --> 00:35:08,329
+with the heavy model at all time.
+
+734
+00:35:08,329 --> 00:35:09,849
+It just uses a lot of energy, right?
+
+735
+00:35:09,849 --> 00:35:11,329
+You want a very lightweight model
+
+736
+00:35:11,329 --> 00:35:13,690
+that understands when volume is playing.
+
+737
+00:35:13,690 --> 00:35:16,889
+And so let's say this network detects volume.
+
+738
+00:35:16,889 --> 00:35:19,210
+It calls another network that is focused
+
+739
+00:35:19,210 --> 00:35:22,690
+on the activation word, the trigger word.
+
+740
+00:35:22,690 --> 00:35:26,210
+Alexa, hey Siri, okay Google.
+
+741
+00:35:26,210 --> 00:35:27,849
+That's usually the second layer.
+
+742
+00:35:28,730 --> 00:35:31,769
+And that one is only listening for a specific keyword.
+
+743
+00:35:31,769 --> 00:35:33,250
+If the keyword comes in,
+
+744
+00:35:33,250 --> 00:35:36,250
+it would typically call a better model
+
+745
+00:35:36,250 --> 00:35:37,730
+that's slightly slower,
+
+746
+00:35:37,730 --> 00:35:41,250
+that might be heavier and more energy consumption.
+
+747
+00:35:41,250 --> 00:35:45,610
+And that might understand what you're trying to do.
+
+748
+00:35:45,610 --> 00:35:48,289
+And then I'm not gonna go into the details,
+
+749
+00:35:48,289 --> 00:35:51,170
+but you have architectures that get very complicated.
+
+750
+00:35:51,170 --> 00:35:53,329
+Back in the day, some of these companies
+
+751
+00:35:53,329 --> 00:35:56,489
+were doing one model to set up a timer,
+
+752
+00:35:56,489 --> 00:35:59,530
+one model to buy something online.
+
+753
+00:35:59,530 --> 00:36:01,809
+One model was very complicated.
+
+754
+00:36:01,809 --> 00:36:03,849
+Today it's slightly simpler and more end to end,
+
+755
+00:36:03,849 --> 00:36:05,409
+but I just want you to know the cascade
+
+756
+00:36:05,409 --> 00:36:06,889
+of models that are being called
+
+757
+00:36:06,889 --> 00:36:09,329
+because this case study is about the second model,
+
+758
+00:36:09,329 --> 00:36:11,170
+is about the trigger word.
+
+759
+00:36:11,170 --> 00:36:12,849
+So here's my problem for you.
+
+760
+00:36:12,849 --> 00:36:17,849
+Given a 10 second audio speech detects the word activate.
+
+761
+00:36:18,130 --> 00:36:20,769
+How would you build that off the shelf like that?
+
+762
+00:36:20,769 --> 00:36:22,090
+Starting from zero.
+
+763
+00:36:23,570 --> 00:36:30,789
+What data would you collect?
+
+764
+00:36:30,789 --> 00:36:44,889
+Yep.
+
+765
+00:36:44,889 --> 00:36:54,219
+Okay.
+
+766
+00:36:54,219 --> 00:36:56,820
+Like a Fourier transform or?
+
+767
+00:36:56,820 --> 00:36:59,420
+Okay, what you described is a Fourier transform
+
+768
+00:36:59,420 --> 00:37:01,139
+or like plus the pre-processing.
+
+769
+00:37:01,139 --> 00:37:01,980
+You're right.
+
+770
+00:37:01,980 --> 00:37:05,139
+So you're saying audio is a bunch of frequencies
+
+771
+00:37:05,139 --> 00:37:09,420
+with values and we wanna first pre-process that
+
+772
+00:37:09,420 --> 00:37:11,059
+then to give it to an algorithm
+
+773
+00:37:11,059 --> 00:37:14,019
+and the length of the sequence matters as well.
+
+774
+00:37:14,019 --> 00:37:15,940
+Because if you wanna detect the word activate,
+
+775
+00:37:15,940 --> 00:37:18,219
+you know that the length needs to be,
+
+776
+00:37:18,219 --> 00:37:19,219
+there's a minimum length.
+
+777
+00:37:19,219 --> 00:37:22,139
+You can't say activate in less than 10 milliseconds, right?
+
+778
+00:37:22,139 --> 00:37:23,539
+So the length matters as well.
+
+779
+00:37:23,539 --> 00:37:25,260
+Okay, that's good insight.
+
+780
+00:37:25,260 --> 00:37:26,099
+What else?
+
+781
+00:37:26,099 --> 00:37:26,940
+What data?
+
+782
+00:37:26,940 --> 00:37:30,170
+How would you collect that data?
+
+783
+00:37:30,170 --> 00:37:31,010
+Yes.
+
+784
+00:37:31,969 --> 00:37:33,769
+Microphone, like with your phone.
+
+785
+00:37:33,769 --> 00:37:36,769
+Okay, like you would go around campus and record people.
+
+786
+00:37:36,769 --> 00:37:41,489
+How would you, what would you ask them to say?
+
+787
+00:37:41,489 --> 00:37:43,170
+Okay, you would ask, you would record a bunch
+
+788
+00:37:43,170 --> 00:37:45,210
+of people saying the word activate.
+
+789
+00:37:45,210 --> 00:37:49,739
+You would ask them anything else?
+
+790
+00:37:49,739 --> 00:37:50,579
+Other words?
+
+791
+00:37:50,579 --> 00:37:51,420
+Yeah.
+
+792
+00:37:51,980 --> 00:37:53,699
+Say a sentence, yeah?
+
+793
+00:37:53,699 --> 00:37:56,539
+It turns out you have website that are random generators
+
+794
+00:37:56,539 --> 00:37:58,780
+and you just say, say this and say this
+
+795
+00:37:58,780 --> 00:37:59,739
+and you record everything.
+
+796
+00:37:59,739 --> 00:38:00,579
+Yeah.
+
+797
+00:38:00,579 --> 00:38:01,820
+Say the word deactivate.
+
+798
+00:38:01,820 --> 00:38:02,659
+Ah, good one.
+
+799
+00:38:02,659 --> 00:38:05,500
+So you're saying you wanna find negative words
+
+800
+00:38:05,500 --> 00:38:07,780
+that are close to the positive word.
+
+801
+00:38:07,780 --> 00:38:09,260
+Just to make sure that the model learns that.
+
+802
+00:38:09,260 --> 00:38:10,619
+That's a great one, yeah.
+
+803
+00:38:10,619 --> 00:38:11,820
+Actually, it turns out activate
+
+804
+00:38:11,820 --> 00:38:14,820
+is a really bad word to choose.
+
+805
+00:38:14,820 --> 00:38:17,219
+The reason Alexa and actually there was a lot
+
+806
+00:38:17,219 --> 00:38:20,059
+of discussions at Amazon back in the days
+
+807
+00:38:20,059 --> 00:38:22,019
+around what would the word be
+
+808
+00:38:22,019 --> 00:38:23,900
+and turns out it's very important what you choose
+
+809
+00:38:23,900 --> 00:38:25,219
+because you wanna choose a word
+
+810
+00:38:25,219 --> 00:38:27,099
+that is not used in common language.
+
+811
+00:38:27,099 --> 00:38:30,099
+Otherwise, your assistant is always turning on, right?
+
+812
+00:38:31,059 --> 00:38:32,659
+And Alexa is not ideal either.
+
+813
+00:38:32,659 --> 00:38:34,940
+It's not bad, but it's not ideal either.
+
+814
+00:38:34,940 --> 00:38:37,139
+Okay, so let me just narrow down the problem.
+
+815
+00:38:37,139 --> 00:38:39,780
+Let's say we've gone around campus
+
+816
+00:38:39,780 --> 00:38:44,139
+and we've collected a bunch of 10-second audio clips.
+
+817
+00:38:44,139 --> 00:38:44,980
+Okay?
+
+818
+00:38:48,449 --> 00:38:51,250
+Do we need to think about the distribution of the data?
+
+819
+00:38:51,929 --> 00:38:52,769
+Like why does it matter?
+
+820
+00:38:52,769 --> 00:38:55,610
+Like why campus only might be limited, let's say.
+
+821
+00:38:56,929 --> 00:38:59,460
+Yeah.
+
+822
+00:38:59,460 --> 00:39:01,019
+Okay, accents.
+
+823
+00:39:01,019 --> 00:39:04,260
+Turns out the first version of this model
+
+824
+00:39:04,260 --> 00:39:07,219
+that I built with Andrew,
+
+825
+00:39:07,219 --> 00:39:09,579
+my German friends could not make it work.
+
+826
+00:39:09,579 --> 00:39:11,500
+None of my German friends would make it work
+
+827
+00:39:11,500 --> 00:39:13,340
+and we had to collect more data from,
+
+828
+00:39:13,340 --> 00:39:15,460
+and I had two German roommates at the time,
+
+829
+00:39:15,460 --> 00:39:17,820
+so we had to collect more data from them
+
+830
+00:39:17,820 --> 00:39:19,179
+because there's just a certain way
+
+831
+00:39:19,179 --> 00:39:21,360
+that people would say words.
+
+832
+00:39:22,199 --> 00:39:23,039
+Okay, good insight.
+
+833
+00:39:23,039 --> 00:39:25,159
+What else other than accents?
+
+834
+00:39:26,119 --> 00:39:29,369
+Yes.
+
+835
+00:39:29,369 --> 00:39:30,250
+Good point.
+
+836
+00:39:30,250 --> 00:39:33,449
+Average age on campus is probably younger
+
+837
+00:39:33,449 --> 00:39:37,010
+than if you actually cross campus and go to Palo Alto.
+
+838
+00:39:37,010 --> 00:39:39,329
+And in fact, the frequencies are gonna be different
+
+839
+00:39:39,329 --> 00:39:40,889
+that younger people use.
+
+840
+00:39:40,889 --> 00:39:43,639
+That's correct.
+
+841
+00:39:43,639 --> 00:39:46,559
+Yeah.
+
+842
+00:39:46,559 --> 00:39:48,039
+How fast some people speak fast.
+
+843
+00:39:48,039 --> 00:39:49,320
+Some people, and it has to do
+
+844
+00:39:49,320 --> 00:39:50,559
+with the language of origin.
+
+845
+00:39:50,559 --> 00:39:52,380
+Some people just speak faster.
+
+846
+00:39:53,539 --> 00:39:54,380
+Correct?
+
+847
+00:39:54,380 --> 00:39:56,239
+And look at this.
+
+848
+00:39:56,239 --> 00:39:59,199
+Like when you hear someone who speaks fast
+
+849
+00:39:59,199 --> 00:40:00,920
+versus someone who speaks slow,
+
+850
+00:40:00,920 --> 00:40:04,480
+it doesn't make a big difference to you as a human.
+
+851
+00:40:04,480 --> 00:40:06,480
+But if you actually just had access
+
+852
+00:40:06,480 --> 00:40:08,360
+to the numbers and the frequencies,
+
+853
+00:40:08,360 --> 00:40:10,119
+it would look completely different.
+
+854
+00:40:10,119 --> 00:40:13,559
+So the model actually struggles a lot with that problem.
+
+855
+00:40:13,559 --> 00:40:14,400
+No.
+
+856
+00:40:18,880 --> 00:40:19,960
+Yeah, for sure.
+
+857
+00:40:19,960 --> 00:40:21,239
+Ratio of male to female.
+
+858
+00:40:21,239 --> 00:40:23,440
+Anything that would modify the frequencies.
+
+859
+00:40:23,440 --> 00:40:25,840
+And on average, yes, there's different frequencies
+
+860
+00:40:25,840 --> 00:40:30,139
+or distribution male to female, yeah.
+
+861
+00:40:30,139 --> 00:40:32,059
+Background noise, very important.
+
+862
+00:40:32,059 --> 00:40:35,460
+Turns out on Stanford campus, you don't hear the metro.
+
+863
+00:40:37,219 --> 00:40:39,420
+So it's very likely that your algorithm
+
+864
+00:40:39,420 --> 00:40:41,099
+will not work for people in New York
+
+865
+00:40:41,099 --> 00:40:43,179
+that are taking the subway all the time
+
+866
+00:40:43,179 --> 00:40:45,460
+because of the background noise behind it, yeah.
+
+867
+00:40:45,460 --> 00:40:47,539
+Okay, I think we get a sense of like,
+
+868
+00:40:47,539 --> 00:40:49,900
+again, the complexity of the task ahead of us.
+
+869
+00:40:51,159 --> 00:40:54,059
+Let's say the input is a 10-second audio clip
+
+870
+00:40:54,059 --> 00:40:55,760
+I'm gonna call X.
+
+871
+00:40:55,760 --> 00:40:58,340
+And this audio clip has a few things
+
+872
+00:40:58,340 --> 00:41:00,539
+that are special to it.
+
+873
+00:41:00,539 --> 00:41:03,739
+So one of the things is negative words,
+
+874
+00:41:03,739 --> 00:41:05,579
+which are in purple.
+
+875
+00:41:05,579 --> 00:41:08,940
+Positive words, which are in green,
+
+876
+00:41:08,940 --> 00:41:11,139
+and then the background is in orange.
+
+877
+00:41:11,139 --> 00:41:13,139
+Okay, so this is, for example, someone saying,
+
+878
+00:41:13,139 --> 00:41:15,460
+hi, activate yourself.
+
+879
+00:41:15,460 --> 00:41:17,579
+Whatever, you see what I mean?
+
+880
+00:41:17,579 --> 00:41:19,980
+Activate is the positive word.
+
+881
+00:41:19,980 --> 00:41:21,820
+What's the resolution we'd want?
+
+882
+00:41:22,980 --> 00:41:24,219
+Okay, I'm not gonna ask you this question
+
+883
+00:41:24,219 --> 00:41:25,539
+because we don't have speech expert.
+
+884
+00:41:25,539 --> 00:41:27,619
+A speech expert would know it.
+
+885
+00:41:27,619 --> 00:41:30,699
+What you can do though, without being a speech expert,
+
+886
+00:41:30,699 --> 00:41:34,219
+is to go on GitHub and find another speech project
+
+887
+00:41:34,219 --> 00:41:36,300
+and you actually search for the hyperparameters
+
+888
+00:41:36,300 --> 00:41:37,340
+they're using.
+
+889
+00:41:37,340 --> 00:41:39,460
+And if you're using human audio,
+
+890
+00:41:39,460 --> 00:41:40,860
+you'll find that the same numbers
+
+891
+00:41:40,860 --> 00:41:42,780
+will work for your project.
+
+892
+00:41:42,780 --> 00:41:44,420
+Okay?
+
+893
+00:41:44,420 --> 00:41:45,920
+So you do that little search
+
+894
+00:41:45,920 --> 00:41:48,699
+and you'll find that there is just a certain
+
+895
+00:41:48,699 --> 00:41:51,920
+sample rate that works well with human voice.
+
+896
+00:41:53,719 --> 00:41:59,460
+What's the output?
+
+897
+00:41:59,460 --> 00:42:00,440
+Zero or one.
+
+898
+00:42:00,440 --> 00:42:01,599
+Okay, let's try something.
+
+899
+00:42:02,440 --> 00:42:03,599
+So let's say the output is zero or one.
+
+900
+00:42:03,599 --> 00:42:05,760
+Zero meaning there is no positive word.
+
+901
+00:42:05,760 --> 00:42:06,880
+The word activate is not there.
+
+902
+00:42:06,880 --> 00:42:08,960
+One meaning there is a positive word
+
+903
+00:42:08,960 --> 00:42:10,679
+in that 10 second audio clip.
+
+904
+00:42:10,679 --> 00:42:13,500
+So we're gonna do a little human experiment.
+
+905
+00:42:13,500 --> 00:42:15,840
+I've selected three,
+
+906
+00:42:17,199 --> 00:42:19,000
+let me turn the volume on.
+
+907
+00:42:19,000 --> 00:42:22,920
+I've selected three audio samples
+
+908
+00:42:22,920 --> 00:42:24,760
+of around 10 seconds, okay?
+
+909
+00:42:26,880 --> 00:42:29,639
+I'm not gonna tell you what the language is, okay?
+
+910
+00:42:29,639 --> 00:42:31,579
+Because the model doesn't know language.
+
+911
+00:42:32,579 --> 00:42:34,619
+So you're acting like the model.
+
+912
+00:42:34,619 --> 00:42:36,179
+That's the experiment.
+
+913
+00:42:36,179 --> 00:42:38,579
+I'm just telling you that the first
+
+914
+00:42:38,579 --> 00:42:41,300
+and the third sample have the word
+
+915
+00:42:41,300 --> 00:42:42,380
+that we're looking for.
+
+916
+00:42:42,380 --> 00:42:43,840
+And I'm not telling you what the word is,
+
+917
+00:42:43,840 --> 00:42:44,980
+again, because the model doesn't know
+
+918
+00:42:44,980 --> 00:42:47,460
+what the word is at the beginning of training, okay?
+
+919
+00:42:47,460 --> 00:42:50,980
+So now up to you to guess what the word is.
+
+920
+00:42:50,980 --> 00:42:52,380
+And I hope one of you will save us
+
+921
+00:42:52,380 --> 00:42:53,500
+and find the word.
+
+922
+00:42:53,500 --> 00:43:02,469
+Okay, let's try.
+
+923
+00:43:02,469 --> 00:43:04,030
+Too loud.
+
+924
+00:43:04,030 --> 00:43:06,070
+Second sample.
+
+925
+00:43:06,070 --> 00:43:12,099
+Wait, let me see if I can put the microphone here.
+
+926
+00:43:13,019 --> 00:43:16,019
+Anybody has it, or no?
+
+927
+00:43:16,019 --> 00:43:20,409
+No, no way, impossible.
+
+928
+00:43:20,409 --> 00:43:21,250
+Third one.
+
+929
+00:43:25,570 --> 00:43:27,050
+Okay, who has the word?
+
+930
+00:43:27,050 --> 00:43:28,050
+Medio?
+
+931
+00:43:28,050 --> 00:43:32,300
+Okay, maybe, that's not it, but maybe.
+
+932
+00:43:33,460 --> 00:43:36,250
+Yeah, in the back.
+
+933
+00:43:37,889 --> 00:43:38,730
+You're Italian?
+
+934
+00:43:40,369 --> 00:43:41,210
+You speak, okay.
+
+935
+00:43:41,210 --> 00:43:42,050
+Okay.
+
+936
+00:43:42,050 --> 00:43:42,889
+Okay.
+
+937
+00:43:42,889 --> 00:43:43,730
+Okay.
+
+938
+00:43:43,730 --> 00:43:44,550
+Okay.
+
+939
+00:43:44,550 --> 00:43:45,389
+Italian?
+
+940
+00:43:46,349 --> 00:43:47,190
+You speak, okay.
+
+941
+00:43:49,389 --> 00:43:50,550
+Yeah, it's funny.
+
+942
+00:43:50,550 --> 00:43:52,650
+Nobody finds it usually in the first try,
+
+943
+00:43:52,650 --> 00:43:54,869
+but you did find it, yeah.
+
+944
+00:43:54,869 --> 00:43:56,190
+That's correct.
+
+945
+00:43:56,190 --> 00:44:00,190
+Okay, let's try again and do it
+
+946
+00:44:00,190 --> 00:44:02,789
+with a different labeling scheme this time, okay?
+
+947
+00:44:02,789 --> 00:44:03,630
+Let's try again.
+
+948
+00:44:03,630 --> 00:44:04,449
+I'm gonna play it again,
+
+949
+00:44:04,449 --> 00:44:14,969
+but the labeling scheme has changed, okay?
+
+950
+00:44:14,969 --> 00:44:17,730
+It's the first one.
+
+951
+00:44:24,019 --> 00:44:30,519
+Third one.
+
+952
+00:44:30,519 --> 00:44:31,360
+Okay.
+
+953
+00:44:32,239 --> 00:44:34,039
+What's the word?
+
+954
+00:44:34,039 --> 00:44:36,260
+Someone who's not Italian speaker?
+
+955
+00:44:42,840 --> 00:44:43,719
+I'm not sure people heard,
+
+956
+00:44:43,719 --> 00:44:45,159
+so I wanna try someone else.
+
+957
+00:44:45,159 --> 00:44:46,679
+Yeah, you've heard it?
+
+958
+00:44:46,679 --> 00:44:47,940
+Something like PromoDigio.
+
+959
+00:44:47,940 --> 00:44:50,559
+Okay, not for PromoDigio, it's Pomerigio,
+
+960
+00:44:50,559 --> 00:44:52,840
+but you're close, you know?
+
+961
+00:44:52,840 --> 00:44:55,920
+Was it easier the second time or the first time?
+
+962
+00:44:55,920 --> 00:44:57,480
+Way more, way easier.
+
+963
+00:44:57,480 --> 00:44:59,320
+So, if it's easier for you,
+
+964
+00:44:59,320 --> 00:45:01,239
+it's easier for the model, basically.
+
+965
+00:45:02,159 --> 00:45:05,420
+And so, what is the question I'm posing here is,
+
+966
+00:45:05,420 --> 00:45:08,059
+we could go with the first labeling scheme,
+
+967
+00:45:08,059 --> 00:45:10,840
+which is easier for us to label, frankly, right?
+
+968
+00:45:10,840 --> 00:45:13,619
+You don't need to indicate the location of the word,
+
+969
+00:45:14,860 --> 00:45:17,619
+but how much more data do you think we need
+
+970
+00:45:17,619 --> 00:45:20,539
+in order for the model to figure it out?
+
+971
+00:45:20,539 --> 00:45:24,659
+It's probably 1,000x data, right?
+
+972
+00:45:24,659 --> 00:45:25,739
+And so, the question is,
+
+973
+00:45:25,739 --> 00:45:29,460
+is the second labeling scheme 1,000 times harder
+
+974
+00:45:29,460 --> 00:45:31,300
+for us to label than the first one?
+
+975
+00:45:31,300 --> 00:45:33,019
+And the answer is no.
+
+976
+00:45:33,019 --> 00:45:34,219
+So, the answer is very clear.
+
+977
+00:45:34,219 --> 00:45:36,219
+You would rather have the second labeling scheme,
+
+978
+00:45:36,219 --> 00:45:37,980
+and your model is gonna learn way faster
+
+979
+00:45:37,980 --> 00:45:39,179
+than in the first case.
+
+980
+00:45:41,579 --> 00:45:43,800
+So, that's the type of human experiment you can do.
+
+981
+00:45:43,800 --> 00:45:46,539
+Now, we're gonna use that labeling scheme.
+
+982
+00:45:46,539 --> 00:45:50,019
+Yeah, question.
+
+983
+00:45:50,019 --> 00:45:51,579
+Yeah, we'll talk about it.
+
+984
+00:45:51,579 --> 00:45:53,260
+Question, is it manual labeling or not?
+
+985
+00:45:53,260 --> 00:45:54,500
+Yes, right now it's manual,
+
+986
+00:45:54,500 --> 00:46:08,250
+but I'll explain some tricks we can use, yeah.
+
+987
+00:46:08,250 --> 00:46:10,389
+Yeah, how do you pick the trade-off
+
+988
+00:46:10,389 --> 00:46:12,710
+between the different labeling strategies and not?
+
+989
+00:46:12,710 --> 00:46:16,650
+In fact, today, you could have
+
+990
+00:46:16,650 --> 00:46:18,530
+a pre-training and a post-training
+
+991
+00:46:18,530 --> 00:46:20,369
+that have different labeling schemes.
+
+992
+00:46:21,289 --> 00:46:24,250
+The question is, for pre-training,
+
+993
+00:46:24,250 --> 00:46:26,510
+you want the model to get really good,
+
+994
+00:46:26,510 --> 00:46:29,909
+and you wanna avoid a cold start problem.
+
+995
+00:46:29,909 --> 00:46:31,809
+The problem of the cold start is,
+
+996
+00:46:31,809 --> 00:46:33,369
+with the first labeling scheme,
+
+997
+00:46:33,369 --> 00:46:35,530
+maybe even with 1,000 data points
+
+998
+00:46:35,530 --> 00:46:38,010
+that you collect and label manually,
+
+999
+00:46:38,010 --> 00:46:39,650
+it's not even gonna understand anything.
+
+1000
+00:46:39,650 --> 00:46:43,489
+So, the second labeling scheme can be a great way
+
+1001
+00:46:43,489 --> 00:46:46,489
+to work around the cold starts.
+
+1002
+00:46:46,489 --> 00:46:47,769
+You might need less data,
+
+1003
+00:46:47,769 --> 00:46:49,889
+but it will start understanding what you mean,
+
+1004
+00:46:49,889 --> 00:46:51,010
+and then the rest of the data
+
+1005
+00:46:51,010 --> 00:46:53,730
+might be labeled differently, essentially.
+
+1006
+00:46:53,730 --> 00:46:55,889
+Okay, let me talk a little bit about the labeling scheme.
+
+1007
+00:46:55,889 --> 00:46:56,929
+We're actually gonna use
+
+1008
+00:46:56,929 --> 00:46:58,849
+a slightly different labeling scheme,
+
+1009
+00:46:58,849 --> 00:47:01,170
+and the reason is, the first,
+
+1010
+00:47:01,170 --> 00:47:03,610
+the one with one, one, and only zeros,
+
+1011
+00:47:04,809 --> 00:47:07,250
+the risk is, you can actually have a model
+
+1012
+00:47:07,250 --> 00:47:10,889
+that performs 99.9% accurate,
+
+1013
+00:47:10,889 --> 00:47:13,449
+that is all zeros, just predict zero all the time.
+
+1014
+00:47:13,449 --> 00:47:15,269
+It's very accurate,
+
+1015
+00:47:15,269 --> 00:47:17,710
+but the thing is, there's just one one to find,
+
+1016
+00:47:17,710 --> 00:47:18,989
+and it's very hard to find it,
+
+1017
+00:47:18,989 --> 00:47:23,409
+and so the network is gonna lean toward zeros,
+
+1018
+00:47:23,409 --> 00:47:27,230
+meaning the data is, the labels are so skewed towards zero
+
+1019
+00:47:27,230 --> 00:47:29,710
+that it's gonna be hard to find any signal in it,
+
+1020
+00:47:29,710 --> 00:47:31,989
+and so the trick that deep learning researchers use
+
+1021
+00:47:31,989 --> 00:47:36,510
+generally is, can we actually do a little more balance
+
+1022
+00:47:36,510 --> 00:47:39,510
+between the positive and the negative labels?
+
+1023
+00:47:39,510 --> 00:47:42,469
+Just a pure engineering hack, not much science behind it.
+
+1024
+00:47:43,429 --> 00:47:45,429
+The last activation, we're gonna use a sigmoid,
+
+1025
+00:47:45,429 --> 00:47:47,050
+but because it's a sequential problem,
+
+1026
+00:47:47,050 --> 00:47:48,710
+we're gonna use sigmoid in sequence.
+
+1027
+00:47:48,710 --> 00:47:52,349
+At every time step, there's gonna be a sigmoid activation.
+
+1028
+00:47:52,349 --> 00:47:53,829
+And then the architecture,
+
+1029
+00:47:53,829 --> 00:47:55,150
+we're gonna learn it later in the class,
+
+1030
+00:47:55,150 --> 00:47:56,309
+you don't need to worry,
+
+1031
+00:47:56,309 --> 00:47:58,469
+this would be likely an R and N.
+
+1032
+00:47:58,469 --> 00:48:01,150
+You'll learn later in the class what that means.
+
+1033
+00:48:01,150 --> 00:48:02,929
+And then the loss function,
+
+1034
+00:48:02,929 --> 00:48:05,730
+can someone guess what loss function we would be using?
+
+1035
+00:48:06,750 --> 00:48:07,590
+Yes?
+
+1036
+00:48:07,590 --> 00:48:08,429
+Binary cross-entropy.
+
+1037
+00:48:08,429 --> 00:48:10,230
+Yeah, binary cross-entropy,
+
+1038
+00:48:10,230 --> 00:48:12,429
+but we're gonna use it sequentially,
+
+1039
+00:48:13,349 --> 00:48:14,190
+meaning at every step,
+
+1040
+00:48:14,190 --> 00:48:24,190
+we're gonna compute that with the sigmoid output, yes?
+
+1041
+00:48:24,190 --> 00:48:27,630
+Correct, you take your input, 10-second inputs,
+
+1042
+00:48:27,630 --> 00:48:30,389
+you look at where the positive word activate is,
+
+1043
+00:48:30,389 --> 00:48:33,570
+and you put ones in there when it plays.
+
+1044
+00:48:34,789 --> 00:48:36,349
+And you force the model to predict,
+
+1045
+00:48:36,349 --> 00:48:38,289
+hey, activate has been played.
+
+1046
+00:48:38,289 --> 00:48:40,070
+There's a lot of nuances you're seeing
+
+1047
+00:48:40,070 --> 00:48:42,469
+because you actually are gonna build this project
+
+1048
+00:48:42,469 --> 00:48:44,469
+with like, do we want the ones to start
+
+1049
+00:48:44,469 --> 00:48:45,849
+exactly when the words start?
+
+1050
+00:48:45,849 --> 00:48:47,510
+Do we wanna have a delay?
+
+1051
+00:48:47,550 --> 00:48:49,269
+There's a lot of technical questions around that.
+
+1052
+00:48:49,269 --> 00:48:54,780
+Yeah, you have a question?
+
+1053
+00:48:54,780 --> 00:48:59,659
+What I mean by steps is audio is a sequence data.
+
+1054
+00:48:59,659 --> 00:49:02,739
+And so it's time step by time step.
+
+1055
+00:49:02,739 --> 00:49:05,659
+And so what I mean is that at every time step,
+
+1056
+00:49:05,659 --> 00:49:07,739
+whatever your sample rate is,
+
+1057
+00:49:07,739 --> 00:49:10,900
+you're gonna have a prediction at every step.
+
+1058
+00:49:10,900 --> 00:49:11,739
+Okay.
+
+1059
+00:49:12,619 --> 00:49:15,699
+So what is critical to the success of this project
+
+1060
+00:49:15,699 --> 00:49:18,179
+is really the labeling strategy.
+
+1061
+00:49:18,179 --> 00:49:19,780
+Here is how we did it.
+
+1062
+00:49:21,659 --> 00:49:25,500
+And you just have to know it or not know it.
+
+1063
+00:49:25,500 --> 00:49:26,860
+It actually takes a long time
+
+1064
+00:49:26,860 --> 00:49:28,699
+to figure something like that out.
+
+1065
+00:49:28,699 --> 00:49:31,219
+And so thankfully, when I was a grad student,
+
+1066
+00:49:31,219 --> 00:49:35,699
+one of my senior PhDs helped me with these methods
+
+1067
+00:49:35,699 --> 00:49:38,820
+and he was able to guide me and save me probably month
+
+1068
+00:49:38,820 --> 00:49:41,800
+because I would not have figured out myself this probably.
+
+1069
+00:49:41,800 --> 00:49:43,019
+So here's what we did.
+
+1070
+00:49:43,019 --> 00:49:45,139
+We took three databases.
+
+1071
+00:49:45,139 --> 00:49:46,579
+We created three databases.
+
+1072
+00:49:46,579 --> 00:49:49,380
+One that would have positive words.
+
+1073
+00:49:49,380 --> 00:49:51,099
+So as you were saying earlier,
+
+1074
+00:49:51,099 --> 00:49:53,659
+we record people for the word activate.
+
+1075
+00:49:53,659 --> 00:49:56,539
+One that would have negative words,
+
+1076
+00:49:56,539 --> 00:49:58,579
+other words, including deactivate,
+
+1077
+00:49:58,579 --> 00:50:02,460
+but also kitchen and lion and dog and whatever.
+
+1078
+00:50:02,460 --> 00:50:04,179
+And then we have background noise.
+
+1079
+00:50:05,699 --> 00:50:08,940
+Turns out background noise in audio data is almost free.
+
+1080
+00:50:08,940 --> 00:50:11,380
+There's just a ton of background noise online.
+
+1081
+00:50:11,380 --> 00:50:14,099
+You can go on many platforms online, video platforms.
+
+1082
+00:50:14,099 --> 00:50:15,579
+You can just take the audio.
+
+1083
+00:50:15,579 --> 00:50:17,300
+It will be background noise.
+
+1084
+00:50:17,300 --> 00:50:18,300
+So background noise is free.
+
+1085
+00:50:18,300 --> 00:50:21,659
+You don't need to go and collect it, most likely.
+
+1086
+00:50:21,659 --> 00:50:23,260
+The other two are harder.
+
+1087
+00:50:23,260 --> 00:50:26,630
+Yeah, question.
+
+1088
+00:50:26,630 --> 00:50:27,469
+Yeah.
+
+1089
+00:50:28,389 --> 00:50:31,309
+So I'll tell you how we do it in a second.
+
+1090
+00:50:31,309 --> 00:50:33,429
+But yes, we recorded everything manually.
+
+1091
+00:50:34,349 --> 00:50:37,070
+What we did is we went online.
+
+1092
+00:50:37,070 --> 00:50:40,550
+We scraped free license data.
+
+1093
+00:50:40,550 --> 00:50:43,070
+Actually, it's a skill to know the licensing models.
+
+1094
+00:50:43,070 --> 00:50:43,909
+You're gonna learn that
+
+1095
+00:50:43,909 --> 00:50:46,269
+in the project mentorship with the TAs.
+
+1096
+00:50:46,269 --> 00:50:49,190
+What licensing allows you to do what with data.
+
+1097
+00:50:49,190 --> 00:50:50,510
+It's good to know forever.
+
+1098
+00:50:50,510 --> 00:50:52,269
+You learn it once and then you know,
+
+1099
+00:50:52,269 --> 00:50:54,590
+what is CC BY, what is CC BY NA,
+
+1100
+00:50:54,590 --> 00:50:55,909
+what is the MIT license,
+
+1101
+00:50:55,909 --> 00:50:57,869
+what is the Apache license, et cetera.
+
+1102
+00:50:58,750 --> 00:51:00,590
+And so we take 10-second audio clips.
+
+1103
+00:51:00,590 --> 00:51:02,389
+We clip the background noise.
+
+1104
+00:51:02,389 --> 00:51:03,789
+And we went around campus
+
+1105
+00:51:03,789 --> 00:51:06,469
+and we literally recorded people saying activate
+
+1106
+00:51:06,469 --> 00:51:10,190
+and other words, and we cut it when they said it.
+
+1107
+00:51:10,190 --> 00:51:12,949
+So the word was contained exactly
+
+1108
+00:51:12,949 --> 00:51:14,630
+to the amount that it was needed.
+
+1109
+00:51:14,630 --> 00:51:16,309
+Then we created a Python script
+
+1110
+00:51:16,309 --> 00:51:18,750
+that randomly inserts words, randomly.
+
+1111
+00:51:18,750 --> 00:51:20,429
+Non-overlapping words.
+
+1112
+00:51:20,429 --> 00:51:23,190
+So for example, this would be created synthetically.
+
+1113
+00:51:23,190 --> 00:51:25,190
+I would have 10-second of background noise.
+
+1114
+00:51:25,190 --> 00:51:27,750
+I would insert two negative words
+
+1115
+00:51:27,750 --> 00:51:29,949
+and I would insert one positive word.
+
+1116
+00:51:29,949 --> 00:51:31,070
+Okay.
+
+1117
+00:51:31,070 --> 00:51:34,150
+The trick is that because the Python script did that,
+
+1118
+00:51:34,150 --> 00:51:38,469
+the Python script knows where activate was put.
+
+1119
+00:51:38,469 --> 00:51:39,989
+So it can label automatically.
+
+1120
+00:51:41,110 --> 00:51:43,150
+And so it turns out that we went around campus.
+
+1121
+00:51:43,150 --> 00:51:45,309
+We used an app even to get help.
+
+1122
+00:51:45,309 --> 00:51:48,230
+So we hired a couple of people to come with us.
+
+1123
+00:51:48,230 --> 00:51:50,590
+Each brought their phone and we went all around campus
+
+1124
+00:51:50,590 --> 00:51:52,989
+recording people to say activate and other words.
+
+1125
+00:51:52,989 --> 00:51:54,630
+And we created those data sets.
+
+1126
+00:51:54,630 --> 00:51:59,150
+Within three hours, we had millions of data points.
+
+1127
+00:52:00,030 --> 00:52:01,110
+Because think about it.
+
+1128
+00:52:01,110 --> 00:52:05,630
+Let's say you have a thousand activates across campus,
+
+1129
+00:52:06,750 --> 00:52:09,829
+10,000 other words, infinite background noise.
+
+1130
+00:52:09,829 --> 00:52:12,309
+Imagine how much data you can create with that.
+
+1131
+00:52:12,309 --> 00:52:13,869
+When you actually write the Python script,
+
+1132
+00:52:13,869 --> 00:52:15,750
+you can also add some data augmentation.
+
+1133
+00:52:15,750 --> 00:52:16,989
+You can reduce some frequencies.
+
+1134
+00:52:16,989 --> 00:52:18,030
+You can augment some frequencies.
+
+1135
+00:52:18,030 --> 00:52:18,909
+You can accelerate it.
+
+1136
+00:52:18,909 --> 00:52:20,150
+You can decelerate it.
+
+1137
+00:52:20,150 --> 00:52:23,309
+So you can actually create a pretty meaningful data sets
+
+1138
+00:52:23,309 --> 00:52:28,940
+for this problem in three hours.
+
+1139
+00:52:28,940 --> 00:52:31,980
+Now I'm talking about training sets
+
+1140
+00:52:31,980 --> 00:52:34,099
+because you don't want to use that data for test sets.
+
+1141
+00:52:34,099 --> 00:52:37,139
+For test sets, you want data to be as real as possible.
+
+1142
+00:52:37,139 --> 00:52:38,139
+You're familiar with the concept
+
+1143
+00:52:38,139 --> 00:52:39,619
+of training test set, right?
+
+1144
+00:52:39,619 --> 00:52:42,500
+So for the test set, we had to manually label data
+
+1145
+00:52:42,500 --> 00:52:45,099
+but it was a much smaller set than the training sets.
+
+1146
+00:52:46,019 --> 00:52:46,860
+Right?
+
+1147
+00:52:46,860 --> 00:52:47,699
+So it's much more convenient.
+
+1148
+00:52:48,139 --> 00:52:51,460
+The second important part was architecture search.
+
+1149
+00:52:51,460 --> 00:52:53,340
+I'm not going to talk about it too much here
+
+1150
+00:52:53,340 --> 00:52:56,860
+but there are architectures that just work better
+
+1151
+00:52:56,860 --> 00:52:58,579
+for these types of problems.
+
+1152
+00:52:58,579 --> 00:53:01,420
+And this is an example of an architecture
+
+1153
+00:53:01,420 --> 00:53:04,500
+on the right that works way better.
+
+1154
+00:53:04,500 --> 00:53:07,420
+And my learning from that project
+
+1155
+00:53:07,420 --> 00:53:10,219
+was just go to the expert and ask them what they've tried
+
+1156
+00:53:10,219 --> 00:53:12,019
+and try to learn from their mistakes.
+
+1157
+00:53:12,019 --> 00:53:13,980
+And in fact, I remember Oni Hanun
+
+1158
+00:53:13,980 --> 00:53:15,860
+which was in the first level
+
+1159
+00:53:15,860 --> 00:53:18,260
+at the Gates Computer Science building.
+
+1160
+00:53:18,260 --> 00:53:21,619
+And he knew that this architecture was going to fail
+
+1161
+00:53:21,619 --> 00:53:24,260
+and he knew why because he's done so many speech projects
+
+1162
+00:53:24,260 --> 00:53:27,539
+and he just knows what works and what doesn't work.
+
+1163
+00:53:27,539 --> 00:53:29,539
+So that's why your TAs are here for
+
+1164
+00:53:29,539 --> 00:53:30,860
+actually in your project.
+
+1165
+00:53:32,139 --> 00:53:33,900
+So you should give them a call and say,
+
+1166
+00:53:33,900 --> 00:53:37,219
+hey, is what I'm doing good or give me a pointer
+
+1167
+00:53:37,219 --> 00:53:39,820
+for what I might spend my next week doing.
+
+1168
+00:53:41,260 --> 00:53:45,260
+Okay, so learnings from this section, this case study,
+
+1169
+00:53:45,300 --> 00:53:47,820
+data collection strategy is extremely important
+
+1170
+00:53:47,820 --> 00:53:50,380
+including the data labeling strategy,
+
+1171
+00:53:50,380 --> 00:53:53,019
+using human experiments matters as well
+
+1172
+00:53:53,019 --> 00:53:55,900
+and then referring to expert advice.
+
+1173
+00:53:55,900 --> 00:54:00,539
+That's the type of thing you wanna do in a project.
+
+1174
+00:54:00,539 --> 00:54:02,579
+Okay, do you understand conceptually
+
+1175
+00:54:02,579 --> 00:54:04,940
+how such project is built now at a high level?
+
+1176
+00:54:04,940 --> 00:54:06,420
+Okay, good.
+
+1177
+00:54:06,420 --> 00:54:17,829
+Yeah, question.
+
+1178
+00:54:17,829 --> 00:54:18,949
+So how often do you need
+
+1179
+00:54:18,949 --> 00:54:23,349
+to do an architecture search nowadays?
+
+1180
+00:54:23,349 --> 00:54:24,750
+Less often than before.
+
+1181
+00:54:24,750 --> 00:54:26,510
+But this class is all about understanding
+
+1182
+00:54:26,550 --> 00:54:27,750
+what's going on under the hood.
+
+1183
+00:54:27,750 --> 00:54:29,750
+So we're gonna walk you through that.
+
+1184
+00:54:29,750 --> 00:54:34,030
+In practice, it depends on your problem.
+
+1185
+00:54:34,030 --> 00:54:35,309
+Like I'll give you, in the industry,
+
+1186
+00:54:35,309 --> 00:54:37,469
+you might be building a company
+
+1187
+00:54:37,469 --> 00:54:40,150
+that requires the model to be running on the browser
+
+1188
+00:54:40,150 --> 00:54:41,750
+and so you have additional constraints
+
+1189
+00:54:41,750 --> 00:54:43,550
+that push you to create your own architecture,
+
+1190
+00:54:43,550 --> 00:54:45,230
+collect your own data,
+
+1191
+00:54:45,230 --> 00:54:47,190
+fine tune the model the way you want.
+
+1192
+00:54:47,190 --> 00:54:50,550
+For many startups out there and companies out there,
+
+1193
+00:54:50,550 --> 00:54:52,630
+you're gonna start from a foundation model.
+
+1194
+00:54:52,630 --> 00:54:54,110
+You're gonna start from a foundation model
+
+1195
+00:54:54,110 --> 00:54:56,429
+and then you might actually quantize it
+
+1196
+00:54:57,230 --> 00:54:59,710
+or prune it or modify it to meet your needs
+
+1197
+00:54:59,710 --> 00:55:01,710
+in terms of latency, in terms of memory,
+
+1198
+00:55:01,710 --> 00:55:03,349
+in terms of hardware capacity
+
+1199
+00:55:03,349 --> 00:55:05,110
+and knowing what's going on like we did
+
+1200
+00:55:05,110 --> 00:55:06,590
+is important in those cases.
+
+1201
+00:55:06,590 --> 00:55:08,860
+Yeah.
+
+1202
+00:55:08,860 --> 00:55:10,659
+Okay, super.
+
+1203
+00:55:10,659 --> 00:55:12,300
+So we're one hour in.
+
+1204
+00:55:12,300 --> 00:55:14,260
+We are about halfway through the class,
+
+1205
+00:55:14,260 --> 00:55:15,099
+a little bit ahead
+
+1206
+00:55:15,099 --> 00:55:18,579
+and I have a few more case studies to cover with you.
+
+1207
+00:55:20,179 --> 00:55:21,340
+Okay.
+
+1208
+00:55:21,340 --> 00:55:24,780
+By the end, we'll have a full set of proxy projects
+
+1209
+00:55:24,780 --> 00:55:26,019
+to work with, okay?
+
+1210
+00:55:26,019 --> 00:55:27,579
+So this one is cool.
+
+1211
+00:55:27,579 --> 00:55:29,260
+It's face verification.
+
+1212
+00:55:30,539 --> 00:55:32,539
+A school wants to use face verification
+
+1213
+00:55:32,539 --> 00:55:34,739
+to validate student IDs in facilities
+
+1214
+00:55:34,739 --> 00:55:37,940
+like dining halls, gym and pool.
+
+1215
+00:55:37,940 --> 00:55:39,340
+So let me explain what it is.
+
+1216
+00:55:39,340 --> 00:55:42,500
+It's like you arrive at the Ariaga gym
+
+1217
+00:55:42,500 --> 00:55:44,739
+and instead of just, you know,
+
+1218
+00:55:44,739 --> 00:55:47,420
+normally you would swipe your student ID, right?
+
+1219
+00:55:47,420 --> 00:55:50,139
+And your picture will show up on the screen
+
+1220
+00:55:50,139 --> 00:55:51,980
+and there's someone sitting there.
+
+1221
+00:55:51,980 --> 00:55:54,099
+It's gonna compare the picture they're seeing
+
+1222
+00:55:54,099 --> 00:55:55,980
+on the screen to the picture they're seeing
+
+1223
+00:55:55,980 --> 00:55:57,179
+with their eyes.
+
+1224
+00:55:57,179 --> 00:55:58,500
+And if it's the same, they're gonna say,
+
+1225
+00:55:58,500 --> 00:56:00,500
+you can go ahead, right?
+
+1226
+00:56:00,500 --> 00:56:01,380
+It's slightly different.
+
+1227
+00:56:01,380 --> 00:56:06,380
+Here, you're gonna be verified by a camera.
+
+1228
+00:56:06,940 --> 00:56:09,260
+So there's actually a camera ahead
+
+1229
+00:56:09,260 --> 00:56:13,619
+and you're walking in and you're swiping your card
+
+1230
+00:56:13,619 --> 00:56:15,820
+and we're gonna compare the picture in the database
+
+1231
+00:56:15,820 --> 00:56:18,579
+to the picture that is being taken by the camera
+
+1232
+00:56:18,579 --> 00:56:23,139
+to make sure that it's the same person, okay?
+
+1233
+00:56:23,139 --> 00:56:36,579
+How do you get started?
+
+1234
+00:56:36,619 --> 00:56:40,340
+Okay, so everybody who got admitted uploaded pictures,
+
+1235
+00:56:40,340 --> 00:56:41,300
+at least one.
+
+1236
+00:56:41,300 --> 00:56:44,420
+So we have that already in the database, correct?
+
+1237
+00:56:44,420 --> 00:56:49,840
+Yeah, what else?
+
+1238
+00:56:49,840 --> 00:56:51,719
+You're saying the camera matters?
+
+1239
+00:56:51,719 --> 00:56:52,559
+Yeah, for sure.
+
+1240
+00:56:52,559 --> 00:56:53,679
+The camera matters.
+
+1241
+00:56:53,679 --> 00:56:55,719
+In fact, we talked about resolution.
+
+1242
+00:56:55,719 --> 00:56:57,519
+Do you think the resolution is lower
+
+1243
+00:56:57,519 --> 00:57:00,119
+or higher than the day and night project?
+
+1244
+00:57:01,440 --> 00:57:02,280
+Probably higher.
+
+1245
+00:57:02,280 --> 00:57:03,639
+In fact, it's gonna be higher.
+
+1246
+00:57:03,639 --> 00:57:06,480
+And again, I would go back to literally doing
+
+1247
+00:57:06,480 --> 00:57:09,480
+a human experiment and showing pictures of twins
+
+1248
+00:57:09,639 --> 00:57:13,360
+and asking people if they can differentiate the twins
+
+1249
+00:57:13,360 --> 00:57:16,480
+and you'll see that the resolution matters actually.
+
+1250
+00:57:16,480 --> 00:57:24,159
+Okay, yeah, you wanted to add something?
+
+1251
+00:57:24,159 --> 00:57:29,480
+Okay, also data from outside the university.
+
+1252
+00:57:29,480 --> 00:57:34,030
+Which features?
+
+1253
+00:57:34,030 --> 00:57:35,510
+Understand the person's human feature
+
+1254
+00:57:35,510 --> 00:57:37,230
+but they're already in the picture, right?
+
+1255
+00:57:37,230 --> 00:57:38,630
+So the picture would have the feature
+
+1256
+00:57:38,630 --> 00:57:43,059
+or you would add anything on top of that.
+
+1257
+00:57:43,059 --> 00:57:45,300
+So typically, you would not actually wanna
+
+1258
+00:57:45,300 --> 00:57:46,300
+get to the feature level.
+
+1259
+00:57:46,300 --> 00:57:47,420
+You would just wanna say,
+
+1260
+00:57:47,420 --> 00:57:49,099
+we need to make sure it's in the data.
+
+1261
+00:57:49,099 --> 00:57:55,389
+If it's in the data, the neural network will learn it.
+
+1262
+00:57:56,230 --> 00:57:57,070
+Absolutely.
+
+1263
+00:57:57,070 --> 00:57:59,429
+Same person multiple times because the angle matters,
+
+1264
+00:57:59,429 --> 00:58:01,949
+the time matters, et cetera.
+
+1265
+00:58:01,949 --> 00:58:03,150
+Yeah.
+
+1266
+00:58:03,150 --> 00:58:04,349
+Okay, same thing.
+
+1267
+00:58:04,349 --> 00:58:08,429
+Okay.
+
+1268
+00:58:08,429 --> 00:58:11,070
+Okay, so you're saying we might do some pre-processing
+
+1269
+00:58:11,070 --> 00:58:13,309
+to crop all the images so that it's centered
+
+1270
+00:58:13,309 --> 00:58:15,429
+or at least that the image that we're trained
+
+1271
+00:58:15,429 --> 00:58:16,869
+the model with looks like the image
+
+1272
+00:58:16,869 --> 00:58:18,510
+that the camera is gonna take
+
+1273
+00:58:18,510 --> 00:58:20,670
+because the model will run on the camera.
+
+1274
+00:58:20,670 --> 00:58:22,030
+Okay, all these are good.
+
+1275
+00:58:22,030 --> 00:58:25,269
+So let's say our data set is picture of every student
+
+1276
+00:58:25,269 --> 00:58:26,269
+labeled with their name.
+
+1277
+00:58:26,309 --> 00:58:28,750
+So this is one of my friends Bertrand
+
+1278
+00:58:28,750 --> 00:58:29,829
+and he has his picture,
+
+1279
+00:58:29,829 --> 00:58:31,989
+which is his picture from the student ID.
+
+1280
+00:58:31,989 --> 00:58:33,670
+And then the input is,
+
+1281
+00:58:33,670 --> 00:58:36,510
+okay, he shows up in front of the building.
+
+1282
+00:58:36,510 --> 00:58:38,190
+He's a little bit confused,
+
+1283
+00:58:38,190 --> 00:58:41,349
+but he showed up and a picture was taken.
+
+1284
+00:58:41,349 --> 00:58:43,230
+The resolution, we talked about it.
+
+1285
+00:58:43,230 --> 00:58:45,989
+What we use here is 412, 412 by three.
+
+1286
+00:58:45,989 --> 00:58:47,750
+It's much higher than before.
+
+1287
+00:58:47,750 --> 00:58:49,469
+Okay, as we were expecting
+
+1288
+00:58:49,469 --> 00:58:51,469
+because we need small details.
+
+1289
+00:58:51,469 --> 00:58:54,070
+Even eye color is identifiable, right?
+
+1290
+00:58:54,070 --> 00:58:58,030
+So these things we cannot find without a higher resolution.
+
+1291
+00:58:58,030 --> 00:59:02,469
+In fact, if you actually go through airport security
+
+1292
+00:59:02,469 --> 00:59:04,909
+and you use some of these fast tracks
+
+1293
+00:59:04,909 --> 00:59:06,750
+which take a picture of you,
+
+1294
+00:59:06,750 --> 00:59:08,750
+trust me, the resolution is gonna be even higher
+
+1295
+00:59:08,750 --> 00:59:10,710
+than that, much higher than that
+
+1296
+00:59:10,710 --> 00:59:12,670
+because they're actually getting into the iris
+
+1297
+00:59:12,670 --> 00:59:14,469
+at that level, right?
+
+1298
+00:59:14,469 --> 00:59:15,989
+So what's the output?
+
+1299
+00:59:15,989 --> 00:59:17,269
+The output is zero or one.
+
+1300
+00:59:17,269 --> 00:59:19,949
+Yeah, it's Bertrand or it's not Bertrand.
+
+1301
+00:59:19,949 --> 00:59:22,110
+Okay, we're good so far.
+
+1302
+00:59:22,670 --> 00:59:29,429
+The architecture, let me actually ask you,
+
+1303
+00:59:29,429 --> 00:59:35,349
+how would you do this comparison without neural networks?
+
+1304
+00:59:35,349 --> 00:59:37,469
+Let's say a very basic way.
+
+1305
+00:59:37,469 --> 00:59:40,150
+If you had to start with the first method.
+
+1306
+00:59:40,150 --> 00:59:49,820
+Yeah. So you would feature engineer,
+
+1307
+00:59:49,820 --> 00:59:51,219
+you would say like, for example,
+
+1308
+00:59:51,219 --> 00:59:54,940
+you would define 10 features that are good for identifying people,
+
+1309
+00:59:54,940 --> 00:59:56,780
+and you would have a filter for each of them,
+
+1310
+00:59:56,780 --> 00:59:58,539
+and you would run it on the picture and say,
+
+1311
+00:59:58,539 --> 01:00:01,820
+yes, do we have this feature or not, essentially?
+
+1312
+01:00:01,820 --> 01:00:03,139
+Okay, yeah, it's a good one.
+
+1313
+01:00:03,139 --> 01:00:07,019
+Even more basic than that would be pixel comparison.
+
+1314
+01:00:07,019 --> 01:00:09,059
+You just compare the two pixels.
+
+1315
+01:00:09,059 --> 01:00:12,860
+What's the problem with doing a pixel comparison?
+
+1316
+01:00:12,860 --> 01:00:15,300
+So the idea is I take the two pictures,
+
+1317
+01:00:15,300 --> 01:00:16,659
+I compare them,
+
+1318
+01:00:16,659 --> 01:00:20,059
+and if they're close enough in pixel-wise comparison,
+
+1319
+01:00:20,059 --> 01:00:21,619
+then it's the same person.
+
+1320
+01:00:21,619 --> 01:00:24,059
+If they're far, it's not the same person.
+
+1321
+01:00:24,059 --> 01:00:27,679
+What can go wrong?
+
+1322
+01:00:27,679 --> 01:00:28,840
+Difference in what?
+
+1323
+01:00:28,840 --> 01:00:29,360
+Lighting.
+
+1324
+01:00:29,360 --> 01:00:33,280
+Lighting, yeah. Actually, what's interesting with the lighting is if you look here,
+
+1325
+01:00:33,280 --> 01:00:34,800
+so in this one,
+
+1326
+01:00:34,800 --> 01:00:38,960
+you take the top left pixel right here, okay?
+
+1327
+01:00:38,960 --> 01:00:43,199
+It's bright. You take the top left pixel on this one,
+
+1328
+01:00:43,199 --> 01:00:46,039
+it's dark or at least dark green.
+
+1329
+01:00:46,039 --> 01:00:48,760
+The difference between these two pixels is massive.
+
+1330
+01:00:48,760 --> 01:00:50,400
+It's close to 255,
+
+1331
+01:00:50,400 --> 01:00:52,639
+yet the pixel doesn't even matter.
+
+1332
+01:00:52,639 --> 01:00:54,079
+So why would you use that?
+
+1333
+01:00:54,079 --> 01:00:57,519
+It would penalize the comparison without actually mattering at all.
+
+1334
+01:00:57,519 --> 01:01:06,210
+So that's a good point, yeah.
+
+1335
+01:01:06,210 --> 01:01:08,610
+Yeah, absolutely. Background difference.
+
+1336
+01:01:08,610 --> 01:01:12,409
+Translation invariance, like imagine the same picture,
+
+1337
+01:01:12,409 --> 01:01:16,050
+but the person is like three pixels to the right.
+
+1338
+01:01:16,050 --> 01:01:19,210
+The comparison will be completely different because it's
+
+1339
+01:01:19,210 --> 01:01:23,130
+a pixel comparison rather than a semantically meaningful comparison, okay?
+
+1340
+01:01:23,130 --> 01:01:25,369
+What are other things that can go wrong?
+
+1341
+01:01:25,369 --> 01:01:28,820
+Distance from the camera.
+
+1342
+01:01:28,820 --> 01:01:30,260
+Again, you know,
+
+1343
+01:01:30,260 --> 01:01:33,539
+rotation invariance, translation invariance, scale invariance,
+
+1344
+01:01:33,539 --> 01:01:34,980
+all of these matter.
+
+1345
+01:01:34,980 --> 01:01:38,980
+What are other things that are not geometric modifications?
+
+1346
+01:01:38,980 --> 01:01:41,099
+Yeah? Wearing glasses or hats.
+
+1347
+01:01:41,099 --> 01:01:45,239
+Wearing glasses or hats. What else?
+
+1348
+01:01:45,239 --> 01:01:49,119
+Hairstyle, yeah. The beard, you know.
+
+1349
+01:01:49,119 --> 01:01:51,079
+And in fact, you look here,
+
+1350
+01:01:51,079 --> 01:01:53,360
+he has much more beard than on the picture.
+
+1351
+01:01:53,360 --> 01:01:56,280
+And he was much younger, by the way, on the first picture.
+
+1352
+01:01:56,280 --> 01:02:00,039
+And oftentimes, we look,
+
+1353
+01:02:00,039 --> 01:02:03,440
+we're younger on our student IDs than we actually are in person,
+
+1354
+01:02:03,440 --> 01:02:04,880
+and that may make a difference.
+
+1355
+01:02:04,880 --> 01:02:07,400
+Okay. So, these issues we all talked about.
+
+1356
+01:02:07,400 --> 01:02:10,079
+I think people get it. Good.
+
+1357
+01:02:10,079 --> 01:02:14,159
+So, our solution is to use the concept of encoding.
+
+1358
+01:02:14,159 --> 01:02:17,119
+You remember what we talked about earlier with the face example.
+
+1359
+01:02:17,119 --> 01:02:21,039
+It turns out a network that has been trained to understand faces
+
+1360
+01:02:21,039 --> 01:02:22,920
+should have meaningful information in
+
+1361
+01:02:22,920 --> 01:02:25,519
+those layers that you can use as comparison,
+
+1362
+01:02:25,519 --> 01:02:27,800
+that is more meaningful than a pixel comparison.
+
+1363
+01:02:27,800 --> 01:02:29,400
+So, this is how it goes.
+
+1364
+01:02:29,400 --> 01:02:32,920
+We have Bertrand picture from the student ID.
+
+1365
+01:02:32,920 --> 01:02:37,559
+We run it through a deep neural network and we get a vector.
+
+1366
+01:02:37,559 --> 01:02:42,559
+What is this vector? It's a vector that we grab in the middle of the network somewhere.
+
+1367
+01:02:42,559 --> 01:02:47,280
+Remember what I said, if the vector is taken earlier in the network,
+
+1368
+01:02:47,280 --> 01:02:49,199
+we're going to get lower level features.
+
+1369
+01:02:49,199 --> 01:02:50,360
+If you go deeper,
+
+1370
+01:02:50,360 --> 01:02:51,719
+it's going to get more facial features.
+
+1371
+01:02:51,719 --> 01:02:53,440
+So, you probably go slightly deeper.
+
+1372
+01:02:53,440 --> 01:02:55,920
+You go much deeper actually for this example.
+
+1373
+01:02:55,920 --> 01:03:01,639
+And then same thing, you run the exact same network on the picture from the camera.
+
+1374
+01:03:01,639 --> 01:03:04,639
+And normally, if the network was trained well,
+
+1375
+01:03:04,639 --> 01:03:07,599
+those two vectors should be close to each other.
+
+1376
+01:03:07,599 --> 01:03:10,000
+This tends to be 0.4.
+
+1377
+01:03:10,000 --> 01:03:11,360
+You set the threshold.
+
+1378
+01:03:11,360 --> 01:03:14,400
+You might do a little study to see what's the right threshold.
+
+1379
+01:03:14,400 --> 01:03:16,559
+And of course, this threshold is going to determine
+
+1380
+01:03:16,559 --> 01:03:18,880
+the number of true positives that you're going to get versus
+
+1381
+01:03:18,880 --> 01:03:21,639
+false positives versus false negatives, you know.
+
+1382
+01:03:21,639 --> 01:03:24,039
+The higher the threshold, the more likely you make a mistake,
+
+1383
+01:03:24,039 --> 01:03:26,000
+the more relaxed you are, right?
+
+1384
+01:03:26,000 --> 01:03:30,119
+So, here, let's say I set a threshold of 0.5.
+
+1385
+01:03:30,119 --> 01:03:33,239
+Hey, I'm confident enough that this is Bertrand.
+
+1386
+01:03:33,239 --> 01:03:37,519
+And again, airport security might have a much higher lower threshold
+
+1387
+01:03:37,519 --> 01:03:42,000
+than the dining hall at Stanford, obviously, you know.
+
+1388
+01:03:42,000 --> 01:03:46,400
+Okay. So, this is the general idea behind what we want to do.
+
+1389
+01:03:46,400 --> 01:03:49,559
+But I still haven't talked to you about how the network is trained.
+
+1390
+01:03:49,559 --> 01:03:51,000
+The network right now is not trained.
+
+1391
+01:03:51,000 --> 01:03:52,159
+We haven't learned how to train it.
+
+1392
+01:03:52,159 --> 01:04:02,900
+Yeah, question.
+
+1393
+01:04:02,900 --> 01:04:05,139
+What's the network? We'll learn it actually.
+
+1394
+01:04:05,139 --> 01:04:07,380
+We're going to see it together. Yeah, I'll describe it.
+
+1395
+01:04:07,380 --> 01:04:10,619
+But I don't want to get into the architectural nitty-gritty.
+
+1396
+01:04:10,619 --> 01:04:14,340
+I want to focus on the general training scheme that we're going to use.
+
+1397
+01:04:14,340 --> 01:04:17,579
+And then you're actually going to build that at some point in the quarter.
+
+1398
+01:04:17,579 --> 01:04:19,219
+Yeah. Other question?
+
+1399
+01:04:19,219 --> 01:04:29,539
+Yeah. What are the hidden features in the 128-dimensional vector?
+
+1400
+01:04:29,539 --> 01:04:32,179
+We don't know. That's the point of deep learning,
+
+1401
+01:04:32,179 --> 01:04:36,739
+is you have to create a loss function that
+
+1402
+01:04:36,739 --> 01:04:41,260
+will modify your parameters in a way that forces it to learn features.
+
+1403
+01:04:41,260 --> 01:04:45,059
+But I can tell you that a dimension number three is for eyes,
+
+1404
+01:04:45,059 --> 01:04:47,579
+and dimension number six is for ears.
+
+1405
+01:04:47,579 --> 01:04:48,820
+I can make a study.
+
+1406
+01:04:48,820 --> 01:04:52,059
+We'll study it later this quarter and tell you that
+
+1407
+01:04:52,059 --> 01:04:56,900
+this neuron is actually good at detecting certain types of features.
+
+1408
+01:04:56,900 --> 01:05:00,900
+But right now I can't tell you, unless I do that study now.
+
+1409
+01:05:00,900 --> 01:05:02,980
+Okay. So, question for you.
+
+1410
+01:05:02,980 --> 01:05:05,019
+What- how would you build a training and
+
+1411
+01:05:05,019 --> 01:05:08,500
+a loss function to make that possible to train that network?
+
+1412
+01:05:08,500 --> 01:05:15,480
+You have ideas. It's not an easy question.
+
+1413
+01:05:15,480 --> 01:05:23,570
+Try. Where to start?
+
+1414
+01:05:23,570 --> 01:05:31,880
+Yes. So, mean squared error between what?
+
+1415
+01:05:31,880 --> 01:05:33,280
+You're right, actually. Two vectors,
+
+1416
+01:05:33,280 --> 01:05:35,320
+mean squared error because it's a, you know, yeah.
+
+1417
+01:05:35,320 --> 01:05:50,099
+But- so, are you saying we would take pairs of pictures,
+
+1418
+01:05:50,099 --> 01:05:52,059
+we will run it through the network,
+
+1419
+01:05:52,059 --> 01:05:54,980
+we will then take the two vectors that we get,
+
+1420
+01:05:54,980 --> 01:05:58,260
+and do- apply the loss function,
+
+1421
+01:05:58,260 --> 01:05:59,860
+some distance, L1 distance,
+
+1422
+01:05:59,860 --> 01:06:03,380
+L2 distance, and then trace it back and say,
+
+1423
+01:06:03,380 --> 01:06:04,900
+these were the same people,
+
+1424
+01:06:04,900 --> 01:06:06,219
+you should have been closer.
+
+1425
+01:06:06,219 --> 01:06:08,380
+That's what you mean? Yeah, it's a good idea.
+
+1426
+01:06:08,380 --> 01:06:13,730
+Yeah. Someone else wanted to say something?
+
+1427
+01:06:13,730 --> 01:06:15,130
+Yeah. That's another one,
+
+1428
+01:06:15,130 --> 01:06:20,619
+cosine similarity that could also be our loss function.
+
+1429
+01:06:20,619 --> 01:06:30,320
+Okay. Like what? Great idea.
+
+1430
+01:06:30,320 --> 01:06:33,119
+Data augmentation. So, you would- you say,
+
+1431
+01:06:33,119 --> 01:06:37,559
+I can take the picture of Bertrand and probably mirror it,
+
+1432
+01:06:37,559 --> 01:06:39,480
+flip it, rotate it,
+
+1433
+01:06:39,480 --> 01:06:41,840
+crop it, and I would use more data that way?
+
+1434
+01:06:41,840 --> 01:06:44,639
+Yeah, absolutely. That's- that would help a lot actually.
+
+1435
+01:06:44,639 --> 01:06:47,440
+Okay. So, all of these are good ones.
+
+1436
+01:06:47,440 --> 01:06:49,880
+If I summarize your points though,
+
+1437
+01:06:49,880 --> 01:06:54,320
+because that's really the key to the designing a good loss function,
+
+1438
+01:06:54,320 --> 01:06:57,760
+what we really want is that similar- picture of
+
+1439
+01:06:57,760 --> 01:07:00,320
+the same person end up with similar vectors,
+
+1440
+01:07:00,320 --> 01:07:04,760
+and picture of different people end up with different vectors,
+
+1441
+01:07:04,760 --> 01:07:07,480
+if we rephrase it in plain English.
+
+1442
+01:07:07,480 --> 01:07:11,800
+So, what we'll do is that we'll build a data set of triplets.
+
+1443
+01:07:11,800 --> 01:07:16,199
+The triplets includes a picture that is the anchor,
+
+1444
+01:07:16,199 --> 01:07:18,360
+a picture that is the positive.
+
+1445
+01:07:18,360 --> 01:07:21,880
+The reason it's called positive is because it's the same person as the anchor,
+
+1446
+01:07:21,880 --> 01:07:24,639
+and a picture that is called the negative because it's
+
+1447
+01:07:24,639 --> 01:07:27,119
+a different person than the anchor and by definition,
+
+1448
+01:07:27,119 --> 01:07:32,480
+also a different person than the positive.
+
+1449
+01:07:32,480 --> 01:07:34,079
+One picture of a person?
+
+1450
+01:07:34,079 --> 01:07:37,159
+Great question. If you have one picture of a person,
+
+1451
+01:07:37,159 --> 01:07:39,000
+then you can't do that.
+
+1452
+01:07:39,000 --> 01:07:43,480
+We'll actually see another method that would allow us to do it even with one pi-
+
+1453
+01:07:43,480 --> 01:07:44,760
+one picture of a person.
+
+1454
+01:07:44,760 --> 01:07:48,389
+Yeah. You can rotate it, that's true.
+
+1455
+01:07:48,389 --> 01:07:50,789
+You- you could actually do some data augmentation as he was
+
+1456
+01:07:50,789 --> 01:07:54,670
+mentioning and build a data set starting with one picture.
+
+1457
+01:07:54,670 --> 01:07:56,789
+But this approach will not be the best one.
+
+1458
+01:07:56,789 --> 01:07:59,590
+We'll see another approach right after that would work better.
+
+1459
+01:07:59,590 --> 01:08:12,090
+Yeah. Good question.
+
+1460
+01:08:12,090 --> 01:08:16,770
+Why do we compare a vector rather than the output of the model, right?
+
+1461
+01:08:16,770 --> 01:08:19,609
+So, what's the output of the model?
+
+1462
+01:08:19,609 --> 01:08:21,369
+We actually haven't talked about the architecture,
+
+1463
+01:08:21,369 --> 01:08:25,090
+but I'm assuming you're saying it's a binary number in between zero and one.
+
+1464
+01:08:25,090 --> 01:08:26,729
+Because it's a single dimension,
+
+1465
+01:08:26,729 --> 01:08:29,810
+it cannot hold meaningful information.
+
+1466
+01:08:29,810 --> 01:08:35,210
+So, you probably want to have a vector that is big enough where you believe it has
+
+1467
+01:08:35,210 --> 01:08:38,689
+enough flexibility to hold information that can
+
+1468
+01:08:38,689 --> 01:08:42,250
+allow us to verify if the same person is on the picture.
+
+1469
+01:08:42,250 --> 01:08:45,569
+No, essentially. Okay. I'm going to move on and if there's- so,
+
+1470
+01:08:45,569 --> 01:08:48,250
+what we want is to minimize the encoding distance
+
+1471
+01:08:48,250 --> 01:08:50,569
+between the anchor and the positive and we want to
+
+1472
+01:08:50,569 --> 01:08:54,649
+maximize the encoding distance between the anchor and the negative.
+
+1473
+01:08:54,649 --> 01:08:56,210
+So, question for you.
+
+1474
+01:08:56,210 --> 01:08:59,729
+What I'm going to ask you is to take 10-15 seconds,
+
+1475
+01:08:59,729 --> 01:09:08,090
+look at the slide and you're going to start voting for A, B, or C.
+
+1476
+01:09:08,090 --> 01:09:11,569
+By the way, Anc is encoding.
+
+1477
+01:09:11,569 --> 01:09:20,949
+It's just how I call the vector that we get out of the network.
+
+1478
+01:09:20,949 --> 01:09:24,310
+A is the anchor, N is the negative,
+
+1479
+01:09:24,310 --> 01:09:27,550
+and P is the positive.
+
+1480
+01:09:27,550 --> 01:09:47,149
+So, A is the anchor picture,
+
+1481
+01:09:47,149 --> 01:09:49,069
+N is the negative picture,
+
+1482
+01:09:49,069 --> 01:09:51,270
+which is different from the anchor, the different person,
+
+1483
+01:09:51,270 --> 01:09:53,229
+and P is the positive picture,
+
+1484
+01:09:53,229 --> 01:09:57,180
+which is the same as the anchor.
+
+1485
+01:09:57,180 --> 01:10:01,579
+An Anc of A is when you run A through the network,
+
+1486
+01:10:01,579 --> 01:10:07,819
+you get the vector Anc of A. Okay.
+
+1487
+01:10:07,819 --> 01:10:09,819
+Let's look at the results.
+
+1488
+01:10:10,260 --> 01:10:18,500
+A. 47 for A,
+
+1489
+01:10:18,500 --> 01:10:23,140
+23 for B, 3 for C. So,
+
+1490
+01:10:23,140 --> 01:10:27,300
+someone who said good job first, that is correct.
+
+1491
+01:10:27,300 --> 01:10:30,579
+Someone who selected A wants to tell us why.
+
+1492
+01:10:30,579 --> 01:10:46,210
+Yeah. Correct. Correct. Great.
+
+1493
+01:10:46,210 --> 01:10:48,689
+So, actually the key word here is minimize.
+
+1494
+01:10:48,689 --> 01:10:50,090
+If I had said maximize,
+
+1495
+01:10:50,090 --> 01:10:52,649
+the answer indeed as you say would have been different because here we're
+
+1496
+01:10:52,649 --> 01:10:56,250
+looking at minimizing the distance between the anchor and the positive,
+
+1497
+01:10:56,250 --> 01:11:02,890
+and in fact minimizing this or maximizing the opposite of it.
+
+1498
+01:11:02,890 --> 01:11:07,529
+That's why the answer is A. Okay. Good stuff.
+
+1499
+01:11:07,529 --> 01:11:10,850
+Let's keep going. So,
+
+1500
+01:11:10,850 --> 01:11:13,529
+going back to the initial setup,
+
+1501
+01:11:13,529 --> 01:11:17,250
+we had a cat and we were predicting a binary number.
+
+1502
+01:11:17,250 --> 01:11:21,689
+Here instead we have three pictures going through the network in parallel.
+
+1503
+01:11:21,689 --> 01:11:23,729
+So, you can imagine it's batch processing.
+
+1504
+01:11:23,729 --> 01:11:26,729
+It's like the three are going in the same network at the same time,
+
+1505
+01:11:26,729 --> 01:11:28,890
+and then you're getting three vectors.
+
+1506
+01:11:28,890 --> 01:11:31,050
+You're computing the loss function.
+
+1507
+01:11:31,050 --> 01:11:35,090
+Okay. You're doing this loss function we talked about.
+
+1508
+01:11:35,090 --> 01:11:37,130
+I'm not going to talk here about the alpha number,
+
+1509
+01:11:37,130 --> 01:11:41,210
+but you're going to learn when you build it why the alpha number matters.
+
+1510
+01:11:41,210 --> 01:11:43,970
+Hint is maybe zero would have been
+
+1511
+01:11:43,970 --> 01:11:46,449
+a correct answer if you didn't have the alpha number.
+
+1512
+01:11:46,449 --> 01:11:49,890
+So, it would have created instability in the model.
+
+1513
+01:11:49,890 --> 01:11:51,770
+But you do that many, many times.
+
+1514
+01:11:51,770 --> 01:11:54,170
+You push the parameters to the right or the left,
+
+1515
+01:11:54,170 --> 01:11:58,609
+and because of the way you created your loss function and your data labeling,
+
+1516
+01:11:58,609 --> 01:12:02,170
+the way you structured your data and the loss function,
+
+1517
+01:12:02,170 --> 01:12:06,609
+essentially the model is going to learn by itself to create
+
+1518
+01:12:06,609 --> 01:12:09,569
+similar encoding for pictures that are of the same person and
+
+1519
+01:12:09,569 --> 01:12:13,250
+separate encodings for pictures that are not from the same person.
+
+1520
+01:12:13,250 --> 01:12:15,090
+You didn't need to do feature engineering.
+
+1521
+01:12:15,090 --> 01:12:17,210
+You didn't need to talk about eyes and ears and
+
+1522
+01:12:17,210 --> 01:12:18,970
+whatever because it will figure it out.
+
+1523
+01:12:18,970 --> 01:12:25,979
+You know that you created the learning environment to allow that to happen.
+
+1524
+01:12:25,979 --> 01:12:29,739
+So, congratulations, you designed your first loss function,
+
+1525
+01:12:29,739 --> 01:12:32,659
+and we're going to design many more in this course.
+
+1526
+01:12:32,659 --> 01:12:35,220
+This, by the way, is from FaceNet.
+
+1527
+01:12:35,220 --> 01:12:38,579
+It's a paper from 2015 from Chautetal,
+
+1528
+01:12:38,579 --> 01:12:40,819
+and you've seen in the slides I used,
+
+1529
+01:12:40,819 --> 01:12:42,420
+I always put the reference to
+
+1530
+01:12:42,420 --> 01:12:46,260
+the papers in case you want to go back and study the actual paper.
+
+1531
+01:12:46,260 --> 01:12:47,939
+Many students do it for their projects.
+
+1532
+01:12:47,939 --> 01:12:48,939
+This is a great one,
+
+1533
+01:12:48,939 --> 01:12:52,899
+great paper to look, a lot of citations as well.
+
+1534
+01:12:52,899 --> 01:12:56,340
+Let me make it slightly more complicated.
+
+1535
+01:12:56,340 --> 01:12:57,979
+We learned face verification,
+
+1536
+01:12:57,979 --> 01:13:00,659
+now we want to do face identification.
+
+1537
+01:13:00,659 --> 01:13:02,460
+How is that different?
+
+1538
+01:13:02,460 --> 01:13:05,699
+Identification is a school
+
+1539
+01:13:05,699 --> 01:13:09,260
+wants to recognize students in facilities.
+
+1540
+01:13:09,260 --> 01:13:11,779
+So, imagine face verification is you swiped
+
+1541
+01:13:11,779 --> 01:13:16,539
+your card and then that picture was compared to the picture of the camera.
+
+1542
+01:13:16,539 --> 01:13:19,739
+That's verification, the two, are they the same or not?
+
+1543
+01:13:19,739 --> 01:13:25,260
+Identification is you have this picture in the database somewhere,
+
+1544
+01:13:25,260 --> 01:13:28,539
+the person enters, immediately you can identify them.
+
+1545
+01:13:28,539 --> 01:13:33,539
+So, the difference for those of you who fly in the US is,
+
+1546
+01:13:33,539 --> 01:13:37,220
+when you go through global entry,
+
+1547
+01:13:37,220 --> 01:13:40,420
+many people don't even need to put their passport or anything.
+
+1548
+01:13:40,420 --> 01:13:42,779
+They just watch, look at the camera and they move on.
+
+1549
+01:13:42,779 --> 01:13:44,779
+That's identification.
+
+1550
+01:13:44,779 --> 01:13:47,140
+But actually, when you're in Europe, for example,
+
+1551
+01:13:47,140 --> 01:13:49,020
+you put your passport in,
+
+1552
+01:13:49,020 --> 01:13:50,659
+then you walk in,
+
+1553
+01:13:50,659 --> 01:13:52,899
+then it takes a picture, that's verification.
+
+1554
+01:13:52,899 --> 01:13:54,739
+You see the difference or no?
+
+1555
+01:13:54,739 --> 01:14:06,979
+The negative or how do you create those triplets essentially?
+
+1556
+01:14:06,979 --> 01:14:09,659
+No, in real time, that's a great question I didn't talk about.
+
+1557
+01:14:09,659 --> 01:14:10,899
+So, at train time,
+
+1558
+01:14:10,899 --> 01:14:14,500
+you have databases and you create the triplets automatically.
+
+1559
+01:14:14,500 --> 01:14:16,979
+You pick pictures from the same person or you use
+
+1560
+01:14:16,979 --> 01:14:20,140
+data augmentation and you add a random picture from someone else.
+
+1561
+01:14:20,140 --> 01:14:22,260
+You create millions of triplets like that or
+
+1562
+01:14:22,260 --> 01:14:25,020
+billions of triplets. At test time,
+
+1563
+01:14:25,020 --> 01:14:28,739
+you only take the picture from the camera,
+
+1564
+01:14:28,739 --> 01:14:30,779
+run it, you don't use a negative.
+
+1565
+01:14:30,779 --> 01:14:32,779
+You just take the picture from the camera,
+
+1566
+01:14:32,779 --> 01:14:34,300
+you run it through the network,
+
+1567
+01:14:34,300 --> 01:14:37,340
+the person swipes, you take the picture from the swipe,
+
+1568
+01:14:37,340 --> 01:14:38,659
+run it through the network,
+
+1569
+01:14:38,659 --> 01:14:40,699
+you do the comparison, you let them in or not.
+
+1570
+01:14:40,699 --> 01:14:44,380
+So, there's no more negative at test time in practice.
+
+1571
+01:14:44,380 --> 01:14:47,100
+It's just a trick to train the model.
+
+1572
+01:14:47,100 --> 01:14:49,859
+So, how would you do face identification
+
+1573
+01:14:49,859 --> 01:14:52,060
+using what we learned for face verification?
+
+1574
+01:14:52,060 --> 01:14:55,340
+Is there any small tweak you can make that would
+
+1575
+01:14:55,340 --> 01:14:58,260
+make this network work for identification?
+
+1576
+01:14:58,260 --> 01:15:13,039
+Yes. Correct. Correct.
+
+1577
+01:15:13,039 --> 01:15:14,800
+What is it called in machine learning?
+
+1578
+01:15:18,539 --> 01:15:20,380
+There's a machine learning algorithm that we
+
+1579
+01:15:20,380 --> 01:15:22,859
+can stack on top of what we just did.
+
+1580
+01:15:22,859 --> 01:15:26,020
+He said you can compare.
+
+1581
+01:15:26,020 --> 01:15:27,659
+So, because we don't have two pictures anymore,
+
+1582
+01:15:27,659 --> 01:15:29,619
+we just have one from the camera.
+
+1583
+01:15:29,619 --> 01:15:33,140
+You just compare the vector of the- you run this by the network,
+
+1584
+01:15:33,140 --> 01:15:37,500
+you get the vector and then you compare it to the database.
+
+1585
+01:15:37,500 --> 01:15:40,380
+No. Good try.
+
+1586
+01:15:40,380 --> 01:15:42,460
+You have a database of all the student pictures,
+
+1587
+01:15:42,460 --> 01:15:44,500
+you run everything through the network.
+
+1588
+01:15:44,500 --> 01:15:45,859
+Instead of storing the image,
+
+1589
+01:15:45,859 --> 01:15:47,380
+you store the vectors.
+
+1590
+01:15:47,380 --> 01:15:50,859
+Then someone shows up and you're looking in the database,
+
+1591
+01:15:50,859 --> 01:15:53,899
+is there any vector that is super close to this one?
+
+1592
+01:15:53,899 --> 01:15:55,939
+That's identification. What is
+
+1593
+01:15:55,939 --> 01:15:58,220
+this algorithm called in machine learning?
+
+1594
+01:15:58,220 --> 01:16:04,060
+It's a pretty simple algorithm.
+
+1595
+01:16:04,060 --> 01:16:09,579
+No. Okay. I'm going to make it easier.
+
+1596
+01:16:09,579 --> 01:16:11,859
+What if instead of having one picture
+
+1597
+01:16:11,859 --> 01:16:13,100
+of a student in the database,
+
+1598
+01:16:13,100 --> 01:16:15,260
+you had three of each students,
+
+1599
+01:16:15,260 --> 01:16:18,060
+you have three vectors for each person,
+
+1600
+01:16:18,060 --> 01:16:20,100
+and then you're trying to find
+
+1601
+01:16:20,100 --> 01:16:21,979
+the nearest vectors in the database
+
+1602
+01:16:21,979 --> 01:16:25,279
+from the one that the camera takes.
+
+1603
+01:16:25,279 --> 01:16:26,399
+I used the keyword.
+
+1604
+01:16:26,399 --> 01:16:32,260
+No. Yeah. K-nearest neighbors.
+
+1605
+01:16:32,260 --> 01:16:34,140
+That's a K-nearest neighbor algorithm.
+
+1606
+01:16:34,140 --> 01:16:39,899
+It's essentially- you want to explain what you meant?
+
+1607
+01:16:39,899 --> 01:16:45,739
+Why is it K-nearest neighbor?
+
+1608
+01:16:45,739 --> 01:16:51,789
+Yeah. It's K-nearest neighbor for
+
+1609
+01:16:51,789 --> 01:16:53,989
+high-dimensional vectors. So here is
+
+1610
+01:16:53,989 --> 01:16:56,550
+a simple example of K-nearest neighbor for two dimensions.
+
+1611
+01:16:56,550 --> 01:16:58,789
+In practice, it's 128 dimensions,
+
+1612
+01:16:58,789 --> 01:17:00,829
+so I can't put it on the slide, of course.
+
+1613
+01:17:00,829 --> 01:17:02,510
+But let's say in green,
+
+1614
+01:17:02,510 --> 01:17:03,789
+you have the query point.
+
+1615
+01:17:03,789 --> 01:17:05,909
+The query point is the camera picture.
+
+1616
+01:17:05,909 --> 01:17:11,989
+Okay? Then you run a nearest neighbor algorithm and you say,
+
+1617
+01:17:11,989 --> 01:17:14,550
+are there three vectors in the database
+
+1618
+01:17:14,550 --> 01:17:18,029
+that are close to this vector?
+
+1619
+01:17:18,029 --> 01:17:19,710
+You can add additional checks.
+
+1620
+01:17:19,710 --> 01:17:22,270
+Are these three vectors from the same person?
+
+1621
+01:17:22,270 --> 01:17:25,109
+If they are, then it's very likely the person is correct
+
+1622
+01:17:25,109 --> 01:17:27,029
+because you just could prove that
+
+1623
+01:17:27,029 --> 01:17:29,750
+the three closest vectors in the database are
+
+1624
+01:17:29,750 --> 01:17:32,510
+from the same person three times.
+
+1625
+01:17:32,510 --> 01:17:33,949
+So it's higher likelihood.
+
+1626
+01:17:33,949 --> 01:17:35,109
+You could even do it for
+
+1627
+01:17:35,109 --> 01:17:37,149
+10 nearest neighbor if you want to be really secure.
+
+1628
+01:17:37,149 --> 01:17:39,229
+Let's say you go to the airport every time,
+
+1629
+01:17:39,229 --> 01:17:41,069
+and every time they take a picture of you,
+
+1630
+01:17:41,069 --> 01:17:44,829
+and now they can do a 10 nearest neighbor on that search.
+
+1631
+01:17:44,829 --> 01:17:48,310
+Does that make sense? Now it's slightly more complicated.
+
+1632
+01:17:48,310 --> 01:17:49,750
+You want to do face clustering.
+
+1633
+01:17:49,750 --> 01:17:52,229
+So you know in your phone sometimes it says,
+
+1634
+01:17:52,229 --> 01:17:56,189
+it put automatically all the pictures from your mom in
+
+1635
+01:17:56,189 --> 01:17:59,670
+one folder and from your dad in another folder, right?
+
+1636
+01:17:59,670 --> 01:18:01,109
+How does it do it?
+
+1637
+01:18:01,109 --> 01:18:05,069
+How could you make a tweak to again what we created or encoding network?
+
+1638
+01:18:05,069 --> 01:18:09,529
+How can you use that to create that?
+
+1639
+01:18:09,529 --> 01:18:10,890
+K-means, yeah, exactly.
+
+1640
+01:18:10,890 --> 01:18:12,529
+K-means algorithm, which is
+
+1641
+01:18:12,529 --> 01:18:15,010
+an unsupervised learning algorithm clustering.
+
+1642
+01:18:15,010 --> 01:18:17,130
+So you have a bunch of pictures,
+
+1643
+01:18:17,130 --> 01:18:19,850
+you have vectorized all of them with the network you trained,
+
+1644
+01:18:19,850 --> 01:18:22,489
+and normally the vectors that are from the same person
+
+1645
+01:18:22,489 --> 01:18:24,369
+should be clustered around the same place,
+
+1646
+01:18:24,369 --> 01:18:32,779
+and that's very simply how big companies do it on your phone.
+
+1647
+01:18:32,779 --> 01:18:39,380
+Yes. Yeah. So if the person is not in the database,
+
+1648
+01:18:39,380 --> 01:18:41,939
+then you shouldn't find any vector
+
+1649
+01:18:41,939 --> 01:18:44,500
+that is close to the vector you're taking picture of.
+
+1650
+01:18:44,500 --> 01:18:46,420
+The closest vector might be above
+
+1651
+01:18:46,420 --> 01:18:48,260
+your threshold in terms of distance,
+
+1652
+01:18:48,260 --> 01:18:55,609
+and you wouldn't let that person in. Yeah, for sure.
+
+1653
+01:18:55,609 --> 01:18:56,890
+Yeah, they make you sign up there.
+
+1654
+01:18:56,890 --> 01:19:00,449
+So it's interesting because companies know that they need to build
+
+1655
+01:19:00,449 --> 01:19:04,369
+these net- these algorithms and then some like the admission process,
+
+1656
+01:19:04,369 --> 01:19:06,529
+the sign-up process might include certain data points,
+
+1657
+01:19:06,529 --> 01:19:09,810
+and now you're starting to understand how it's used in the background, right?
+
+1658
+01:19:09,810 --> 01:19:12,329
+Okay. Let's move on.
+
+1659
+01:19:12,329 --> 01:19:20,520
+Yeah, one question. Oh, good question.
+
+1660
+01:19:20,520 --> 01:19:23,039
+So are you comparing each new picture?
+
+1661
+01:19:23,039 --> 01:19:27,760
+So I take a picture of my mom with my phone.
+
+1662
+01:19:27,760 --> 01:19:29,239
+What's going to happen?
+
+1663
+01:19:29,239 --> 01:19:31,359
+This picture is going to likely,
+
+1664
+01:19:31,359 --> 01:19:32,439
+if you're doing clustering,
+
+1665
+01:19:32,439 --> 01:19:34,640
+is going to be compared to the centroid of my mom.
+
+1666
+01:19:34,640 --> 01:19:37,760
+So the phone keeps probably a centroid of my mom,
+
+1667
+01:19:37,760 --> 01:19:40,920
+and if it's close enough to the centroid over another centroid,
+
+1668
+01:19:40,920 --> 01:19:43,399
+it's going to probably put it in that folder, essentially.
+
+1669
+01:19:43,399 --> 01:19:50,800
+No. Yeah, one more question and then we move on.
+
+1670
+01:19:50,800 --> 01:19:52,359
+Yeah, there is- okay.
+
+1671
+01:19:52,359 --> 01:19:54,840
+How many- how do you figure out how many centroids you want?
+
+1672
+01:19:54,840 --> 01:19:56,079
+There is an algorithm.
+
+1673
+01:19:56,079 --> 01:19:58,600
+I- you'll study it in CS229,
+
+1674
+01:19:58,600 --> 01:20:02,250
+not in CS230, but you know.
+
+1675
+01:20:02,250 --> 01:20:05,449
+Okay. Okay.
+
+1676
+01:20:05,449 --> 01:20:08,369
+What we learned here is what an encoder network is.
+
+1677
+01:20:08,369 --> 01:20:09,810
+We learned about positive,
+
+1678
+01:20:09,810 --> 01:20:12,250
+anchor, negative, for the triplet loss.
+
+1679
+01:20:12,250 --> 01:20:14,609
+The loss I showed you is called the triplet loss,
+
+1680
+01:20:14,609 --> 01:20:16,250
+because of the triplets.
+
+1681
+01:20:16,250 --> 01:20:18,130
+And then we learned the different variations
+
+1682
+01:20:18,130 --> 01:20:20,770
+of phase verification, identification, and clustering.
+
+1683
+01:20:20,770 --> 01:20:24,489
+Now, we're going to get to an interesting section,
+
+1684
+01:20:24,489 --> 01:20:27,970
+which is brand new around self-supervised learning.
+
+1685
+01:20:27,970 --> 01:20:30,729
+So note that everything we did so far,
+
+1686
+01:20:30,729 --> 01:20:32,970
+the day and night classification,
+
+1687
+01:20:32,970 --> 01:20:35,090
+the trigger word detection,
+
+1688
+01:20:35,090 --> 01:20:38,890
+and the triplet loss were supervised learning.
+
+1689
+01:20:38,890 --> 01:20:41,250
+We had labels, essentially.
+
+1690
+01:20:41,250 --> 01:20:43,409
+Day and night is very classic supervised learning.
+
+1691
+01:20:43,409 --> 01:20:45,170
+You label data with zero and one.
+
+1692
+01:20:45,170 --> 01:20:46,729
+Same for trigger word detection,
+
+1693
+01:20:46,729 --> 01:20:49,090
+phase verification, you can- can- can debate,
+
+1694
+01:20:49,090 --> 01:20:50,569
+it can be different.
+
+1695
+01:20:50,569 --> 01:20:53,329
+But anyway, we- we focused on supervised learning.
+
+1696
+01:20:53,329 --> 01:20:57,170
+Now, we're going to talk about self-supervised learning.
+
+1697
+01:20:57,170 --> 01:21:00,449
+And my question for you is the following.
+
+1698
+01:21:00,449 --> 01:21:03,770
+Labeling is expensive. We know that.
+
+1699
+01:21:03,770 --> 01:21:08,649
+So how would you redo what we did with
+
+1700
+01:21:08,649 --> 01:21:12,489
+a different approach that does not require labels?
+
+1701
+01:21:12,489 --> 01:21:15,569
+Meaning, you remember even in phase verification,
+
+1702
+01:21:15,569 --> 01:21:17,930
+we sort of had the name of the students in
+
+1703
+01:21:17,930 --> 01:21:20,170
+the database with their face
+
+1704
+01:21:20,170 --> 01:21:22,930
+and we might have multiple pictures of them.
+
+1705
+01:21:22,930 --> 01:21:24,289
+Let's say you don't even have that.
+
+1706
+01:21:24,289 --> 01:21:29,939
+You just have faces in the wild, unlabeled.
+
+1707
+01:21:29,939 --> 01:21:33,260
+How would you do things differently?
+
+1708
+01:21:33,300 --> 01:21:42,329
+Any idea? Yeah. Okay.
+
+1709
+01:21:42,329 --> 01:21:44,329
+Let the neural network find
+
+1710
+01:21:44,329 --> 01:21:45,689
+the pictures that are close to each other.
+
+1711
+01:21:45,689 --> 01:21:47,489
+But how would you train that network?
+
+1712
+01:21:47,489 --> 01:21:48,890
+Like, you're starting with a network
+
+1713
+01:21:48,890 --> 01:21:50,930
+that doesn't do anything and you give it an image,
+
+1714
+01:21:50,930 --> 01:21:52,970
+it gives you a random vector at first.
+
+1715
+01:21:52,970 --> 01:21:54,689
+So how would you train it?
+
+1716
+01:21:54,689 --> 01:22:03,710
+Yeah. Do some clustering offline.
+
+1717
+01:22:03,710 --> 01:22:05,670
+But again, my question is the clustering algorithm,
+
+1718
+01:22:05,670 --> 01:22:07,550
+how is it trained? How do you cluster?
+
+1719
+01:22:07,550 --> 01:22:10,189
+If you don't have any encoder network.
+
+1720
+01:22:10,189 --> 01:22:12,350
+Because the clustering came after
+
+1721
+01:22:12,350 --> 01:22:14,109
+we trained the encoder network.
+
+1722
+01:22:14,109 --> 01:22:16,270
+The clustering only worked because we had
+
+1723
+01:22:16,270 --> 01:22:24,619
+a good encoder network.
+
+1724
+01:22:24,619 --> 01:22:26,300
+But you don't know if it's the same person.
+
+1725
+01:22:26,300 --> 01:22:27,100
+That's what I'm saying is that-
+
+1726
+01:22:27,100 --> 01:22:28,180
+Vectors would be similar.
+
+1727
+01:22:28,180 --> 01:22:30,500
+No, because that's the network you're training.
+
+1728
+01:22:30,500 --> 01:22:32,100
+The vectors are not similar because
+
+1729
+01:22:32,100 --> 01:22:33,699
+that's the network we want to train.
+
+1730
+01:22:33,699 --> 01:22:36,100
+Right now, I gave you a network.
+
+1731
+01:22:36,100 --> 01:22:37,500
+It's completely random.
+
+1732
+01:22:37,500 --> 01:22:40,579
+You give it my picture on Saturday and on Sunday,
+
+1733
+01:22:40,579 --> 01:22:42,899
+the vectors are completely off.
+
+1734
+01:22:42,899 --> 01:22:48,409
+So how do you start? Yeah.
+
+1735
+01:22:48,409 --> 01:23:04,300
+Okay. Tell me more.
+
+1736
+01:23:04,300 --> 01:23:06,500
+Okay. Yeah, you're ahead.
+
+1737
+01:23:06,500 --> 01:23:09,220
+But we'll study that in two weeks, actually.
+
+1738
+01:23:09,220 --> 01:23:12,500
+So we'll do autoencoders two weeks from now in class.
+
+1739
+01:23:14,380 --> 01:23:15,979
+Anyone else has an idea?
+
+1740
+01:23:15,979 --> 01:23:29,539
+Yeah. Okay.
+
+1741
+01:23:29,539 --> 01:23:31,779
+It's actually similar to what he was saying
+
+1742
+01:23:31,779 --> 01:23:33,659
+to reconstruct the original image.
+
+1743
+01:23:33,659 --> 01:23:35,699
+Yeah, that's what we learned.
+
+1744
+01:23:35,699 --> 01:23:36,619
+There's a lot of methods.
+
+1745
+01:23:36,619 --> 01:23:40,420
+Diffusion models work like that, autoencoders.
+
+1746
+01:23:40,420 --> 01:23:42,100
+We learn about that in two weeks
+
+1747
+01:23:42,100 --> 01:23:44,779
+when we focus on generative AI, generative modeling.
+
+1748
+01:23:44,859 --> 01:23:51,380
+Here, I want to present also a generative method,
+
+1749
+01:23:51,380 --> 01:23:53,739
+but it's really interesting because it will be
+
+1750
+01:23:53,739 --> 01:23:56,020
+your foray into self-supervised learning.
+
+1751
+01:23:56,020 --> 01:23:57,300
+Here is the idea.
+
+1752
+01:23:57,300 --> 01:23:59,420
+If we have pictures in the wild,
+
+1753
+01:23:59,420 --> 01:24:03,020
+going with the methods you had mentioned around data augmentation,
+
+1754
+01:24:03,020 --> 01:24:07,779
+you can actually force the network to learn from the data itself.
+
+1755
+01:24:07,779 --> 01:24:09,420
+So let me give you an example.
+
+1756
+01:24:09,420 --> 01:24:12,140
+I take, you look at the picture of this dog,
+
+1757
+01:24:12,460 --> 01:24:15,420
+and you rotate it by 90 degrees.
+
+1758
+01:24:15,420 --> 01:24:17,899
+It's still the same dog.
+
+1759
+01:24:17,899 --> 01:24:20,500
+A human would say it's the same dog.
+
+1760
+01:24:20,500 --> 01:24:21,819
+What are we using in our brain?
+
+1761
+01:24:21,819 --> 01:24:24,659
+We're using the ability to understand rotation invariance
+
+1762
+01:24:24,659 --> 01:24:26,939
+and to understand the semantics of the dog.
+
+1763
+01:24:26,939 --> 01:24:32,340
+And so technically, if you gave those two images to the network,
+
+1764
+01:24:32,340 --> 01:24:35,260
+you could create a loss function that compares those two pairs
+
+1765
+01:24:35,260 --> 01:24:39,060
+and has to have vectors that are close to each other.
+
+1766
+01:24:39,060 --> 01:24:41,020
+Does that make sense?
+
+1767
+01:24:41,020 --> 01:24:43,060
+Other thing you could do, you can do a patch.
+
+1768
+01:24:43,060 --> 01:24:45,060
+You can literally take an image of a face
+
+1769
+01:24:45,060 --> 01:24:47,899
+and put the patch on half of the image.
+
+1770
+01:24:50,260 --> 01:24:54,260
+And then you do the same thing on the other image.
+
+1771
+01:24:54,260 --> 01:24:56,300
+You put the other patch, the other half,
+
+1772
+01:24:56,300 --> 01:24:59,659
+and now you tell the network these two should have the same vector,
+
+1773
+01:24:59,659 --> 01:25:01,260
+pretty much.
+
+1774
+01:25:01,260 --> 01:25:05,020
+So you use your data augmentation scheme
+
+1775
+01:25:05,020 --> 01:25:07,539
+on massive datasets online
+
+1776
+01:25:07,539 --> 01:25:10,539
+to force the network to learn from the data itself.
+
+1777
+01:25:12,949 --> 01:25:13,989
+Okay?
+
+1778
+01:25:13,989 --> 01:25:16,390
+No need to forge triplets per se.
+
+1779
+01:25:16,390 --> 01:25:17,869
+You just take a picture.
+
+1780
+01:25:17,869 --> 01:25:21,829
+You make a variance of it with noise, with rotation,
+
+1781
+01:25:21,829 --> 01:25:25,149
+with cropping, with translation, with whatever you want.
+
+1782
+01:25:25,149 --> 01:25:26,949
+And then you put these two in the dataset
+
+1783
+01:25:26,949 --> 01:25:28,430
+and you say these are two the same person.
+
+1784
+01:25:28,430 --> 01:25:30,430
+It should have the same vector.
+
+1785
+01:25:30,430 --> 01:25:31,949
+Does that make sense?
+
+1786
+01:25:31,949 --> 01:25:34,670
+That's why it's called self-supervised learning
+
+1787
+01:25:34,670 --> 01:25:37,270
+because you don't have labels.
+
+1788
+01:25:37,270 --> 01:25:40,310
+You just create a learning environment
+
+1789
+01:25:40,310 --> 01:25:43,710
+that makes the network learn
+
+1790
+01:25:43,710 --> 01:25:48,779
+from the patterns of the data directly itself.
+
+1791
+01:25:48,779 --> 01:25:51,340
+Okay, so this is an example called Sinclair.
+
+1792
+01:25:51,340 --> 01:25:53,779
+Again, the paper is right there.
+
+1793
+01:25:53,779 --> 01:25:58,539
+And this shifts from supervised triplets,
+
+1794
+01:25:58,539 --> 01:26:01,380
+FaceNet, which was a paper from 2015,
+
+1795
+01:26:01,380 --> 01:26:04,300
+to self-supervised pairs.
+
+1796
+01:26:04,300 --> 01:26:07,460
+That is why modern models are trained
+
+1797
+01:26:07,460 --> 01:26:10,420
+on billions of unlabeled images.
+
+1798
+01:26:10,420 --> 01:26:11,579
+Okay?
+
+1799
+01:26:11,579 --> 01:26:12,420
+That's how we create.
+
+1800
+01:26:12,420 --> 01:26:14,979
+It's much simpler when you think about it.
+
+1801
+01:26:14,979 --> 01:26:18,140
+You can literally write a script and scrape
+
+1802
+01:26:18,140 --> 01:26:20,380
+and it will label, auto-label the images
+
+1803
+01:26:20,380 --> 01:26:22,979
+and put them in pairs, do variations.
+
+1804
+01:26:22,979 --> 01:26:23,819
+And then you'll end up
+
+1805
+01:26:23,819 --> 01:26:26,340
+with a very powerful pre-trained model.
+
+1806
+01:26:27,220 --> 01:26:29,659
+Much simpler than people think.
+
+1807
+01:26:29,659 --> 01:26:31,579
+It's not that hard, you know, at the end of the day.
+
+1808
+01:26:31,579 --> 01:26:34,659
+Most of the complexities are gonna come from compute.
+
+1809
+01:26:34,659 --> 01:26:35,500
+Right?
+
+1810
+01:26:36,779 --> 01:26:40,020
+Okay, so this method is called contrastive learning.
+
+1811
+01:26:40,020 --> 01:26:40,859
+Okay?
+
+1812
+01:26:40,859 --> 01:26:43,140
+We're gonna talk about it a little more in two weeks.
+
+1813
+01:26:44,779 --> 01:26:47,699
+Self-supervision is not only an image thing.
+
+1814
+01:26:47,699 --> 01:26:49,979
+It's also used in other modalities.
+
+1815
+01:26:49,979 --> 01:26:53,579
+For example, in text, the principle is the same.
+
+1816
+01:26:53,579 --> 01:26:55,739
+You predict what belongs together
+
+1817
+01:26:55,739 --> 01:26:57,819
+and you push away what doesn't.
+
+1818
+01:26:57,819 --> 01:26:59,180
+That's for images.
+
+1819
+01:26:59,180 --> 01:27:03,180
+And here, what the core of GPT,
+
+1820
+01:27:03,180 --> 01:27:05,500
+some of you probably have heard of that,
+
+1821
+01:27:05,500 --> 01:27:08,619
+is a method called next token prediction.
+
+1822
+01:27:08,619 --> 01:27:10,939
+We're gonna learn later about tokens in the class,
+
+1823
+01:27:10,939 --> 01:27:13,859
+but today, forget about tokens, just think the words.
+
+1824
+01:27:13,859 --> 01:27:15,579
+We're trying to look at a sentence
+
+1825
+01:27:15,579 --> 01:27:17,460
+and predict the next word.
+
+1826
+01:27:17,460 --> 01:27:20,739
+Why is this self-supervised learning?
+
+1827
+01:27:20,739 --> 01:27:22,060
+Because you don't label data.
+
+1828
+01:27:22,060 --> 01:27:24,140
+You just literally grab data from online
+
+1829
+01:27:24,140 --> 01:27:26,859
+and you create a scheme that forces the model
+
+1830
+01:27:26,859 --> 01:27:28,819
+to learn from the patterns of the data
+
+1831
+01:27:28,819 --> 01:27:30,899
+using self-supervised learning,
+
+1832
+01:27:30,899 --> 01:27:32,819
+but the self comes from the fact
+
+1833
+01:27:32,819 --> 01:27:35,020
+that you didn't label it manually yourself.
+
+1834
+01:27:36,420 --> 01:27:38,300
+So let's do a few examples.
+
+1835
+01:27:38,300 --> 01:27:40,460
+And the reason I wanna do the examples
+
+1836
+01:27:40,460 --> 01:27:44,979
+is because we wanna talk about emergent behaviors
+
+1837
+01:27:44,979 --> 01:27:47,659
+that stem from the tasks we defined.
+
+1838
+01:27:47,659 --> 01:27:50,500
+So give me the word you're thinking of.
+
+1839
+01:27:50,500 --> 01:27:52,859
+I poured myself a cup of,
+
+1840
+01:27:54,420 --> 01:27:56,619
+some people said tea, coffee.
+
+1841
+01:27:56,619 --> 01:27:58,819
+Anybody said anything else?
+
+1842
+01:27:58,819 --> 01:28:00,739
+Water, a cup of water.
+
+1843
+01:28:00,739 --> 01:28:02,739
+Healthy people said water, okay.
+
+1844
+01:28:03,659 --> 01:28:07,100
+Yeah, so what's the emergent behavior
+
+1845
+01:28:07,100 --> 01:28:10,060
+that you can expect the model is gonna learn
+
+1846
+01:28:10,060 --> 01:28:12,140
+based on just that example?
+
+1847
+01:28:18,250 --> 01:28:20,130
+Yeah, good point, because you know that
+
+1848
+01:28:20,130 --> 01:28:23,409
+whatever is here first fits in a cup.
+
+1849
+01:28:23,409 --> 01:28:25,409
+So it understands that.
+
+1850
+01:28:25,409 --> 01:28:26,930
+The second reason is poured.
+
+1851
+01:28:26,930 --> 01:28:28,210
+So it's a liquid.
+
+1852
+01:28:28,210 --> 01:28:30,609
+So just this sentence without even labeling
+
+1853
+01:28:30,609 --> 01:28:32,970
+is going to generate emergent behaviors
+
+1854
+01:28:32,970 --> 01:28:35,289
+that we've never trained the model for.
+
+1855
+01:28:35,289 --> 01:28:39,810
+That's what's interesting about modern AI, if you will.
+
+1856
+01:28:40,770 --> 01:28:42,649
+You don't need to define the tasks.
+
+1857
+01:28:46,010 --> 01:28:49,449
+Frankly, the same way, think about face verification.
+
+1858
+01:28:49,449 --> 01:28:51,329
+Back in the days, we used to do what I showed you
+
+1859
+01:28:51,329 --> 01:28:52,970
+where we would create triplets
+
+1860
+01:28:52,970 --> 01:28:54,409
+and we would be very specific
+
+1861
+01:28:54,409 --> 01:28:56,729
+about this is for face verification.
+
+1862
+01:28:56,729 --> 01:28:59,649
+You could actually scrape all the images online
+
+1863
+01:28:59,649 --> 01:29:02,449
+and do the contrastive learning that I showed you next.
+
+1864
+01:29:02,449 --> 01:29:04,449
+And it will still be good at detecting faces
+
+1865
+01:29:04,449 --> 01:29:06,289
+without you having even defined that task
+
+1866
+01:29:06,289 --> 01:29:07,170
+in the first place,
+
+1867
+01:29:07,170 --> 01:29:10,329
+just by doing the contrastive prediction.
+
+1868
+01:29:10,329 --> 01:29:12,729
+Second, okay, first example also,
+
+1869
+01:29:12,729 --> 01:29:13,890
+again, I was trying to predict,
+
+1870
+01:29:13,890 --> 01:29:15,689
+but people usually say different things.
+
+1871
+01:29:15,689 --> 01:29:17,770
+I think the majority of people think coffee.
+
+1872
+01:29:17,770 --> 01:29:18,770
+It's very cultural.
+
+1873
+01:29:18,770 --> 01:29:22,250
+You go in another country, it's gonna be tea, for sure.
+
+1874
+01:29:22,250 --> 01:29:25,970
+And that forces the model to really think
+
+1875
+01:29:25,970 --> 01:29:29,250
+about everyday co-occurrence pattern,
+
+1876
+01:29:29,250 --> 01:29:33,449
+like them being liquid, being of a certain size,
+
+1877
+01:29:33,449 --> 01:29:34,890
+occurring together.
+
+1878
+01:29:34,890 --> 01:29:37,609
+So for example, there's probably a lot of sentences online
+
+1879
+01:29:37,609 --> 01:29:39,930
+that says pouring a cup of tea,
+
+1880
+01:29:39,930 --> 01:29:42,689
+and there's a lot saying pouring a cup of coffee.
+
+1881
+01:29:42,689 --> 01:29:44,289
+Because of that, the model should understand
+
+1882
+01:29:44,289 --> 01:29:46,449
+that these two things are probably close to each other
+
+1883
+01:29:46,449 --> 01:29:48,449
+because their context is similar.
+
+1884
+01:29:48,449 --> 01:29:52,569
+Second example, the capital of France is?
+
+1885
+01:29:55,020 --> 01:29:55,859
+Nobody?
+
+1886
+01:29:55,859 --> 01:29:56,699
+Huh?
+
+1887
+01:29:58,699 --> 01:30:00,020
+Paris, okay.
+
+1888
+01:30:00,020 --> 01:30:01,180
+What's the emergent behavior
+
+1889
+01:30:01,180 --> 01:30:06,619
+you can expect the model to learn?
+
+1890
+01:30:06,619 --> 01:30:08,300
+Yeah, learn about facts, exactly.
+
+1891
+01:30:09,300 --> 01:30:11,539
+So this is really predicting the next token forces the model
+
+1892
+01:30:11,539 --> 01:30:12,979
+to encode real world facts,
+
+1893
+01:30:12,979 --> 01:30:15,060
+such as Paris being the capital of France.
+
+1894
+01:30:15,060 --> 01:30:16,819
+Oops, sorry.
+
+1895
+01:30:16,819 --> 01:30:18,739
+What about the third example?
+
+1896
+01:30:18,739 --> 01:30:22,340
+She unlocked her phone using her?
+
+1897
+01:30:22,340 --> 01:30:23,220
+Body parts.
+
+1898
+01:30:23,220 --> 01:30:24,180
+Body parts.
+
+1899
+01:30:25,380 --> 01:30:27,380
+I don't know what your phone,
+
+1900
+01:30:27,380 --> 01:30:29,739
+type of phone you have, but.
+
+1901
+01:30:29,739 --> 01:30:31,020
+Wait, what would you say?
+
+1902
+01:30:31,020 --> 01:30:31,979
+Face.
+
+1903
+01:30:31,979 --> 01:30:32,819
+Face.
+
+1904
+01:30:32,819 --> 01:30:33,659
+Password.
+
+1905
+01:30:33,659 --> 01:30:35,300
+Password.
+
+1906
+01:30:35,300 --> 01:30:36,779
+Fingerprint.
+
+1907
+01:30:36,779 --> 01:30:38,460
+Yeah, all of them are possible.
+
+1908
+01:30:38,460 --> 01:30:40,699
+So again, the network would learn probably
+
+1909
+01:30:40,699 --> 01:30:42,380
+that password, fingerprint, and face
+
+1910
+01:30:42,380 --> 01:30:43,859
+can be used to unlock stuff.
+
+1911
+01:30:45,420 --> 01:30:49,100
+Yeah, and in fact here, probably fingerprint or face
+
+1912
+01:30:49,100 --> 01:30:51,539
+might nowadays be the more common
+
+1913
+01:30:51,539 --> 01:30:54,020
+because of how the world has evolved,
+
+1914
+01:30:54,020 --> 01:30:57,180
+but back in the days it would be password, for sure.
+
+1915
+01:30:57,180 --> 01:30:59,939
+And so this forces a semantic understanding
+
+1916
+01:30:59,939 --> 01:31:02,220
+that these things are probably all meant
+
+1917
+01:31:02,220 --> 01:31:03,699
+to unlock information.
+
+1918
+01:31:04,460 --> 01:31:09,460
+The next one, the cat chased the dog or mouth or ball.
+
+1919
+01:31:11,779 --> 01:31:16,300
+And again, the model will learn probabilistic reasoning,
+
+1920
+01:31:16,300 --> 01:31:18,619
+meaning because in the data set,
+
+1921
+01:31:18,619 --> 01:31:20,699
+it will find variations of the sentence
+
+1922
+01:31:20,699 --> 01:31:23,779
+with different actually conclusion.
+
+1923
+01:31:23,779 --> 01:31:25,699
+It would say that there's a lot of things
+
+1924
+01:31:25,699 --> 01:31:27,619
+that the cat can chase.
+
+1925
+01:31:27,619 --> 01:31:29,859
+And so that's probabilistic reasoning.
+
+1926
+01:31:29,859 --> 01:31:30,859
+What about the last one?
+
+1927
+01:31:30,859 --> 01:31:33,020
+If it's raining, I should bring on
+
+1928
+01:31:34,180 --> 01:31:37,380
+umbrella, what's the emergent behavior?
+
+1929
+01:31:37,380 --> 01:31:39,180
+It's reasoning and inference,
+
+1930
+01:31:39,180 --> 01:31:42,659
+is the model will learn to connect conditions.
+
+1931
+01:31:42,659 --> 01:31:45,539
+So for example, raining requires you
+
+1932
+01:31:45,539 --> 01:31:49,020
+to be protecting yourself from the rain with an umbrella.
+
+1933
+01:31:49,020 --> 01:31:51,180
+That's reasoning, okay?
+
+1934
+01:31:52,300 --> 01:31:54,899
+So long story short, emergent behaviors
+
+1935
+01:31:54,899 --> 01:31:57,939
+are unexpected capabilities that arise
+
+1936
+01:31:57,939 --> 01:32:00,020
+from simple training objectives at scale
+
+1937
+01:32:00,020 --> 01:32:04,619
+without being explicitly taught or labeled.
+
+1938
+01:32:04,619 --> 01:32:06,659
+Later in this class, we're gonna have a full lecture
+
+1939
+01:32:06,659 --> 01:32:08,579
+on deep reinforcement learning,
+
+1940
+01:32:08,579 --> 01:32:10,859
+where we're gonna talk about emergent behaviors
+
+1941
+01:32:10,859 --> 01:32:14,380
+in robotics or in gaming,
+
+1942
+01:32:14,380 --> 01:32:18,100
+where turns out the agent your training learns
+
+1943
+01:32:18,100 --> 01:32:19,939
+to do certain strategies
+
+1944
+01:32:19,939 --> 01:32:22,060
+that you didn't expect they would do.
+
+1945
+01:32:22,060 --> 01:32:23,380
+AlphaGo is a good example
+
+1946
+01:32:23,380 --> 01:32:26,850
+if you've watched the documentary.
+
+1947
+01:32:26,850 --> 01:32:27,689
+Okay.
+
+1948
+01:32:30,449 --> 01:32:33,649
+Self-supervision is not just about text and images.
+
+1949
+01:32:33,649 --> 01:32:36,090
+We've seen the next token prediction for GPT
+
+1950
+01:32:37,050 --> 01:32:40,050
+and we've also seen contrastive learning for images.
+
+1951
+01:32:40,050 --> 01:32:42,369
+My question here is the following.
+
+1952
+01:32:42,369 --> 01:32:49,460
+What other examples of modalities can you think of?
+
+1953
+01:32:49,460 --> 01:32:51,300
+And tell me the task that you would define.
+
+1954
+01:32:51,300 --> 01:32:58,819
+Audio, so for audio, what would you do?
+
+1955
+01:32:58,819 --> 01:33:04,390
+Audio, how would you do a self-supervision in audio?
+
+1956
+01:33:05,229 --> 01:33:07,670
+Exactly, mask out portion.
+
+1957
+01:33:07,670 --> 01:33:10,069
+So mask out 20 time steps.
+
+1958
+01:33:10,069 --> 01:33:11,710
+And because you know what the data was,
+
+1959
+01:33:11,710 --> 01:33:14,029
+you have a label, you knew what the truth was.
+
+1960
+01:33:14,029 --> 01:33:16,989
+You can do a self-supervision task, it would work great.
+
+1961
+01:33:17,789 --> 01:33:20,069
+The limitation is compute and scale.
+
+1962
+01:33:20,069 --> 01:33:28,119
+What other modalities?
+
+1963
+01:33:28,119 --> 01:33:29,520
+So self-driving is a good example.
+
+1964
+01:33:29,520 --> 01:33:31,319
+It's very multimodal.
+
+1965
+01:33:31,319 --> 01:33:32,960
+There's a lot of different things happening
+
+1966
+01:33:32,960 --> 01:33:33,800
+in self-driving.
+
+1967
+01:33:33,800 --> 01:33:36,000
+We'll talk about it in a future lecture.
+
+1968
+01:33:36,000 --> 01:33:39,319
+What else, what other modalities can you think of?
+
+1969
+01:33:39,319 --> 01:33:41,359
+Videos, what would you do, video?
+
+1970
+01:33:43,000 --> 01:33:45,359
+Take frames out, you can take some frames out.
+
+1971
+01:33:45,359 --> 01:33:46,880
+Same principle as audio.
+
+1972
+01:33:48,159 --> 01:33:53,039
+Biology, some people work in healthcare biology here.
+
+1973
+01:33:53,880 --> 01:33:55,000
+Yeah, a couple.
+
+1974
+01:33:55,000 --> 01:33:58,840
+Well, you know about amino acids and protein structure.
+
+1975
+01:33:58,840 --> 01:34:03,159
+You can actually mask portion of the inputs
+
+1976
+01:34:03,159 --> 01:34:08,159
+such as a protein structure or DNA and then complete it.
+
+1977
+01:34:08,640 --> 01:34:11,359
+And it will force the model to understand those patterns.
+
+1978
+01:34:12,560 --> 01:34:13,800
+So great stuff in there.
+
+1979
+01:34:14,800 --> 01:34:16,560
+But the world is very multimodal.
+
+1980
+01:34:16,560 --> 01:34:19,720
+We experience words, images, sounds and actions together.
+
+1981
+01:34:19,720 --> 01:34:21,560
+How can we connect them?
+
+1982
+01:34:21,560 --> 01:34:26,199
+When you think about multimodality,
+
+1983
+01:34:26,199 --> 01:34:30,159
+you wanna connect texts and images, let's say.
+
+1984
+01:34:30,159 --> 01:34:31,479
+What do you need to do those?
+
+1985
+01:34:31,479 --> 01:34:33,479
+You actually need labeled data.
+
+1986
+01:34:33,479 --> 01:34:35,640
+You need image captions.
+
+1987
+01:34:35,640 --> 01:34:38,399
+So for example, you have a bunch of picture online
+
+1988
+01:34:38,399 --> 01:34:40,039
+of the cat is looking at the camera.
+
+1989
+01:34:40,039 --> 01:34:42,760
+So there's a picture and there's a label underneath,
+
+1990
+01:34:42,760 --> 01:34:43,960
+just like on Instagram.
+
+1991
+01:34:43,960 --> 01:34:45,920
+Let's say people put captions, right?
+
+1992
+01:34:47,039 --> 01:34:50,640
+And the reason you can connect those modalities
+
+1993
+01:34:50,640 --> 01:34:52,600
+is because of that data set.
+
+1994
+01:34:52,600 --> 01:34:54,039
+Because you have a lot of that.
+
+1995
+01:34:54,039 --> 01:34:56,359
+Now, this is not typically called supervised learning.
+
+1996
+01:34:56,359 --> 01:34:59,159
+It will be called weekly supervised learning
+
+1997
+01:34:59,159 --> 01:35:02,920
+because you're not actually labeling images with captions.
+
+1998
+01:35:02,920 --> 01:35:07,720
+You are benefiting from naturally occurring pairings
+
+1999
+01:35:07,720 --> 01:35:08,720
+in the world.
+
+2000
+01:35:08,720 --> 01:35:10,600
+There is naturally occurring pairings
+
+2001
+01:35:10,600 --> 01:35:12,880
+of images and texts, okay?
+
+2002
+01:35:12,880 --> 01:35:14,119
+So now what I want you to do
+
+2003
+01:35:14,119 --> 01:35:15,800
+is to find other examples
+
+2004
+01:35:15,800 --> 01:35:19,359
+that are not just images captioned,
+
+2005
+01:35:19,399 --> 01:35:23,520
+but naturally occurring examples of different modalities
+
+2006
+01:35:23,520 --> 01:35:26,239
+that appear in the wild together
+
+2007
+01:35:26,239 --> 01:35:28,920
+that we could use to connect modalities.
+
+2008
+01:35:28,920 --> 01:35:30,520
+The whole point of connecting modalities
+
+2009
+01:35:30,520 --> 01:35:33,520
+is that our vectors now can represent
+
+2010
+01:35:34,720 --> 01:35:37,880
+different modalities close to each other in space.
+
+2011
+01:35:37,880 --> 01:35:38,720
+Okay?
+
+2012
+01:35:39,600 --> 01:35:50,880
+So think about that.
+
+2013
+01:35:50,880 --> 01:35:51,720
+Please continue.
+
+2014
+01:35:51,720 --> 01:35:52,720
+I'm gonna read some of the answers,
+
+2015
+01:35:52,720 --> 01:35:58,539
+but we keep going.
+
+2016
+01:35:58,539 --> 01:36:02,300
+Okay, so stock price sequence is a single modality.
+
+2017
+01:36:02,340 --> 01:36:04,220
+You would look at stock price
+
+2018
+01:36:04,220 --> 01:36:06,859
+and you can mask and then predict.
+
+2019
+01:36:06,859 --> 01:36:08,180
+But I think maybe what you mean
+
+2020
+01:36:08,180 --> 01:36:11,420
+is you would put additional data points in there as well.
+
+2021
+01:36:11,420 --> 01:36:12,579
+Let me see if I have something.
+
+2022
+01:36:12,579 --> 01:36:13,659
+Audio paired with video.
+
+2023
+01:36:13,659 --> 01:36:14,779
+Audio and video is a great one.
+
+2024
+01:36:14,779 --> 01:36:17,260
+Audio and video is naturally paired.
+
+2025
+01:36:17,260 --> 01:36:18,859
+You take a YouTube video.
+
+2026
+01:36:18,859 --> 01:36:20,939
+It has the audio and the video.
+
+2027
+01:36:20,939 --> 01:36:23,060
+And so when a dog is barking,
+
+2028
+01:36:24,060 --> 01:36:25,539
+you have the audio of the dog barking
+
+2029
+01:36:25,539 --> 01:36:26,979
+and the video of the dog barking.
+
+2030
+01:36:26,979 --> 01:36:28,699
+And so you can create a pairing
+
+2031
+01:36:28,699 --> 01:36:30,380
+between those two modalities.
+
+2032
+01:36:31,380 --> 01:36:32,220
+Transcription.
+
+2033
+01:36:32,220 --> 01:36:34,979
+So a lot of movies have subtitles.
+
+2034
+01:36:34,979 --> 01:36:36,859
+And so by definition, a video stream
+
+2035
+01:36:36,859 --> 01:36:40,539
+or stream of images will be naturally connected to text,
+
+2036
+01:36:40,539 --> 01:36:55,069
+which would also be naturally connected to audio.
+
+2037
+01:36:55,069 --> 01:36:56,229
+Music and song title.
+
+2038
+01:36:56,229 --> 01:36:57,270
+Again, that's a great one.
+
+2039
+01:36:57,270 --> 01:37:01,739
+Audio and text are connected.
+
+2040
+01:37:01,739 --> 01:37:03,739
+Genotype and phenotype.
+
+2041
+01:37:03,739 --> 01:37:09,050
+Good one as well.
+
+2042
+01:37:09,050 --> 01:37:11,050
+Medical imaging with ultrasound.
+
+2043
+01:37:11,050 --> 01:37:12,409
+That's a great one.
+
+2044
+01:37:12,409 --> 01:37:13,369
+Naturally occurring.
+
+2045
+01:37:13,369 --> 01:37:15,130
+You usually, if you go to an ultrasound,
+
+2046
+01:37:15,130 --> 01:37:17,090
+you'll have the different types of images
+
+2047
+01:37:17,090 --> 01:37:22,050
+that occur together naturally.
+
+2048
+01:37:22,050 --> 01:37:23,689
+Game footage and keyboard action.
+
+2049
+01:37:23,689 --> 01:37:25,130
+Again, another great one.
+
+2050
+01:37:25,130 --> 01:37:27,369
+So, you know, price scenario code.
+
+2051
+01:37:27,369 --> 01:37:28,210
+Good one.
+
+2052
+01:37:29,649 --> 01:37:31,930
+Yeah, great examples.
+
+2053
+01:37:31,930 --> 01:37:32,770
+Facial expression.
+
+2054
+01:37:32,770 --> 01:37:37,770
+So TLDR is we have ways to connect modalities.
+
+2055
+01:37:40,050 --> 01:37:41,810
+Oftentimes, some modalities
+
+2056
+01:37:41,810 --> 01:37:43,649
+are gonna connect very naturally.
+
+2057
+01:37:43,649 --> 01:37:45,569
+Most things connect to text.
+
+2058
+01:37:46,529 --> 01:37:48,569
+So that's what you wanna use
+
+2059
+01:37:48,569 --> 01:37:50,970
+as your shared space typically.
+
+2060
+01:37:50,970 --> 01:37:54,449
+But here, it is an example of a paper called ImageBind.
+
+2061
+01:37:54,449 --> 01:37:57,890
+And the interesting thing about ImageBind is it says
+
+2062
+01:37:57,890 --> 01:38:02,890
+that most things connect through a single modality.
+
+2063
+01:38:04,050 --> 01:38:08,409
+So for example, thermal data connects to imaging.
+
+2064
+01:38:08,409 --> 01:38:10,050
+Imaging connects to text.
+
+2065
+01:38:10,050 --> 01:38:13,289
+So text is gonna connect through images with thermal data.
+
+2066
+01:38:14,250 --> 01:38:16,369
+And what's the consequence of that,
+
+2067
+01:38:16,369 --> 01:38:18,729
+if I may show you a little example,
+
+2068
+01:38:18,729 --> 01:38:22,449
+is that you can, this is a demo from Meta
+
+2069
+01:38:22,449 --> 01:38:23,810
+called ImageBind.
+
+2070
+01:38:23,810 --> 01:38:24,770
+It's a cool one.
+
+2071
+01:38:24,770 --> 01:38:27,210
+You can actually see things occurring together.
+
+2072
+01:38:27,210 --> 01:38:29,569
+So for example, you put a text, drums,
+
+2073
+01:38:29,569 --> 01:38:31,970
+and of course, you can get an audio of a drum.
+
+2074
+01:38:33,489 --> 01:38:35,930
+But you can also see what the closest image
+
+2075
+01:38:35,930 --> 01:38:38,770
+in the vector space is to that concept.
+
+2076
+01:38:38,770 --> 01:38:42,210
+So all the spaces are now bound together.
+
+2077
+01:38:42,250 --> 01:38:44,729
+You can also do audio and image.
+
+2078
+01:38:44,729 --> 01:38:49,729
+So you give it a dog barking and a picture.
+
+2079
+01:38:49,770 --> 01:38:51,489
+What can you expect?
+
+2080
+01:38:51,489 --> 01:38:53,210
+A dog on the beach.
+
+2081
+01:38:53,210 --> 01:38:55,210
+That's the multimodal embedding,
+
+2082
+01:38:55,210 --> 01:38:58,529
+the connecting tissue between those different modalities.
+
+2083
+01:38:58,529 --> 01:39:01,489
+And that's probably one of the biggest innovation
+
+2084
+01:39:01,489 --> 01:39:04,890
+of the last few years, connecting those shared spaces.
+
+2085
+01:39:04,890 --> 01:39:06,770
+Okay, I'm not gonna cover the full paper,
+
+2086
+01:39:06,770 --> 01:39:11,210
+but the core insight is that there are shared spaces.
+
+2087
+01:39:11,210 --> 01:39:12,810
+There are spaces like text and image
+
+2088
+01:39:12,810 --> 01:39:14,130
+that connect to most modalities
+
+2089
+01:39:14,130 --> 01:39:17,569
+that can allow us to connect those modalities together.
+
+2090
+01:39:17,569 --> 01:39:19,090
+Okay, we learned a lot of things here.
+
+2091
+01:39:19,090 --> 01:39:21,409
+Embeddings, self-supervised learning,
+
+2092
+01:39:21,409 --> 01:39:23,409
+contrastive learning, data augmentation,
+
+2093
+01:39:23,409 --> 01:39:26,289
+next token prediction, weekly supervised learning,
+
+2094
+01:39:26,289 --> 01:39:28,250
+and then the shared embedding stays
+
+2095
+01:39:28,250 --> 01:39:31,170
+with the central pivot usually being text.
+
+2096
+01:39:31,170 --> 01:39:34,329
+Okay, that's all for today.
+
+2097
+01:39:34,329 --> 01:39:36,890
+We're not gonna have time to cover the adversarial example,
+
+2098
+01:39:36,890 --> 01:39:39,170
+but we're gonna cover it in two weeks together.
+
+2099
+01:39:39,170 --> 01:39:41,569
+You're gonna have more neural network baggage.
+
